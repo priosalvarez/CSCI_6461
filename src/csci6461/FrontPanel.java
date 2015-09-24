@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JToggleButton;
 
 import co.com.csci.model.Instruction;
+import co.com.csci.util.BinaryUtil;
 import co.com.csci.util.InstructionEnum;
 
 import java.awt.event.ActionListener;
@@ -126,7 +127,7 @@ public class FrontPanel {
 		
 		//Area for general output
 		
-		JTextArea txtrOutput = new JTextArea();
+		JTextPane txtrOutput = new JTextPane();
 		txtrOutput.setText("Output");
 		txtrOutput.setBounds(44, 203, 207, 123);
 		frame.getContentPane().add(txtrOutput);
@@ -177,187 +178,204 @@ public class FrontPanel {
 			  Integer pcDecimal = Integer.parseInt(txtpnPc.getText(), 2);
 			  //Get Instruction from memory space
 			  String plainInstruction = memory[pcDecimal-1].getText();
-			  Instruction instruction = new Instruction(plainInstruction);
-			  //Change MAR
-			  txtpnMar.setText(pc);
-			  //Change MBR
-			  txtpnMbr.setText(plainInstruction);
-			  //Change IR
-			  txtpnMbr.setText(plainInstruction);
-			  //Evaluate instruction
-			  InstructionEnum iCode = instruction.getIntructionCode();
-			  switch(iCode){
-	  		  		case LDR:
-	  		  			instructionLDR();
-	  		  			break;
-	  		  		case STR:
-	  		  			instructionSTR();
-  		  				break;
-			  }
-			  //Increment PC counter
-			  pcDecimal++;
-			  txtpnPc.setText(Integer.toBinaryString(pcDecimal));
-			  //We can make a little correction here so the binary string is also 16 bits long
+			  Instruction instruction;
+			  try
+			  {
+				  instruction = new Instruction(plainInstruction);
+				  //Change MAR
+				  txtpnMar.setText(pc);
+				  //Change MBR
+				  txtpnMbr.setText(plainInstruction);
+				  //Change IR
+				  txtpnIr.setText(plainInstruction);
+				  //Evaluate instruction
+				  InstructionEnum iCode = instruction.getIntructionCode();
+				  switch(iCode){
+		  		  		case LDR:
+		  		  			instructionLDR(instruction);
+		  		  			break;
+		  		  		case STR:
+		  		  			instructionSTR();
+	  		  				break;
+		  		  		case HALT:
+		  		  			txtrOutput.setText("HALT");
+			  				break;
+		  		  		case FAULT:
+		  		  			txtrOutput.setText("FAULT");
+		  		  			break;
+				  }
+				  //Increment PC counter
+				  if(iCode != InstructionEnum.HALT){
+					  pcDecimal++;
+				  }
+				  txtpnPc.setText(BinaryUtil.fillBinaryString(Integer.toBinaryString(pcDecimal)));
+		  	} catch (Throwable t){
+		  		txtrOutput.setText("FAULT");
+		  		
+		  	}
 		  }
 		});
 		
 		txtMsr = new JTextField();
-		txtMsr.setText("1010101010101010");
+		txtMsr.setText("MSR");
 		txtMsr.setBounds(326, 306, 113, 20);
 		frame.getContentPane().add(txtMsr);
 		txtMsr.setColumns(10);
 		
 		txtpnPc = new JTextPane();
-		txtpnPc.setText("PC");
-		txtpnPc.setBounds(524, 91, 113, 20);
+		txtpnPc.setText("0000000000000001");
+		txtpnPc.setBounds(524, 91, 120, 20);
 		frame.getContentPane().add(txtpnPc);
 		
 		txtpnMar = new JTextPane();
-		txtpnMar.setText("MAR");
-		txtpnMar.setBounds(524, 122, 113, 20);
+		txtpnMar.setText("");
+		txtpnMar.setBounds(524, 122, 120, 20);
 		frame.getContentPane().add(txtpnMar);
 		
 		txtpnMbr = new JTextPane();
-		txtpnMbr.setText("MBR");
-		txtpnMbr.setBounds(524, 153, 113, 20);
+		txtpnMbr.setText("");
+		txtpnMbr.setBounds(524, 153, 120, 20);
 		frame.getContentPane().add(txtpnMbr);
 		
 		txtpnIr = new JTextPane();
-		txtpnIr.setText("IR");
-		txtpnIr.setBounds(524, 184, 113, 20);
+		txtpnIr.setText("");
+		txtpnIr.setBounds(524, 184, 120, 20);
 		frame.getContentPane().add(txtpnIr);
 		
 		JTextPane txtpnIar = new JTextPane();
 		txtpnIar.setText("IAR");
-		txtpnIar.setBounds(524, 215, 113, 20);
+		txtpnIar.setBounds(524, 215, 120, 20);
 		frame.getContentPane().add(txtpnIar);
 		
 		txtpnR = new JTextPane();
-		txtpnR.setText("1010101010101010");
-		txtpnR.setBounds(524, 294, 113, 20);
+		txtpnR.setText("");
+		txtpnR.setBounds(524, 294, 120, 20);
 		frame.getContentPane().add(txtpnR);
 		
 		txtpnR_1 = new JTextPane();
-		txtpnR_1.setText("R1");
-		txtpnR_1.setBounds(524, 325, 113, 20);
+		txtpnR_1.setText("");
+		txtpnR_1.setBounds(524, 325, 120, 20);
 		frame.getContentPane().add(txtpnR_1);
 		
 		txtpnR_2 = new JTextPane();
-		txtpnR_2.setText("R2");
-		txtpnR_2.setBounds(524, 356, 113, 20);
+		txtpnR_2.setText("");
+		txtpnR_2.setBounds(524, 356, 120, 20);
 		frame.getContentPane().add(txtpnR_2);
 		
 		txtpnX = new JTextPane();
-		txtpnX.setText("1010101010101010");
-		txtpnX.setBounds(676, 294, 113, 20);
+		txtpnX.setText("0000000000000001");
+		txtpnX.setBounds(676, 294, 120, 20);
 		frame.getContentPane().add(txtpnX);
 		
 		txtpnX_1 = new JTextPane();
-		txtpnX_1.setText("X2");
-		txtpnX_1.setBounds(676, 325, 113, 20);
+		txtpnX_1.setText("");
+		txtpnX_1.setBounds(676, 325, 120, 20);
 		frame.getContentPane().add(txtpnX_1);
 		
 		txtpnX_2 = new JTextPane();
-		txtpnX_2.setText("X3");
-		txtpnX_2.setBounds(676, 356, 113, 20);
+		txtpnX_2.setText("");
+		txtpnX_2.setBounds(676, 356, 120, 20);
 		frame.getContentPane().add(txtpnX_2);
 		
 		//StartsMemory
 		memory = new JTextPane[16];
 		
 		JTextPane textPane = new JTextPane();
-		textPane.setText("0101010101010101");
-		textPane.setBounds(862, 139, 113, 20);
+		//No indirect
+		textPane.setText("0000010001000001");
+		//Indirect
+		//textPane.setText("0000010001100001");
+		textPane.setBounds(862, 139, 120, 20);
 		frame.getContentPane().add(textPane);
 		memory[0] = textPane;
 		
 		JTextPane textPane_1 = new JTextPane();
-		textPane_1.setText("02");
-		textPane_1.setBounds(862, 170, 113, 20);
+		textPane_1.setText("0000000001100011");
+		textPane_1.setBounds(862, 170, 120, 20);
 		frame.getContentPane().add(textPane_1);
 		memory[1] = textPane_1;
 		
 		JTextPane textPane_2 = new JTextPane();
-		textPane_2.setText("03");
-		textPane_2.setBounds(862, 201, 113, 20);
+		textPane_2.setText("");
+		textPane_2.setBounds(862, 201, 120, 20);
 		frame.getContentPane().add(textPane_2);
 		memory[2] = textPane_2;
 		
 		JTextPane textPane_3 = new JTextPane();
-		textPane_3.setText("04");
-		textPane_3.setBounds(862, 232, 113, 20);
+		textPane_3.setText("");
+		textPane_3.setBounds(862, 232, 120, 20);
 		frame.getContentPane().add(textPane_3);
 		memory[3] = textPane_3;
 		
 		JTextPane textPane_4 = new JTextPane();
-		textPane_4.setText("05");
-		textPane_4.setBounds(862, 263, 113, 20);	
+		textPane_4.setText("");
+		textPane_4.setBounds(862, 263, 120, 20);	
 		frame.getContentPane().add(textPane_4);
 		memory[4] = textPane_4;
 		
 		JTextPane textPane_10 = new JTextPane();
-		textPane_10.setText("06");
-		textPane_10.setBounds(862, 294, 113, 20);
+		textPane_10.setText("");
+		textPane_10.setBounds(862, 294, 120, 20);
 		frame.getContentPane().add(textPane_10);
 		memory[5] = textPane_10;
 		
 		JTextPane textPane_11 = new JTextPane();
-		textPane_11.setText("07");
-		textPane_11.setBounds(862, 325, 113, 20);
+		textPane_11.setText("");
+		textPane_11.setBounds(862, 325, 120, 20);
 		frame.getContentPane().add(textPane_11);
 		memory[6] = textPane_11;
 		
 		JTextPane textPane_12 = new JTextPane();
-		textPane_12.setText("08");
-		textPane_12.setBounds(862, 356, 113, 20);
+		textPane_12.setText("");
+		textPane_12.setBounds(862, 356, 120, 20);
 		frame.getContentPane().add(textPane_12);
 		memory[7] = textPane_12;
 		
 		JTextPane textPane_5 = new JTextPane();
-		textPane_5.setText("0101010101010101");
-		textPane_5.setBounds(1015, 139, 113, 20);
+		textPane_5.setText("");
+		textPane_5.setBounds(1015, 139, 120, 20);
 		frame.getContentPane().add(textPane_5);
 		memory[8] = textPane_5;
 		
 		JTextPane textPane_6 = new JTextPane();
-		textPane_6.setText("10");
-		textPane_6.setBounds(1015, 170, 113, 20);
+		textPane_6.setText("");
+		textPane_6.setBounds(1015, 170, 120, 20);
 		frame.getContentPane().add(textPane_6);
 		memory[9] = textPane_6;
 		
 		JTextPane textPane_7 = new JTextPane();
-		textPane_7.setText("11");
-		textPane_7.setBounds(1015, 203, 113, 20);
+		textPane_7.setText("");
+		textPane_7.setBounds(1015, 203, 120, 20);
 		frame.getContentPane().add(textPane_7);
 		memory[10] = textPane_7;
 		
 		JTextPane textPane_8 = new JTextPane();
-		textPane_8.setText("12");
-		textPane_8.setBounds(1015, 232, 113, 20);
+		textPane_8.setText("");
+		textPane_8.setBounds(1015, 232, 120, 20);
 		frame.getContentPane().add(textPane_8);
 		memory[11] = textPane_8;
 		
 		JTextPane textPane_9 = new JTextPane();
-		textPane_9.setText("13");
-		textPane_9.setBounds(1015, 263, 113, 20);
+		textPane_9.setText("");
+		textPane_9.setBounds(1015, 263, 120, 20);
 		frame.getContentPane().add(textPane_9);
 		memory[12] = textPane_9;
 		
 		JTextPane textPane_13 = new JTextPane();
-		textPane_13.setText("14");
-		textPane_13.setBounds(1015, 294, 113, 20);
+		textPane_13.setText("");
+		textPane_13.setBounds(1015, 294, 120, 20);
 		frame.getContentPane().add(textPane_13);
 		memory[13] = textPane_13;
 		
 		JTextPane textPane_14 = new JTextPane();
-		textPane_14.setText("15");
-		textPane_14.setBounds(1015, 325, 113, 20);
+		textPane_14.setText("");
+		textPane_14.setBounds(1015, 325, 120, 20);
 		frame.getContentPane().add(textPane_14);
 		memory[14] = textPane_14;
 		
 		JTextPane textPane_15 = new JTextPane();
-		textPane_15.setText("16");
-		textPane_15.setBounds(1015, 356, 113, 20);
+		textPane_15.setText("");
+		textPane_15.setBounds(1015, 356, 120, 20);
 		frame.getContentPane().add(textPane_15);
 		memory[15] = textPane_15;
 		
@@ -570,20 +588,56 @@ public class FrontPanel {
 	
 	public String getIndex(int indexNum){
 		if(indexNum == 1){
-			txtpnX.getText();
+			return txtpnX.getText();
 		} else  if(indexNum == 2){
-			txtpnX_1.getText();
+			return txtpnX_1.getText();
 		} else if(indexNum == 3){
-			txtpnX_2.getText();
+			return txtpnX_2.getText();
 		} else {
 			//Exception
 		}
 		return "";
 	}
 	
-	public void instructionLDR(){
-		//ImplementLDR logic
+	public String evaluateIndirect(Instruction instruction, String ea) throws Throwable{
+		try {
+			if(instruction.isIndirect()){
+				// Is all what is in the address or only the address part?
+				Instruction indirectInstruction = new Instruction(memory[Integer.parseInt(ea, 2) - 1].getText());
+				//AddressPart
+				ea = indirectInstruction.getAddress();
+				// else
+				//ea = indirectInstruction.getBinaryInstruction();
+			}
+		} catch (Exception e){
+			throw new Throwable("FAULT");
+		}
+		return ea;
 	}
+	
+	public void instructionLDR(Instruction instruction) throws Throwable{
+		String ea = "";
+		//Verify if instruction has index
+		if(instruction.getIndexNumber() == 0){
+			ea = instruction.getAddress();
+		} else {
+			Integer addressDecimal = Integer.parseInt(instruction.getAddress(), 2);
+			Integer indexDecimal = Integer.parseInt(getIndex(instruction.getIndexNumber()), 2);
+			//Get index and sum it with address
+			Integer sum = addressDecimal + indexDecimal;
+			if(sum > 31){
+				throw new Throwable("FAULT");
+			}
+			ea = Integer.toBinaryString(sum);
+		}
+		
+		ea = evaluateIndirect(instruction, ea);
+		ea = BinaryUtil.fillBinaryString(ea);
+		
+		setRegister(instruction.getRegisterNumber(), ea);
+	}
+	
+	
 	public void instructionSTR(){
 		//ImplementSTR logic
 	}

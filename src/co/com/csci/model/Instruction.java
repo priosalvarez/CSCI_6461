@@ -54,9 +54,17 @@ public class Instruction {
 	public void setIx(String ix) {
 		this.ix = ix;
 	}
+	
+	public Integer getIndexNumber() {
+		return Integer.parseInt(ix, 2);
+	}
 
 	public String getR() {
 		return r;
+	}
+	
+	public Integer getRegisterNumber() {
+		return Integer.parseInt(r, 2);
 	}
 
 	public void setR(String r) {
@@ -65,6 +73,10 @@ public class Instruction {
 
 	public String getI() {
 		return i;
+	}
+	
+	public Boolean isIndirect(){
+		return (getI().equals("1") ? true : false);
 	}
 
 	public void setI(String i) {
@@ -92,6 +104,10 @@ public class Instruction {
 		return "Instruction [opCode=" + opCode + ", ix=" + ix + ", r=" + r + ", i=" + i + ", address=" + address
 				+ ", base=" + base + "]";
 	} 
+	
+	public String getBinaryInstruction(){
+		return opCode + r + ix + i + address;
+	}
 	
 	public InstructionEnum getIntructionCode(){
 		String part1 = opCode.substring(0, 2);
