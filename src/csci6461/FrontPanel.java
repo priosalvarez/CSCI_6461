@@ -16,6 +16,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import java.awt.Font;
+import javax.swing.JRadioButton;
 
 public class FrontPanel {
 
@@ -73,7 +74,7 @@ public class FrontPanel {
 		
 		//Main window
 		frame = new JFrame();
-		frame.setBounds(100, 100, 1000, 450);
+		frame.setBounds(100, 100, 1200, 450);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
@@ -108,7 +109,8 @@ public class FrontPanel {
 		textField_3.setColumns(10);
 		//Address
 		textField_4 = new JTextField();
-		textField_4.setBounds(305, 91, 153, 20);
+		textField_4.setText("1010101010101010");
+		textField_4.setBounds(305, 91, 134, 20);
 		frame.getContentPane().add(textField_4);
 		textField_4.setColumns(10);
 		
@@ -118,7 +120,7 @@ public class FrontPanel {
 		
 		JTextPane txtpnEc = new JTextPane();
 		txtpnEc.setText("EC");
-		txtpnEc.setBounds(43, 122, 415, 51);
+		txtpnEc.setBounds(43, 122, 396, 51);
 		frame.getContentPane().add(txtpnEc);
 		
 		
@@ -126,13 +128,13 @@ public class FrontPanel {
 		
 		JTextArea txtrOutput = new JTextArea();
 		txtrOutput.setText("Output");
-		txtrOutput.setBounds(44, 203, 270, 123);
+		txtrOutput.setBounds(44, 203, 207, 123);
 		frame.getContentPane().add(txtrOutput);
 		
 		//Button to trigger a single step in the process (i.e. fetch instruction etc.)
 		
 		JButton btnSingleStep = new JButton("Single Step");
-		btnSingleStep.setBounds(324, 204, 134, 23);
+		btnSingleStep.setBounds(286, 204, 153, 23);
 		frame.getContentPane().add(btnSingleStep);
 		
 		
@@ -150,7 +152,7 @@ public class FrontPanel {
 		frame.getContentPane().add(tglbtnExecute);
 		
 		JButton btnSave = new JButton("Save");
-		btnSave.setBounds(270, 353, 89, 23);
+		btnSave.setBounds(251, 353, 89, 23);
 		frame.getContentPane().add(btnSave);
 		
 		JButton btnNewButton = new JButton("Stop");
@@ -158,11 +160,11 @@ public class FrontPanel {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnNewButton.setBounds(369, 353, 89, 23);
+		btnNewButton.setBounds(350, 353, 89, 23);
 		frame.getContentPane().add(btnNewButton);
 		
 		JButton btnSingle = new JButton("Single Instruction");
-		btnSingle.setBounds(324, 252, 134, 23);
+		btnSingle.setBounds(286, 253, 153, 23);
 		frame.getContentPane().add(btnSingle);
 		
 		btnSingle.addActionListener(new ActionListener()
@@ -200,162 +202,162 @@ public class FrontPanel {
 		});
 		
 		txtMsr = new JTextField();
-		txtMsr.setText("MSR");
-		txtMsr.setBounds(376, 306, 82, 20);
+		txtMsr.setText("1010101010101010");
+		txtMsr.setBounds(326, 306, 113, 20);
 		frame.getContentPane().add(txtMsr);
 		txtMsr.setColumns(10);
 		
 		txtpnPc = new JTextPane();
 		txtpnPc.setText("PC");
-		txtpnPc.setBounds(524, 91, 93, 20);
+		txtpnPc.setBounds(524, 91, 113, 20);
 		frame.getContentPane().add(txtpnPc);
 		
 		txtpnMar = new JTextPane();
 		txtpnMar.setText("MAR");
-		txtpnMar.setBounds(524, 122, 93, 20);
+		txtpnMar.setBounds(524, 122, 113, 20);
 		frame.getContentPane().add(txtpnMar);
 		
 		txtpnMbr = new JTextPane();
 		txtpnMbr.setText("MBR");
-		txtpnMbr.setBounds(524, 153, 93, 20);
+		txtpnMbr.setBounds(524, 153, 113, 20);
 		frame.getContentPane().add(txtpnMbr);
 		
 		txtpnIr = new JTextPane();
 		txtpnIr.setText("IR");
-		txtpnIr.setBounds(524, 184, 93, 20);
+		txtpnIr.setBounds(524, 184, 113, 20);
 		frame.getContentPane().add(txtpnIr);
 		
 		JTextPane txtpnIar = new JTextPane();
 		txtpnIar.setText("IAR");
-		txtpnIar.setBounds(524, 215, 93, 20);
+		txtpnIar.setBounds(524, 215, 113, 20);
 		frame.getContentPane().add(txtpnIar);
 		
 		txtpnR = new JTextPane();
-		txtpnR.setText("R0");
-		txtpnR.setBounds(524, 294, 63, 20);
+		txtpnR.setText("1010101010101010");
+		txtpnR.setBounds(524, 294, 113, 20);
 		frame.getContentPane().add(txtpnR);
 		
 		txtpnR_1 = new JTextPane();
 		txtpnR_1.setText("R1");
-		txtpnR_1.setBounds(524, 325, 63, 20);
+		txtpnR_1.setBounds(524, 325, 113, 20);
 		frame.getContentPane().add(txtpnR_1);
 		
 		txtpnR_2 = new JTextPane();
 		txtpnR_2.setText("R2");
-		txtpnR_2.setBounds(524, 356, 63, 20);
+		txtpnR_2.setBounds(524, 356, 113, 20);
 		frame.getContentPane().add(txtpnR_2);
 		
 		txtpnX = new JTextPane();
-		txtpnX.setText("X1");
-		txtpnX.setBounds(626, 294, 63, 20);
+		txtpnX.setText("1010101010101010");
+		txtpnX.setBounds(676, 294, 113, 20);
 		frame.getContentPane().add(txtpnX);
 		
 		txtpnX_1 = new JTextPane();
 		txtpnX_1.setText("X2");
-		txtpnX_1.setBounds(626, 325, 63, 20);
+		txtpnX_1.setBounds(676, 325, 113, 20);
 		frame.getContentPane().add(txtpnX_1);
 		
 		txtpnX_2 = new JTextPane();
 		txtpnX_2.setText("X3");
-		txtpnX_2.setBounds(626, 356, 63, 20);
+		txtpnX_2.setBounds(676, 356, 113, 20);
 		frame.getContentPane().add(txtpnX_2);
 		
 		//StartsMemory
 		memory = new JTextPane[16];
 		
 		JTextPane textPane = new JTextPane();
-		textPane.setText("01");
-		textPane.setBounds(763, 139, 63, 20);
+		textPane.setText("0101010101010101");
+		textPane.setBounds(862, 139, 113, 20);
 		frame.getContentPane().add(textPane);
 		memory[0] = textPane;
 		
 		JTextPane textPane_1 = new JTextPane();
 		textPane_1.setText("02");
-		textPane_1.setBounds(763, 170, 63, 20);
+		textPane_1.setBounds(862, 170, 113, 20);
 		frame.getContentPane().add(textPane_1);
 		memory[1] = textPane_1;
 		
 		JTextPane textPane_2 = new JTextPane();
 		textPane_2.setText("03");
-		textPane_2.setBounds(763, 201, 63, 20);
+		textPane_2.setBounds(862, 201, 113, 20);
 		frame.getContentPane().add(textPane_2);
 		memory[2] = textPane_2;
 		
 		JTextPane textPane_3 = new JTextPane();
 		textPane_3.setText("04");
-		textPane_3.setBounds(763, 232, 63, 20);
+		textPane_3.setBounds(862, 232, 113, 20);
 		frame.getContentPane().add(textPane_3);
 		memory[3] = textPane_3;
 		
 		JTextPane textPane_4 = new JTextPane();
 		textPane_4.setText("05");
-		textPane_4.setBounds(763, 263, 63, 20);	
+		textPane_4.setBounds(862, 263, 113, 20);	
 		frame.getContentPane().add(textPane_4);
 		memory[4] = textPane_4;
 		
 		JTextPane textPane_10 = new JTextPane();
 		textPane_10.setText("06");
-		textPane_10.setBounds(763, 294, 63, 20);
+		textPane_10.setBounds(862, 294, 113, 20);
 		frame.getContentPane().add(textPane_10);
 		memory[5] = textPane_10;
 		
 		JTextPane textPane_11 = new JTextPane();
 		textPane_11.setText("07");
-		textPane_11.setBounds(763, 325, 63, 20);
+		textPane_11.setBounds(862, 325, 113, 20);
 		frame.getContentPane().add(textPane_11);
 		memory[6] = textPane_11;
 		
 		JTextPane textPane_12 = new JTextPane();
 		textPane_12.setText("08");
-		textPane_12.setBounds(763, 356, 63, 20);
+		textPane_12.setBounds(862, 356, 113, 20);
 		frame.getContentPane().add(textPane_12);
 		memory[7] = textPane_12;
 		
 		JTextPane textPane_5 = new JTextPane();
-		textPane_5.setText("09");
-		textPane_5.setBounds(880, 139, 63, 20);
+		textPane_5.setText("0101010101010101");
+		textPane_5.setBounds(1015, 139, 113, 20);
 		frame.getContentPane().add(textPane_5);
 		memory[8] = textPane_5;
 		
 		JTextPane textPane_6 = new JTextPane();
 		textPane_6.setText("10");
-		textPane_6.setBounds(880, 170, 63, 20);
+		textPane_6.setBounds(1015, 170, 113, 20);
 		frame.getContentPane().add(textPane_6);
 		memory[9] = textPane_6;
 		
 		JTextPane textPane_7 = new JTextPane();
 		textPane_7.setText("11");
-		textPane_7.setBounds(880, 203, 63, 20);
+		textPane_7.setBounds(1015, 203, 113, 20);
 		frame.getContentPane().add(textPane_7);
 		memory[10] = textPane_7;
 		
 		JTextPane textPane_8 = new JTextPane();
 		textPane_8.setText("12");
-		textPane_8.setBounds(880, 232, 63, 20);
+		textPane_8.setBounds(1015, 232, 113, 20);
 		frame.getContentPane().add(textPane_8);
 		memory[11] = textPane_8;
 		
 		JTextPane textPane_9 = new JTextPane();
 		textPane_9.setText("13");
-		textPane_9.setBounds(880, 263, 63, 20);
+		textPane_9.setBounds(1015, 263, 113, 20);
 		frame.getContentPane().add(textPane_9);
 		memory[12] = textPane_9;
 		
 		JTextPane textPane_13 = new JTextPane();
 		textPane_13.setText("14");
-		textPane_13.setBounds(880, 294, 63, 20);
+		textPane_13.setBounds(1015, 294, 113, 20);
 		frame.getContentPane().add(textPane_13);
 		memory[13] = textPane_13;
 		
 		JTextPane textPane_14 = new JTextPane();
 		textPane_14.setText("15");
-		textPane_14.setBounds(880, 325, 63, 20);
+		textPane_14.setBounds(1015, 325, 113, 20);
 		frame.getContentPane().add(textPane_14);
 		memory[14] = textPane_14;
 		
 		JTextPane textPane_15 = new JTextPane();
 		textPane_15.setText("16");
-		textPane_15.setBounds(880, 356, 63, 20);
+		textPane_15.setBounds(1015, 356, 113, 20);
 		frame.getContentPane().add(textPane_15);
 		memory[15] = textPane_15;
 		
@@ -380,7 +382,7 @@ public class FrontPanel {
 		frame.getContentPane().add(lblAddress);
 		
 		JLabel lblMsr = new JLabel("MSR");
-		lblMsr.setBounds(337, 309, 30, 14);
+		lblMsr.setBounds(286, 312, 30, 14);
 		frame.getContentPane().add(lblMsr);
 		
 		JLabel lblPc = new JLabel("PC");
@@ -416,95 +418,112 @@ public class FrontPanel {
 		frame.getContentPane().add(lblR_3);
 		
 		JLabel lblX = new JLabel("  X1");
-		lblX.setBounds(597, 300, 30, 14);
+		lblX.setBounds(647, 300, 30, 14);
 		frame.getContentPane().add(lblX);
 		
 		JLabel lblX_1 = new JLabel("  X2");
-		lblX_1.setBounds(597, 331, 30, 14);
+		lblX_1.setBounds(647, 331, 30, 14);
 		frame.getContentPane().add(lblX_1);
 		
 		JLabel lblX_2 = new JLabel("  X3");
-		lblX_2.setBounds(597, 362, 30, 14);
+		lblX_2.setBounds(647, 362, 30, 14);
 		frame.getContentPane().add(lblX_2);
 		
 		JLabel label = new JLabel("  01");
-		label.setBounds(733, 145, 20, 14);
+		label.setBounds(832, 145, 20, 14);
 		frame.getContentPane().add(label);
 		
 		JLabel label_1 = new JLabel("  02");
-		label_1.setBounds(733, 176, 20, 14);
+		label_1.setBounds(832, 176, 20, 14);
 		frame.getContentPane().add(label_1);
 		
 		JLabel label_2 = new JLabel("  03");
-		label_2.setBounds(733, 207, 20, 14);
+		label_2.setBounds(832, 207, 20, 14);
 		frame.getContentPane().add(label_2);
 		
 		JLabel label_3 = new JLabel("  09");
-		label_3.setBounds(850, 145, 20, 14);
+		label_3.setBounds(985, 145, 20, 14);
 		frame.getContentPane().add(label_3);
 		
 		JLabel label_4 = new JLabel("  10");
-		label_4.setBounds(850, 176, 20, 14);
+		label_4.setBounds(985, 176, 20, 14);
 		frame.getContentPane().add(label_4);
 		
 		JLabel label_5 = new JLabel("  11");
-		label_5.setBounds(850, 208, 20, 14);
+		label_5.setBounds(985, 208, 20, 14);
 		frame.getContentPane().add(label_5);
 		
 		JLabel label_6 = new JLabel("  12");
-		label_6.setBounds(850, 238, 20, 14);
+		label_6.setBounds(985, 238, 20, 14);
 		frame.getContentPane().add(label_6);
 		
 		JLabel label_7 = new JLabel("  13");
-		label_7.setBounds(850, 269, 20, 14);
+		label_7.setBounds(985, 269, 20, 14);
 		frame.getContentPane().add(label_7);
 		
 		JLabel label_8 = new JLabel("  14");
-		label_8.setBounds(850, 300, 20, 14);
+		label_8.setBounds(985, 300, 20, 14);
 		frame.getContentPane().add(label_8);
 		
 		JLabel label_9 = new JLabel("  15");
-		label_9.setBounds(850, 331, 20, 14);
+		label_9.setBounds(985, 331, 20, 14);
 		frame.getContentPane().add(label_9);
 		
 		JLabel label_10 = new JLabel("  16");
-		label_10.setBounds(850, 362, 20, 14);
+		label_10.setBounds(985, 362, 20, 14);
 		frame.getContentPane().add(label_10);
 		
 		JLabel label_11 = new JLabel("  04");
-		label_11.setBounds(733, 238, 20, 14);
+		label_11.setBounds(832, 238, 20, 14);
 		frame.getContentPane().add(label_11);
 		
 		JLabel label_12 = new JLabel("  05");
-		label_12.setBounds(733, 269, 20, 14);
+		label_12.setBounds(832, 269, 20, 14);
 		frame.getContentPane().add(label_12);
 		
 		JLabel label_13 = new JLabel("  06");
-		label_13.setBounds(733, 300, 20, 14);
+		label_13.setBounds(832, 300, 20, 14);
 		frame.getContentPane().add(label_13);
 		
 		JLabel label_14 = new JLabel("  07");
-		label_14.setBounds(733, 331, 20, 14);
+		label_14.setBounds(832, 331, 20, 14);
 		frame.getContentPane().add(label_14);
 		
 		JLabel label_15 = new JLabel("  08");
-		label_15.setBounds(733, 362, 20, 14);
+		label_15.setBounds(832, 362, 20, 14);
 		frame.getContentPane().add(label_15);
 		
 		JLabel lblCiscSimulator = new JLabel("CISC Simulator");
 		lblCiscSimulator.setFont(new Font("Tahoma", Font.BOLD, 25));
-		lblCiscSimulator.setBounds(413, 11, 237, 33);
+		lblCiscSimulator.setBounds(524, 11, 207, 33);
 		frame.getContentPane().add(lblCiscSimulator);
 		
 		JLabel lblMemory = new JLabel("Memory");
 		lblMemory.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblMemory.setBounds(812, 91, 80, 20);
+		lblMemory.setBounds(961, 89, 80, 20);
 		frame.getContentPane().add(lblMemory);
 		
 		JLabel lblRegisters = new JLabel("Registers");
 		lblRegisters.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblRegisters.setBounds(563, 256, 80, 20);
+		lblRegisters.setBounds(620, 263, 80, 20);
 		frame.getContentPane().add(lblRegisters);
+		
+		JRadioButton rdbtnDecimal = new JRadioButton("Decimal");
+		rdbtnDecimal.setBounds(676, 122, 109, 23);
+		frame.getContentPane().add(rdbtnDecimal);
+		
+		JRadioButton rdbtnOctal = new JRadioButton("Octal");
+		rdbtnOctal.setBounds(676, 153, 109, 23);
+		frame.getContentPane().add(rdbtnOctal);
+		
+		JRadioButton rdbtnHexadecimal = new JRadioButton("Hexadecimal");
+		rdbtnHexadecimal.setBounds(676, 184, 109, 23);
+		frame.getContentPane().add(rdbtnHexadecimal);
+		
+		JLabel lblNumberFormat = new JLabel("Number Format");
+		lblNumberFormat.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblNumberFormat.setBounds(676, 94, 134, 20);
+		frame.getContentPane().add(lblNumberFormat);
 	}
 	
 	public void setRegister(int registerNum, String content){
@@ -567,5 +586,4 @@ public class FrontPanel {
 	public void instructionSTR(){
 		//ImplementSTR logic
 	}
-	
 }
