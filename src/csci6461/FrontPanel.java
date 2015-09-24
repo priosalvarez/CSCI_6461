@@ -509,6 +509,7 @@ public class FrontPanel {
 		frame.getContentPane().add(lblRegisters);
 		
 		JRadioButton rdbtnDecimal = new JRadioButton("Decimal");
+		rdbtnDecimal.setSelected(true);
 		rdbtnDecimal.setBounds(676, 122, 109, 23);
 		frame.getContentPane().add(rdbtnDecimal);
 		
