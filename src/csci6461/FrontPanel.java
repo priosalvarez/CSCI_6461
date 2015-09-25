@@ -10,7 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JToggleButton;
 
 import co.com.csci.model.Instruction;
-import co.com.csci.util.BinaryUtil;
+//import co.com.csci.util.BinaryUtil;
 import co.com.csci.util.InstructionEnum;
 
 import java.awt.event.ActionListener;
