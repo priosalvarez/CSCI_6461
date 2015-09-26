@@ -647,14 +647,21 @@
       <modelElement href="CSCI_6461.uml#_3RFB4GRdEeW_1tKxQI0T4Q"/>
       <visibility xmi:id="_56y2RmRdEeW_1tKxQI0T4Q" label="+"/>
       <cardinality xmi:id="_56y2R2RdEeW_1tKxQI0T4Q" label="1" max="1" min="1"/>
+      <parameters xmi:id="_6fdooGSNEeW_1tKxQI0T4Q" name="instruction">
+        <modelElement href="CSCI_6461.uml#_6dIGUGSNEeW_1tKxQI0T4Q"/>
+        <cardinality xmi:id="_6fdooWSNEeW_1tKxQI0T4Q" label="1" max="1" min="1"/>
+        <type xmi:id="_6fdoomSNEeW_1tKxQI0T4Q" name="Instruction">
+          <modelElement href="CSCI_6461.uml#_3Ub34WRdEeW_1tKxQI0T4Q"/>
+        </type>
+      </parameters>
     </operations>
-    <operations xmi:id="_56y2SGRdEeW_1tKxQI0T4Q" comments="_559vsGRdEeW_1tKxQI0T4Q" targetConnectionVisual="_55-WwGRdEeW_1tKxQI0T4Q" name="evaluateIndirect">
+    <operations xmi:id="_56y2SGRdEeW_1tKxQI0T4Q" comments="_559vsGRdEeW_1tKxQI0T4Q" targetConnectionVisual="_55-WwGRdEeW_1tKxQI0T4Q" name="evaluateIndirectLDR">
       <modelElement href="CSCI_6461.uml#_3VWd4WRdEeW_1tKxQI0T4Q"/>
       <visibility xmi:id="_56y2SWRdEeW_1tKxQI0T4Q" label="+"/>
       <cardinality xmi:id="_56y2SmRdEeW_1tKxQI0T4Q" label="1" max="1" min="1"/>
-      <outParameters xmi:id="_56y2S2RdEeW_1tKxQI0T4Q">
-        <modelElement href="CSCI_6461.uml#_3VXsAGRdEeW_1tKxQI0T4Q"/>
-        <type xmi:id="_56y2TGRdEeW_1tKxQI0T4Q" name="String">
+      <outParameters xmi:id="_6eJaAGSNEeW_1tKxQI0T4Q">
+        <modelElement href="CSCI_6461.uml#_6dOM8GSNEeW_1tKxQI0T4Q"/>
+        <type xmi:id="_6eJaAWSNEeW_1tKxQI0T4Q" name="String">
           <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
         </type>
       </outParameters>
@@ -665,10 +672,10 @@
           <modelElement href="CSCI_6461.uml#_3Ub34WRdEeW_1tKxQI0T4Q"/>
         </type>
       </parameters>
-      <parameters xmi:id="_56y2UGRdEeW_1tKxQI0T4Q" name="ea">
-        <modelElement href="CSCI_6461.uml#_3VXE8WRdEeW_1tKxQI0T4Q"/>
-        <cardinality xmi:id="_56y2UWRdEeW_1tKxQI0T4Q" label="1" max="1" min="1"/>
-        <type xmi:id="_56y2UmRdEeW_1tKxQI0T4Q" name="String">
+      <parameters xmi:id="_6eLPMGSNEeW_1tKxQI0T4Q" name="ea">
+        <modelElement href="CSCI_6461.uml#_3W6kImRdEeW_1tKxQI0T4Q"/>
+        <cardinality xmi:id="_6eLPMWSNEeW_1tKxQI0T4Q" label="1" max="1" min="1"/>
+        <type xmi:id="_6eLPMmSNEeW_1tKxQI0T4Q" name="String">
           <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
         </type>
       </parameters>
@@ -681,6 +688,24 @@
         <modelElement href="CSCI_6461.uml#_3Vb9cGRdEeW_1tKxQI0T4Q"/>
         <cardinality xmi:id="_56y2V2RdEeW_1tKxQI0T4Q" label="1" max="1" min="1"/>
         <type xmi:id="_56y2WGRdEeW_1tKxQI0T4Q" name="Instruction">
+          <modelElement href="CSCI_6461.uml#_3Ub34WRdEeW_1tKxQI0T4Q"/>
+        </type>
+      </parameters>
+    </operations>
+    <operations xmi:id="_6e_HgGSNEeW_1tKxQI0T4Q" name="evaluateIndirectSTR">
+      <modelElement href="CSCI_6461.uml#_6dJUcGSNEeW_1tKxQI0T4Q"/>
+      <visibility xmi:id="_6e_HgWSNEeW_1tKxQI0T4Q" label="+"/>
+      <cardinality xmi:id="_6e_HgmSNEeW_1tKxQI0T4Q" label="1" max="1" min="1"/>
+      <outParameters xmi:id="_6e_Hg2SNEeW_1tKxQI0T4Q">
+        <modelElement href="CSCI_6461.uml#_6dOM8WSNEeW_1tKxQI0T4Q"/>
+        <type xmi:id="_6e_HhGSNEeW_1tKxQI0T4Q" name="Integer">
+          <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </type>
+      </outParameters>
+      <parameters xmi:id="_6e_HhWSNEeW_1tKxQI0T4Q" name="instruction">
+        <modelElement href="CSCI_6461.uml#_6dJUcWSNEeW_1tKxQI0T4Q"/>
+        <cardinality xmi:id="_6e_HhmSNEeW_1tKxQI0T4Q" label="1" max="1" min="1"/>
+        <type xmi:id="_6e_Hh2SNEeW_1tKxQI0T4Q" name="Instruction">
           <modelElement href="CSCI_6461.uml#_3Ub34WRdEeW_1tKxQI0T4Q"/>
         </type>
       </parameters>

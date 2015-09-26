@@ -4,7 +4,7 @@
     <eAnnotations xmi:id="_2mvEYGRdEeW_1tKxQI0T4Q" source="http://ns.yatta.de/umllab">
       <contents xmi:type="ecore:EAnnotation" xmi:id="_2mvEYWRdEeW_1tKxQI0T4Q" source="codegen">
         <details xmi:id="_2mvrcGRdEeW_1tKxQI0T4Q" key="codegenDirectory" value="/CSCI_6461/src"/>
-        <details xmi:id="_55XSwGRdEeW_1tKxQI0T4Q" key="AssociatedSourceCode" value="/CSCI_6461/src/csci6461/FrontPanel.java;1164102461/1;"/>
+        <details xmi:id="_55XSwGRdEeW_1tKxQI0T4Q" key="AssociatedSourceCode" value="/CSCI_6461/src/csci6461/FrontPanel.java;4054349569/1;"/>
       </contents>
     </eAnnotations>
     <elementImport xmi:id="_3O5QkGRdEeW_1tKxQI0T4Q">
@@ -237,20 +237,13 @@
 				  txtpnIr.setText(plainInstruction);&#xD;
 				  //Evaluate instruction&#xD;
 				  InstructionEnum iCode = instruction.getIntructionCode();&#xD;
-	&#xD;
-				  //Store MAR&#xD;
-				  String varMAR = txtpnMar.getText();&#xD;
-				  //Store MBR&#xD;
-				  String varMBR = txtpnMbr.getText();&#xD;
-				  //Store IR&#xD;
-				  String varIR = txtpnIr.getText();&#xD;
 			&#xD;
 				  switch(iCode){&#xD;
 		  		  		case LDR:&#xD;
 		  		  			instructionLDR(instruction);&#xD;
 		  		  			break;&#xD;
 		  		  		case STR:&#xD;
-		  		  			instructionSTR();&#xD;
+		  		  			instructionSTR(instruction);&#xD;
 	  		  				break;&#xD;
 		  		  		case HALT:&#xD;
 		  		  			txtrOutput.setText(&quot;HALT&quot;);&#xD;
@@ -278,7 +271,7 @@
 		txtMsr.setColumns(10);&#xD;
 		&#xD;
 		txtpnPc = new JTextPane();&#xD;
-		txtpnPc.setText(&quot;0000000000000001&quot;);&#xD;
+		txtpnPc.setText(&quot;0000000000000000&quot;);&#xD;
 		txtpnPc.setBounds(524, 91, 120, 20);&#xD;
 		frame.getContentPane().add(txtpnPc);&#xD;
 		&#xD;
@@ -696,20 +689,16 @@
 		return &quot;&quot;;&#xD;
 	</body>
         </ownedBehavior>
-        <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_3W6kIGRdEeW_1tKxQI0T4Q" name="evaluateIndirect" specification="_3VWd4WRdEeW_1tKxQI0T4Q">
-          <ownedParameter xmi:id="_3W6kIWRdEeW_1tKxQI0T4Q" name="instruction" type="_3Ub34WRdEeW_1tKxQI0T4Q"/>
-          <ownedParameter xmi:id="_3W6kImRdEeW_1tKxQI0T4Q" name="ea">
-            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
-          </ownedParameter>
-          <ownedParameter xmi:id="_3W6kI2RdEeW_1tKxQI0T4Q" direction="return">
-            <name xsi:nil="true"/>
+        <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_3W6kIGRdEeW_1tKxQI0T4Q" name="evaluateIndirectLDR" specification="_3VWd4WRdEeW_1tKxQI0T4Q">
+          <ownedParameter xmi:id="_6dQpMGSNEeW_1tKxQI0T4Q" name="instruction" type="_3Ub34WRdEeW_1tKxQI0T4Q"/>
+          <ownedParameter xmi:id="_6dRQQGSNEeW_1tKxQI0T4Q" direction="return">
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
           </ownedParameter>
           <language>java</language>
           <body>try {&#xD;
 			if(instruction.isIndirect()){&#xD;
 				// Is all what is in the address or only the address part?&#xD;
-				Instruction indirectInstruction = new Instruction(memory[Integer.parseInt(ea, 2) - 1].getText());&#xD;
+				Instruction indirectInstruction = new Instruction(memory[Integer.parseInt(ea, 2)].getText());&#xD;
 				//AddressPart&#xD;
 				ea = indirectInstruction.getAddress();&#xD;
 				// else&#xD;
@@ -739,15 +728,49 @@
 			ea = Integer.toBinaryString(sum);&#xD;
 		}&#xD;
 		&#xD;
-		ea = evaluateIndirect(instruction, ea);&#xD;
+		ea = evaluateIndirectLDR(instruction, ea);&#xD;
 		ea = BinaryUtil.fillBinaryString(ea);&#xD;
 		&#xD;
 		setRegister(instruction.getRegisterNumber(), ea);&#xD;
 	</body>
         </ownedBehavior>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_3W7LMmRdEeW_1tKxQI0T4Q" name="instructionSTR" specification="_3RFB4GRdEeW_1tKxQI0T4Q">
+          <ownedParameter xmi:id="_6dR3UGSNEeW_1tKxQI0T4Q" name="instruction" type="_3Ub34WRdEeW_1tKxQI0T4Q"/>
           <language>java</language>
-          <body>//ImplementSTR logic&#xD;
+          <body>String content = &quot;&quot;;&#xD;
+		//Verify if instruction has index&#xD;
+		if(instruction.getIndexNumber() == 0){&#xD;
+			content = getRegister(instruction.getRegisterNumber());&#xD;
+		} else {&#xD;
+			Integer registerDecimal = Integer.parseInt(getRegister(instruction.getRegisterNumber()), 2);&#xD;
+			Integer indexDecimal = Integer.parseInt(getIndex(instruction.getIndexNumber()), 2);&#xD;
+			//Get index and sum it with address&#xD;
+			Integer sum = registerDecimal + indexDecimal;&#xD;
+			if(sum > 31){&#xD;
+				throw new Throwable(&quot;FAULT&quot;);&#xD;
+			}&#xD;
+			content = Integer.toBinaryString(sum);&#xD;
+		}&#xD;
+		&#xD;
+		Integer ea = evaluateIndirectSTR(instruction);&#xD;
+		content = BinaryUtil.fillBinaryString(content);&#xD;
+		memory[ea].setText(content);&#xD;
+	</body>
+        </ownedBehavior>
+        <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_6dRQQWSNEeW_1tKxQI0T4Q" name="evaluateIndirectSTR" specification="_6dJUcGSNEeW_1tKxQI0T4Q">
+          <ownedParameter xmi:id="_6dRQQmSNEeW_1tKxQI0T4Q" name="instruction" type="_3Ub34WRdEeW_1tKxQI0T4Q"/>
+          <ownedParameter xmi:id="_6dRQQ2SNEeW_1tKxQI0T4Q" direction="return">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+          </ownedParameter>
+          <language>java</language>
+          <body>try {&#xD;
+			if(instruction.isIndirect()){&#xD;
+				return instruction.getIntegerAddress();&#xD;
+			}&#xD;
+		} catch (Exception e){&#xD;
+			throw new Throwable(&quot;FAULT&quot;);&#xD;
+		}&#xD;
+		return Integer.parseInt(txtpnPc.getText(), 2);&#xD;
 	</body>
         </ownedBehavior>
         <ownedOperation xmi:id="_3Q1KQGRdEeW_1tKxQI0T4Q" name="main" isStatic="true" method="_3WyoUGRdEeW_1tKxQI0T4Q">
@@ -805,17 +828,19 @@
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
           </ownedParameter>
         </ownedOperation>
-        <ownedOperation xmi:id="_3RFB4GRdEeW_1tKxQI0T4Q" name="instructionSTR" method="_3W7LMmRdEeW_1tKxQI0T4Q"/>
-        <ownedOperation xmi:id="_3VWd4WRdEeW_1tKxQI0T4Q" name="evaluateIndirect" method="_3W6kIGRdEeW_1tKxQI0T4Q" raisedException="_3VUosGRdEeW_1tKxQI0T4Q">
+        <ownedOperation xmi:id="_3RFB4GRdEeW_1tKxQI0T4Q" name="instructionSTR" method="_3W7LMmRdEeW_1tKxQI0T4Q" raisedException="_3VUosGRdEeW_1tKxQI0T4Q">
+          <ownedParameter xmi:id="_6dIGUGSNEeW_1tKxQI0T4Q" name="instruction" type="_3Ub34WRdEeW_1tKxQI0T4Q"/>
+        </ownedOperation>
+        <ownedOperation xmi:id="_3VWd4WRdEeW_1tKxQI0T4Q" name="evaluateIndirectLDR" method="_3W6kIGRdEeW_1tKxQI0T4Q" raisedException="_3VUosGRdEeW_1tKxQI0T4Q">
           <ownedComment xmi:id="_3W9ncmRdEeW_1tKxQI0T4Q">
             <body>This method implements the condition in which an instruction has the &#xD;
 	 * indirect flag for processing.</body>
           </ownedComment>
           <ownedParameter xmi:id="_3VXE8GRdEeW_1tKxQI0T4Q" name="instruction" type="_3Ub34WRdEeW_1tKxQI0T4Q"/>
-          <ownedParameter xmi:id="_3VXE8WRdEeW_1tKxQI0T4Q" name="ea">
+          <ownedParameter xmi:id="_6dOM8GSNEeW_1tKxQI0T4Q" direction="return">
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
           </ownedParameter>
-          <ownedParameter xmi:id="_3VXsAGRdEeW_1tKxQI0T4Q" direction="return">
+          <ownedParameter xmi:id="_3W6kImRdEeW_1tKxQI0T4Q" name="ea">
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
           </ownedParameter>
         </ownedOperation>
@@ -824,6 +849,12 @@
             <body>This method implements the Load instruction in the UI</body>
           </ownedComment>
           <ownedParameter xmi:id="_3Vb9cGRdEeW_1tKxQI0T4Q" name="instruction" type="_3Ub34WRdEeW_1tKxQI0T4Q"/>
+        </ownedOperation>
+        <ownedOperation xmi:id="_6dJUcGSNEeW_1tKxQI0T4Q" name="evaluateIndirectSTR" method="_6dRQQWSNEeW_1tKxQI0T4Q" raisedException="_3VUosGRdEeW_1tKxQI0T4Q">
+          <ownedParameter xmi:id="_6dJUcWSNEeW_1tKxQI0T4Q" name="instruction" type="_3Ub34WRdEeW_1tKxQI0T4Q"/>
+          <ownedParameter xmi:id="_6dOM8WSNEeW_1tKxQI0T4Q" direction="return">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+          </ownedParameter>
         </ownedOperation>
       </packagedElement>
       <packagedElement xmi:type="uml:Association" xmi:id="_3XGKUGRdEeW_1tKxQI0T4Q" name="" memberEnd="_3XGKUWRdEeW_1tKxQI0T4Q _3VkgUGRdEeW_1tKxQI0T4Q">
