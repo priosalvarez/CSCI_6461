@@ -632,15 +632,19 @@ public class FrontPanel {
 		return ea;
 	}
 	
-	public Integer evaluateIndirectSTR(Instruction instruction) throws Throwable{
+	public Integer evaluateIndirectSTR(Instruction instruction, String ea) throws Throwable{
 		try {
 			if(instruction.isIndirect()){
-				return instruction.getIntegerAddress();
+				// Is all what is in the address or only the address part?
+				Instruction indirectInstruction = new Instruction(memory[Integer.parseInt(ea, 2)].getText());
+				//AddressPart
+				ea = indirectInstruction.getAddress();
+				return Integer.parseInt(ea,2);
 			}
 		} catch (Exception e){
 			throw new Throwable("FAULT");
 		}
-		return Integer.parseInt(txtpnPc.getText(), 2);
+		return Integer.parseInt(ea,2);
 	}
 	
 	/*
@@ -675,17 +679,18 @@ public class FrontPanel {
 		if(instruction.getIndexNumber() == 0){
 			content = getRegister(instruction.getRegisterNumber());
 		} else {
-			Integer registerDecimal = Integer.parseInt(getRegister(instruction.getRegisterNumber()), 2);
+			content = getRegister(instruction.getRegisterNumber());
+			Integer addressDecimal = instruction.getIntegerAddress();
 			Integer indexDecimal = Integer.parseInt(getIndex(instruction.getIndexNumber()), 2);
 			//Get index and sum it with address
-			Integer sum = registerDecimal + indexDecimal;
+			Integer sum = addressDecimal + indexDecimal;
 			if(sum > 31){
 				throw new Throwable("FAULT");
 			}
 			content = Integer.toBinaryString(sum);
 		}
 		
-		Integer ea = evaluateIndirectSTR(instruction);
+		Integer ea = evaluateIndirectSTR(instruction, content);
 		content = BinaryUtil.fillBinaryString(content);
 		memory[ea].setText(content);
 	}
