@@ -178,7 +178,7 @@ public class FrontPanel {
 			  //Convert PC from binary to decimal 
 			  Integer pcDecimal = Integer.parseInt(txtpnPc.getText(), 2);
 			  //Get Instruction from memory space
-			  String plainInstruction = memory[pcDecimal-1].getText();
+			  String plainInstruction = memory[pcDecimal].getText();
 			  Instruction instruction;
 			  try
 			  {

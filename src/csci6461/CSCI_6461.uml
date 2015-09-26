@@ -4,7 +4,7 @@
     <eAnnotations xmi:id="_2mvEYGRdEeW_1tKxQI0T4Q" source="http://ns.yatta.de/umllab">
       <contents xmi:type="ecore:EAnnotation" xmi:id="_2mvEYWRdEeW_1tKxQI0T4Q" source="codegen">
         <details xmi:id="_2mvrcGRdEeW_1tKxQI0T4Q" key="codegenDirectory" value="/CSCI_6461/src"/>
-        <details xmi:id="_55XSwGRdEeW_1tKxQI0T4Q" key="AssociatedSourceCode" value="/CSCI_6461/src/csci6461/FrontPanel.java;3286585785/1;"/>
+        <details xmi:id="_55XSwGRdEeW_1tKxQI0T4Q" key="AssociatedSourceCode" value="/CSCI_6461/src/csci6461/FrontPanel.java;1164102461/1;"/>
       </contents>
     </eAnnotations>
     <elementImport xmi:id="_3O5QkGRdEeW_1tKxQI0T4Q">
@@ -224,7 +224,7 @@
 			  //Convert PC from binary to decimal &#xD;
 			  Integer pcDecimal = Integer.parseInt(txtpnPc.getText(), 2);&#xD;
 			  //Get Instruction from memory space&#xD;
-			  String plainInstruction = memory[pcDecimal-1].getText();&#xD;
+			  String plainInstruction = memory[pcDecimal].getText();&#xD;
 			  Instruction instruction;&#xD;
 			  try&#xD;
 			  {&#xD;
