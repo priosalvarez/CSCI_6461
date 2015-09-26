@@ -191,13 +191,6 @@ public class FrontPanel {
 				  txtpnIr.setText(plainInstruction);
 				  //Evaluate instruction
 				  InstructionEnum iCode = instruction.getIntructionCode();
-	
-				  //Store MAR
-				  String varMAR = txtpnMar.getText();
-				  //Store MBR
-				  String varMBR = txtpnMbr.getText();
-				  //Store IR
-				  String varIR = txtpnIr.getText();
 			
 				  switch(iCode){
 		  		  		case LDR:
