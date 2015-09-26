@@ -204,7 +204,7 @@ public class FrontPanel {
 		  		  			instructionLDR(instruction);
 		  		  			break;
 		  		  		case STR:
-		  		  			instructionSTR();
+		  		  			instructionSTR(instruction);
 	  		  				break;
 		  		  		case HALT:
 		  		  			txtrOutput.setText("HALT");
@@ -232,7 +232,7 @@ public class FrontPanel {
 		txtMsr.setColumns(10);
 		
 		txtpnPc = new JTextPane();
-		txtpnPc.setText("0000000000000001");
+		txtpnPc.setText("0000000000000000");
 		txtpnPc.setBounds(524, 91, 120, 20);
 		frame.getContentPane().add(txtpnPc);
 		
@@ -623,11 +623,11 @@ public class FrontPanel {
 	 * This method implements the condition in which an instruction has the 
 	 * indirect flag for processing.
 	 */
-	public String evaluateIndirect(Instruction instruction, String ea) throws Throwable{
+	public String evaluateIndirectLDR(Instruction instruction, String ea) throws Throwable{
 		try {
 			if(instruction.isIndirect()){
 				// Is all what is in the address or only the address part?
-				Instruction indirectInstruction = new Instruction(memory[Integer.parseInt(ea, 2) - 1].getText());
+				Instruction indirectInstruction = new Instruction(memory[Integer.parseInt(ea, 2)].getText());
 				//AddressPart
 				ea = indirectInstruction.getAddress();
 				// else
@@ -638,6 +638,18 @@ public class FrontPanel {
 		}
 		return ea;
 	}
+	
+	public Integer evaluateIndirectSTR(Instruction instruction) throws Throwable{
+		try {
+			if(instruction.isIndirect()){
+				return instruction.getIntegerAddress();
+			}
+		} catch (Exception e){
+			throw new Throwable("FAULT");
+		}
+		return Integer.parseInt(txtpnPc.getText(), 2);
+	}
+	
 	/*
 	 * This method implements the Load instruction in the UI
 	 */
@@ -657,14 +669,31 @@ public class FrontPanel {
 			ea = Integer.toBinaryString(sum);
 		}
 		
-		ea = evaluateIndirect(instruction, ea);
+		ea = evaluateIndirectLDR(instruction, ea);
 		ea = BinaryUtil.fillBinaryString(ea);
 		
 		setRegister(instruction.getRegisterNumber(), ea);
 	}
 	
 	
-	public void instructionSTR(){
-		//ImplementSTR logic
+	public void instructionSTR(Instruction instruction) throws Throwable{
+		String content = "";
+		//Verify if instruction has index
+		if(instruction.getIndexNumber() == 0){
+			content = getRegister(instruction.getRegisterNumber());
+		} else {
+			Integer registerDecimal = Integer.parseInt(getRegister(instruction.getRegisterNumber()), 2);
+			Integer indexDecimal = Integer.parseInt(getIndex(instruction.getIndexNumber()), 2);
+			//Get index and sum it with address
+			Integer sum = registerDecimal + indexDecimal;
+			if(sum > 31){
+				throw new Throwable("FAULT");
+			}
+			content = Integer.toBinaryString(sum);
+		}
+		
+		Integer ea = evaluateIndirectSTR(instruction);
+		content = BinaryUtil.fillBinaryString(content);
+		memory[ea].setText(content);
 	}
 }

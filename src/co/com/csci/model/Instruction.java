@@ -86,6 +86,10 @@ public class Instruction {
 	public String getAddress() {
 		return address;
 	}
+	
+	public Integer getIntegerAddress() {
+		return Integer.parseInt(address);
+	}
 
 	public void setAddress(String address) {
 		this.address = address;
