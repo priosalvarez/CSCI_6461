@@ -569,7 +569,7 @@ public class FrontPanel {
 		} else  if(registerNum == 2){
 			txtpnR_2.setText(content);
 		} else if(registerNum == 3){
-//			txtpnR_3.setText(content);
+			textPane_16.setText(content);
 		} else {
 			//Exception
 		}
