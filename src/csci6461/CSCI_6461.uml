@@ -1,0 +1,946 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:UMLLabProfile="http:///schemas/UMLLabProfile/NS/0" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http:///schemas/UMLLabProfile/NS/0 pathmap://UMLLAB_PROFILES/UMLLab.profile.uml#UMLLabProfile-Annotation_2-UMLLabProfile">
+  <uml:Model xmi:id="_2EsHQGRdEeW_1tKxQI0T4Q" name="CSCI_6461">
+    <eAnnotations xmi:id="_2mvEYGRdEeW_1tKxQI0T4Q" source="http://ns.yatta.de/umllab">
+      <contents xmi:type="ecore:EAnnotation" xmi:id="_2mvEYWRdEeW_1tKxQI0T4Q" source="codegen">
+        <details xmi:id="_2mvrcGRdEeW_1tKxQI0T4Q" key="codegenDirectory" value="/CSCI_6461/src"/>
+        <details xmi:id="_55XSwGRdEeW_1tKxQI0T4Q" key="AssociatedSourceCode" value="/CSCI_6461/src/csci6461/FrontPanel.java;3286585785/1;"/>
+      </contents>
+    </eAnnotations>
+    <elementImport xmi:id="_3O5QkGRdEeW_1tKxQI0T4Q">
+      <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+    </elementImport>
+    <elementImport xmi:id="_3O53oGRdEeW_1tKxQI0T4Q">
+      <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#byte"/>
+    </elementImport>
+    <elementImport xmi:id="_3O53oWRdEeW_1tKxQI0T4Q">
+      <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#char"/>
+    </elementImport>
+    <elementImport xmi:id="_3O53omRdEeW_1tKxQI0T4Q">
+      <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#double"/>
+    </elementImport>
+    <elementImport xmi:id="_3O6esGRdEeW_1tKxQI0T4Q">
+      <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#float"/>
+    </elementImport>
+    <elementImport xmi:id="_3O6esWRdEeW_1tKxQI0T4Q">
+      <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+    </elementImport>
+    <elementImport xmi:id="_3O6esmRdEeW_1tKxQI0T4Q">
+      <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#long"/>
+    </elementImport>
+    <elementImport xmi:id="_3O7FwGRdEeW_1tKxQI0T4Q">
+      <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#short"/>
+    </elementImport>
+    <elementImport xmi:id="_3O-JEGRdEeW_1tKxQI0T4Q">
+      <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </elementImport>
+    <packagedElement xmi:type="uml:Package" xmi:id="_3PGr8GRdEeW_1tKxQI0T4Q" name="java">
+      <packagedElement xmi:type="uml:Package" xmi:id="_3PGr8WRdEeW_1tKxQI0T4Q" name="awt">
+        <packagedElement xmi:type="uml:Class" xmi:id="_3UOcgGRdEeW_1tKxQI0T4Q" name="EventQueue"/>
+        <packagedElement xmi:type="uml:Package" xmi:id="_3PKWUGRdEeW_1tKxQI0T4Q" name="event">
+          <packagedElement xmi:type="uml:Interface" xmi:id="_3UhXcGRdEeW_1tKxQI0T4Q" name="ActionListener"/>
+          <packagedElement xmi:type="uml:Class" xmi:id="_3UjMoWRdEeW_1tKxQI0T4Q" name="ActionEvent"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_3Um3AGRdEeW_1tKxQI0T4Q" name="Font"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Package" xmi:id="_3VUBoGRdEeW_1tKxQI0T4Q" name="lang">
+        <packagedElement xmi:type="uml:Class" xmi:id="_3VUosGRdEeW_1tKxQI0T4Q" name="Throwable"/>
+      </packagedElement>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Package" xmi:id="_3PH6EGRdEeW_1tKxQI0T4Q" name="javax">
+      <packagedElement xmi:type="uml:Package" xmi:id="_3PH6EWRdEeW_1tKxQI0T4Q" name="swing">
+        <packagedElement xmi:type="uml:Class" xmi:id="_3USG4GRdEeW_1tKxQI0T4Q" name="JFrame"/>
+        <packagedElement xmi:type="uml:Class" xmi:id="_3UUjIGRdEeW_1tKxQI0T4Q" name="JTextField"/>
+        <packagedElement xmi:type="uml:Class" xmi:id="_3UWYUGRdEeW_1tKxQI0T4Q" name="JTextPane"/>
+        <packagedElement xmi:type="uml:Class" xmi:id="_3UYNgGRdEeW_1tKxQI0T4Q" name="JButton"/>
+        <packagedElement xmi:type="uml:Class" xmi:id="_3UaCsWRdEeW_1tKxQI0T4Q" name="JToggleButton"/>
+        <packagedElement xmi:type="uml:Class" xmi:id="_3UlB0GRdEeW_1tKxQI0T4Q" name="JLabel"/>
+      </packagedElement>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Package" xmi:id="_3PJIMGRdEeW_1tKxQI0T4Q" name="co">
+      <packagedElement xmi:type="uml:Package" xmi:id="_3PJIMWRdEeW_1tKxQI0T4Q" name="com">
+        <packagedElement xmi:type="uml:Package" xmi:id="_3PJIMmRdEeW_1tKxQI0T4Q" name="csci">
+          <packagedElement xmi:type="uml:Package" xmi:id="_3PJvQGRdEeW_1tKxQI0T4Q" name="model">
+            <packagedElement xmi:type="uml:Class" xmi:id="_3Ub34WRdEeW_1tKxQI0T4Q" name="Instruction"/>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Package" xmi:id="_3PJvQWRdEeW_1tKxQI0T4Q" name="util">
+            <packagedElement xmi:type="uml:Class" xmi:id="_3UdtEWRdEeW_1tKxQI0T4Q" name="BinaryUtil"/>
+            <packagedElement xmi:type="uml:Enumeration" xmi:id="_3UfiQGRdEeW_1tKxQI0T4Q" name="InstructionEnum"/>
+          </packagedElement>
+        </packagedElement>
+      </packagedElement>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Package" xmi:id="_3PwzQGRdEeW_1tKxQI0T4Q" name="csci6461">
+      <packagedElement xmi:type="uml:Class" xmi:id="_3Ql5sGRdEeW_1tKxQI0T4Q" name="FrontPanel">
+        <ownedAttribute xmi:id="_3VkgUGRdEeW_1tKxQI0T4Q" name="frame" visibility="private" type="_3USG4GRdEeW_1tKxQI0T4Q" association="_3XGKUGRdEeW_1tKxQI0T4Q"/>
+        <ownedAttribute xmi:id="_3Vm8kGRdEeW_1tKxQI0T4Q" name="textField" visibility="private" type="_3UUjIGRdEeW_1tKxQI0T4Q" association="_3XH_gWRdEeW_1tKxQI0T4Q"/>
+        <ownedAttribute xmi:id="_3VoKsGRdEeW_1tKxQI0T4Q" name="textField_1" visibility="private" type="_3UUjIGRdEeW_1tKxQI0T4Q" association="_3XKbwGRdEeW_1tKxQI0T4Q"/>
+        <ownedAttribute xmi:id="_3VpY0GRdEeW_1tKxQI0T4Q" name="textField_2" visibility="private" type="_3UUjIGRdEeW_1tKxQI0T4Q" association="_3XMQ8GRdEeW_1tKxQI0T4Q"/>
+        <ownedAttribute xmi:id="_3Vqm8GRdEeW_1tKxQI0T4Q" name="textField_3" visibility="private" type="_3UUjIGRdEeW_1tKxQI0T4Q" association="_3XNfEWRdEeW_1tKxQI0T4Q"/>
+        <ownedAttribute xmi:id="_3VrOAWRdEeW_1tKxQI0T4Q" name="textField_4" visibility="private" type="_3UUjIGRdEeW_1tKxQI0T4Q" association="_3XPUQWRdEeW_1tKxQI0T4Q"/>
+        <ownedAttribute xmi:id="_3VscIWRdEeW_1tKxQI0T4Q" name="txtMsr" visibility="private" type="_3UUjIGRdEeW_1tKxQI0T4Q" association="_3XRJcWRdEeW_1tKxQI0T4Q"/>
+        <ownedAttribute xmi:id="_3VtqQWRdEeW_1tKxQI0T4Q" name="txtpnR" visibility="package" type="_3UWYUGRdEeW_1tKxQI0T4Q" association="_3XS-oGRdEeW_1tKxQI0T4Q"/>
+        <ownedAttribute xmi:id="_3VvfcGRdEeW_1tKxQI0T4Q" name="txtpnR_1" visibility="package" type="_3UWYUGRdEeW_1tKxQI0T4Q" association="_3XUMwWRdEeW_1tKxQI0T4Q"/>
+        <ownedAttribute xmi:id="_3VwtkWRdEeW_1tKxQI0T4Q" name="txtpnR_2" visibility="package" type="_3UWYUGRdEeW_1tKxQI0T4Q" association="_3XWB8GRdEeW_1tKxQI0T4Q"/>
+        <ownedAttribute xmi:id="_3Vx7sWRdEeW_1tKxQI0T4Q" name="txtpnX" visibility="package" type="_3UWYUGRdEeW_1tKxQI0T4Q" association="_3XXQEWRdEeW_1tKxQI0T4Q"/>
+        <ownedAttribute xmi:id="_3Vzw4GRdEeW_1tKxQI0T4Q" name="txtpnX_1" visibility="package" type="_3UWYUGRdEeW_1tKxQI0T4Q" association="_3XZFQWRdEeW_1tKxQI0T4Q"/>
+        <ownedAttribute xmi:id="_3V0X8WRdEeW_1tKxQI0T4Q" name="txtpnX_2" visibility="package" type="_3UWYUGRdEeW_1tKxQI0T4Q" association="_3XaTYWRdEeW_1tKxQI0T4Q"/>
+        <ownedAttribute xmi:id="_3V1mEGRdEeW_1tKxQI0T4Q" name="memory" visibility="package" type="_3UWYUGRdEeW_1tKxQI0T4Q" association="_3XbhgWRdEeW_1tKxQI0T4Q">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_3V1mEWRdEeW_1tKxQI0T4Q" value="*"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_3V20MWRdEeW_1tKxQI0T4Q" name="txtpnPc" visibility="package" type="_3UWYUGRdEeW_1tKxQI0T4Q" association="_3XcvoWRdEeW_1tKxQI0T4Q"/>
+        <ownedAttribute xmi:id="_3V4CUGRdEeW_1tKxQI0T4Q" name="txtpnMar" visibility="package" type="_3UWYUGRdEeW_1tKxQI0T4Q" association="_3Xek0GRdEeW_1tKxQI0T4Q"/>
+        <ownedAttribute xmi:id="_3V4pYWRdEeW_1tKxQI0T4Q" name="txtpnMbr" visibility="package" type="_3UWYUGRdEeW_1tKxQI0T4Q" association="_3XgaAGRdEeW_1tKxQI0T4Q"/>
+        <ownedAttribute xmi:id="_3V53gGRdEeW_1tKxQI0T4Q" name="txtpnIr" visibility="package" type="_3UWYUGRdEeW_1tKxQI0T4Q" association="_3XiPMWRdEeW_1tKxQI0T4Q"/>
+        <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_3WyoUGRdEeW_1tKxQI0T4Q" name="main" specification="_3Q1KQGRdEeW_1tKxQI0T4Q">
+          <ownedParameter xmi:id="_3WzPYGRdEeW_1tKxQI0T4Q" name="args">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+            <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_3WzPYWRdEeW_1tKxQI0T4Q" value="*"/>
+          </ownedParameter>
+          <language>java</language>
+          <body>EventQueue.invokeLater(new Runnable() {&#xD;
+			public void run() {&#xD;
+				try {&#xD;
+					FrontPanel window = new FrontPanel();&#xD;
+					window.frame.setVisible(true);&#xD;
+				} catch (Exception e) {&#xD;
+					e.printStackTrace();&#xD;
+				}&#xD;
+			}&#xD;
+		});&#xD;
+	</body>
+        </ownedBehavior>
+        <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_3W3g0GRdEeW_1tKxQI0T4Q" name="FrontPanel" specification="_3Q6p0GRdEeW_1tKxQI0T4Q">
+          <ownedParameter xmi:id="_3W3g0WRdEeW_1tKxQI0T4Q" type="_3Ql5sGRdEeW_1tKxQI0T4Q" direction="return">
+            <name xsi:nil="true"/>
+          </ownedParameter>
+          <language>java</language>
+          <body>initialize();&#xD;
+	</body>
+        </ownedBehavior>
+        <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_3W4H4GRdEeW_1tKxQI0T4Q" name="initialize" specification="_3Q738GRdEeW_1tKxQI0T4Q">
+          <language>java</language>
+          <body>//Main window&#xD;
+		frame = new JFrame();&#xD;
+		frame.setBounds(100, 100, 1200, 450);&#xD;
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);&#xD;
+		frame.getContentPane().setLayout(null);&#xD;
+		&#xD;
+		/*&#xD;
+		 * Input Area - In this area the user can input individual instructions&#xD;
+		 * Opcode	6 bits	Specifies one of 64 possible instructions; Not all may be defined in this project&#xD;
+		 * IX		2 bits	Specifies one of three index registers; may be referred to by X1 – X3. O value indicates no indexing.&#xD;
+		 * R		2 bits	Specifies one of four general purpose registers; may be referred to by R0 – R3&#xD;
+		 * I		1 bits	If I =1, specifies indirect addressing; otherwise, no indirect addressing.&#xD;
+		 * Address	7 bits	Specifies one of 32 locations&#xD;
+		 */&#xD;
+		&#xD;
+		//OpCode&#xD;
+		textField = new JTextField();&#xD;
+		textField.setBounds(44, 91, 113, 20);&#xD;
+		frame.getContentPane().add(textField);&#xD;
+		textField.setColumns(10);&#xD;
+		//R&#xD;
+		textField_1 = new JTextField();&#xD;
+		textField_1.setBounds(167, 91, 44, 20);&#xD;
+		frame.getContentPane().add(textField_1);&#xD;
+		textField_1.setColumns(10);&#xD;
+		//IX&#xD;
+		textField_2 = new JTextField();&#xD;
+		textField_2.setBounds(221, 91, 44, 20);&#xD;
+		frame.getContentPane().add(textField_2);&#xD;
+		textField_2.setColumns(10);&#xD;
+		//I&#xD;
+		textField_3 = new JTextField();&#xD;
+		textField_3.setBounds(275, 91, 20, 20);&#xD;
+		frame.getContentPane().add(textField_3);&#xD;
+		textField_3.setColumns(10);&#xD;
+		//Address&#xD;
+		textField_4 = new JTextField();&#xD;
+		textField_4.setText(&quot;1010101010101010&quot;);&#xD;
+		textField_4.setBounds(305, 91, 134, 20);&#xD;
+		frame.getContentPane().add(textField_4);&#xD;
+		textField_4.setColumns(10);&#xD;
+		&#xD;
+		&#xD;
+		&#xD;
+		//Output area for processing messages (i.e. troubleshooting, trap messages&#xD;
+		&#xD;
+		JTextPane txtpnEc = new JTextPane();&#xD;
+		txtpnEc.setText(&quot;EC&quot;);&#xD;
+		txtpnEc.setBounds(43, 122, 396, 51);&#xD;
+		frame.getContentPane().add(txtpnEc);&#xD;
+		&#xD;
+		&#xD;
+		//Area for general output&#xD;
+		&#xD;
+		JTextPane txtrOutput = new JTextPane();&#xD;
+		txtrOutput.setText(&quot;Output&quot;);&#xD;
+		txtrOutput.setBounds(44, 203, 207, 123);&#xD;
+		frame.getContentPane().add(txtrOutput);&#xD;
+		&#xD;
+		//Button to trigger a single step in the process (i.e. fetch instruction etc.)&#xD;
+		&#xD;
+		//JButton btnSingleStep = new JButton(&quot;Single Step&quot;);&#xD;
+		//btnSingleStep.setBounds(286, 204, 153, 23);&#xD;
+		//frame.getContentPane().add(btnSingleStep);&#xD;
+		&#xD;
+		&#xD;
+		//Main Execution Area&#xD;
+		&#xD;
+		/*Button to load instruction from input or file (may have to add another feature &#xD;
+		 * or create another to load instructions from a file.&#xD;
+		 */&#xD;
+		JToggleButton tglbtnLoad = new JToggleButton(&quot;Load&quot;);&#xD;
+		tglbtnLoad.setBounds(44, 353, 94, 23);&#xD;
+		frame.getContentPane().add(tglbtnLoad);&#xD;
+		&#xD;
+		JToggleButton tglbtnExecute = new JToggleButton(&quot;Execute&quot;);&#xD;
+		tglbtnExecute.setBounds(148, 353, 93, 23);&#xD;
+		frame.getContentPane().add(tglbtnExecute);&#xD;
+		&#xD;
+		JButton btnSave = new JButton(&quot;Save&quot;);&#xD;
+		btnSave.setBounds(251, 353, 89, 23);&#xD;
+		frame.getContentPane().add(btnSave);&#xD;
+		&#xD;
+		JButton btnNewButton = new JButton(&quot;Stop&quot;);&#xD;
+		btnNewButton.addActionListener(new ActionListener() {&#xD;
+			public void actionPerformed(ActionEvent e) {&#xD;
+			}&#xD;
+		});&#xD;
+		btnNewButton.setBounds(350, 353, 89, 23);&#xD;
+		frame.getContentPane().add(btnNewButton);&#xD;
+		&#xD;
+		JButton btnSingle = new JButton(&quot;Single Instruction&quot;);&#xD;
+		btnSingle.setBounds(286, 253, 153, 23);&#xD;
+		frame.getContentPane().add(btnSingle);&#xD;
+		&#xD;
+		btnSingle.addActionListener(new ActionListener()&#xD;
+		{&#xD;
+		  public void actionPerformed(ActionEvent e)&#xD;
+		  {&#xD;
+			  //Get PC counter&#xD;
+			  String pc = txtpnPc.getText();&#xD;
+			  //Convert PC from binary to decimal &#xD;
+			  Integer pcDecimal = Integer.parseInt(txtpnPc.getText(), 2);&#xD;
+			  //Get Instruction from memory space&#xD;
+			  String plainInstruction = memory[pcDecimal-1].getText();&#xD;
+			  Instruction instruction;&#xD;
+			  try&#xD;
+			  {&#xD;
+				  instruction = new Instruction(plainInstruction);&#xD;
+				  //Change MAR&#xD;
+				  txtpnMar.setText(pc);&#xD;
+				  //Change MBR&#xD;
+				  txtpnMbr.setText(plainInstruction);&#xD;
+				  //Change IR&#xD;
+				  txtpnIr.setText(plainInstruction);&#xD;
+				  //Evaluate instruction&#xD;
+				  InstructionEnum iCode = instruction.getIntructionCode();&#xD;
+	&#xD;
+				  //Store MAR&#xD;
+				  String varMAR = txtpnMar.getText();&#xD;
+				  //Store MBR&#xD;
+				  String varMBR = txtpnMbr.getText();&#xD;
+				  //Store IR&#xD;
+				  String varIR = txtpnIr.getText();&#xD;
+			&#xD;
+				  switch(iCode){&#xD;
+		  		  		case LDR:&#xD;
+		  		  			instructionLDR(instruction);&#xD;
+		  		  			break;&#xD;
+		  		  		case STR:&#xD;
+		  		  			instructionSTR();&#xD;
+	  		  				break;&#xD;
+		  		  		case HALT:&#xD;
+		  		  			txtrOutput.setText(&quot;HALT&quot;);&#xD;
+			  				break;&#xD;
+		  		  		case FAULT:&#xD;
+		  		  			txtrOutput.setText(&quot;FAULT&quot;);&#xD;
+		  		  			break;&#xD;
+				  }&#xD;
+				  //Increment PC counter&#xD;
+				  if(iCode != InstructionEnum.HALT){&#xD;
+					  pcDecimal++;&#xD;
+				  }&#xD;
+				  txtpnPc.setText(BinaryUtil.fillBinaryString(Integer.toBinaryString(pcDecimal)));&#xD;
+		  	} catch (Throwable t){&#xD;
+		  		txtrOutput.setText(&quot;FAULT&quot;);&#xD;
+		  		&#xD;
+		  	}&#xD;
+		  }&#xD;
+		});&#xD;
+		&#xD;
+		txtMsr = new JTextField();&#xD;
+		txtMsr.setText(&quot;MSR&quot;);&#xD;
+		txtMsr.setBounds(326, 306, 113, 20);&#xD;
+		frame.getContentPane().add(txtMsr);&#xD;
+		txtMsr.setColumns(10);&#xD;
+		&#xD;
+		txtpnPc = new JTextPane();&#xD;
+		txtpnPc.setText(&quot;0000000000000001&quot;);&#xD;
+		txtpnPc.setBounds(524, 91, 120, 20);&#xD;
+		frame.getContentPane().add(txtpnPc);&#xD;
+		&#xD;
+		txtpnMar = new JTextPane();&#xD;
+		txtpnMar.setText(&quot;&quot;);&#xD;
+		txtpnMar.setBounds(524, 122, 120, 20);&#xD;
+		frame.getContentPane().add(txtpnMar);&#xD;
+		&#xD;
+		txtpnMbr = new JTextPane();&#xD;
+		txtpnMbr.setText(&quot;&quot;);&#xD;
+		txtpnMbr.setBounds(524, 153, 120, 20);&#xD;
+		frame.getContentPane().add(txtpnMbr);&#xD;
+		&#xD;
+		txtpnIr = new JTextPane();&#xD;
+		txtpnIr.setText(&quot;&quot;);&#xD;
+		txtpnIr.setBounds(524, 184, 120, 20);&#xD;
+		frame.getContentPane().add(txtpnIr);&#xD;
+		&#xD;
+		JTextPane txtpnIar = new JTextPane();&#xD;
+		txtpnIar.setText(&quot;IAR&quot;);&#xD;
+		txtpnIar.setBounds(524, 215, 120, 20);&#xD;
+		frame.getContentPane().add(txtpnIar);&#xD;
+		&#xD;
+		txtpnR = new JTextPane();&#xD;
+		txtpnR.setText(&quot;&quot;);&#xD;
+		txtpnR.setBounds(524, 269, 120, 20);&#xD;
+		frame.getContentPane().add(txtpnR);&#xD;
+		&#xD;
+		txtpnR_1 = new JTextPane();&#xD;
+		txtpnR_1.setText(&quot;&quot;);&#xD;
+		txtpnR_1.setBounds(524, 300, 120, 20);&#xD;
+		frame.getContentPane().add(txtpnR_1);&#xD;
+		&#xD;
+		txtpnR_2 = new JTextPane();&#xD;
+		txtpnR_2.setText(&quot;&quot;);&#xD;
+		txtpnR_2.setBounds(524, 331, 120, 20);&#xD;
+		frame.getContentPane().add(txtpnR_2);&#xD;
+		&#xD;
+		txtpnX = new JTextPane();&#xD;
+		txtpnX.setText(&quot;0000000000000001&quot;);&#xD;
+		txtpnX.setBounds(683, 269, 120, 20);&#xD;
+		frame.getContentPane().add(txtpnX);&#xD;
+		&#xD;
+		txtpnX_1 = new JTextPane();&#xD;
+		txtpnX_1.setText(&quot;&quot;);&#xD;
+		txtpnX_1.setBounds(683, 300, 120, 20);&#xD;
+		frame.getContentPane().add(txtpnX_1);&#xD;
+		&#xD;
+		txtpnX_2 = new JTextPane();&#xD;
+		txtpnX_2.setText(&quot;&quot;);&#xD;
+		txtpnX_2.setBounds(683, 331, 120, 20);&#xD;
+		frame.getContentPane().add(txtpnX_2);&#xD;
+		&#xD;
+		//StartsMemory&#xD;
+		memory = new JTextPane[16];&#xD;
+		&#xD;
+		JTextPane textPane = new JTextPane();&#xD;
+		//No indirect&#xD;
+		textPane.setText(&quot;0000010001000001&quot;);&#xD;
+		//Indirect&#xD;
+		//textPane.setText(&quot;0000010001100001&quot;);&#xD;
+		textPane.setBounds(862, 139, 120, 20);&#xD;
+		frame.getContentPane().add(textPane);&#xD;
+		memory[0] = textPane;&#xD;
+		&#xD;
+		JTextPane textPane_1 = new JTextPane();&#xD;
+		textPane_1.setText(&quot;0000000001100011&quot;);&#xD;
+		textPane_1.setBounds(862, 170, 120, 20);&#xD;
+		frame.getContentPane().add(textPane_1);&#xD;
+		memory[1] = textPane_1;&#xD;
+		&#xD;
+		JTextPane textPane_2 = new JTextPane();&#xD;
+		textPane_2.setText(&quot;&quot;);&#xD;
+		textPane_2.setBounds(862, 201, 120, 20);&#xD;
+		frame.getContentPane().add(textPane_2);&#xD;
+		memory[2] = textPane_2;&#xD;
+		&#xD;
+		JTextPane textPane_3 = new JTextPane();&#xD;
+		textPane_3.setText(&quot;&quot;);&#xD;
+		textPane_3.setBounds(862, 232, 120, 20);&#xD;
+		frame.getContentPane().add(textPane_3);&#xD;
+		memory[3] = textPane_3;&#xD;
+		&#xD;
+		JTextPane textPane_4 = new JTextPane();&#xD;
+		textPane_4.setText(&quot;&quot;);&#xD;
+		textPane_4.setBounds(862, 263, 120, 20);	&#xD;
+		frame.getContentPane().add(textPane_4);&#xD;
+		memory[4] = textPane_4;&#xD;
+		&#xD;
+		JTextPane textPane_10 = new JTextPane();&#xD;
+		textPane_10.setText(&quot;&quot;);&#xD;
+		textPane_10.setBounds(862, 294, 120, 20);&#xD;
+		frame.getContentPane().add(textPane_10);&#xD;
+		memory[5] = textPane_10;&#xD;
+		&#xD;
+		JTextPane textPane_11 = new JTextPane();&#xD;
+		textPane_11.setText(&quot;&quot;);&#xD;
+		textPane_11.setBounds(862, 325, 120, 20);&#xD;
+		frame.getContentPane().add(textPane_11);&#xD;
+		memory[6] = textPane_11;&#xD;
+		&#xD;
+		JTextPane textPane_12 = new JTextPane();&#xD;
+		textPane_12.setText(&quot;&quot;);&#xD;
+		textPane_12.setBounds(862, 356, 120, 20);&#xD;
+		frame.getContentPane().add(textPane_12);&#xD;
+		memory[7] = textPane_12;&#xD;
+		&#xD;
+		JTextPane textPane_5 = new JTextPane();&#xD;
+		textPane_5.setText(&quot;&quot;);&#xD;
+		textPane_5.setBounds(1024, 139, 120, 20);&#xD;
+		frame.getContentPane().add(textPane_5);&#xD;
+		memory[8] = textPane_5;&#xD;
+		&#xD;
+		JTextPane textPane_6 = new JTextPane();&#xD;
+		textPane_6.setText(&quot;&quot;);&#xD;
+		textPane_6.setBounds(1024, 170, 120, 20);&#xD;
+		frame.getContentPane().add(textPane_6);&#xD;
+		memory[9] = textPane_6;&#xD;
+		&#xD;
+		JTextPane textPane_7 = new JTextPane();&#xD;
+		textPane_7.setText(&quot;&quot;);&#xD;
+		textPane_7.setBounds(1024, 203, 120, 20);&#xD;
+		frame.getContentPane().add(textPane_7);&#xD;
+		memory[10] = textPane_7;&#xD;
+		&#xD;
+		JTextPane textPane_8 = new JTextPane();&#xD;
+		textPane_8.setText(&quot;&quot;);&#xD;
+		textPane_8.setBounds(1024, 232, 120, 20);&#xD;
+		frame.getContentPane().add(textPane_8);&#xD;
+		memory[11] = textPane_8;&#xD;
+		&#xD;
+		JTextPane textPane_9 = new JTextPane();&#xD;
+		textPane_9.setText(&quot;&quot;);&#xD;
+		textPane_9.setBounds(1024, 263, 120, 20);&#xD;
+		frame.getContentPane().add(textPane_9);&#xD;
+		memory[12] = textPane_9;&#xD;
+		&#xD;
+		JTextPane textPane_13 = new JTextPane();&#xD;
+		textPane_13.setText(&quot;&quot;);&#xD;
+		textPane_13.setBounds(1024, 294, 120, 20);&#xD;
+		frame.getContentPane().add(textPane_13);&#xD;
+		memory[13] = textPane_13;&#xD;
+		&#xD;
+		JTextPane textPane_14 = new JTextPane();&#xD;
+		textPane_14.setText(&quot;&quot;);&#xD;
+		textPane_14.setBounds(1024, 325, 120, 20);&#xD;
+		frame.getContentPane().add(textPane_14);&#xD;
+		memory[14] = textPane_14;&#xD;
+		&#xD;
+		JTextPane textPane_15 = new JTextPane();&#xD;
+		textPane_15.setText(&quot;&quot;);&#xD;
+		textPane_15.setBounds(1024, 356, 120, 20);&#xD;
+		frame.getContentPane().add(textPane_15);&#xD;
+		memory[15] = textPane_15;&#xD;
+		&#xD;
+		JLabel lblOpcode = new JLabel(&quot;OpCode&quot;);&#xD;
+		lblOpcode.setBounds(44, 66, 46, 14);&#xD;
+		frame.getContentPane().add(lblOpcode);&#xD;
+		&#xD;
+		JLabel lblR = new JLabel(&quot;R&quot;);&#xD;
+		lblR.setBounds(180, 66, 20, 14);&#xD;
+		frame.getContentPane().add(lblR);&#xD;
+		&#xD;
+		JLabel lblIx = new JLabel(&quot;IX&quot;);&#xD;
+		lblIx.setBounds(233, 66, 20, 14);&#xD;
+		frame.getContentPane().add(lblIx);&#xD;
+		&#xD;
+		JLabel lblI = new JLabel(&quot;   I&quot;);&#xD;
+		lblI.setBounds(275, 66, 20, 14);&#xD;
+		frame.getContentPane().add(lblI);&#xD;
+		&#xD;
+		JLabel lblAddress = new JLabel(&quot;ADDRESS&quot;);&#xD;
+		lblAddress.setBounds(321, 66, 69, 14);&#xD;
+		frame.getContentPane().add(lblAddress);&#xD;
+		&#xD;
+		JLabel lblMsr = new JLabel(&quot;MSR&quot;);&#xD;
+		lblMsr.setBounds(286, 312, 30, 14);&#xD;
+		frame.getContentPane().add(lblMsr);&#xD;
+		&#xD;
+		JLabel lblPc = new JLabel(&quot;PC&quot;);&#xD;
+		lblPc.setBounds(494, 97, 20, 14);&#xD;
+		frame.getContentPane().add(lblPc);&#xD;
+		&#xD;
+		JLabel lblMar = new JLabel(&quot;MAR&quot;);&#xD;
+		lblMar.setBounds(494, 128, 30, 14);&#xD;
+		frame.getContentPane().add(lblMar);&#xD;
+		&#xD;
+		JLabel lblMbr = new JLabel(&quot;MBR&quot;);&#xD;
+		lblMbr.setBounds(494, 159, 30, 14);&#xD;
+		frame.getContentPane().add(lblMbr);&#xD;
+		&#xD;
+		JLabel lblIr = new JLabel(&quot;IR&quot;);&#xD;
+		lblIr.setBounds(494, 190, 20, 14);&#xD;
+		frame.getContentPane().add(lblIr);&#xD;
+		&#xD;
+		JLabel lblIar = new JLabel(&quot;IAR&quot;);&#xD;
+		lblIar.setBounds(494, 221, 20, 14);&#xD;
+		frame.getContentPane().add(lblIar);&#xD;
+		&#xD;
+		JLabel lblR_1 = new JLabel(&quot;R0&quot;);&#xD;
+		lblR_1.setBounds(494, 275, 20, 14);&#xD;
+		frame.getContentPane().add(lblR_1);&#xD;
+		&#xD;
+		JLabel lblR_2 = new JLabel(&quot;R1&quot;);&#xD;
+		lblR_2.setBounds(494, 306, 20, 14);&#xD;
+		frame.getContentPane().add(lblR_2);&#xD;
+		&#xD;
+		JLabel lblR_3 = new JLabel(&quot;R2&quot;);&#xD;
+		lblR_3.setBounds(494, 337, 20, 14);&#xD;
+		frame.getContentPane().add(lblR_3);&#xD;
+		&#xD;
+		JLabel lblX = new JLabel(&quot;  X1&quot;);&#xD;
+		lblX.setBounds(654, 275, 30, 14);&#xD;
+		frame.getContentPane().add(lblX);&#xD;
+		&#xD;
+		JLabel lblX_1 = new JLabel(&quot;  X2&quot;);&#xD;
+		lblX_1.setBounds(654, 306, 30, 14);&#xD;
+		frame.getContentPane().add(lblX_1);&#xD;
+		&#xD;
+		JLabel lblX_2 = new JLabel(&quot;  X3&quot;);&#xD;
+		lblX_2.setBounds(654, 337, 30, 14);&#xD;
+		frame.getContentPane().add(lblX_2);&#xD;
+		&#xD;
+		JLabel label = new JLabel(&quot;00&quot;);&#xD;
+		label.setBounds(832, 145, 20, 14);&#xD;
+		frame.getContentPane().add(label);&#xD;
+		&#xD;
+		JLabel label_1 = new JLabel(&quot;01&quot;);&#xD;
+		label_1.setBounds(832, 176, 20, 14);&#xD;
+		frame.getContentPane().add(label_1);&#xD;
+		&#xD;
+		JLabel label_2 = new JLabel(&quot;02&quot;);&#xD;
+		label_2.setBounds(832, 207, 20, 14);&#xD;
+		frame.getContentPane().add(label_2);&#xD;
+		&#xD;
+		JLabel label_3 = new JLabel(&quot;08&quot;);&#xD;
+		label_3.setBounds(998, 145, 20, 14);&#xD;
+		frame.getContentPane().add(label_3);&#xD;
+		&#xD;
+		JLabel label_4 = new JLabel(&quot;09&quot;);&#xD;
+		label_4.setBounds(998, 176, 20, 14);&#xD;
+		frame.getContentPane().add(label_4);&#xD;
+		&#xD;
+		JLabel label_5 = new JLabel(&quot;10&quot;);&#xD;
+		label_5.setBounds(998, 208, 20, 14);&#xD;
+		frame.getContentPane().add(label_5);&#xD;
+		&#xD;
+		JLabel label_6 = new JLabel(&quot;11&quot;);&#xD;
+		label_6.setBounds(998, 238, 20, 14);&#xD;
+		frame.getContentPane().add(label_6);&#xD;
+		&#xD;
+		JLabel label_7 = new JLabel(&quot;12&quot;);&#xD;
+		label_7.setBounds(998, 269, 20, 14);&#xD;
+		frame.getContentPane().add(label_7);&#xD;
+		&#xD;
+		JLabel label_8 = new JLabel(&quot;13&quot;);&#xD;
+		label_8.setBounds(998, 300, 20, 14);&#xD;
+		frame.getContentPane().add(label_8);&#xD;
+		&#xD;
+		JLabel label_9 = new JLabel(&quot;14&quot;);&#xD;
+		label_9.setBounds(998, 331, 20, 14);&#xD;
+		frame.getContentPane().add(label_9);&#xD;
+		&#xD;
+		JLabel label_10 = new JLabel(&quot;15&quot;);&#xD;
+		label_10.setBounds(998, 362, 20, 14);&#xD;
+		frame.getContentPane().add(label_10);&#xD;
+		&#xD;
+		JLabel label_11 = new JLabel(&quot;03&quot;);&#xD;
+		label_11.setBounds(832, 238, 20, 14);&#xD;
+		frame.getContentPane().add(label_11);&#xD;
+		&#xD;
+		JLabel label_12 = new JLabel(&quot;04&quot;);&#xD;
+		label_12.setBounds(832, 269, 20, 14);&#xD;
+		frame.getContentPane().add(label_12);&#xD;
+		&#xD;
+		JLabel label_13 = new JLabel(&quot;05&quot;);&#xD;
+		label_13.setBounds(832, 300, 20, 14);&#xD;
+		frame.getContentPane().add(label_13);&#xD;
+		&#xD;
+		JLabel label_14 = new JLabel(&quot;06&quot;);&#xD;
+		label_14.setBounds(832, 331, 20, 14);&#xD;
+		frame.getContentPane().add(label_14);&#xD;
+		&#xD;
+		JLabel label_15 = new JLabel(&quot;07&quot;);&#xD;
+		label_15.setBounds(832, 362, 20, 14);&#xD;
+		frame.getContentPane().add(label_15);&#xD;
+		&#xD;
+		JLabel lblCiscSimulator = new JLabel(&quot;CISC Simulator&quot;);&#xD;
+		lblCiscSimulator.setFont(new Font(&quot;Tahoma&quot;, Font.BOLD, 25));&#xD;
+		lblCiscSimulator.setBounds(524, 11, 207, 33);&#xD;
+		frame.getContentPane().add(lblCiscSimulator);&#xD;
+		&#xD;
+		JLabel lblMemory = new JLabel(&quot;Memory&quot;);&#xD;
+		lblMemory.setFont(new Font(&quot;Tahoma&quot;, Font.BOLD, 15));&#xD;
+		lblMemory.setBounds(961, 89, 80, 20);&#xD;
+		frame.getContentPane().add(lblMemory);&#xD;
+		&#xD;
+		JLabel lblRegisters = new JLabel(&quot;Registers&quot;);&#xD;
+		lblRegisters.setFont(new Font(&quot;Tahoma&quot;, Font.BOLD, 15));&#xD;
+		lblRegisters.setBounds(620, 246, 80, 20);&#xD;
+		frame.getContentPane().add(lblRegisters);&#xD;
+		&#xD;
+		JLabel lblR_4 = new JLabel(&quot;R3&quot;);&#xD;
+		lblR_4.setBounds(494, 368, 20, 14);&#xD;
+		frame.getContentPane().add(lblR_4);&#xD;
+		&#xD;
+		JTextPane textPane_16 = new JTextPane();&#xD;
+		textPane_16.setText(&quot;&quot;);&#xD;
+		textPane_16.setBounds(524, 362, 120, 20);&#xD;
+		frame.getContentPane().add(textPane_16);&#xD;
+		&#xD;
+		//This portion is for a number format converter&#xD;
+		//that we hope to implement in a future phase&#xD;
+		&#xD;
+		/*JRadioButton rdbtnDecimal = new JRadioButton(&quot;Decimal&quot;);&#xD;
+		rdbtnDecimal.setSelected(true);&#xD;
+		rdbtnDecimal.setBounds(676, 122, 109, 23);&#xD;
+		frame.getContentPane().add(rdbtnDecimal);&#xD;
+		&#xD;
+		JRadioButton rdbtnOctal = new JRadioButton(&quot;Octal&quot;);&#xD;
+		rdbtnOctal.setBounds(676, 153, 109, 23);&#xD;
+		frame.getContentPane().add(rdbtnOctal);&#xD;
+		&#xD;
+		JRadioButton rdbtnHexadecimal = new JRadioButton(&quot;Hexadecimal&quot;);&#xD;
+		rdbtnHexadecimal.setBounds(676, 184, 109, 23);&#xD;
+		frame.getContentPane().add(rdbtnHexadecimal);&#xD;
+		&#xD;
+		JLabel lblNumberFormat = new JLabel(&quot;Number Format&quot;);&#xD;
+		lblNumberFormat.setFont(new Font(&quot;Tahoma&quot;, Font.BOLD, 15));&#xD;
+		lblNumberFormat.setBounds(676, 94, 134, 20);&#xD;
+		frame.getContentPane().add(lblNumberFormat);*/&#xD;
+	</body>
+        </ownedBehavior>
+        <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_3W4u8GRdEeW_1tKxQI0T4Q" name="setRegister" specification="_3Q9GEGRdEeW_1tKxQI0T4Q">
+          <ownedParameter xmi:id="_3W4u8WRdEeW_1tKxQI0T4Q" name="registerNum">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+          </ownedParameter>
+          <ownedParameter xmi:id="_3W4u8mRdEeW_1tKxQI0T4Q" name="content">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+          </ownedParameter>
+          <language>java</language>
+          <body>if(registerNum == 0){&#xD;
+			txtpnR.setText(content);&#xD;
+		} else if(registerNum == 1){&#xD;
+			txtpnR_1.setText(content);&#xD;
+		} else  if(registerNum == 2){&#xD;
+			txtpnR_2.setText(content);&#xD;
+		} else if(registerNum == 3){&#xD;
+//			txtpnR_3.setText(content);&#xD;
+		} else {&#xD;
+			//Exception&#xD;
+		}&#xD;
+	</body>
+        </ownedBehavior>
+        <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_3W4u82RdEeW_1tKxQI0T4Q" name="getRegister" specification="_3Q-7QGRdEeW_1tKxQI0T4Q">
+          <ownedParameter xmi:id="_3W4u9GRdEeW_1tKxQI0T4Q" name="registerNum">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+          </ownedParameter>
+          <ownedParameter xmi:id="_3W4u9WRdEeW_1tKxQI0T4Q" direction="return">
+            <name xsi:nil="true"/>
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+          </ownedParameter>
+          <language>java</language>
+          <body>if(registerNum == 0){&#xD;
+			return txtpnR.getText();&#xD;
+		} else if(registerNum == 1){&#xD;
+			txtpnR_1.getText();&#xD;
+		} else  if(registerNum == 2){&#xD;
+			txtpnR_2.getText();&#xD;
+		} else if(registerNum == 3){&#xD;
+//			txtpnR_3.getText();&#xD;
+		} else {&#xD;
+			//Exception&#xD;
+		}&#xD;
+		return &quot;&quot;;&#xD;
+	</body>
+        </ownedBehavior>
+        <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_3W5WAGRdEeW_1tKxQI0T4Q" name="setIndex" specification="_3RAwcGRdEeW_1tKxQI0T4Q">
+          <ownedParameter xmi:id="_3W5WAWRdEeW_1tKxQI0T4Q" name="indexNum">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+          </ownedParameter>
+          <ownedParameter xmi:id="_3W5WAmRdEeW_1tKxQI0T4Q" name="content">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+          </ownedParameter>
+          <language>java</language>
+          <body>if(indexNum == 1){&#xD;
+			txtpnX.setText(content);&#xD;
+		} else  if(indexNum == 2){&#xD;
+			txtpnX_1.setText(content);&#xD;
+		} else if(indexNum == 3){&#xD;
+			txtpnX_2.setText(content);&#xD;
+		} else {&#xD;
+			//Exception&#xD;
+		}&#xD;
+	</body>
+        </ownedBehavior>
+        <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_3W59EGRdEeW_1tKxQI0T4Q" name="getIndex" specification="_3RB-kGRdEeW_1tKxQI0T4Q">
+          <ownedParameter xmi:id="_3W59EWRdEeW_1tKxQI0T4Q" name="indexNum">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+          </ownedParameter>
+          <ownedParameter xmi:id="_3W59EmRdEeW_1tKxQI0T4Q" direction="return">
+            <name xsi:nil="true"/>
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+          </ownedParameter>
+          <language>java</language>
+          <body>if(indexNum == 1){&#xD;
+			return txtpnX.getText();&#xD;
+		} else  if(indexNum == 2){&#xD;
+			return txtpnX_1.getText();&#xD;
+		} else if(indexNum == 3){&#xD;
+			return txtpnX_2.getText();&#xD;
+		} else {&#xD;
+			//Exception&#xD;
+		}&#xD;
+		return &quot;&quot;;&#xD;
+	</body>
+        </ownedBehavior>
+        <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_3W6kIGRdEeW_1tKxQI0T4Q" name="evaluateIndirect" specification="_3VWd4WRdEeW_1tKxQI0T4Q">
+          <ownedParameter xmi:id="_3W6kIWRdEeW_1tKxQI0T4Q" name="instruction" type="_3Ub34WRdEeW_1tKxQI0T4Q"/>
+          <ownedParameter xmi:id="_3W6kImRdEeW_1tKxQI0T4Q" name="ea">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+          </ownedParameter>
+          <ownedParameter xmi:id="_3W6kI2RdEeW_1tKxQI0T4Q" direction="return">
+            <name xsi:nil="true"/>
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+          </ownedParameter>
+          <language>java</language>
+          <body>try {&#xD;
+			if(instruction.isIndirect()){&#xD;
+				// Is all what is in the address or only the address part?&#xD;
+				Instruction indirectInstruction = new Instruction(memory[Integer.parseInt(ea, 2) - 1].getText());&#xD;
+				//AddressPart&#xD;
+				ea = indirectInstruction.getAddress();&#xD;
+				// else&#xD;
+				//ea = indirectInstruction.getBinaryInstruction();&#xD;
+			}&#xD;
+		} catch (Exception e){&#xD;
+			throw new Throwable(&quot;FAULT&quot;);&#xD;
+		}&#xD;
+		return ea;&#xD;
+	</body>
+        </ownedBehavior>
+        <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_3W7LMGRdEeW_1tKxQI0T4Q" name="instructionLDR" specification="_3VbWYGRdEeW_1tKxQI0T4Q">
+          <ownedParameter xmi:id="_3W7LMWRdEeW_1tKxQI0T4Q" name="instruction" type="_3Ub34WRdEeW_1tKxQI0T4Q"/>
+          <language>java</language>
+          <body>String ea = &quot;&quot;;&#xD;
+		//Verify if instruction has index&#xD;
+		if(instruction.getIndexNumber() == 0){&#xD;
+			ea = instruction.getAddress();&#xD;
+		} else {&#xD;
+			Integer addressDecimal = Integer.parseInt(instruction.getAddress(), 2);&#xD;
+			Integer indexDecimal = Integer.parseInt(getIndex(instruction.getIndexNumber()), 2);&#xD;
+			//Get index and sum it with address&#xD;
+			Integer sum = addressDecimal + indexDecimal;&#xD;
+			if(sum > 31){&#xD;
+				throw new Throwable(&quot;FAULT&quot;);&#xD;
+			}&#xD;
+			ea = Integer.toBinaryString(sum);&#xD;
+		}&#xD;
+		&#xD;
+		ea = evaluateIndirect(instruction, ea);&#xD;
+		ea = BinaryUtil.fillBinaryString(ea);&#xD;
+		&#xD;
+		setRegister(instruction.getRegisterNumber(), ea);&#xD;
+	</body>
+        </ownedBehavior>
+        <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_3W7LMmRdEeW_1tKxQI0T4Q" name="instructionSTR" specification="_3RFB4GRdEeW_1tKxQI0T4Q">
+          <language>java</language>
+          <body>//ImplementSTR logic&#xD;
+	</body>
+        </ownedBehavior>
+        <ownedOperation xmi:id="_3Q1KQGRdEeW_1tKxQI0T4Q" name="main" isStatic="true" method="_3WyoUGRdEeW_1tKxQI0T4Q">
+          <ownedComment xmi:id="_3W9AYGRdEeW_1tKxQI0T4Q">
+            <body>Launch the application.</body>
+          </ownedComment>
+          <ownedParameter xmi:id="_3Q1xUGRdEeW_1tKxQI0T4Q" name="args">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+            <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_3Q4NkGRdEeW_1tKxQI0T4Q" value="*"/>
+          </ownedParameter>
+        </ownedOperation>
+        <ownedOperation xmi:id="_3Q6p0GRdEeW_1tKxQI0T4Q" name="FrontPanel" method="_3W3g0GRdEeW_1tKxQI0T4Q">
+          <eAnnotations xmi:id="_3Q7Q4GRdEeW_1tKxQI0T4Q" source="http://www.eclipse.org/uml2/2.0.0/UML">
+            <details xmi:id="_3Q7Q4WRdEeW_1tKxQI0T4Q" key="create"/>
+          </eAnnotations>
+          <ownedComment xmi:id="_3W9ncGRdEeW_1tKxQI0T4Q">
+            <body>Create the application.</body>
+          </ownedComment>
+          <ownedParameter xmi:id="_3Q7Q4mRdEeW_1tKxQI0T4Q" type="_3Ql5sGRdEeW_1tKxQI0T4Q" direction="return"/>
+        </ownedOperation>
+        <ownedOperation xmi:id="_3Q738GRdEeW_1tKxQI0T4Q" name="initialize" visibility="private" method="_3W4H4GRdEeW_1tKxQI0T4Q">
+          <ownedComment xmi:id="_3W9ncWRdEeW_1tKxQI0T4Q">
+            <body>Initialize the contents of the frame.</body>
+          </ownedComment>
+        </ownedOperation>
+        <ownedOperation xmi:id="_3Q9GEGRdEeW_1tKxQI0T4Q" name="setRegister" method="_3W4u8GRdEeW_1tKxQI0T4Q">
+          <ownedParameter xmi:id="_3Q9tIGRdEeW_1tKxQI0T4Q" name="registerNum">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+          </ownedParameter>
+          <ownedParameter xmi:id="_3Q9tIWRdEeW_1tKxQI0T4Q" name="content">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+          </ownedParameter>
+        </ownedOperation>
+        <ownedOperation xmi:id="_3Q-7QGRdEeW_1tKxQI0T4Q" name="getRegister" method="_3W4u82RdEeW_1tKxQI0T4Q">
+          <ownedParameter xmi:id="_3Q-7QWRdEeW_1tKxQI0T4Q" name="registerNum">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+          </ownedParameter>
+          <ownedParameter xmi:id="_3Q_iUGRdEeW_1tKxQI0T4Q" direction="return">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+          </ownedParameter>
+        </ownedOperation>
+        <ownedOperation xmi:id="_3RAwcGRdEeW_1tKxQI0T4Q" name="setIndex" method="_3W5WAGRdEeW_1tKxQI0T4Q">
+          <ownedParameter xmi:id="_3RAwcWRdEeW_1tKxQI0T4Q" name="indexNum">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+          </ownedParameter>
+          <ownedParameter xmi:id="_3RAwcmRdEeW_1tKxQI0T4Q" name="content">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+          </ownedParameter>
+        </ownedOperation>
+        <ownedOperation xmi:id="_3RB-kGRdEeW_1tKxQI0T4Q" name="getIndex" method="_3W59EGRdEeW_1tKxQI0T4Q">
+          <ownedParameter xmi:id="_3RB-kWRdEeW_1tKxQI0T4Q" name="indexNum">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+          </ownedParameter>
+          <ownedParameter xmi:id="_3RCloGRdEeW_1tKxQI0T4Q" direction="return">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+          </ownedParameter>
+        </ownedOperation>
+        <ownedOperation xmi:id="_3RFB4GRdEeW_1tKxQI0T4Q" name="instructionSTR" method="_3W7LMmRdEeW_1tKxQI0T4Q"/>
+        <ownedOperation xmi:id="_3VWd4WRdEeW_1tKxQI0T4Q" name="evaluateIndirect" method="_3W6kIGRdEeW_1tKxQI0T4Q" raisedException="_3VUosGRdEeW_1tKxQI0T4Q">
+          <ownedComment xmi:id="_3W9ncmRdEeW_1tKxQI0T4Q">
+            <body>This method implements the condition in which an instruction has the &#xD;
+	 * indirect flag for processing.</body>
+          </ownedComment>
+          <ownedParameter xmi:id="_3VXE8GRdEeW_1tKxQI0T4Q" name="instruction" type="_3Ub34WRdEeW_1tKxQI0T4Q"/>
+          <ownedParameter xmi:id="_3VXE8WRdEeW_1tKxQI0T4Q" name="ea">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+          </ownedParameter>
+          <ownedParameter xmi:id="_3VXsAGRdEeW_1tKxQI0T4Q" direction="return">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+          </ownedParameter>
+        </ownedOperation>
+        <ownedOperation xmi:id="_3VbWYGRdEeW_1tKxQI0T4Q" name="instructionLDR" method="_3W7LMGRdEeW_1tKxQI0T4Q" raisedException="_3VUosGRdEeW_1tKxQI0T4Q">
+          <ownedComment xmi:id="_3W-OgGRdEeW_1tKxQI0T4Q">
+            <body>This method implements the Load instruction in the UI</body>
+          </ownedComment>
+          <ownedParameter xmi:id="_3Vb9cGRdEeW_1tKxQI0T4Q" name="instruction" type="_3Ub34WRdEeW_1tKxQI0T4Q"/>
+        </ownedOperation>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="_3XGKUGRdEeW_1tKxQI0T4Q" name="" memberEnd="_3XGKUWRdEeW_1tKxQI0T4Q _3VkgUGRdEeW_1tKxQI0T4Q">
+        <ownedEnd xmi:id="_3XGKUWRdEeW_1tKxQI0T4Q" name="" type="_3Ql5sGRdEeW_1tKxQI0T4Q" association="_3XGKUGRdEeW_1tKxQI0T4Q"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="_3XH_gWRdEeW_1tKxQI0T4Q" name="" memberEnd="_3XH_gmRdEeW_1tKxQI0T4Q _3Vm8kGRdEeW_1tKxQI0T4Q">
+        <ownedEnd xmi:id="_3XH_gmRdEeW_1tKxQI0T4Q" name="" type="_3Ql5sGRdEeW_1tKxQI0T4Q" association="_3XH_gWRdEeW_1tKxQI0T4Q"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="_3XKbwGRdEeW_1tKxQI0T4Q" name="" memberEnd="_3XKbwWRdEeW_1tKxQI0T4Q _3VoKsGRdEeW_1tKxQI0T4Q">
+        <ownedEnd xmi:id="_3XKbwWRdEeW_1tKxQI0T4Q" name="" type="_3Ql5sGRdEeW_1tKxQI0T4Q" association="_3XKbwGRdEeW_1tKxQI0T4Q"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="_3XMQ8GRdEeW_1tKxQI0T4Q" name="" memberEnd="_3XMQ8WRdEeW_1tKxQI0T4Q _3VpY0GRdEeW_1tKxQI0T4Q">
+        <ownedEnd xmi:id="_3XMQ8WRdEeW_1tKxQI0T4Q" name="" type="_3Ql5sGRdEeW_1tKxQI0T4Q" association="_3XMQ8GRdEeW_1tKxQI0T4Q"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="_3XNfEWRdEeW_1tKxQI0T4Q" name="" memberEnd="_3XOGIGRdEeW_1tKxQI0T4Q _3Vqm8GRdEeW_1tKxQI0T4Q">
+        <ownedEnd xmi:id="_3XOGIGRdEeW_1tKxQI0T4Q" name="" type="_3Ql5sGRdEeW_1tKxQI0T4Q" association="_3XNfEWRdEeW_1tKxQI0T4Q"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="_3XPUQWRdEeW_1tKxQI0T4Q" name="" memberEnd="_3XPUQmRdEeW_1tKxQI0T4Q _3VrOAWRdEeW_1tKxQI0T4Q">
+        <ownedEnd xmi:id="_3XPUQmRdEeW_1tKxQI0T4Q" name="" type="_3Ql5sGRdEeW_1tKxQI0T4Q" association="_3XPUQWRdEeW_1tKxQI0T4Q"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="_3XRJcWRdEeW_1tKxQI0T4Q" name="" memberEnd="_3XRJcmRdEeW_1tKxQI0T4Q _3VscIWRdEeW_1tKxQI0T4Q">
+        <ownedEnd xmi:id="_3XRJcmRdEeW_1tKxQI0T4Q" name="" type="_3Ql5sGRdEeW_1tKxQI0T4Q" association="_3XRJcWRdEeW_1tKxQI0T4Q"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="_3XS-oGRdEeW_1tKxQI0T4Q" name="" memberEnd="_3XS-oWRdEeW_1tKxQI0T4Q _3VtqQWRdEeW_1tKxQI0T4Q">
+        <ownedEnd xmi:id="_3XS-oWRdEeW_1tKxQI0T4Q" name="" type="_3Ql5sGRdEeW_1tKxQI0T4Q" association="_3XS-oGRdEeW_1tKxQI0T4Q"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="_3XUMwWRdEeW_1tKxQI0T4Q" name="" memberEnd="_3XUMwmRdEeW_1tKxQI0T4Q _3VvfcGRdEeW_1tKxQI0T4Q">
+        <ownedEnd xmi:id="_3XUMwmRdEeW_1tKxQI0T4Q" name="" type="_3Ql5sGRdEeW_1tKxQI0T4Q" association="_3XUMwWRdEeW_1tKxQI0T4Q"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="_3XWB8GRdEeW_1tKxQI0T4Q" name="" memberEnd="_3XWB8WRdEeW_1tKxQI0T4Q _3VwtkWRdEeW_1tKxQI0T4Q">
+        <ownedEnd xmi:id="_3XWB8WRdEeW_1tKxQI0T4Q" name="" type="_3Ql5sGRdEeW_1tKxQI0T4Q" association="_3XWB8GRdEeW_1tKxQI0T4Q"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="_3XXQEWRdEeW_1tKxQI0T4Q" name="" memberEnd="_3XXQEmRdEeW_1tKxQI0T4Q _3Vx7sWRdEeW_1tKxQI0T4Q">
+        <ownedEnd xmi:id="_3XXQEmRdEeW_1tKxQI0T4Q" name="" type="_3Ql5sGRdEeW_1tKxQI0T4Q" association="_3XXQEWRdEeW_1tKxQI0T4Q"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="_3XZFQWRdEeW_1tKxQI0T4Q" name="" memberEnd="_3XZFQmRdEeW_1tKxQI0T4Q _3Vzw4GRdEeW_1tKxQI0T4Q">
+        <ownedEnd xmi:id="_3XZFQmRdEeW_1tKxQI0T4Q" name="" type="_3Ql5sGRdEeW_1tKxQI0T4Q" association="_3XZFQWRdEeW_1tKxQI0T4Q"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="_3XaTYWRdEeW_1tKxQI0T4Q" name="" memberEnd="_3XaTYmRdEeW_1tKxQI0T4Q _3V0X8WRdEeW_1tKxQI0T4Q">
+        <ownedEnd xmi:id="_3XaTYmRdEeW_1tKxQI0T4Q" name="" type="_3Ql5sGRdEeW_1tKxQI0T4Q" association="_3XaTYWRdEeW_1tKxQI0T4Q"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="_3XbhgWRdEeW_1tKxQI0T4Q" name="" memberEnd="_3XbhgmRdEeW_1tKxQI0T4Q _3V1mEGRdEeW_1tKxQI0T4Q">
+        <ownedEnd xmi:id="_3XbhgmRdEeW_1tKxQI0T4Q" name="" type="_3Ql5sGRdEeW_1tKxQI0T4Q" association="_3XbhgWRdEeW_1tKxQI0T4Q"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="_3XcvoWRdEeW_1tKxQI0T4Q" name="" memberEnd="_3XcvomRdEeW_1tKxQI0T4Q _3V20MWRdEeW_1tKxQI0T4Q">
+        <ownedEnd xmi:id="_3XcvomRdEeW_1tKxQI0T4Q" name="" type="_3Ql5sGRdEeW_1tKxQI0T4Q" association="_3XcvoWRdEeW_1tKxQI0T4Q"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="_3Xek0GRdEeW_1tKxQI0T4Q" name="" memberEnd="_3Xek0WRdEeW_1tKxQI0T4Q _3V4CUGRdEeW_1tKxQI0T4Q">
+        <ownedEnd xmi:id="_3Xek0WRdEeW_1tKxQI0T4Q" name="" type="_3Ql5sGRdEeW_1tKxQI0T4Q" association="_3Xek0GRdEeW_1tKxQI0T4Q"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="_3XgaAGRdEeW_1tKxQI0T4Q" name="" memberEnd="_3XgaAWRdEeW_1tKxQI0T4Q _3V4pYWRdEeW_1tKxQI0T4Q">
+        <ownedEnd xmi:id="_3XgaAWRdEeW_1tKxQI0T4Q" name="" type="_3Ql5sGRdEeW_1tKxQI0T4Q" association="_3XgaAGRdEeW_1tKxQI0T4Q"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="_3XiPMWRdEeW_1tKxQI0T4Q" name="" memberEnd="_3XiPMmRdEeW_1tKxQI0T4Q _3V53gGRdEeW_1tKxQI0T4Q">
+        <ownedEnd xmi:id="_3XiPMmRdEeW_1tKxQI0T4Q" name="" type="_3Ql5sGRdEeW_1tKxQI0T4Q" association="_3XiPMWRdEeW_1tKxQI0T4Q"/>
+      </packagedElement>
+    </packagedElement>
+    <profileApplication xmi:id="_2mzV0GRdEeW_1tKxQI0T4Q">
+      <eAnnotations xmi:id="_2oy54GRdEeW_1tKxQI0T4Q" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://UMLLAB_PROFILES/UMLLab.profile.uml#UMLLabProfile-Annotation_2-UMLLabProfile"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://UMLLAB_PROFILES/UMLLab.profile.uml#UMLLabProfile"/>
+    </profileApplication>
+  </uml:Model>
+  <UMLLabProfile:TargetLanguage xmi:id="_2o6OoGRdEeW_1tKxQI0T4Q" base_Package="_2EsHQGRdEeW_1tKxQI0T4Q">
+    <languageName>java</languageName>
+  </UMLLabProfile:TargetLanguage>
+  <UMLLabProfile:Array xmi:id="_3Q40oGRdEeW_1tKxQI0T4Q" dimensions="1" base_Element="_3Q1xUGRdEeW_1tKxQI0T4Q"/>
+  <UMLLabProfile:Reference xmi:id="_3UQRsGRdEeW_1tKxQI0T4Q" base_Element="_3UOcgGRdEeW_1tKxQI0T4Q"/>
+  <UMLLabProfile:Reference xmi:id="_3UT8EGRdEeW_1tKxQI0T4Q" base_Element="_3USG4GRdEeW_1tKxQI0T4Q"/>
+  <UMLLabProfile:Reference xmi:id="_3UVxQGRdEeW_1tKxQI0T4Q" base_Element="_3UUjIGRdEeW_1tKxQI0T4Q"/>
+  <UMLLabProfile:Reference xmi:id="_3UXmcGRdEeW_1tKxQI0T4Q" base_Element="_3UWYUGRdEeW_1tKxQI0T4Q"/>
+  <UMLLabProfile:Reference xmi:id="_3UaCsGRdEeW_1tKxQI0T4Q" base_Element="_3UYNgGRdEeW_1tKxQI0T4Q"/>
+  <UMLLabProfile:Reference xmi:id="_3Ub34GRdEeW_1tKxQI0T4Q" base_Element="_3UaCsWRdEeW_1tKxQI0T4Q"/>
+  <UMLLabProfile:Reference xmi:id="_3UdtEGRdEeW_1tKxQI0T4Q" base_Element="_3Ub34WRdEeW_1tKxQI0T4Q"/>
+  <UMLLabProfile:Reference xmi:id="_3Ue7MGRdEeW_1tKxQI0T4Q" base_Element="_3UdtEWRdEeW_1tKxQI0T4Q"/>
+  <UMLLabProfile:Reference xmi:id="_3UgwYGRdEeW_1tKxQI0T4Q" base_Element="_3UfiQGRdEeW_1tKxQI0T4Q"/>
+  <UMLLabProfile:Reference xmi:id="_3UjMoGRdEeW_1tKxQI0T4Q" base_Element="_3UhXcGRdEeW_1tKxQI0T4Q"/>
+  <UMLLabProfile:Reference xmi:id="_3UkawGRdEeW_1tKxQI0T4Q" base_Element="_3UjMoWRdEeW_1tKxQI0T4Q"/>
+  <UMLLabProfile:Reference xmi:id="_3UmP8GRdEeW_1tKxQI0T4Q" base_Element="_3UlB0GRdEeW_1tKxQI0T4Q"/>
+  <UMLLabProfile:Reference xmi:id="_3UoFIGRdEeW_1tKxQI0T4Q" base_Element="_3Um3AGRdEeW_1tKxQI0T4Q"/>
+  <UMLLabProfile:Reference xmi:id="_3VWd4GRdEeW_1tKxQI0T4Q" base_Element="_3VUosGRdEeW_1tKxQI0T4Q"/>
+  <UMLLabProfile:LegacyStyledElement xmi:id="_3VmVgGRdEeW_1tKxQI0T4Q" base_Element="_3VkgUGRdEeW_1tKxQI0T4Q"/>
+  <UMLLabProfile:LegacyStyledElement xmi:id="_3VnjoGRdEeW_1tKxQI0T4Q" base_Element="_3Vm8kGRdEeW_1tKxQI0T4Q"/>
+  <UMLLabProfile:LegacyStyledElement xmi:id="_3VoxwGRdEeW_1tKxQI0T4Q" base_Element="_3VoKsGRdEeW_1tKxQI0T4Q"/>
+  <UMLLabProfile:LegacyStyledElement xmi:id="_3Vp_4GRdEeW_1tKxQI0T4Q" base_Element="_3VpY0GRdEeW_1tKxQI0T4Q"/>
+  <UMLLabProfile:LegacyStyledElement xmi:id="_3VrOAGRdEeW_1tKxQI0T4Q" base_Element="_3Vqm8GRdEeW_1tKxQI0T4Q"/>
+  <UMLLabProfile:LegacyStyledElement xmi:id="_3VscIGRdEeW_1tKxQI0T4Q" base_Element="_3VrOAWRdEeW_1tKxQI0T4Q"/>
+  <UMLLabProfile:LegacyStyledElement xmi:id="_3VtqQGRdEeW_1tKxQI0T4Q" base_Element="_3VscIWRdEeW_1tKxQI0T4Q"/>
+  <UMLLabProfile:LegacyStyledElement xmi:id="_3Vu4YGRdEeW_1tKxQI0T4Q" base_Element="_3VtqQWRdEeW_1tKxQI0T4Q"/>
+  <UMLLabProfile:LegacyStyledElement xmi:id="_3VwtkGRdEeW_1tKxQI0T4Q" base_Element="_3VvfcGRdEeW_1tKxQI0T4Q"/>
+  <UMLLabProfile:LegacyStyledElement xmi:id="_3Vx7sGRdEeW_1tKxQI0T4Q" base_Element="_3VwtkWRdEeW_1tKxQI0T4Q"/>
+  <UMLLabProfile:LegacyStyledElement xmi:id="_3VzJ0GRdEeW_1tKxQI0T4Q" base_Element="_3Vx7sWRdEeW_1tKxQI0T4Q"/>
+  <UMLLabProfile:LegacyStyledElement xmi:id="_3V0X8GRdEeW_1tKxQI0T4Q" base_Element="_3Vzw4GRdEeW_1tKxQI0T4Q"/>
+  <UMLLabProfile:LegacyStyledElement xmi:id="_3V0_AGRdEeW_1tKxQI0T4Q" base_Element="_3V0X8WRdEeW_1tKxQI0T4Q"/>
+  <UMLLabProfile:Array xmi:id="_3V2NIGRdEeW_1tKxQI0T4Q" base_Element="_3V1mEGRdEeW_1tKxQI0T4Q"/>
+  <UMLLabProfile:LegacyStyledElement xmi:id="_3V20MGRdEeW_1tKxQI0T4Q" base_Element="_3V1mEGRdEeW_1tKxQI0T4Q"/>
+  <UMLLabProfile:LegacyStyledElement xmi:id="_3V3bQGRdEeW_1tKxQI0T4Q" base_Element="_3V20MWRdEeW_1tKxQI0T4Q"/>
+  <UMLLabProfile:LegacyStyledElement xmi:id="_3V4pYGRdEeW_1tKxQI0T4Q" base_Element="_3V4CUGRdEeW_1tKxQI0T4Q"/>
+  <UMLLabProfile:LegacyStyledElement xmi:id="_3V5QcGRdEeW_1tKxQI0T4Q" base_Element="_3V4pYWRdEeW_1tKxQI0T4Q"/>
+  <UMLLabProfile:LegacyStyledElement xmi:id="_3V6ekGRdEeW_1tKxQI0T4Q" base_Element="_3V53gGRdEeW_1tKxQI0T4Q"/>
+  <UMLLabProfile:Reference xmi:id="_3XH_gGRdEeW_1tKxQI0T4Q" base_Element="_3XGKUGRdEeW_1tKxQI0T4Q"/>
+  <UMLLabProfile:Reference xmi:id="_3XJ0sGRdEeW_1tKxQI0T4Q" base_Element="_3XH_gWRdEeW_1tKxQI0T4Q"/>
+  <UMLLabProfile:Reference xmi:id="_3XLp4GRdEeW_1tKxQI0T4Q" base_Element="_3XKbwGRdEeW_1tKxQI0T4Q"/>
+  <UMLLabProfile:Reference xmi:id="_3XNfEGRdEeW_1tKxQI0T4Q" base_Element="_3XMQ8GRdEeW_1tKxQI0T4Q"/>
+  <UMLLabProfile:Reference xmi:id="_3XPUQGRdEeW_1tKxQI0T4Q" base_Element="_3XNfEWRdEeW_1tKxQI0T4Q"/>
+  <UMLLabProfile:Reference xmi:id="_3XRJcGRdEeW_1tKxQI0T4Q" base_Element="_3XPUQWRdEeW_1tKxQI0T4Q"/>
+  <UMLLabProfile:Reference xmi:id="_3XSXkGRdEeW_1tKxQI0T4Q" base_Element="_3XRJcWRdEeW_1tKxQI0T4Q"/>
+  <UMLLabProfile:Reference xmi:id="_3XUMwGRdEeW_1tKxQI0T4Q" base_Element="_3XS-oGRdEeW_1tKxQI0T4Q"/>
+  <UMLLabProfile:Reference xmi:id="_3XVa4GRdEeW_1tKxQI0T4Q" base_Element="_3XUMwWRdEeW_1tKxQI0T4Q"/>
+  <UMLLabProfile:Reference xmi:id="_3XXQEGRdEeW_1tKxQI0T4Q" base_Element="_3XWB8GRdEeW_1tKxQI0T4Q"/>
+  <UMLLabProfile:Reference xmi:id="_3XZFQGRdEeW_1tKxQI0T4Q" base_Element="_3XXQEWRdEeW_1tKxQI0T4Q"/>
+  <UMLLabProfile:Reference xmi:id="_3XaTYGRdEeW_1tKxQI0T4Q" base_Element="_3XZFQWRdEeW_1tKxQI0T4Q"/>
+  <UMLLabProfile:Reference xmi:id="_3XbhgGRdEeW_1tKxQI0T4Q" base_Element="_3XaTYWRdEeW_1tKxQI0T4Q"/>
+  <UMLLabProfile:Reference xmi:id="_3XcvoGRdEeW_1tKxQI0T4Q" base_Element="_3XbhgWRdEeW_1tKxQI0T4Q"/>
+  <UMLLabProfile:Reference xmi:id="_3Xd9wGRdEeW_1tKxQI0T4Q" base_Element="_3XcvoWRdEeW_1tKxQI0T4Q"/>
+  <UMLLabProfile:Reference xmi:id="_3Xfy8GRdEeW_1tKxQI0T4Q" base_Element="_3Xek0GRdEeW_1tKxQI0T4Q"/>
+  <UMLLabProfile:Reference xmi:id="_3XiPMGRdEeW_1tKxQI0T4Q" base_Element="_3XgaAGRdEeW_1tKxQI0T4Q"/>
+  <UMLLabProfile:Reference xmi:id="_3XjdUGRdEeW_1tKxQI0T4Q" base_Element="_3XiPMWRdEeW_1tKxQI0T4Q"/>
+</xmi:XMI>
