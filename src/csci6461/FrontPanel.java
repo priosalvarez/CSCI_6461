@@ -34,6 +34,7 @@ public class FrontPanel {
 	JTextPane txtpnR; // TextInput for R0
 	JTextPane txtpnR_1;// TextInput for R1
 	JTextPane txtpnR_2;// TextInput for R2
+	JTextPane textPane_16;// TextInput for R3
 	
 	JTextPane txtpnX;// TextInput for X1
 	JTextPane txtpnX_1;// TextInput for X2
@@ -173,6 +174,7 @@ public class FrontPanel {
 		{
 		  public void actionPerformed(ActionEvent e)
 		  {
+			  txtrOutput.setText("Output");
 			  //Get PC counter
 			  String pc = txtpnPc.getText();
 			  //Convert PC from binary to decimal 
@@ -532,7 +534,7 @@ public class FrontPanel {
 		lblR_4.setBounds(494, 368, 20, 14);
 		frame.getContentPane().add(lblR_4);
 		
-		JTextPane textPane_16 = new JTextPane();
+		textPane_16 = new JTextPane();
 		textPane_16.setText("");
 		textPane_16.setBounds(524, 362, 120, 20);
 		frame.getContentPane().add(textPane_16);
@@ -577,11 +579,11 @@ public class FrontPanel {
 		if(registerNum == 0){
 			return txtpnR.getText();
 		} else if(registerNum == 1){
-			txtpnR_1.getText();
+			return txtpnR_1.getText();
 		} else  if(registerNum == 2){
-			txtpnR_2.getText();
+			return txtpnR_2.getText();
 		} else if(registerNum == 3){
-//			txtpnR_3.getText();
+			return textPane_16.getText();
 		} else {
 			//Exception
 		}
@@ -674,12 +676,11 @@ public class FrontPanel {
 	
 	
 	public void instructionSTR(Instruction instruction) throws Throwable{
-		String content = "";
+		String ea = "";
 		//Verify if instruction has index
 		if(instruction.getIndexNumber() == 0){
-			content = getRegister(instruction.getRegisterNumber());
+			ea = txtpnPc.getText();
 		} else {
-			content = getRegister(instruction.getRegisterNumber());
 			Integer addressDecimal = instruction.getIntegerAddress();
 			Integer indexDecimal = Integer.parseInt(getIndex(instruction.getIndexNumber()), 2);
 			//Get index and sum it with address
@@ -687,11 +688,10 @@ public class FrontPanel {
 			if(sum > 31){
 				throw new Throwable("FAULT");
 			}
-			content = Integer.toBinaryString(sum);
+			ea = Integer.toBinaryString(sum);
 		}
 		
-		Integer ea = evaluateIndirectSTR(instruction, content);
-		content = BinaryUtil.fillBinaryString(content);
-		memory[ea].setText(content);
+		Integer eaDecimal = evaluateIndirectSTR(instruction, ea);
+		memory[eaDecimal].setText(getRegister(instruction.getRegisterNumber()));
 	}
 }
