@@ -4,7 +4,7 @@
     <eAnnotations xmi:id="_2mvEYGRdEeW_1tKxQI0T4Q" source="http://ns.yatta.de/umllab">
       <contents xmi:type="ecore:EAnnotation" xmi:id="_2mvEYWRdEeW_1tKxQI0T4Q" source="codegen">
         <details xmi:id="_2mvrcGRdEeW_1tKxQI0T4Q" key="codegenDirectory" value="/CSCI_6461/src"/>
-        <details xmi:id="_55XSwGRdEeW_1tKxQI0T4Q" key="AssociatedSourceCode" value="/CSCI_6461/src/csci6461/FrontPanel.java;4054349569/1;"/>
+        <details xmi:id="_55XSwGRdEeW_1tKxQI0T4Q" key="AssociatedSourceCode" value="/CSCI_6461/src/csci6461/FrontPanel.java;4043660114/1;"/>
       </contents>
     </eAnnotations>
     <elementImport xmi:id="_3O5QkGRdEeW_1tKxQI0T4Q">
@@ -92,6 +92,7 @@
         <ownedAttribute xmi:id="_3V4CUGRdEeW_1tKxQI0T4Q" name="txtpnMar" visibility="package" type="_3UWYUGRdEeW_1tKxQI0T4Q" association="_3Xek0GRdEeW_1tKxQI0T4Q"/>
         <ownedAttribute xmi:id="_3V4pYWRdEeW_1tKxQI0T4Q" name="txtpnMbr" visibility="package" type="_3UWYUGRdEeW_1tKxQI0T4Q" association="_3XgaAGRdEeW_1tKxQI0T4Q"/>
         <ownedAttribute xmi:id="_3V53gGRdEeW_1tKxQI0T4Q" name="txtpnIr" visibility="package" type="_3UWYUGRdEeW_1tKxQI0T4Q" association="_3XiPMWRdEeW_1tKxQI0T4Q"/>
+        <ownedAttribute xmi:id="_jfruoGSXEeW_1tKxQI0T4Q" name="textPane_16" visibility="package" type="_3UWYUGRdEeW_1tKxQI0T4Q" association="_jfxOMGSXEeW_1tKxQI0T4Q"/>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_3WyoUGRdEeW_1tKxQI0T4Q" name="main" specification="_3Q1KQGRdEeW_1tKxQI0T4Q">
           <ownedParameter xmi:id="_3WzPYGRdEeW_1tKxQI0T4Q" name="args">
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
@@ -219,6 +220,7 @@
 		{&#xD;
 		  public void actionPerformed(ActionEvent e)&#xD;
 		  {&#xD;
+			  txtrOutput.setText(&quot;Output&quot;);&#xD;
 			  //Get PC counter&#xD;
 			  String pc = txtpnPc.getText();&#xD;
 			  //Convert PC from binary to decimal &#xD;
@@ -578,7 +580,7 @@
 		lblR_4.setBounds(494, 368, 20, 14);&#xD;
 		frame.getContentPane().add(lblR_4);&#xD;
 		&#xD;
-		JTextPane textPane_16 = new JTextPane();&#xD;
+		textPane_16 = new JTextPane();&#xD;
 		textPane_16.setText(&quot;&quot;);&#xD;
 		textPane_16.setBounds(524, 362, 120, 20);&#xD;
 		frame.getContentPane().add(textPane_16);&#xD;
@@ -620,7 +622,7 @@
 		} else  if(registerNum == 2){&#xD;
 			txtpnR_2.setText(content);&#xD;
 		} else if(registerNum == 3){&#xD;
-//			txtpnR_3.setText(content);&#xD;
+			textPane_16.setText(content);&#xD;
 		} else {&#xD;
 			//Exception&#xD;
 		}&#xD;
@@ -638,11 +640,11 @@
           <body>if(registerNum == 0){&#xD;
 			return txtpnR.getText();&#xD;
 		} else if(registerNum == 1){&#xD;
-			txtpnR_1.getText();&#xD;
+			return txtpnR_1.getText();&#xD;
 		} else  if(registerNum == 2){&#xD;
-			txtpnR_2.getText();&#xD;
+			return txtpnR_2.getText();&#xD;
 		} else if(registerNum == 3){&#xD;
-//			txtpnR_3.getText();&#xD;
+			return textPane_16.getText();&#xD;
 		} else {&#xD;
 			//Exception&#xD;
 		}&#xD;
@@ -690,8 +692,12 @@
 	</body>
         </ownedBehavior>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_3W6kIGRdEeW_1tKxQI0T4Q" name="evaluateIndirectLDR" specification="_3VWd4WRdEeW_1tKxQI0T4Q">
-          <ownedParameter xmi:id="_6dQpMGSNEeW_1tKxQI0T4Q" name="instruction" type="_3Ub34WRdEeW_1tKxQI0T4Q"/>
-          <ownedParameter xmi:id="_6dRQQGSNEeW_1tKxQI0T4Q" direction="return">
+          <ownedParameter xmi:id="_jftj0GSXEeW_1tKxQI0T4Q" name="instruction" type="_3Ub34WRdEeW_1tKxQI0T4Q"/>
+          <ownedParameter xmi:id="_jftj0WSXEeW_1tKxQI0T4Q" direction="return">
+            <name xsi:nil="true"/>
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+          </ownedParameter>
+          <ownedParameter xmi:id="_jfuK4GSXEeW_1tKxQI0T4Q" name="ea">
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
           </ownedParameter>
           <language>java</language>
@@ -737,40 +743,47 @@
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_3W7LMmRdEeW_1tKxQI0T4Q" name="instructionSTR" specification="_3RFB4GRdEeW_1tKxQI0T4Q">
           <ownedParameter xmi:id="_6dR3UGSNEeW_1tKxQI0T4Q" name="instruction" type="_3Ub34WRdEeW_1tKxQI0T4Q"/>
           <language>java</language>
-          <body>String content = &quot;&quot;;&#xD;
+          <body>String ea = &quot;&quot;;&#xD;
 		//Verify if instruction has index&#xD;
 		if(instruction.getIndexNumber() == 0){&#xD;
-			content = getRegister(instruction.getRegisterNumber());&#xD;
+			ea = txtpnPc.getText();&#xD;
 		} else {&#xD;
-			Integer registerDecimal = Integer.parseInt(getRegister(instruction.getRegisterNumber()), 2);&#xD;
+			Integer addressDecimal = instruction.getIntegerAddress();&#xD;
 			Integer indexDecimal = Integer.parseInt(getIndex(instruction.getIndexNumber()), 2);&#xD;
 			//Get index and sum it with address&#xD;
-			Integer sum = registerDecimal + indexDecimal;&#xD;
+			Integer sum = addressDecimal + indexDecimal;&#xD;
 			if(sum > 31){&#xD;
 				throw new Throwable(&quot;FAULT&quot;);&#xD;
 			}&#xD;
-			content = Integer.toBinaryString(sum);&#xD;
+			ea = Integer.toBinaryString(sum);&#xD;
 		}&#xD;
 		&#xD;
-		Integer ea = evaluateIndirectSTR(instruction);&#xD;
-		content = BinaryUtil.fillBinaryString(content);&#xD;
-		memory[ea].setText(content);&#xD;
+		Integer eaDecimal = evaluateIndirectSTR(instruction, ea);&#xD;
+		memory[eaDecimal].setText(getRegister(instruction.getRegisterNumber()));&#xD;
 	</body>
         </ownedBehavior>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_6dRQQWSNEeW_1tKxQI0T4Q" name="evaluateIndirectSTR" specification="_6dJUcGSNEeW_1tKxQI0T4Q">
-          <ownedParameter xmi:id="_6dRQQmSNEeW_1tKxQI0T4Q" name="instruction" type="_3Ub34WRdEeW_1tKxQI0T4Q"/>
-          <ownedParameter xmi:id="_6dRQQ2SNEeW_1tKxQI0T4Q" direction="return">
+          <ownedParameter xmi:id="_jfuK4WSXEeW_1tKxQI0T4Q" name="instruction" type="_3Ub34WRdEeW_1tKxQI0T4Q"/>
+          <ownedParameter xmi:id="_jfuK4mSXEeW_1tKxQI0T4Q" direction="return">
+            <name xsi:nil="true"/>
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+          </ownedParameter>
+          <ownedParameter xmi:id="_jfuK42SXEeW_1tKxQI0T4Q" name="ea">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
           </ownedParameter>
           <language>java</language>
           <body>try {&#xD;
 			if(instruction.isIndirect()){&#xD;
-				return instruction.getIntegerAddress();&#xD;
+				// Is all what is in the address or only the address part?&#xD;
+				Instruction indirectInstruction = new Instruction(memory[Integer.parseInt(ea, 2)].getText());&#xD;
+				//AddressPart&#xD;
+				ea = indirectInstruction.getAddress();&#xD;
+				return Integer.parseInt(ea,2);&#xD;
 			}&#xD;
 		} catch (Exception e){&#xD;
 			throw new Throwable(&quot;FAULT&quot;);&#xD;
 		}&#xD;
-		return Integer.parseInt(txtpnPc.getText(), 2);&#xD;
+		return Integer.parseInt(ea,2);&#xD;
 	</body>
         </ownedBehavior>
         <ownedOperation xmi:id="_3Q1KQGRdEeW_1tKxQI0T4Q" name="main" isStatic="true" method="_3WyoUGRdEeW_1tKxQI0T4Q">
@@ -855,6 +868,9 @@
           <ownedParameter xmi:id="_6dOM8WSNEeW_1tKxQI0T4Q" direction="return">
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
           </ownedParameter>
+          <ownedParameter xmi:id="_jfp5cGSXEeW_1tKxQI0T4Q" name="ea">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+          </ownedParameter>
         </ownedOperation>
       </packagedElement>
       <packagedElement xmi:type="uml:Association" xmi:id="_3XGKUGRdEeW_1tKxQI0T4Q" name="" memberEnd="_3XGKUWRdEeW_1tKxQI0T4Q _3VkgUGRdEeW_1tKxQI0T4Q">
@@ -911,6 +927,9 @@
       <packagedElement xmi:type="uml:Association" xmi:id="_3XiPMWRdEeW_1tKxQI0T4Q" name="" memberEnd="_3XiPMmRdEeW_1tKxQI0T4Q _3V53gGRdEeW_1tKxQI0T4Q">
         <ownedEnd xmi:id="_3XiPMmRdEeW_1tKxQI0T4Q" name="" type="_3Ql5sGRdEeW_1tKxQI0T4Q" association="_3XiPMWRdEeW_1tKxQI0T4Q"/>
       </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="_jfxOMGSXEeW_1tKxQI0T4Q" name="" memberEnd="_jfxOMWSXEeW_1tKxQI0T4Q _jfruoGSXEeW_1tKxQI0T4Q">
+        <ownedEnd xmi:id="_jfxOMWSXEeW_1tKxQI0T4Q" name="" type="_3Ql5sGRdEeW_1tKxQI0T4Q" association="_jfxOMGSXEeW_1tKxQI0T4Q"/>
+      </packagedElement>
     </packagedElement>
     <profileApplication xmi:id="_2mzV0GRdEeW_1tKxQI0T4Q">
       <eAnnotations xmi:id="_2oy54GRdEeW_1tKxQI0T4Q" source="http://www.eclipse.org/uml2/2.0.0/UML">
@@ -922,7 +941,7 @@
   <UMLLabProfile:TargetLanguage xmi:id="_2o6OoGRdEeW_1tKxQI0T4Q" base_Package="_2EsHQGRdEeW_1tKxQI0T4Q">
     <languageName>java</languageName>
   </UMLLabProfile:TargetLanguage>
-  <UMLLabProfile:Array xmi:id="_3Q40oGRdEeW_1tKxQI0T4Q" dimensions="1" base_Element="_3Q1xUGRdEeW_1tKxQI0T4Q"/>
+  <UMLLabProfile:Array xmi:id="_3Q40oGRdEeW_1tKxQI0T4Q" dimensions="0" base_Element="_3Q1xUGRdEeW_1tKxQI0T4Q"/>
   <UMLLabProfile:Reference xmi:id="_3UQRsGRdEeW_1tKxQI0T4Q" base_Element="_3UOcgGRdEeW_1tKxQI0T4Q"/>
   <UMLLabProfile:Reference xmi:id="_3UT8EGRdEeW_1tKxQI0T4Q" base_Element="_3USG4GRdEeW_1tKxQI0T4Q"/>
   <UMLLabProfile:Reference xmi:id="_3UVxQGRdEeW_1tKxQI0T4Q" base_Element="_3UUjIGRdEeW_1tKxQI0T4Q"/>
@@ -974,4 +993,6 @@
   <UMLLabProfile:Reference xmi:id="_3Xfy8GRdEeW_1tKxQI0T4Q" base_Element="_3Xek0GRdEeW_1tKxQI0T4Q"/>
   <UMLLabProfile:Reference xmi:id="_3XiPMGRdEeW_1tKxQI0T4Q" base_Element="_3XgaAGRdEeW_1tKxQI0T4Q"/>
   <UMLLabProfile:Reference xmi:id="_3XjdUGRdEeW_1tKxQI0T4Q" base_Element="_3XiPMWRdEeW_1tKxQI0T4Q"/>
+  <UMLLabProfile:LegacyStyledElement xmi:id="_jfsVsGSXEeW_1tKxQI0T4Q" base_Element="_jfruoGSXEeW_1tKxQI0T4Q"/>
+  <UMLLabProfile:Reference xmi:id="_jfycUGSXEeW_1tKxQI0T4Q" base_Element="_jfxOMGSXEeW_1tKxQI0T4Q"/>
 </xmi:XMI>
