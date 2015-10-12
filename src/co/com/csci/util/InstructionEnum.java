@@ -18,8 +18,7 @@ public enum InstructionEnum {
 	JSR("14"),
 	RFS("15"),
 	SOB("16"),
-	JGE("17"),	
-	
+	JGE("17"),		
 	//Arithmetic and Logical Ops
 	AMR("04"),
 	SMR("05"),

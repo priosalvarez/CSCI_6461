@@ -2,6 +2,7 @@ package csci6461;
 
 import java.awt.EventQueue;
 
+
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
@@ -31,21 +32,21 @@ public class FrontPanel {
 	private JTextField txtMsr;
 
 	
-	JTextPane txtpnR; // TextInput for R0
-	JTextPane txtpnR_1;// TextInput for R1
-	JTextPane txtpnR_2;// TextInput for R2
-	JTextPane textPane_16;// TextInput for R3
+	static JTextPane txtpnR; // TextInput for R0
+	static JTextPane txtpnR_1;// TextInput for R1
+	static JTextPane txtpnR_2;// TextInput for R2
+	static JTextPane textPane_16;// TextInput for R3
 	
-	JTextPane txtpnX;// TextInput for X1
-	JTextPane txtpnX_1;// TextInput for X2
-	JTextPane txtpnX_2;// TextInput for X3
+	static JTextPane txtpnX;// TextInput for X1
+	static JTextPane txtpnX_1;// TextInput for X2
+	static JTextPane txtpnX_2;// TextInput for X3
 	
-	JTextPane[] memory; //All memory entries
+	static JTextPane[] memory; //All memory entries
 	
-	JTextPane txtpnPc; //PC
-	JTextPane txtpnMar; //MAR
-	JTextPane txtpnMbr; //MBR
-	JTextPane txtpnIr;  //IR
+	static JTextPane txtpnPc; //PC
+	static JTextPane txtpnMar; //MAR
+	static JTextPane txtpnMbr; //MBR
+	static JTextPane txtpnIr;  //IR
 	
 	/**
 	 * Launch the application.
@@ -196,10 +197,10 @@ public class FrontPanel {
 			
 				  switch(iCode){
 		  		  		case LDR:
-		  		  			instructionLDR(instruction);
+		  		  			LoadStore.instructionLDR(instruction);
 		  		  			break;
 		  		  		case STR:
-		  		  			instructionSTR(instruction);
+		  		  			LoadStore.instructionSTR(instruction);
 	  		  				break;
 		  		  		case HALT:
 		  		  			txtrOutput.setText("HALT");
@@ -561,7 +562,7 @@ public class FrontPanel {
 		frame.getContentPane().add(lblNumberFormat);*/
 	}
 	
-	public void setRegister(int registerNum, String content){
+	public static void setRegister(int registerNum, String content){
 		if(registerNum == 0){
 			txtpnR.setText(content);
 		} else if(registerNum == 1){
@@ -575,7 +576,7 @@ public class FrontPanel {
 		}
 	}
 	
-	public String getRegister(int registerNum){
+	public static String getRegister(int registerNum){
 		if(registerNum == 0){
 			return txtpnR.getText();
 		} else if(registerNum == 1){
@@ -602,7 +603,7 @@ public class FrontPanel {
 		}
 	}
 	
-	public String getIndex(int indexNum){
+	public static String getIndex(int indexNum){
 		if(indexNum == 1){
 			return txtpnX.getText();
 		} else  if(indexNum == 2){
@@ -617,7 +618,7 @@ public class FrontPanel {
 	/*
 	 * This method implements the condition in which an instruction has the 
 	 * indirect flag for processing.
-	 */
+	 
 	public String evaluateIndirectLDR(Instruction instruction, String ea) throws Throwable{
 		try {
 			if(instruction.isIndirect()){
@@ -649,9 +650,9 @@ public class FrontPanel {
 		return Integer.parseInt(ea,2);
 	}
 	
-	/*
+	
 	 * This method implements the Load instruction in the UI
-	 */
+	 
 	public void instructionLDR(Instruction instruction) throws Throwable{
 		String ea = "";
 		//Verify if instruction has index
@@ -693,7 +694,7 @@ public class FrontPanel {
 		
 		Integer eaDecimal = evaluateIndirectSTR(instruction, ea);
 		memory[eaDecimal].setText(getRegister(instruction.getRegisterNumber()));
-	}
+	}*/
 	
 	public void instructionLDA(Instruction instruction) throws Throwable{
 		//TODO
