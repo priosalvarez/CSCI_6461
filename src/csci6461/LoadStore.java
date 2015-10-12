@@ -87,6 +87,33 @@ public class LoadStore {
 		FrontPanel.memory[eaDecimal].setText(FrontPanel.getRegister(instruction.getRegisterNumber()));
 	}
 	
+	public void instructionLDA(Instruction instruction) throws Throwable{
+		//TODO
+		String ea = "";
+		/*Load Register with Address, r = 0..3
+				r <- EA
+				r <- c(EA), if I bit set*/
+		
+		
+	}
+	
+	public void instructionLDX(Instruction instruction) throws Throwable{
+		//TODO
+		String ea = "";
+		/*Load Index Register from Memory, x = 1..3
+				Xx <- c(EA)*/
+		
+		
+	}
+	public void instructionSTX(Instruction instruction) throws Throwable{
+		//TODO
+		String ea = "";
+		/*Store Index Register to Memory. X = 1..3
+				EA <- c(X0)
+				C(EA) <- c(Xx), if I-bit set*/
+		
+	}
+	
 	
 	
 
