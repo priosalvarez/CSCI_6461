@@ -2,6 +2,13 @@ package csci6461;
 
 import co.com.csci.model.Instruction;
 
+
+/*Transfer Instructions:
+The Transfer instructions change control of program execution. Conditional 
+transfer instructions test the value of a register. Note R = 0…3. They have 
+the same format as the Load/Store instructions.*/
+
+
 public class Transfer {
 	
 	
