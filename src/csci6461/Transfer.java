@@ -13,13 +13,37 @@ public class Transfer {
 	
 	
 	//Transfer Instructions
-		public void instructionJZ(Instruction instruction) throws Throwable{
-			//TODO
+		public Integer instructionJZ(Instruction instruction) throws Throwable{
+			/*Jump If Zero:
+			If c(r) = 0, then PC <- EA or c(EA), if I bit set;
+			Else PC <- PC+1*/
 			String ea = "";
 			
-			/*Jump If Zero:
-				If c(r) = 0, then PC ?? EA or c(EA), if I bit set;
-				Else PC <- PC+1*/
+		  //String pc = FrontPanel.txtpnPc.getText();
+		  //Convert PC from binary to decimal 
+		  Integer pcDecimal = Integer.parseInt(FrontPanel.txtpnPc.getText(), 2);
+			
+			
+			try {
+				if(instruction.getRegisterNumber()==0){
+					ea = FrontPanel.txtpnPc.getText();
+					
+					//verify that bit is set
+					if(instruction.isIndirect()){
+						
+						Instruction indirectInstruction = new Instruction(FrontPanel.memory[Integer.parseInt(ea, 2)].getText());						
+						ea = indirectInstruction.getAddress();						
+					}
+				}
+				else {
+					
+					pcDecimal = pcDecimal + 1;					
+				}						
+					
+			} catch (Exception e){
+				throw new Throwable("FAULT");
+			}
+			return pcDecimal;
 			
 			
 		}
@@ -29,7 +53,7 @@ public class Transfer {
 			String ea = "";
 			
 			/*Jump If Not Equal:
-				If c(r) != 0, then PC ??- EA or c(EA) , if I bit set;
+				If c(r) != 0, then PC <- EA or c(EA) , if I bit set;
 				Else PC <- PC + 1*/
 			
 		}

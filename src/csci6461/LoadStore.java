@@ -6,43 +6,7 @@ import csci6461.FrontPanel;
 
 public class LoadStore {	
 	
-	/*
-	 * This method implements the condition in which an instruction has the 
-	 * indirect flag for processing.*/
-	 
-	public static String evaluateIndirectLDR(Instruction instruction, String ea) throws Throwable{
-		try {
-			if(instruction.isIndirect()){
-				// Is all what is in the address or only the address part?
-				Instruction indirectInstruction = new Instruction(FrontPanel.memory[Integer.parseInt(ea, 2)].getText());
-				//AddressPart
-				ea = indirectInstruction.getAddress();
-				// else
-				//ea = indirectInstruction.getBinaryInstruction();
-			}
-		} catch (Exception e){
-			throw new Throwable("FAULT");
-		}
-		return ea;
-	}
-	
-	public static Integer evaluateIndirectSTR(Instruction instruction, String ea) throws Throwable{
-		try {
-			if(instruction.isIndirect()){
-				// Is all what is in the address or only the address part?
-				Instruction indirectInstruction = new Instruction(FrontPanel.memory[Integer.parseInt(ea, 2)].getText());
-				//AddressPart
-				ea = indirectInstruction.getAddress();
-				return Integer.parseInt(ea,2);
-			}
-		} catch (Exception e){
-			throw new Throwable("FAULT");
-		}
-		return Integer.parseInt(ea,2);
-	}
-	
-	
-	/* This method implements the Load instruction in the UI*/
+/* This method implements the Load instruction in the UI*/
 	
 	public static void instructionLDR(Instruction instruction) throws Throwable{
 		String ea = "";
@@ -86,6 +50,44 @@ public class LoadStore {
 		Integer eaDecimal = evaluateIndirectSTR(instruction, ea);
 		FrontPanel.memory[eaDecimal].setText(FrontPanel.getRegister(instruction.getRegisterNumber()));
 	}
+	
+	
+	/*
+	 * This method implements the condition in which an instruction has the 
+	 * indirect flag for processing.*/
+	 
+	public static String evaluateIndirectLDR(Instruction instruction, String ea) throws Throwable{
+		try {
+			if(instruction.isIndirect()){
+				// Is all what is in the address or only the address part?
+				Instruction indirectInstruction = new Instruction(FrontPanel.memory[Integer.parseInt(ea, 2)].getText());
+				//AddressPart
+				ea = indirectInstruction.getAddress();
+				// else
+				//ea = indirectInstruction.getBinaryInstruction();
+			}
+		} catch (Exception e){
+			throw new Throwable("FAULT");
+		}
+		return ea;
+	}
+	
+	public static Integer evaluateIndirectSTR(Instruction instruction, String ea) throws Throwable{
+		try {
+			if(instruction.isIndirect()){
+				// Is all what is in the address or only the address part?
+				Instruction indirectInstruction = new Instruction(FrontPanel.memory[Integer.parseInt(ea, 2)].getText());
+				//AddressPart
+				ea = indirectInstruction.getAddress();
+				return Integer.parseInt(ea,2);
+			}
+		} catch (Exception e){
+			throw new Throwable("FAULT");
+		}
+		return Integer.parseInt(ea,2);
+	}
+	
+	
 	
 	public void instructionLDA(Instruction instruction) throws Throwable{
 		//TODO
