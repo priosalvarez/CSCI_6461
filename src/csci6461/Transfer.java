@@ -17,7 +17,7 @@ public class Transfer {
 			/*Jump If Zero:
 			If c(r) = 0, then PC <- EA or c(EA), if I bit set;
 			Else PC <- PC+1*/
-			String ea = "";
+		  String ea = "";
 			
 		  //String pc = FrontPanel.txtpnPc.getText();
 		  //Convert PC from binary to decimal 
@@ -48,35 +48,116 @@ public class Transfer {
 			
 		}
 		
-		public void instructionJNE(Instruction instruction) throws Throwable{
-			//TODO
+		public Integer instructionJNE(Instruction instruction) throws Throwable{
+			
 			String ea = "";
 			
 			/*Jump If Not Equal:
 				If c(r) != 0, then PC <- EA or c(EA) , if I bit set;
 				Else PC <- PC + 1*/
 			
+			
+			  //String pc = FrontPanel.txtpnPc.getText();
+			  //Convert PC from binary to decimal 
+			  Integer pcDecimal = Integer.parseInt(FrontPanel.txtpnPc.getText(), 2);
+				
+				
+				try {
+					if(instruction.getRegisterNumber()!=0){
+						ea = FrontPanel.txtpnPc.getText();
+						
+						//verify that bit is set
+						if(instruction.isIndirect()){
+							
+							Instruction indirectInstruction = new Instruction(FrontPanel.memory[Integer.parseInt(ea, 2)].getText());						
+							ea = indirectInstruction.getAddress();						
+						}
+					}
+					else {
+						
+						pcDecimal = pcDecimal + 1;					
+					}						
+						
+				} catch (Exception e){
+					throw new Throwable("FAULT");
+				}
+				return pcDecimal;
+			
 		}
-		public void instructionJCC(Instruction instruction) throws Throwable{
+		public Integer instructionJCC(Instruction instruction) throws Throwable{
 			//TODO
 			String ea = "";
 			
 			/*Jump If Condition Code
 			cc replaces r for this instruction
 			cc takes values 0, 1, 2, 3 as above and specifies the bit in the Condition Code Register to check;
-			If cc bit  = 1, PC ?? EA or c(EA), if I bit set;
+			If cc bit  = 1, PC <- EA or c(EA), if I bit set;
 			Else PC <- PC + 1*/
+			
+			  //String pc = FrontPanel.txtpnPc.getText();
+			  //Convert PC from binary to decimal 
+			  Integer pcDecimal = Integer.parseInt(FrontPanel.txtpnPc.getText(), 2);
+				
+				
+				try {
+					if(instruction.getRegisterNumber()==1){
+						ea = FrontPanel.txtpnPc.getText();
+						
+						//verify that bit is set
+						if(instruction.isIndirect()){
+							
+							Instruction indirectInstruction = new Instruction(FrontPanel.memory[Integer.parseInt(ea, 2)].getText());						
+							ea = indirectInstruction.getAddress();						
+						}
+					}
+					else {
+						
+						pcDecimal = pcDecimal + 1;					
+					}						
+						
+				} catch (Exception e){
+					throw new Throwable("FAULT");
+				}
+				return pcDecimal;
 			
 			
 			
 		}
-		public void instructionJMA(Instruction instruction) throws Throwable{
+		public Integer instructionJMA(Instruction instruction) throws Throwable{
 			//TODO
-			String ea = "";
+			
 			
 			/*Unconditional Jump To Address
 			PC <- EA, if I bit not set; PC <- c(EA), if I bit set
 			Note: r is ignored in this instruction*/
+			
+			String ea = "";
+			
+			  //String pc = FrontPanel.txtpnPc.getText();
+			  //Convert PC from binary to decimal 
+			  Integer pcDecimal = Integer.parseInt(FrontPanel.txtpnPc.getText(), 2);
+				
+				
+				try {
+					
+					if(instruction.isIndirect()){
+							
+							Instruction indirectInstruction = new Instruction(FrontPanel.memory[Integer.parseInt(ea, 2)].getText());						
+							ea = indirectInstruction.getAddress();						
+						}
+					
+					else {
+						
+						pcDecimal = pcDecimal + 1;					
+					}						
+						
+				} catch (Exception e){
+					throw new Throwable("FAULT");
+				}
+				return pcDecimal;
+				
+				
+			
 			
 			
 		}

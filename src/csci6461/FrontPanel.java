@@ -47,6 +47,7 @@ public class FrontPanel {
 	static JTextPane txtpnMar; //MAR
 	static JTextPane txtpnMbr; //MBR
 	static JTextPane txtpnIr;  //IR
+	private static JTextField cc;
 	
 	/**
 	 * Launch the application.
@@ -540,6 +541,16 @@ public class FrontPanel {
 		textPane_16.setBounds(524, 362, 120, 20);
 		frame.getContentPane().add(textPane_16);
 		
+		//output for the condition code (CC)
+		cc = new JTextField();
+		cc.setBounds(353, 203, 86, 20);
+		frame.getContentPane().add(cc);
+		cc.setColumns(10);
+		
+		JLabel lblCc = new JLabel("CC");
+		lblCc.setBounds(326, 203, 20, 14);
+		frame.getContentPane().add(lblCc);
+		
 		//This portion is for a number format converter
 		//that we hope to implement in a future phase
 		
@@ -616,8 +627,32 @@ public class FrontPanel {
 		return "";
 	}
 	
+	public void setCC(int CCNum, String content){
+		if(CCNum == 1){
+			cc.setText(content);
+		} else  if(CCNum == 2){
+			cc.setText(content);
+		} else if(CCNum == 3){
+			cc.setText(content);
+		} else if(CCNum == 4){
+			cc.setText(content);
+		} else {
+			//Exception
+		}
+	}
 	
-	
-	
-	
+	public static String getCC(int CCNum){
+		if(CCNum == 1){
+			return cc.getText();
+		} else  if(CCNum == 2){
+			return cc.getText();
+		} else if(CCNum == 3){
+			return cc.getText();
+		} else if(CCNum == 4){
+			return cc.getText();
+		} else {
+			//Exception
+		}
+		return "";
+	}
 }
