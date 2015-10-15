@@ -18,6 +18,7 @@ public class Instruction {
 	private String r;
 	private String i;
 	private String address;
+	private String cc;
 	
 	private Integer base;
 	
@@ -112,6 +113,12 @@ public class Instruction {
 	public String getBinaryInstruction(){
 		return opCode + r + ix + i + address;
 	}
+	
+	public Integer getCCNumber() {
+		return Integer.parseInt(cc, 2);
+	}
+	
+	
 	
 	public InstructionEnum getIntructionCode(){
 		String part1 = opCode.substring(0, 2);

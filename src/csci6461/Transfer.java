@@ -85,7 +85,7 @@ public class Transfer {
 			
 		}
 		public Integer instructionJCC(Instruction instruction) throws Throwable{
-			//TODO
+			
 			String ea = "";
 			
 			/*Jump If Condition Code
@@ -100,7 +100,7 @@ public class Transfer {
 				
 				
 				try {
-					if(instruction.getRegisterNumber()==1){
+					if(instruction.getCCNumber()==1){
 						ea = FrontPanel.txtpnPc.getText();
 						
 						//verify that bit is set
@@ -172,6 +172,9 @@ public class Transfer {
 				Argument list should end with –17777 value*/
 			
 			
+			
+			
+			
 		}
 		public void instructionRFS(Instruction instruction) throws Throwable{
 			//TODO
@@ -182,25 +185,60 @@ public class Transfer {
 					IX, I fields are ignored.*/
 			
 			
+			
+			
+			
 		}
 		public void instructionSOB(Instruction instruction) throws Throwable{
 			//TODO
 			String ea = "";
 			
 			/*Subtract One and Branch. R = 0..3
-					r ?? c(r) – 1
+					r <- c(r) – 1
 					If c(r) > 0,  PC <- EA; but PC ?? c(EA), if I bit set;
 					Else PC <- PC + 1*/
 			
 			
+			
+			
+			
 		}
-		public void instructionJGE(Instruction instruction) throws Throwable{
-			//TODO
+		public Integer instructionJGE(Instruction instruction) throws Throwable{
+			
 			String ea = "";
 			
 			/*Jump Greater Than or Equal To:
 				If c(r) >= 0, then PC <- EA or c(EA) , if I bit set;
 				Else PC <- PC + 1*/
+			
+			
+			
+			  //String pc = FrontPanel.txtpnPc.getText();
+			  //Convert PC from binary to decimal 
+			  Integer pcDecimal = Integer.parseInt(FrontPanel.txtpnPc.getText(), 2);
+				
+				
+				try {
+					if(instruction.getRegisterNumber()>=0){
+						ea = FrontPanel.txtpnPc.getText();
+						
+						//verify that bit is set
+						if(instruction.isIndirect()){
+							
+							Instruction indirectInstruction = new Instruction(FrontPanel.memory[Integer.parseInt(ea, 2)].getText());						
+							ea = indirectInstruction.getAddress();						
+						}
+					}
+					else {
+						
+						pcDecimal = pcDecimal + 1;					
+					}						
+						
+				} catch (Exception e){
+					throw new Throwable("FAULT");
+				}
+				return pcDecimal;
+			
 			
 			
 		}	
