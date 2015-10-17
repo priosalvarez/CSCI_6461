@@ -203,6 +203,36 @@ public class FrontPanel {
 		  		  		case STR:
 		  		  			LoadStore.instructionSTR(instruction);
 	  		  				break;
+		  		  		case AMR:
+		  		  			instructionAMR(instruction);
+	  		  				break;
+		  		  		case SMR:
+		  		  			instructionSMR(instruction);
+	  		  				break;
+		  		  		case AIR:
+		  		  			instructionAIR(instruction);
+	  		  				break;
+		  		  		case SIR:
+		  		  			instructionSIR(instruction);
+	  		  				break;
+		  		  		case MLT:
+		  		  			instructionMLT(instruction);
+	  		  				break;
+		  		  		case DVD:
+		  		  			instructionDVD(instruction);
+	  		  				break;
+		  		  		case TRR:
+		  		  			instructionTRR(instruction);
+	  		  				break;
+		  		  		case AND:
+		  		  			instructionAND(instruction);
+	  		  				break;
+		  		  		case ORR:
+		  		  			instructionORR(instruction);
+	  		  				break;
+		  		  		case NOT:
+		  		  			instructionNOT(instruction);
+	  		  				break;	
 		  		  		case HALT:
 		  		  			txtrOutput.setText("HALT");
 			  				break;
