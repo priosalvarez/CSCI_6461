@@ -9,8 +9,13 @@ For immediate instructions, the Address portion is considered to be the Immediat
 The condition codes are set for the arithmetic operations. The maximum value of the Immediate value is 32 (5 bits).*/
 
 
+
 public class ArithmeticLogicalOps {
 	
+	
+
+	private Object[] memory;
+
 	public String evaluateIndirectAMR(Instruction instruction, String ea) throws Throwable{
 		try {
 			if(instruction.isIndirect()){
@@ -37,7 +42,7 @@ public class ArithmeticLogicalOps {
 			ea = instruction.getAddress();
 		} else {
 			Integer addressDecimal = Integer.parseInt(instruction.getAddress(), 2);
-			Integer indexDecimal = Integer.parseInt(getIndex(instruction.getIndexNumber()), 2);
+			Integer indexDecimal = Integer.parseInt(FrontPanel.getIndex(instruction.getIndexNumber()), 2);
 			//Get index and sum it with address
 			Integer sum = addressDecimal + indexDecimal;
 			if(sum > 31){ 
@@ -50,12 +55,12 @@ public class ArithmeticLogicalOps {
 		ea = BinaryUtil.fillBinaryString(ea); 
 		
 		Integer addressDecimal = Integer.parseInt(instruction.getAddress(), 2);
-		Integer registerDecimal = Integer.parseInt(getRegister(instruction.getRegisterNumber()), 2);
+		Integer registerDecimal = Integer.parseInt(FrontPanel.getRegister(instruction.getRegisterNumber()), 2);
 		Integer sumAMR = registerDecimal + addressDecimal;
 		
 		//Add Memory to Register
 		ea = Integer.toBinaryString(sumAMR);
-		setRegister(instruction.getRegisterNumber(), ea);
+		FrontPanel.setRegister(instruction.getRegisterNumber(), ea);
 	}
 	
 
@@ -86,7 +91,7 @@ public class ArithmeticLogicalOps {
 			ea = instruction.getAddress();
 		} else {
 			Integer addressDecimal = Integer.parseInt(instruction.getAddress(), 2);
-			Integer indexDecimal = Integer.parseInt(getIndex(instruction.getIndexNumber()), 2);
+			Integer indexDecimal = Integer.parseInt(FrontPanel.getIndex(instruction.getIndexNumber()), 2);
 			//Get index and sum it with address
 			Integer sum = addressDecimal + indexDecimal; 
 			if(sum > 31){ 
@@ -99,12 +104,12 @@ public class ArithmeticLogicalOps {
 		ea = BinaryUtil.fillBinaryString(ea);
 		
 		Integer addressDecimal = Integer.parseInt(instruction.getAddress(), 2);
-		Integer registerDecimal = Integer.parseInt(getRegister(instruction.getRegisterNumber()), 2);
+		Integer registerDecimal = Integer.parseInt(FrontPanel.getRegister(instruction.getRegisterNumber()), 2);
 		Integer diffAMR = registerDecimal - addressDecimal;
 		
 		//Subtract Memory from Register
 		ea = Integer.toBinaryString(diffAMR);
-		setRegister(instruction.getRegisterNumber(), ea);
+		FrontPanel.setRegister(instruction.getRegisterNumber(), ea);
 	}
 	/*
 	 * This method implements the AIR instruction in the UI
@@ -114,11 +119,11 @@ public class ArithmeticLogicalOps {
 		String ea = "";
 		//Assume the Immediate Value is 10
 		Integer immediate = 10;
-		Integer registerDecimal = Integer.parseInt(getRegister(instruction.getRegisterNumber()), 2);
+		Integer registerDecimal = Integer.parseInt(FrontPanel.getRegister(instruction.getRegisterNumber()), 2);
 		
 		if(immediate == 0){
 		//No action required
-		getRegister(instruction.getRegisterNumber());
+			FrontPanel.getRegister(instruction.getRegisterNumber());
 		}
 
 		if(registerDecimal == 0){
@@ -129,7 +134,7 @@ public class ArithmeticLogicalOps {
 		
 		//Convert the result to binary
 		ea = Integer.toBinaryString(sumAIR);
-		setRegister(instruction.getRegisterNumber(), ea);
+		FrontPanel.setRegister(instruction.getRegisterNumber(), ea);
 		
 	}
 	}
@@ -142,11 +147,11 @@ public class ArithmeticLogicalOps {
 		String ea = "";
 		//Assume the Immediate Value is 10
 		Integer immediate = 10;
-		Integer registerDecimal = Integer.parseInt(getRegister(instruction.getRegisterNumber()), 2);
+		Integer registerDecimal = Integer.parseInt(FrontPanel.getRegister(instruction.getRegisterNumber()), 2);
 		
 		if(immediate == 0){
 		//No action required
-		getRegister(instruction.getRegisterNumber());
+			FrontPanel.getRegister(instruction.getRegisterNumber());
 		}
 
 		if(registerDecimal == 0){
@@ -157,7 +162,7 @@ public class ArithmeticLogicalOps {
 		
 		//Convert the result to binary
 		ea = Integer.toBinaryString(diffSIR);
-		setRegister(instruction.getRegisterNumber(), ea);
+		FrontPanel.setRegister(instruction.getRegisterNumber(), ea);
 	}
 }
 
@@ -166,7 +171,7 @@ public class ArithmeticLogicalOps {
 		try {
 			if(instruction.isIndirect()){
 				// Is all what is in the address or only the address part?
-				Instruction indirectInstruction = new Instruction(memory[Integer.parseInt(ea, 2)].getText());
+				Instruction indirectInstruction = new Instruction(memory[Integer.parseInt(ea, 2)].getText());//Need destination on front panel
 				//AddressPart
 				ea = indirectInstruction.getAddress();
 				// else
@@ -188,7 +193,7 @@ public class ArithmeticLogicalOps {
 			ea = instruction.getAddress();
 		} else {
 			Integer addressDecimal = Integer.parseInt(instruction.getAddress(), 2);
-			Integer indexDecimal = Integer.parseInt(getIndex(instruction.getIndexNumber()), 2);
+			Integer indexDecimal = Integer.parseInt(FrontPanel.getIndex(instruction.getIndexNumber()), 2);
 			//Get index and sum it with address
 			Integer sum = addressDecimal + indexDecimal;
 			if(sum > 31){
@@ -201,8 +206,8 @@ public class ArithmeticLogicalOps {
 		
 	try{
 		//Multiply R0 by R2
-		Integer RxDecimal = Integer.parseInt(getRegister(0));
-		Integer RyDecimal = Integer.parseInt(getRegister(2));
+		Integer RxDecimal = Integer.parseInt(FrontPanel.getRegister(0));
+		Integer RyDecimal = Integer.parseInt(FrontPanel.getRegister(2));
 		Integer productMLT = RxDecimal * RyDecimal;
 		
 		//Find High Order Bit and Low Order Bit
@@ -212,13 +217,13 @@ public class ArithmeticLogicalOps {
 		//Store the MSB in R0 and LSB in R1
 		String eaMSB = Integer.toBinaryString(MSB);
 		String eaLSB = Integer.toBinaryString(LSB);
-		setRegister(instruction.getRegisterNumber(0), eaMSB);
-		setRegister(instruction.getRegisterNumber(1), eaLSB);
+		FrontPanel.setRegister(instruction.getRegisterNumber(), eaMSB);//(0)
+		FrontPanel.setRegister(instruction.getRegisterNumber(), eaLSB);//(1)
 	}
 	//Overflow Flag if R0 or R1 already have content
-	catch{
-		if(instruction.getRegisterNumber(0) != "" || instruction.getRegisterNumber(1) != ""){
-		setCC(instruction.getCCNum(4), 0);
+	finally{
+		if(instruction.getRegisterNumber() != null || instruction.getRegisterNumber() != null){//(1), also here '' means 'null' incompatible types check
+			instruction.setCCNumber(instruction.getCCNumber(4), 0);
 		}
 		}
 	}
@@ -229,7 +234,7 @@ public class ArithmeticLogicalOps {
 		try {
 			if(instruction.isIndirect()){
 				// Is all what is in the address or only the address part?
-				Instruction indirectInstruction = new Instruction(memory[Integer.parseInt(ea, 2)].getText());
+				Instruction indirectInstruction = new Instruction(memory[Integer.parseInt(ea, 2)].getText());//Need destination on front panel
 				//AddressPart
 				ea = indirectInstruction.getAddress();
 				// else
@@ -250,7 +255,7 @@ public class ArithmeticLogicalOps {
 			ea = instruction.getAddress();
 		} else {
 			Integer addressDecimal = Integer.parseInt(instruction.getAddress(), 2);
-			Integer indexDecimal = Integer.parseInt(getIndex(instruction.getIndexNumber()), 2);
+			Integer indexDecimal = Integer.parseInt(FrontPanel.getIndex(instruction.getIndexNumber()), 2);
 			//Get index and sum it with address
 			Integer sum = addressDecimal + indexDecimal;
 			if(sum > 31){
@@ -261,8 +266,8 @@ public class ArithmeticLogicalOps {
 		ea = evaluateIndirectDVD(instruction, ea);
 		ea = BinaryUtil.fillBinaryString(ea); 
 		
-		Integer RxDecimal = Integer.parseInt(getRegister(0));
-		Integer RyDecimal = Integer.parseInt(getRegister(2));
+		Integer RxDecimal = Integer.parseInt(FrontPanel.getRegister(0));
+		Integer RyDecimal = Integer.parseInt(FrontPanel.getRegister(2));
 		
 	try{
 		//Divide R0 by R2
@@ -272,14 +277,14 @@ public class ArithmeticLogicalOps {
 		//Store the quotient in Rx and the remainder in Rx+1
 		String eaQuotient = Integer.toBinaryString(quotientDVD);
 		String eaRemainder = Integer.toBinaryString(remainderDVD);
-		setRegister(instruction.getRegisterNumber(), eaQuotient);
-		setRegister(instruction.getRegisterNumber(), eaRemainder);
+		FrontPanel.setRegister(instruction.getRegisterNumber(), eaQuotient);
+		FrontPanel.setRegister(instruction.getRegisterNumber(), eaRemainder);
 	}
 	//Exception Handler if the denominator was 0
 	catch (ArithmeticException ae) {
 	if (RyDecimal == 0){
 		//set cc(3) to 1
-		setCC(instruction.getCCNum(3), 1);
+		instruction.setCCNumber(instruction.getCCNumber(3), 1);
     }
 }
 
@@ -290,7 +295,7 @@ public class ArithmeticLogicalOps {
 		try {
 			if(instruction.isIndirect()){
 				// Is all what is in the address or only the address part?
-				Instruction indirectInstruction = new Instruction(memory[Integer.parseInt(ea, 2)].getText());
+				Instruction indirectInstruction = new Instruction(memory[Integer.parseInt(ea, 2)].getText());//Need destination on front panel
 				//AddressPart
 				ea = indirectInstruction.getAddress();
 				// else
@@ -312,7 +317,7 @@ public class ArithmeticLogicalOps {
 			ea = instruction.getAddress();
 		} else {
 			Integer addressDecimal = Integer.parseInt(instruction.getAddress(), 2);
-			Integer indexDecimal = Integer.parseInt(getIndex(instruction.getIndexNumber()), 2);
+			Integer indexDecimal = Integer.parseInt(FrontPanel.getIndex(instruction.getIndexNumber()), 2);
 			//Get index and sum it with address
 			Integer sum = addressDecimal + indexDecimal;
 			if(sum > 31){
@@ -324,16 +329,18 @@ public class ArithmeticLogicalOps {
 		ea = BinaryUtil.fillBinaryString(ea); 
 		
 		//Test the Equality of R0 and R2
-		Integer RxDecimal = Integer.parseInt(getRegister(0));
-		Integer RyDecimal = Integer.parseInt(getRegister(2));
+		Integer RxDecimal = Integer.parseInt(FrontPanel.getRegister(0));
+		Integer RyDecimal = Integer.parseInt(FrontPanel.getRegister(2));
 		
 	if(RxDecimal == RyDecimal){
 	//set cc(3) to 1
-		setCC(instruction.getCCNum(3), 1);
+		
+		instruction.setCCNumber(instruction.getCCNumber(3), 1);
 	}
 	else{
 	//set cc(4) to 0
-		setCC(instruction.getCCNum(4), 0);
+		
+		instruction.setCCNumber(instruction.getCCNumber(4), 1);
 	}
 	}
 	
@@ -342,7 +349,7 @@ public class ArithmeticLogicalOps {
 		try {
 			if(instruction.isIndirect()){
 				// Is all what is in the address or only the address part?
-				Instruction indirectInstruction = new Instruction(memory[Integer.parseInt(ea, 2)].getText());
+				Instruction indirectInstruction = new Instruction(memory[Integer.parseInt(ea, 2)].getText());//Need destination on front panel
 				//AddressPart
 				ea = indirectInstruction.getAddress();
 				// else
@@ -364,7 +371,7 @@ public class ArithmeticLogicalOps {
 			ea = instruction.getAddress();
 		} else {
 			Integer addressDecimal = Integer.parseInt(instruction.getAddress(), 2);
-			Integer indexDecimal = Integer.parseInt(getIndex(instruction.getIndexNumber()), 2);
+			Integer indexDecimal = Integer.parseInt(FrontPanel.getIndex(instruction.getIndexNumber()), 2);
 			//Get index and sum it with address
 			Integer sum = addressDecimal + indexDecimal;
 			if(sum > 31){
@@ -376,13 +383,13 @@ public class ArithmeticLogicalOps {
 		ea = BinaryUtil.fillBinaryString(ea); 
 		
 		//Logical AND for R0 and R2
-		Integer RxDecimal = Integer.parseInt(getRegister(0));
-		Integer RyDecimal = Integer.parseInt(getRegister(2));
+		Integer RxDecimal = Integer.parseInt(FrontPanel.getRegister(0));
+		Integer RyDecimal = Integer.parseInt(FrontPanel.getRegister(2));
 		Integer AndDecimal = RxDecimal & RyDecimal;
 		
 		//Store the result in R0
 		ea = Integer.toBinaryString(AndDecimal);
-		setRegister(instruction.getRegisterNumber(), ea);
+		FrontPanel.setRegister(instruction.getRegisterNumber(), ea);
 	}
 	
 
@@ -412,7 +419,7 @@ public class ArithmeticLogicalOps {
 			ea = instruction.getAddress();
 		} else {
 			Integer addressDecimal = Integer.parseInt(instruction.getAddress(), 2);
-			Integer indexDecimal = Integer.parseInt(getIndex(instruction.getIndexNumber()), 2);
+			Integer indexDecimal = Integer.parseInt(FrontPanel.getIndex(instruction.getIndexNumber()), 2);
 			//Get index and sum it with address
 			Integer sum = addressDecimal + indexDecimal;
 			if(sum > 31){
@@ -424,13 +431,13 @@ public class ArithmeticLogicalOps {
 		ea = BinaryUtil.fillBinaryString(ea); 
 		
 		//Logical OR of R0 and R2
-		Integer RxDecimal = Integer.parseInt(getRegister(0));
-		Integer RyDecimal = Integer.parseInt(getRegister(2));
+		Integer RxDecimal = Integer.parseInt(FrontPanel.getRegister(0));
+		Integer RyDecimal = Integer.parseInt(FrontPanel.getRegister(2));
 		Integer ORRDecimal = RxDecimal ^ RyDecimal;
 		
 		//Store the result in R0
 		ea = Integer.toBinaryString(ORRDecimal);
-		setRegister(instruction.getRegisterNumber(), ea);
+		FrontPanel.setRegister(instruction.getRegisterNumber(), ea);
 	}
 	
 
@@ -438,7 +445,10 @@ public class ArithmeticLogicalOps {
 		try {
 			if(instruction.isIndirect()){
 				// Is all what is in the address or only the address part?
+				//Instruction indirectInstruction = new Instruction(memory[Integer.parseInt(ea, 2)].getText());
+				
 				Instruction indirectInstruction = new Instruction(memory[Integer.parseInt(ea, 2)].getText());
+								
 				//AddressPart
 				ea = indirectInstruction.getAddress();
 				// else
@@ -460,7 +470,7 @@ public class ArithmeticLogicalOps {
 			ea = instruction.getAddress();
 		} else {
 			Integer addressDecimal = Integer.parseInt(instruction.getAddress(), 2);
-			Integer indexDecimal = Integer.parseInt(getIndex(instruction.getIndexNumber()), 2);
+			Integer indexDecimal = Integer.parseInt(FrontPanel.getIndex(instruction.getIndexNumber()), 2);
 			//Get index and sum it with address
 			Integer sum = addressDecimal + indexDecimal;
 			if(sum > 31){
@@ -472,12 +482,12 @@ public class ArithmeticLogicalOps {
 		ea = BinaryUtil.fillBinaryString(ea); 
 		
 		//Multiply R0 by R2
-		Integer RxDecimal = Integer.parseInt(getRegister(2));
+		Integer RxDecimal = Integer.parseInt(FrontPanel.getRegister(2));
 		Integer NOTDecimal = ~RxDecimal;
 		
 		//Store the result in R0
 		ea = Integer.toBinaryString(NOTDecimal);
-		setRegister(instruction.getRegisterNumber(), ea);
+		FrontPanel.setRegister(instruction.getRegisterNumber(), ea);
 	}
 	
 	

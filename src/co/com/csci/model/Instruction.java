@@ -21,6 +21,7 @@ public class Instruction {
 	private String cc;
 	
 	private Integer base;
+	private Integer ccNumber;
 	
 	public Instruction(String opCode, String r, String ix, String i, String address){
 		this.opCode = opCode;
@@ -114,10 +115,13 @@ public class Instruction {
 		return opCode + r + ix + i + address;
 	}
 	
-	public Integer getCCNumber() {
+	public Integer getCCNumber(int j) {
 		return Integer.parseInt(cc, 2);
 	}
 	
+	public void setCCNumber(Integer ccNumber, int j) {
+		this.ccNumber = ccNumber;
+	}
 	
 	
 	public InstructionEnum getIntructionCode(){
@@ -127,6 +131,8 @@ public class Instruction {
 		int decimalValue2 = Integer.parseInt(part2, 2);
 		return InstructionEnum.findInstruction(decimalValue + "" + decimalValue2);
 	}
+
+	
 	
 
 }

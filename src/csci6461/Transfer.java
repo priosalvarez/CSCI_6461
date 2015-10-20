@@ -12,7 +12,8 @@ the same format as the Load/Store instructions.*/
 public class Transfer {
 	
 	
-	//Transfer Instructions
+	private int r;
+		//Transfer Instructions
 		public Integer instructionJZ(Instruction instruction) throws Throwable{
 			/*Jump If Zero:
 			If c(r) = 0, then PC <- EA or c(EA), if I bit set;
@@ -100,7 +101,7 @@ public class Transfer {
 				
 				
 				try {
-					if(instruction.getCCNumber()==1){
+					if(instruction.getCCNumber(r)==1){
 						ea = FrontPanel.txtpnPc.getText();
 						
 						//verify that bit is set
