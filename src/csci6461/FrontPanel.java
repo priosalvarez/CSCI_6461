@@ -40,6 +40,7 @@ public class FrontPanel {
 	static JTextPane txtpnR_1;// TextInput for R1
 	static JTextPane txtpnR_2;// TextInput for R2
 	static JTextPane textPane_16;// TextInput for R3
+	static JTextPane txtpnX;// TextInput for X1
 	static JTextPane txtpnX_1;// TextInput for X2
 	static JTextPane txtpnX_2;// TextInput for X3
 	
@@ -302,6 +303,7 @@ public class FrontPanel {
 		gbc_textPane.gridx = 14;
 		gbc_textPane.gridy = 4;
 		frame.getContentPane().add(textPane, gbc_textPane);
+		memory = new JTextPane[16];
 		memory[0] = textPane;
 		
 		JLabel lblMbr = new JLabel("MBR");
@@ -614,7 +616,7 @@ public class FrontPanel {
 		  		  		case STR:
 		  		  			LoadStore.instructionSTR(instruction);
 	  		  				break;
-		  		  		case AMR:
+		  		  		/*case AMR:
 		  		  			instructionAMR(instruction);
 	  		  				break;
 		  		  		case SMR:
@@ -643,7 +645,7 @@ public class FrontPanel {
 	  		  				break;
 		  		  		case NOT:
 		  		  			instructionNOT(instruction);
-	  		  				break;	
+	  		  				break;	*/
 		  		  		case HALT:
 		  		  			txtrOutput.setText("HALT");
 			  				break;
@@ -866,15 +868,14 @@ public class FrontPanel {
 		gbc_lblX.gridy = 15;
 		frame.getContentPane().add(lblX, gbc_lblX);
 		
-		txtpnX_1 = new JTextPane();
-		txtpnX_1.setText("");
-		GridBagConstraints gbc_txtpnX_1 = new GridBagConstraints();
-		gbc_txtpnX_1.anchor = GridBagConstraints.SOUTH;
-		gbc_txtpnX_1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtpnX_1.insets = new Insets(0, 0, 5, 5);
-		gbc_txtpnX_1.gridx = 11;
-		gbc_txtpnX_1.gridy = 15;
-		frame.getContentPane().add(txtpnX_1, gbc_txtpnX_1);
+		txtpnX = new JTextPane();
+		txtpnX.setText("");
+		GridBagConstraints gbc_txtpnX = new GridBagConstraints();
+		gbc_txtpnX.insets = new Insets(0, 0, 5, 5);
+		gbc_txtpnX.fill = GridBagConstraints.BOTH;
+		gbc_txtpnX.gridx = 11;
+		gbc_txtpnX.gridy = 15;
+		frame.getContentPane().add(txtpnX, gbc_txtpnX);
 		JToggleButton tglbtnLoad = new JToggleButton("Load");
 		GridBagConstraints gbc_tglbtnLoad = new GridBagConstraints();
 		gbc_tglbtnLoad.anchor = GridBagConstraints.NORTH;
@@ -924,14 +925,15 @@ public class FrontPanel {
 		gbc_lblX_1.gridy = 16;
 		frame.getContentPane().add(lblX_1, gbc_lblX_1);
 		
-		JTextPane textPane_18 = new JTextPane();
-		textPane_18.setText("");
-		GridBagConstraints gbc_textPane_18 = new GridBagConstraints();
-		gbc_textPane_18.insets = new Insets(0, 0, 5, 5);
-		gbc_textPane_18.fill = GridBagConstraints.BOTH;
-		gbc_textPane_18.gridx = 11;
-		gbc_textPane_18.gridy = 16;
-		frame.getContentPane().add(textPane_18, gbc_textPane_18);
+		txtpnX_1 = new JTextPane();
+		txtpnX_1.setText("");
+		GridBagConstraints gbc_txtpnX_1 = new GridBagConstraints();
+		gbc_txtpnX_1.anchor = GridBagConstraints.SOUTH;
+		gbc_txtpnX_1.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtpnX_1.insets = new Insets(0, 0, 5, 5);
+		gbc_txtpnX_1.gridx = 11;
+		gbc_txtpnX_1.gridy = 16;
+		frame.getContentPane().add(txtpnX_1, gbc_txtpnX_1);
 		
 		JLabel lblX_2 = new JLabel("X3");
 		GridBagConstraints gbc_lblX_2 = new GridBagConstraints();
@@ -1071,7 +1073,7 @@ public class FrontPanel {
 		return "";
 	}
 
-	public String getDirectInput() {
+	public JTextField getDirectInput() {
 		return directInput;
 	}
 
