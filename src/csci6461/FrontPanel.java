@@ -122,9 +122,8 @@ public class FrontPanel {
 		textField_5 = new JTextField();
 		textField_5.setColumns(10);
 		GridBagConstraints gbc_textField_5 = new GridBagConstraints();
-		gbc_textField_5.anchor = GridBagConstraints.NORTH;
+		gbc_textField_5.fill = GridBagConstraints.BOTH;
 		gbc_textField_5.insets = new Insets(0, 0, 5, 5);
-		gbc_textField_5.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textField_5.gridx = 2;
 		gbc_textField_5.gridy = 1;
 		frame.getContentPane().add(textField_5, gbc_textField_5);
@@ -887,7 +886,6 @@ public class FrontPanel {
 		JToggleButton tglbtnExecute = new JToggleButton("Execute");
 		GridBagConstraints gbc_tglbtnExecute = new GridBagConstraints();
 		gbc_tglbtnExecute.anchor = GridBagConstraints.NORTH;
-		gbc_tglbtnExecute.fill = GridBagConstraints.HORIZONTAL;
 		gbc_tglbtnExecute.insets = new Insets(0, 0, 5, 5);
 		gbc_tglbtnExecute.gridwidth = 2;
 		gbc_tglbtnExecute.gridx = 2;
