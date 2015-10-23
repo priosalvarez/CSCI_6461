@@ -22,12 +22,12 @@ public class Transfer {
 			
 		  //String pc = FrontPanel.txtpnPc.getText();
 		  //Convert PC from binary to decimal 
-		  Integer pcDecimal = Integer.parseInt(FrontPanel.txtpnPc.getText(), 2);
+		  Integer pcDecimal = Integer.parseInt(FrontPanel.txtPc.getText(), 2);
 			
 			
 			try {
 				if(instruction.getRegisterNumber()==0){
-					ea = FrontPanel.txtpnPc.getText();
+					ea = FrontPanel.txtPc.getText();
 					
 					//verify that bit is set
 					if(instruction.isIndirect()){
@@ -60,12 +60,12 @@ public class Transfer {
 			
 			  //String pc = FrontPanel.txtpnPc.getText();
 			  //Convert PC from binary to decimal 
-			  Integer pcDecimal = Integer.parseInt(FrontPanel.txtpnPc.getText(), 2);
+			  Integer pcDecimal = Integer.parseInt(FrontPanel.txtPc.getText(), 2);
 				
 				
 				try {
 					if(instruction.getRegisterNumber()!=0){
-						ea = FrontPanel.txtpnPc.getText();
+						ea = FrontPanel.txtPc.getText();
 						
 						//verify that bit is set
 						if(instruction.isIndirect()){
@@ -97,12 +97,12 @@ public class Transfer {
 			
 			  //String pc = FrontPanel.txtpnPc.getText();
 			  //Convert PC from binary to decimal 
-			  Integer pcDecimal = Integer.parseInt(FrontPanel.txtpnPc.getText(), 2);
+			  Integer pcDecimal = Integer.parseInt(FrontPanel.txtPc.getText(), 2);
 				
 				
 				try {
 					if(instruction.getCCNumber(r)==1){
-						ea = FrontPanel.txtpnPc.getText();
+						ea = FrontPanel.txtPc.getText();
 						
 						//verify that bit is set
 						if(instruction.isIndirect()){
@@ -136,7 +136,7 @@ public class Transfer {
 			
 			  //String pc = FrontPanel.txtpnPc.getText();
 			  //Convert PC from binary to decimal 
-			  Integer pcDecimal = Integer.parseInt(FrontPanel.txtpnPc.getText(), 2);
+			  Integer pcDecimal = Integer.parseInt(FrontPanel.txtPc.getText(), 2);
 				
 				
 				try {
@@ -216,12 +216,12 @@ public class Transfer {
 			
 			  //String pc = FrontPanel.txtpnPc.getText();
 			  //Convert PC from binary to decimal 
-			  Integer pcDecimal = Integer.parseInt(FrontPanel.txtpnPc.getText(), 2);
+			  Integer pcDecimal = Integer.parseInt(FrontPanel.txtPc.getText(), 2);
 				
 				
 				try {
 					if(instruction.getRegisterNumber()>=0){
-						ea = FrontPanel.txtpnPc.getText();
+						ea = FrontPanel.txtPc.getText();
 						
 						//verify that bit is set
 						if(instruction.isIndirect()){

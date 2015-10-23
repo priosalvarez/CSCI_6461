@@ -35,7 +35,7 @@ public class LoadStore {
 		String ea = "";
 		//Verify if instruction has index
 		if(instruction.getIndexNumber() == 0){
-			ea = FrontPanel.txtpnPc.getText();
+			ea = FrontPanel.txtPc.getText();
 		} else {
 			Integer addressDecimal = instruction.getIntegerAddress();
 			Integer indexDecimal = Integer.parseInt(FrontPanel.getIndex(instruction.getIndexNumber()), 2);

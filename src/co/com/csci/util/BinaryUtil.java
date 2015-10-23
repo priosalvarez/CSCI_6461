@@ -17,5 +17,22 @@ public class BinaryUtil {
 			return "";
 		}		
 	}
+	
+	public static String fillBinaryString32(String binary){
+		if (binary.length() == 32){
+			return binary;
+		} else if (binary.length() < 32){
+			int zerosNeeded = 32 - binary.length();
+			String zeros = "";
+			for (int i = 0; i < zerosNeeded; i++) {
+				zeros += 0;
+			}
+			return zeros + binary;
+		} else {
+			//Exception
+			return "";
+		}		
+	}	
+
 
 }

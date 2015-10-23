@@ -20,7 +20,7 @@ public class ArithmeticLogicalOps {
 		try {
 			if(instruction.isIndirect()){
 				// Is all what is in the address or only the address part?
-				Instruction indirectInstruction = new Instruction(memory[Integer.parseInt(ea, 2)].getText());
+				Instruction indirectInstruction = new Instruction(FrontPanel.memory[Integer.parseInt(ea, 2)].getText());
 				//AddressPart
 				ea = indirectInstruction.getAddress();
 				// else
@@ -68,7 +68,7 @@ public class ArithmeticLogicalOps {
 		try {
 			if(instruction.isIndirect()){
 				// Is all what is in the address or only the address part?
-				Instruction indirectInstruction = new Instruction(memory[Integer.parseInt(ea, 2)].getText());
+				Instruction indirectInstruction = new Instruction(FrontPanel.memory[Integer.parseInt(ea, 2)].getText());
 				//AddressPart
 				ea = indirectInstruction.getAddress();
 				// else
@@ -171,7 +171,7 @@ public class ArithmeticLogicalOps {
 		try {
 			if(instruction.isIndirect()){
 				// Is all what is in the address or only the address part?
-				Instruction indirectInstruction = new Instruction(memory[Integer.parseInt(ea, 2)].getText());//Need destination on front panel
+				Instruction indirectInstruction = new Instruction(FrontPanel.memory[Integer.parseInt(ea, 2)].getText());//Need destination on front panel
 				//AddressPart
 				ea = indirectInstruction.getAddress();
 				// else
@@ -206,19 +206,19 @@ public class ArithmeticLogicalOps {
 		
 	try{
 		//Multiply R0 by R2
-		Integer RxDecimal = Integer.parseInt(FrontPanel.getRegister(0));
-		Integer RyDecimal = Integer.parseInt(FrontPanel.getRegister(2));
-		Integer productMLT = RxDecimal * RyDecimal;
-		
-		//Find High Order Bit and Low Order Bit
-		Integer MSB = Integer.highestOneBit(productMLT);
-		Integer LSB = Integer.lowestOneBit(productMLT);
-		
-		//Store the MSB in R0 and LSB in R1
-		String eaMSB = Integer.toBinaryString(MSB);
-		String eaLSB = Integer.toBinaryString(LSB);
-		FrontPanel.setRegister(instruction.getRegisterNumber(), eaMSB);//(0)
-		FrontPanel.setRegister(instruction.getRegisterNumber(), eaLSB);//(1)
+				Integer RxDecimal = Integer.parseInt(FrontPanel.getRegister(0));
+				Integer RyDecimal = Integer.parseInt(FrontPanel.getRegister(2));
+				Integer productMLT = RxDecimal * RyDecimal;
+				String productBinary = Integer.toBinaryString(productMLT);
+				productBinary = BinaryUtil.fillBinaryString32(productBinary);
+				
+				//Find High Order Bit and Low Order Bit
+				String LSB = productBinary.substring(0, 15);
+				String MSB = productBinary.substring(16, 31);
+				
+				//Store the MSB in R0 and LSB in R1
+				FrontPanel.setRegister(instruction.getRegisterNumber(), MSB);//(0)
+				FrontPanel.setRegister(instruction.getRegisterNumber(), LSB);//(1)
 	}
 	//Overflow Flag if R0 or R1 already have content
 	finally{
@@ -234,7 +234,7 @@ public class ArithmeticLogicalOps {
 		try {
 			if(instruction.isIndirect()){
 				// Is all what is in the address or only the address part?
-				Instruction indirectInstruction = new Instruction(memory[Integer.parseInt(ea, 2)].getText());//Need destination on front panel
+				Instruction indirectInstruction = new Instruction(FrontPanel.memory[Integer.parseInt(ea, 2)].getText());//Need destination on front panel
 				//AddressPart
 				ea = indirectInstruction.getAddress();
 				// else
@@ -295,7 +295,7 @@ public class ArithmeticLogicalOps {
 		try {
 			if(instruction.isIndirect()){
 				// Is all what is in the address or only the address part?
-				Instruction indirectInstruction = new Instruction(memory[Integer.parseInt(ea, 2)].getText());//Need destination on front panel
+				Instruction indirectInstruction = new Instruction(FrontPanel.memory[Integer.parseInt(ea, 2)].getText());//Need destination on front panel
 				//AddressPart
 				ea = indirectInstruction.getAddress();
 				// else
@@ -349,7 +349,7 @@ public class ArithmeticLogicalOps {
 		try {
 			if(instruction.isIndirect()){
 				// Is all what is in the address or only the address part?
-				Instruction indirectInstruction = new Instruction(memory[Integer.parseInt(ea, 2)].getText());//Need destination on front panel
+				Instruction indirectInstruction = new Instruction(FrontPanel.memory[Integer.parseInt(ea, 2)].getText());//Need destination on front panel
 				//AddressPart
 				ea = indirectInstruction.getAddress();
 				// else
@@ -397,7 +397,7 @@ public class ArithmeticLogicalOps {
 		try {
 			if(instruction.isIndirect()){
 				// Is all what is in the address or only the address part?
-				Instruction indirectInstruction = new Instruction(memory[Integer.parseInt(ea, 2)].getText());
+				Instruction indirectInstruction = new Instruction(FrontPanel.memory[Integer.parseInt(ea, 2)].getText());
 				//AddressPart
 				ea = indirectInstruction.getAddress();
 				// else
@@ -447,7 +447,7 @@ public class ArithmeticLogicalOps {
 				// Is all what is in the address or only the address part?
 				//Instruction indirectInstruction = new Instruction(memory[Integer.parseInt(ea, 2)].getText());
 				
-				Instruction indirectInstruction = new Instruction(memory[Integer.parseInt(ea, 2)].getText());
+				Instruction indirectInstruction = new Instruction(FrontPanel.memory[Integer.parseInt(ea, 2)].getText());
 								
 				//AddressPart
 				ea = indirectInstruction.getAddress();
