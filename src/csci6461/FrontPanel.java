@@ -64,6 +64,7 @@ public class FrontPanel {
 	static JTextPane txtOutput; //Output
 	
 	static JTextPane[] memory; //All memory entries
+	private JPanel panel_1;
 	
 	/**
 	 * Launch the application.
@@ -98,51 +99,6 @@ public class FrontPanel {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 1176, 618);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-		
-		/*
-		 * Input Area - In this area the user can input individual instructions
-		 * Opcode	6 bits	Specifies one of 64 possible instructions; Not all may be defined in this project
-		 * IX		2 bits	Specifies one of three index registers; may be referred to by X1 – X3. O value indicates no indexing.
-		 * R		2 bits	Specifies one of four general purpose registers; may be referred to by R0 – R3
-		 * I		1 bits	If I =1, specifies indirect addressing; otherwise, no indirect addressing.
-		 * Address	7 bits	Specifies one of 32 locations
-		 */
-		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{42, 122, 124, 44, 30, 14, 20, 11, 89, 39, 30, 115, 31, 20, 120, 20, 128, 120, 0};
-		gridBagLayout.rowHeights = new int[]{45, 27, 14, 22, 20, 14, 0, 34, 14, 14, 14, 2, 3, 14, 13, 20, 63, 26, 0, 1, 20, 29, 0};
-		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		frame.getContentPane().setLayout(gridBagLayout);
-		
-		setDirectInput(new JTextField());
-		getDirectInput().setBounds(100, 12, 94, 43);
-		GridBagConstraints gbc_directInput = new GridBagConstraints();
-		gbc_directInput.fill = GridBagConstraints.BOTH;
-		gbc_directInput.insets = new Insets(0, 0, 5, 5);
-		gbc_directInput.gridx = 0;
-		gbc_directInput.gridy = 0;
-		frame.getContentPane().add(getDirectInput(), gbc_directInput);
-		getDirectInput().setColumns(10);
-		
-		JLabel lblInput = new JLabel("INPUT");
-		GridBagConstraints gbc_lblInput = new GridBagConstraints();
-		gbc_lblInput.anchor = GridBagConstraints.NORTHEAST;
-		gbc_lblInput.insets = new Insets(0, 0, 5, 5);
-		gbc_lblInput.gridx = 1;
-		gbc_lblInput.gridy = 1;
-		frame.getContentPane().add(lblInput, gbc_lblInput);
-		
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
-		GridBagConstraints gbc_textField_5 = new GridBagConstraints();
-		gbc_textField_5.fill = GridBagConstraints.BOTH;
-		gbc_textField_5.insets = new Insets(0, 0, 5, 5);
-		gbc_textField_5.gridx = 2;
-		gbc_textField_5.gridy = 1;
-		frame.getContentPane().add(textField_5, gbc_textField_5);
-		
-
 		frame.getContentPane().setLayout(new GridLayout(0, 1, 0, 0));
 		
 		//Split Panel (main panel)
@@ -157,11 +113,11 @@ public class FrontPanel {
 		splitPanel.setRightComponent(new MemoryPanel(2048, memory).getSplitPane());
 		
 		//Left Panel (left part of the part - all that isn't memory)
-		JPanel panel = new JPanel();
-		splitPanel.setLeftComponent(panel);
-		GridBagLayout gbl_panel = new GridBagLayout();
-		panel.setLayout(gbl_panel);
-		initLeftPanelComponents(panel);
+		panel_1 = new JPanel();
+		splitPanel.setLeftComponent(panel_1);
+		GridBagLayout gbl_panel_1 = new GridBagLayout();
+		panel_1.setLayout(gbl_panel_1);
+		initLeftPanelComponents(panel_1);
 	}
 	
 	private void initLeftPanelComponents(JPanel panel){
@@ -268,7 +224,6 @@ public class FrontPanel {
 	}
 	
 	private void initTitle(JPanel panel){
-
 		JLabel lblCiscSimulator = new JLabel("CISC Simulator");
 		lblCiscSimulator.setFont(new Font("Tahoma", Font.BOLD, 25));
 		GridBagConstraints gbc_lblCiscSimulator = new GridBagConstraints();
@@ -282,6 +237,14 @@ public class FrontPanel {
 	}
 	
 	private void initInstructionInput(JPanel panel){
+		
+		JLabel lblUpload = new JLabel("Upload");
+		GridBagConstraints gbc_lblUpload = new GridBagConstraints();
+		gbc_lblUpload.anchor = GridBagConstraints.SOUTH;
+		gbc_lblUpload.insets = new Insets(0, 0, 5, 5);
+		gbc_lblUpload.gridx = 10;
+		gbc_lblUpload.gridy = 1;
+		panel_1.add(lblUpload, gbc_lblUpload);
 		
 		//OpCode
 		JLabel lblOpcode = new JLabel("OpCode");
@@ -399,7 +362,6 @@ public class FrontPanel {
 		JLabel lblMar = new JLabel("MAR");
 		GridBagConstraints gbc_lblMar = new GridBagConstraints();
 		gbc_lblMar.anchor = GridBagConstraints.SOUTH;
-		gbc_lblMar.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lblMar.insets = new Insets(0, 0, 5, 5);
 		gbc_lblMar.gridx = 10;
 		gbc_lblMar.gridy = 4;
@@ -419,8 +381,7 @@ public class FrontPanel {
 		//Init MBR
 		JLabel lblMbr = new JLabel("MBR");
 		GridBagConstraints gbc_lblMbr = new GridBagConstraints();
-		gbc_lblMbr.anchor = GridBagConstraints.NORTH;
-		gbc_lblMbr.fill = GridBagConstraints.HORIZONTAL;
+		gbc_lblMbr.anchor = GridBagConstraints.SOUTH;
 		gbc_lblMbr.insets = new Insets(0, 0, 5, 5);
 		gbc_lblMbr.gridx = 10;
 		gbc_lblMbr.gridy = 5;
@@ -439,7 +400,7 @@ public class FrontPanel {
 		//Init IR
 		JLabel lblIr = new JLabel("IR");
 		GridBagConstraints gbc_lblIr = new GridBagConstraints();
-		gbc_lblIr.anchor = GridBagConstraints.NORTH;
+		gbc_lblIr.anchor = GridBagConstraints.SOUTH;
 		gbc_lblIr.insets = new Insets(0, 0, 5, 5);
 		gbc_lblIr.gridx = 10;
 		gbc_lblIr.gridy = 6;
@@ -458,8 +419,7 @@ public class FrontPanel {
 		//Init IAR
 		JLabel lblIar = new JLabel("IAR");
 		GridBagConstraints gbc_lblIar = new GridBagConstraints();
-		gbc_lblIar.gridheight = 2;
-		gbc_lblIar.anchor = GridBagConstraints.NORTHWEST;
+		gbc_lblIar.anchor = GridBagConstraints.SOUTH;
 		gbc_lblIar.insets = new Insets(0, 0, 5, 5);
 		gbc_lblIar.gridx = 10;
 		gbc_lblIar.gridy = 7;
@@ -706,257 +666,11 @@ public class FrontPanel {
 		  	}
 		  }
 		});
-
-		
-		JLabel lblR_1 = new JLabel("R0");
-		GridBagConstraints gbc_lblR_1 = new GridBagConstraints();
-		gbc_lblR_1.anchor = GridBagConstraints.SOUTHWEST;
-		gbc_lblR_1.insets = new Insets(0, 0, 5, 5);
-		gbc_lblR_1.gridx = 10;
-		gbc_lblR_1.gridy = 10;
-		frame.getContentPane().add(lblR_1, gbc_lblR_1);
-		
-		txtpnR = new JTextPane();
-		txtpnR.setText("");
-		GridBagConstraints gbc_txtpnR = new GridBagConstraints();
-		gbc_txtpnR.anchor = GridBagConstraints.NORTH;
-		gbc_txtpnR.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtpnR.insets = new Insets(0, 0, 5, 5);
-		gbc_txtpnR.gridx = 11;
-		gbc_txtpnR.gridy = 10;
-		frame.getContentPane().add(txtpnR, gbc_txtpnR);
-		
-		JLabel label_13 = new JLabel("05");
-		GridBagConstraints gbc_label_13 = new GridBagConstraints();
-		gbc_label_13.anchor = GridBagConstraints.EAST;
-		gbc_label_13.insets = new Insets(0, 0, 5, 5);
-		gbc_label_13.gridx = 13;
-		gbc_label_13.gridy = 10;
-		frame.getContentPane().add(label_13, gbc_label_13);
-		
-		JTextPane textPane_10 = new JTextPane();
-		textPane_10.setText("");
-		GridBagConstraints gbc_textPane_10 = new GridBagConstraints();
-		gbc_textPane_10.anchor = GridBagConstraints.NORTH;
-		gbc_textPane_10.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textPane_10.insets = new Insets(0, 0, 5, 5);
-		gbc_textPane_10.gridx = 14;
-		gbc_textPane_10.gridy = 10;
-		frame.getContentPane().add(textPane_10, gbc_textPane_10);
-		memory[5] = textPane_10;
-		
-		JLabel label_8 = new JLabel("13");
-		GridBagConstraints gbc_label_8 = new GridBagConstraints();
-		gbc_label_8.fill = GridBagConstraints.HORIZONTAL;
-		gbc_label_8.insets = new Insets(0, 0, 5, 5);
-		gbc_label_8.gridx = 15;
-		gbc_label_8.gridy = 10;
-		frame.getContentPane().add(label_8, gbc_label_8);
-		
-		JTextPane textPane_13 = new JTextPane();
-		textPane_13.setText("");
-		GridBagConstraints gbc_textPane_13 = new GridBagConstraints();
-		gbc_textPane_13.anchor = GridBagConstraints.NORTH;
-		gbc_textPane_13.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textPane_13.insets = new Insets(0, 0, 5, 5);
-		gbc_textPane_13.gridx = 16;
-		gbc_textPane_13.gridy = 10;
-		frame.getContentPane().add(textPane_13, gbc_textPane_13);
-		memory[13] = textPane_13;
-		
-		txtMsr = new JTextField();
-		txtMsr.setText("MSR");
-		GridBagConstraints gbc_txtMsr = new GridBagConstraints();
-		gbc_txtMsr.anchor = GridBagConstraints.SOUTH;
-		gbc_txtMsr.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtMsr.insets = new Insets(0, 0, 5, 5);
-		gbc_txtMsr.gridx = 8;
-		gbc_txtMsr.gridy = 11;
-		frame.getContentPane().add(txtMsr, gbc_txtMsr);
-		txtMsr.setColumns(10);
-		
-		JLabel lblR_2 = new JLabel("R1");
-		GridBagConstraints gbc_lblR_2 = new GridBagConstraints();
-		gbc_lblR_2.anchor = GridBagConstraints.SOUTHWEST;
-		gbc_lblR_2.insets = new Insets(0, 0, 5, 5);
-		gbc_lblR_2.gridx = 10;
-		gbc_lblR_2.gridy = 11;
-		frame.getContentPane().add(lblR_2, gbc_lblR_2);
-		
-		txtpnR_1 = new JTextPane();
-		txtpnR_1.setText("");
-		GridBagConstraints gbc_txtpnR_1 = new GridBagConstraints();
-		gbc_txtpnR_1.anchor = GridBagConstraints.SOUTH;
-		gbc_txtpnR_1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtpnR_1.insets = new Insets(0, 0, 5, 5);
-		gbc_txtpnR_1.gridx = 11;
-		gbc_txtpnR_1.gridy = 11;
-		frame.getContentPane().add(txtpnR_1, gbc_txtpnR_1);
-		
-		JLabel label_14 = new JLabel("06");
-		GridBagConstraints gbc_label_14 = new GridBagConstraints();
-		gbc_label_14.anchor = GridBagConstraints.NORTHEAST;
-		gbc_label_14.insets = new Insets(0, 0, 5, 5);
-		gbc_label_14.gridx = 13;
-		gbc_label_14.gridy = 11;
-		frame.getContentPane().add(label_14, gbc_label_14);
-		
-		JTextPane textPane_11 = new JTextPane();
-		textPane_11.setText("");
-		GridBagConstraints gbc_textPane_11 = new GridBagConstraints();
-		gbc_textPane_11.anchor = GridBagConstraints.NORTH;
-		gbc_textPane_11.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textPane_11.insets = new Insets(0, 0, 5, 5);
-		gbc_textPane_11.gridx = 14;
-		gbc_textPane_11.gridy = 11;
-		frame.getContentPane().add(textPane_11, gbc_textPane_11);
-		memory[6] = textPane_11;
-		
-		JLabel label_9 = new JLabel("14");
-		GridBagConstraints gbc_label_9 = new GridBagConstraints();
-		gbc_label_9.anchor = GridBagConstraints.NORTH;
-		gbc_label_9.fill = GridBagConstraints.HORIZONTAL;
-		gbc_label_9.insets = new Insets(0, 0, 5, 5);
-		gbc_label_9.gridx = 15;
-		gbc_label_9.gridy = 11;
-		frame.getContentPane().add(label_9, gbc_label_9);
-		
-		JTextPane textPane_14 = new JTextPane();
-		textPane_14.setText("");
-		GridBagConstraints gbc_textPane_14 = new GridBagConstraints();
-		gbc_textPane_14.anchor = GridBagConstraints.NORTH;
-		gbc_textPane_14.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textPane_14.insets = new Insets(0, 0, 5, 5);
-		gbc_textPane_14.gridx = 16;
-		gbc_textPane_14.gridy = 11;
-		frame.getContentPane().add(textPane_14, gbc_textPane_14);
-		memory[14] = textPane_14;
-		
-		JLabel lblR_3 = new JLabel("R2");
-		GridBagConstraints gbc_lblR_3 = new GridBagConstraints();
-		gbc_lblR_3.anchor = GridBagConstraints.SOUTHWEST;
-		gbc_lblR_3.insets = new Insets(0, 0, 5, 5);
-		gbc_lblR_3.gridx = 10;
-		gbc_lblR_3.gridy = 12;
-		frame.getContentPane().add(lblR_3, gbc_lblR_3);
-		
-		txtpnR_2 = new JTextPane();
-		txtpnR_2.setText("");
-		GridBagConstraints gbc_txtpnR_2 = new GridBagConstraints();
-		gbc_txtpnR_2.anchor = GridBagConstraints.NORTH;
-		gbc_txtpnR_2.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtpnR_2.insets = new Insets(0, 0, 5, 5);
-		gbc_txtpnR_2.gridx = 11;
-		gbc_txtpnR_2.gridy = 12;
-		frame.getContentPane().add(txtpnR_2, gbc_txtpnR_2);
-		
-		JLabel label_15 = new JLabel("07");
-		GridBagConstraints gbc_label_15 = new GridBagConstraints();
-		gbc_label_15.anchor = GridBagConstraints.EAST;
-		gbc_label_15.insets = new Insets(0, 0, 5, 5);
-		gbc_label_15.gridx = 13;
-		gbc_label_15.gridy = 12;
-		frame.getContentPane().add(label_15, gbc_label_15);
-		
-		JTextPane textPane_12 = new JTextPane();
-		textPane_12.setText("");
-		GridBagConstraints gbc_textPane_12 = new GridBagConstraints();
-		gbc_textPane_12.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textPane_12.insets = new Insets(0, 0, 5, 5);
-		gbc_textPane_12.gridx = 14;
-		gbc_textPane_12.gridy = 12;
-		frame.getContentPane().add(textPane_12, gbc_textPane_12);
-		memory[7] = textPane_12;
-		
-		JLabel label_10 = new JLabel("15");
-		GridBagConstraints gbc_label_10 = new GridBagConstraints();
-		gbc_label_10.fill = GridBagConstraints.HORIZONTAL;
-		gbc_label_10.insets = new Insets(0, 0, 5, 5);
-		gbc_label_10.gridx = 15;
-		gbc_label_10.gridy = 12;
-		frame.getContentPane().add(label_10, gbc_label_10);
-		
-		JTextPane textPane_15 = new JTextPane();
-		textPane_15.setText("");
-		GridBagConstraints gbc_textPane_15 = new GridBagConstraints();
-		gbc_textPane_15.insets = new Insets(0, 0, 5, 5);
-		gbc_textPane_15.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textPane_15.gridx = 16;
-		gbc_textPane_15.gridy = 12;
-		frame.getContentPane().add(textPane_15, gbc_textPane_15);
-		memory[15] = textPane_15;
-		
-		JLabel lblR_4 = new JLabel("R3");
-		GridBagConstraints gbc_lblR_4 = new GridBagConstraints();
-		gbc_lblR_4.anchor = GridBagConstraints.SOUTHWEST;
-		gbc_lblR_4.insets = new Insets(0, 0, 5, 5);
-		gbc_lblR_4.gridx = 10;
-		gbc_lblR_4.gridy = 13;
-		frame.getContentPane().add(lblR_4, gbc_lblR_4);
-		
-		textPane_16 = new JTextPane();
-		textPane_16.setText("");
-		GridBagConstraints gbc_textPane_16 = new GridBagConstraints();
-		gbc_textPane_16.anchor = GridBagConstraints.SOUTH;
-		gbc_textPane_16.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textPane_16.insets = new Insets(0, 0, 5, 5);
-		gbc_textPane_16.gridx = 11;
-		gbc_textPane_16.gridy = 13;
-		frame.getContentPane().add(textPane_16, gbc_textPane_16);
-		
-		JLabel lblX = new JLabel("X1");
-		GridBagConstraints gbc_lblX = new GridBagConstraints();
-		gbc_lblX.insets = new Insets(0, 0, 5, 5);
-		gbc_lblX.gridx = 10;
-		gbc_lblX.gridy = 15;
-		frame.getContentPane().add(lblX, gbc_lblX);
-		
-		txtpnX_1 = new JTextPane();
-		txtpnX_1.setText("");
-		GridBagConstraints gbc_txtpnX_1 = new GridBagConstraints();
-		gbc_txtpnX_1.anchor = GridBagConstraints.SOUTH;
-		gbc_txtpnX_1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtpnX_1.insets = new Insets(0, 0, 5, 5);
-		gbc_txtpnX_1.gridx = 11;
-		gbc_txtpnX_1.gridy = 15;
-		frame.getContentPane().add(txtpnX_1, gbc_txtpnX_1);
-		JToggleButton tglbtnLoad = new JToggleButton("Load");
-		GridBagConstraints gbc_tglbtnLoad = new GridBagConstraints();
-		gbc_tglbtnLoad.anchor = GridBagConstraints.NORTH;
-		gbc_tglbtnLoad.fill = GridBagConstraints.HORIZONTAL;
-		gbc_tglbtnLoad.insets = new Insets(0, 0, 5, 5);
-		gbc_tglbtnLoad.gridx = 1;
-		gbc_tglbtnLoad.gridy = 16;
-		frame.getContentPane().add(tglbtnLoad, gbc_tglbtnLoad);
-		
-		JToggleButton tglbtnExecute = new JToggleButton("Execute");
-		GridBagConstraints gbc_tglbtnExecute = new GridBagConstraints();
-		gbc_tglbtnExecute.anchor = GridBagConstraints.NORTH;
-		gbc_tglbtnExecute.insets = new Insets(0, 0, 5, 5);
-		gbc_tglbtnExecute.gridwidth = 2;
-		gbc_tglbtnExecute.gridx = 2;
-		gbc_tglbtnExecute.gridy = 16;
-		frame.getContentPane().add(tglbtnExecute, gbc_tglbtnExecute);
-		
-		JButton btnSave = new JButton("Save");
-		GridBagConstraints gbc_btnSave = new GridBagConstraints();
-		gbc_btnSave.anchor = GridBagConstraints.NORTH;
-		gbc_btnSave.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btnSave.insets = new Insets(0, 0, 5, 5);
-		gbc_btnSave.gridwidth = 4;
-		gbc_btnSave.gridx = 4;
-		gbc_btnSave.gridy = 16;
-		frame.getContentPane().add(btnSave, gbc_btnSave);
-		
-		JButton btnNewButton = new JButton("Stop");
-		btnNewButton.addActionListener(new ActionListener() {
-
 	}
 	
 	private void initBtnStop(JPanel panel) {
 		JButton btnStop = new JButton("Stop");
 		btnStop.addActionListener(new ActionListener() {
-
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
