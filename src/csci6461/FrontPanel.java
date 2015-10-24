@@ -233,7 +233,7 @@ public class FrontPanel {
 	private void initLoadComboBox(JPanel panel){
 		JLabel lblLoad = new JLabel("Upload");
 		GridBagConstraints gbc_lblLoad = new GridBagConstraints();
-		gbc_lblLoad.anchor = GridBagConstraints.SOUTHEAST;
+		gbc_lblLoad.anchor = GridBagConstraints.EAST;
 		gbc_lblLoad.insets = new Insets(0, 0, 5, 5);
 		gbc_lblLoad.gridx = 10;
 		gbc_lblLoad.gridy = 1;
