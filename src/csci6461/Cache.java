@@ -117,6 +117,20 @@ public class Cache {
 		}
 		return null;
 	}
+	
+	/**
+	 * Find if a memory address is in cache
+	 * @param memoryAddress
+	 * @return cache position where is found
+	 */
+	private Integer findPosition(int memoryAddress) {
+		for(int i = 0; i < cacheSize; i++){
+			if(cacheSlots.get(i) != null && cacheSlots.get(i).getMemoryAddress() == memoryAddress){
+				return i;
+			}
+		}
+		return null;
+	}
 
 	/**
 	 * Put memory information in cache
@@ -126,10 +140,12 @@ public class Cache {
 		String data = FrontPanel.memory[memoryAddress].getText();
 		CacheSlot slot = new CacheSlot(data, memoryAddress);
 		if(cacheSize == MEMORY_SIZE){
+			System.out.println("Bringing data from memory postion " + memoryAddress + " to cache position " + memoryAddress);
 			cacheSlots.set(memoryAddress, slot);
 			return data;
 		} else {
 			cacheSlots.set(addCounter, slot);
+			System.out.println("Bringing data from memory address postion " + memoryAddress + " to position " + addCounter);
 			incrementAddCounter();
 			return data;
 		}
@@ -142,7 +158,9 @@ public class Cache {
 	 * @param data
 	 */
 	private void writeThrough(int memoryAddress, CacheSlot slot, String data){
+		System.out.println("Writing data to cache postion " + findPosition(memoryAddress));
 		slot.setData(data);
+		System.out.println("Writing data to memory address postion " + memoryAddress);
 		FrontPanel.memory[memoryAddress].setText(slot.getData());
 	}
 
