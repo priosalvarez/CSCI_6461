@@ -6,8 +6,11 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
+import java.awt.ItemSelectable;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -26,6 +29,7 @@ import co.com.csci.util.BinaryUtil;
 import co.com.csci.util.InstructionEnum;
 
 import javax.swing.JTextField;
+import javax.swing.JComboBox;
 
 
 
@@ -130,6 +134,7 @@ public class FrontPanel {
 		initButtons(panel);
 		//Init CC, Output, Input, CC and MSR
 		initInputsAndOutputs(panel);
+		initLoadComboBox(panel);
 	}
 	
 	public static void setRegister(int registerNum, String content){
@@ -223,6 +228,42 @@ public class FrontPanel {
 		this.txtInput = directInput;
 	}
 	
+	private void initLoadComboBox(JPanel panel){
+		JLabel lblLoad = new JLabel("Upload");
+		GridBagConstraints gbc_lblLoad = new GridBagConstraints();
+		gbc_lblLoad.anchor = GridBagConstraints.SOUTHEAST;
+		gbc_lblLoad.insets = new Insets(0, 0, 5, 5);
+		gbc_lblLoad.gridx = 10;
+		gbc_lblLoad.gridy = 1;
+		panel_1.add(lblLoad, gbc_lblLoad);
+		
+		JComboBox<String> cmbLoad = new JComboBox();
+		GridBagConstraints gbc_cmbLoad = new GridBagConstraints();
+		gbc_cmbLoad.insets = new Insets(0, 0, 5, 0);
+		gbc_cmbLoad.fill = GridBagConstraints.HORIZONTAL;
+		gbc_cmbLoad.gridx = 11;
+		gbc_cmbLoad.gridy = 1;
+		panel_1.add(cmbLoad, gbc_cmbLoad);
+		
+		cmbLoad.addItem("");
+		cmbLoad.addItem("Program 1");
+		cmbLoad.addItemListener(new ItemListener() {
+			
+			@Override
+			public void itemStateChanged(ItemEvent itemEvent) {
+				if (itemEvent.getStateChange() == ItemEvent.SELECTED) {
+					ItemSelectable is = itemEvent.getItemSelectable();
+					HardCodeBuilder.loadProgram(selectedString(is));
+				}
+			}
+		});
+	}
+	
+	private String selectedString(ItemSelectable is) {
+	    Object selected[] = is.getSelectedObjects();
+	    return ((selected.length == 0) ? "null" : (String) selected[0]);
+	}
+	
 	private void initTitle(JPanel panel){
 		JLabel lblCiscSimulator = new JLabel("CISC Simulator");
 		lblCiscSimulator.setFont(new Font("Tahoma", Font.BOLD, 25));
@@ -237,14 +278,6 @@ public class FrontPanel {
 	}
 	
 	private void initInstructionInput(JPanel panel){
-		
-		JLabel lblUpload = new JLabel("Upload");
-		GridBagConstraints gbc_lblUpload = new GridBagConstraints();
-		gbc_lblUpload.anchor = GridBagConstraints.SOUTH;
-		gbc_lblUpload.insets = new Insets(0, 0, 5, 5);
-		gbc_lblUpload.gridx = 10;
-		gbc_lblUpload.gridy = 1;
-		panel_1.add(lblUpload, gbc_lblUpload);
 		
 		//OpCode
 		JLabel lblOpcode = new JLabel("OpCode");

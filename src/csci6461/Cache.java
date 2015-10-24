@@ -35,12 +35,14 @@ class CacheSlot {
  */
 public class Cache {
 	
+	//Only can be one instance of cache in the application
+	private static Cache instance = null;
 	//Cache slots, representing the size and data into the cache
-	private ArrayList<CacheSlot> cacheSlots;
+	private static ArrayList<CacheSlot> cacheSlots;
 	//Size of the cache
-	private int cacheSize;
+	private static int cacheSize;
 	//Flag to handle FIFO
-	private int addCounter;
+	private static int addCounter;
 	
 	private static int MEMORY_SIZE = 2048;
 
@@ -49,7 +51,7 @@ public class Cache {
 	 * @param size - Normally 2048 - To make a fully associative cache
 	 * 				 with same size than memory in this case.
 	 */
-	public Cache(int size) {
+	private Cache(int size) {
 		
 		cacheSize = size;
 		cacheSlots = new ArrayList<>();
@@ -60,12 +62,23 @@ public class Cache {
 	}
 	
 	/**
+	 * Singleton call for cache
+	 * @return the cache
+	 */
+	public static Cache getInstance() {
+	      if(instance == null) {
+	         instance = new Cache(MEMORY_SIZE);
+	      }
+	      return instance;
+   }
+	
+	/**
 	 * Check if cache has in the memory address what the machine needs
 	 * @param memoryAddress
 	 * @return data from memory address after fetching it from cache
 	 * 		   or adding it to the cache if it wasn't stored it. 
 	 */
-	public String checkCache(int memoryAddress){
+	public static String checkCache(int memoryAddress){
 		CacheSlot slot = find(memoryAddress);
 		if(slot == null){
 			return bringMemoryAddressToCache(memoryAddress);
@@ -79,7 +92,7 @@ public class Cache {
 	 * @param memoryAddress 
 	 * @param newData 
 	 */
-	public void updateData(int memoryAddress, String newData){
+	public static void updateData(int memoryAddress, String newData){
 		CacheSlot slot = find(memoryAddress);
 		//Verify first if the the memory address to be updated is in the cache or not
 		if(slot != null){
@@ -96,7 +109,7 @@ public class Cache {
 	 * @param memoryAddress
 	 * @return cache slot if it's found or null if it's not
 	 */
-	private CacheSlot find(int memoryAddress) {
+	private static CacheSlot find(int memoryAddress) {
 		for(int i = 0; i < cacheSize; i++){
 			if(cacheSlots.get(i) != null && cacheSlots.get(i).getMemoryAddress() == memoryAddress){
 				return cacheSlots.get(i);
@@ -109,7 +122,7 @@ public class Cache {
 	 * Put memory information in cache
 	 * @param memoryAddress
 	 */
-	private String bringMemoryAddressToCache(int memoryAddress){
+	private static String bringMemoryAddressToCache(int memoryAddress){
 		String data = FrontPanel.memory[memoryAddress].getText();
 		CacheSlot slot = new CacheSlot(data, memoryAddress);
 		if(cacheSize == MEMORY_SIZE){
@@ -128,7 +141,7 @@ public class Cache {
 	 * @param cacheAddress
 	 * @param data
 	 */
-	private void writeThrough(int memoryAddress, CacheSlot slot, String data){
+	private static void writeThrough(int memoryAddress, CacheSlot slot, String data){
 		slot.setData(data);
 		FrontPanel.memory[memoryAddress].setText(slot.getData());
 	}
@@ -136,7 +149,7 @@ public class Cache {
 	/**
 	 * Increment or initialize flag for FIFO handling in the cache
 	 */
-	private void incrementAddCounter(){
+	private static void incrementAddCounter(){
 		//Verify first if cache is full
 		if(addCounter == cacheSize - 1){
 			addCounter = 0;
