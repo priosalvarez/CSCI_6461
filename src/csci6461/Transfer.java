@@ -1,5 +1,7 @@
 package csci6461;
 
+import javax.swing.text.ChangedCharSetException;
+
 import co.com.csci.model.Instruction;
 import co.com.csci.util.BinaryUtil;
 
@@ -265,7 +267,7 @@ public class Transfer {
 					return FrontPanel.memory[instruction.getIntegerAddress()].getText();
 				} else {
 					Integer eaPos = sumBinaryToInteger(FrontPanel.getIndex(instruction.getIndexNumber()), instruction.getAddress());
-					return FrontPanel.memory[eaPos].getText();
+					return Cache.getInstance().checkCache(eaPos);
 				}
 			}
 		}
