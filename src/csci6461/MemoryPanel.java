@@ -18,9 +18,6 @@ public class MemoryPanel extends JPanel{
 	
 	public MemoryPanel(int memorySize, JTextPane[] memory) {
 		
-		//Init memory
-		memory = new JTextPane[memorySize];
-		
 		JPanel mainPanel = new JPanel();
         
 		/*

@@ -114,6 +114,8 @@ public class FrontPanel {
 		JScrollPane memoryPanel = new JScrollPane();
 		memoryPanel.setViewportBorder(new CompoundBorder());
 		memoryPanel.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		//Init memory
+		memory = new JTextPane[2048];
 		splitPanel.setRightComponent(new MemoryPanel(2048, memory).getSplitPane());
 		
 		//Left Panel (left part of the part - all that isn't memory)
@@ -409,7 +411,6 @@ public class FrontPanel {
 		gbc_txtMar.gridx = 11;
 		gbc_txtMar.gridy = 4;
 		panel.add(txtMar, gbc_txtMar);
-		memory = new JTextPane[16];
 		
 		//Init MBR
 		JLabel lblMbr = new JLabel("MBR");
@@ -591,6 +592,19 @@ public class FrontPanel {
 		gbc_txtX2.gridx = 11;
 		gbc_txtX2.gridy = 16;
 		panel.add(txtX2, gbc_txtX2);
+		JButton btnStop = new JButton("Stop");
+		btnStop.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		GridBagConstraints gbc_btnStop = new GridBagConstraints();
+		gbc_btnStop.gridwidth = 2;
+		gbc_btnStop.anchor = GridBagConstraints.NORTH;
+		gbc_btnStop.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnStop.insets = new Insets(0, 0, 0, 5);
+		gbc_btnStop.gridx = 6;
+		gbc_btnStop.gridy = 17;
+		panel.add(btnStop, gbc_btnStop);
 		
 		//Init Index 3
 		JLabel lblX3 = new JLabel("X3");
@@ -681,6 +695,9 @@ public class FrontPanel {
 		  		  		case NOT:
 		  		  			instructionNOT(instruction);
 	  		  				break;	*/
+		  		  		case JZ:
+		  		  			Transfer.instructionJZ(instruction);
+		  		  			break;	
 		  		  		case HALT:
 		  		  			txtOutput.setText("HALT");
 			  				break;
@@ -689,7 +706,7 @@ public class FrontPanel {
 		  		  			break;
 				  }
 				  //Increment PC counter
-				  if(iCode != InstructionEnum.HALT){
+				  if((iCode != InstructionEnum.HALT) || (iCode != InstructionEnum.JZ)){
 					  pcDecimal++;
 				  }
 				  txtPc.setText(BinaryUtil.fillBinaryString(Integer.toBinaryString(pcDecimal)));
@@ -702,19 +719,6 @@ public class FrontPanel {
 	}
 	
 	private void initBtnStop(JPanel panel) {
-		JButton btnStop = new JButton("Stop");
-		btnStop.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		GridBagConstraints gbc_btnStop = new GridBagConstraints();
-		gbc_btnStop.gridwidth = 2;
-		gbc_btnStop.anchor = GridBagConstraints.NORTH;
-		gbc_btnStop.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btnStop.insets = new Insets(0, 0, 0, 5);
-		gbc_btnStop.gridx = 7;
-		gbc_btnStop.gridy = 17;
-		panel.add(btnStop, gbc_btnStop);
 	}
 
 	private void initBtnLoad(JPanel panel) {
@@ -723,8 +727,8 @@ public class FrontPanel {
 		gbc_btnExecute.anchor = GridBagConstraints.NORTH;
 		gbc_btnExecute.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnExecute.insets = new Insets(0, 0, 0, 5);
-		gbc_btnExecute.gridwidth = 3;
-		gbc_btnExecute.gridx = 2;
+		gbc_btnExecute.gridwidth = 2;
+		gbc_btnExecute.gridx = 3;
 		gbc_btnExecute.gridy = 17;
 		panel.add(btnExecute, gbc_btnExecute);
 	}
@@ -732,6 +736,7 @@ public class FrontPanel {
 	private void initBtnExecute(JPanel panel) {
 		JToggleButton btnLoad = new JToggleButton("Load");
 		GridBagConstraints gbc_btnLoad = new GridBagConstraints();
+		gbc_btnLoad.gridwidth = 2;
 		gbc_btnLoad.anchor = GridBagConstraints.NORTH;
 		gbc_btnLoad.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnLoad.insets = new Insets(0, 0, 0, 5);
@@ -746,7 +751,6 @@ public class FrontPanel {
 		gbc_btnSave.anchor = GridBagConstraints.NORTH;
 		gbc_btnSave.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnSave.insets = new Insets(0, 0, 0, 5);
-		gbc_btnSave.gridwidth = 2;
 		gbc_btnSave.gridx = 5;
 		gbc_btnSave.gridy = 17;
 		panel.add(btnSave, gbc_btnSave);
