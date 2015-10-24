@@ -644,6 +644,7 @@ public class FrontPanel {
 			  //Convert PC from binary to decimal 
 			  Integer pcDecimal = Integer.parseInt(txtPc.getText(), 2);
 			  //Get Instruction from memory space
+			  //String plainInstruction = Cache.getInstance().checkCache(pcDecimal);
 			  String plainInstruction = memory[pcDecimal].getText();
 			  Instruction instruction;
 			  try
