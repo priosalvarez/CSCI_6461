@@ -244,6 +244,32 @@ public class Transfer {
 			
 		}	
 		
+		public String sumBinary(String bin1, String bin2){
+			Integer sum = Integer.parseInt(bin1, 2) + Integer.parseInt(bin2,2);
+			return Integer.toBinaryString(sum);
+		}
+		
+		public Integer sumBinaryToInteger(String bin1, String bin2){
+			return Integer.parseInt(bin1, 2) + Integer.parseInt(bin2,2);
+		}
+		
+		public String eaCalculation(Instruction instruction){
+			if(!instruction.isIndirect()){
+				if(!instruction.hasIndex()){
+					return instruction.getAddress();
+				} else {
+					return sumBinary(FrontPanel.getIndex(instruction.getIndexNumber()), instruction.getAddress());
+				}
+			} else {
+				if(!instruction.hasIndex()){
+					return FrontPanel.memory[instruction.getIntegerAddress()].getText();
+				} else {
+					Integer eaPos = sumBinaryToInteger(FrontPanel.getIndex(instruction.getIndexNumber()), instruction.getAddress());
+					return FrontPanel.memory[eaPos].getText();
+				}
+			}
+		}
+		
 	
 	
 	

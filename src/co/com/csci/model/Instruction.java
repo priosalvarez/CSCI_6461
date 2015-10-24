@@ -60,6 +60,11 @@ public class Instruction {
 	public Integer getIndexNumber() {
 		return Integer.parseInt(ix, 2);
 	}
+	
+	public boolean hasIndex(){
+		int index = Integer.parseInt(ix, 2);
+		return index == 0 ? true : false;
+	}
 
 	public String getR() {
 		return r;
