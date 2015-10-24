@@ -36,7 +36,7 @@ class CacheSlot {
 public class Cache {
 	
 	//Only can be one instance of cache in the application
-	private Cache instance = null;
+	private static Cache instance = null;
 	//Cache slots, representing the size and data into the cache
 	private ArrayList<CacheSlot> cacheSlots;
 	//Size of the cache
@@ -65,7 +65,7 @@ public class Cache {
 	 * Singleton call for cache
 	 * @return the cache
 	 */
-	public Cache getInstance() {
+	public static Cache getInstance() {
 	      if(instance == null) {
 	         instance = new Cache(MEMORY_SIZE);
 	      }
