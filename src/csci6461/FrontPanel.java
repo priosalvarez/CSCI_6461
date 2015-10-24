@@ -110,6 +110,8 @@ public class FrontPanel {
 		JScrollPane memoryPanel = new JScrollPane();
 		memoryPanel.setViewportBorder(new CompoundBorder());
 		memoryPanel.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		//Init memory
+		memory = new JTextPane[2048];
 		splitPanel.setRightComponent(new MemoryPanel(2048, memory).getSplitPane());
 		
 		//Left Panel (left part of the part - all that isn't memory)
@@ -376,7 +378,6 @@ public class FrontPanel {
 		gbc_txtMar.gridx = 11;
 		gbc_txtMar.gridy = 4;
 		panel.add(txtMar, gbc_txtMar);
-		memory = new JTextPane[16];
 		
 		//Init MBR
 		JLabel lblMbr = new JLabel("MBR");
@@ -661,6 +662,9 @@ public class FrontPanel {
 		  		  		case NOT:
 		  		  			instructionNOT(instruction);
 	  		  				break;	*/
+		  		  		case JZ:
+		  		  			Transfer.instructionJZ(instruction);
+		  		  			break;	
 		  		  		case HALT:
 		  		  			txtOutput.setText("HALT");
 			  				break;
@@ -669,7 +673,7 @@ public class FrontPanel {
 		  		  			break;
 				  }
 				  //Increment PC counter
-				  if(iCode != InstructionEnum.HALT){
+				  if((iCode != InstructionEnum.HALT) || (iCode != InstructionEnum.JZ)){
 					  pcDecimal++;
 				  }
 				  txtPc.setText(BinaryUtil.fillBinaryString(Integer.toBinaryString(pcDecimal)));

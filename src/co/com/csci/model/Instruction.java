@@ -125,8 +125,8 @@ public class Instruction {
 	
 	
 	public InstructionEnum getIntructionCode(){
-		String part1 = opCode.substring(0, 2);
-		String part2 = opCode.substring(2);
+		String part1 = opCode.substring(0, 3);
+		String part2 = opCode.substring(3);
 		int decimalValue = Integer.parseInt(part1, 2);
 		int decimalValue2 = Integer.parseInt(part2, 2);
 		return InstructionEnum.findInstruction(decimalValue + "" + decimalValue2);

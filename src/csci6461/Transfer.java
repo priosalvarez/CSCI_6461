@@ -1,6 +1,7 @@
 package csci6461;
 
 import co.com.csci.model.Instruction;
+import co.com.csci.util.BinaryUtil;
 
 
 /*Transfer Instructions:
@@ -14,7 +15,7 @@ public class Transfer {
 	
 	private int r;
 		//Transfer Instructions
-		public Integer instructionJZ(Instruction instruction) throws Throwable{
+		public static Integer instructionJZ(Instruction instruction) throws Throwable{
 			/*Jump If Zero:
 			If c(r) = 0, then PC <- EA or c(EA), if I bit set;
 			Else PC <- PC+1*/
@@ -26,8 +27,8 @@ public class Transfer {
 			
 			
 			try {
-				if(instruction.getRegisterNumber()==0){
-					ea = FrontPanel.txtPc.getText();
+				if(Integer.parseInt(FrontPanel.getRegister(instruction.getRegisterNumber()), 2) == 0){
+					ea = instruction.getAddress();
 					
 					//verify that bit is set
 					if(instruction.isIndirect()){
@@ -37,8 +38,8 @@ public class Transfer {
 					}
 				}
 				else {
-					
-					pcDecimal = pcDecimal + 1;					
+					pcDecimal = pcDecimal + 1;
+					FrontPanel.txtPc.setText(BinaryUtil.fillBinaryString(Integer.toBinaryString(pcDecimal)));;
 				}						
 					
 			} catch (Exception e){
@@ -125,8 +126,7 @@ public class Transfer {
 			
 		}
 		public Integer instructionJMA(Instruction instruction) throws Throwable{
-			//TODO
-			
+						
 			
 			/*Unconditional Jump To Address
 			PC <- EA, if I bit not set; PC <- c(EA), if I bit set
@@ -182,7 +182,7 @@ public class Transfer {
 			String ea = "";
 			
 			/*Return From Subroutine w/ return code as Immed portion (optional) stored in the instruction’s address field. 
-					R0 <- Immed; PC ?? c(R3)
+					R0 <- Immed; PC <-- c(R3)
 					IX, I fields are ignored.*/
 			
 			
@@ -196,7 +196,7 @@ public class Transfer {
 			
 			/*Subtract One and Branch. R = 0..3
 					r <- c(r) – 1
-					If c(r) > 0,  PC <- EA; but PC ?? c(EA), if I bit set;
+					If c(r) > 0,  PC <- EA; but PC <-- c(EA), if I bit set;
 					Else PC <- PC + 1*/
 			
 			
