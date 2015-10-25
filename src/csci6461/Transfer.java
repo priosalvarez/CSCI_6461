@@ -66,9 +66,9 @@ public class Transfer {
 			  Integer pcDecimal = Integer.parseInt(FrontPanel.txtPc.getText(), 2);
 				
 				
-				try {
-					if(instruction.getRegisterNumber()!=0){
-						ea = FrontPanel.txtPc.getText();
+			  try {
+					if(Integer.parseInt(FrontPanel.getRegister(instruction.getRegisterNumber()), 2) != 0){
+						ea = instruction.getAddress();
 						
 						//verify that bit is set
 						if(instruction.isIndirect()){
@@ -78,8 +78,8 @@ public class Transfer {
 						}
 					}
 					else {
-						
-						pcDecimal = pcDecimal + 1;					
+						pcDecimal = pcDecimal + 1;
+						FrontPanel.txtPc.setText(BinaryUtil.fillBinaryString(Integer.toBinaryString(pcDecimal)));;
 					}						
 						
 				} catch (Exception e){
@@ -103,9 +103,9 @@ public class Transfer {
 			  Integer pcDecimal = Integer.parseInt(FrontPanel.txtPc.getText(), 2);
 				
 				
-				try {
-					if(instruction.getCCNumber(r)==1){
-						ea = FrontPanel.txtPc.getText();
+			  try {
+					if(Integer.parseInt(FrontPanel.getRegister(instruction.getCCNumber(pcDecimal)), 2) == 1){
+						ea = instruction.getAddress();
 						
 						//verify that bit is set
 						if(instruction.isIndirect()){
@@ -115,8 +115,8 @@ public class Transfer {
 						}
 					}
 					else {
-						
-						pcDecimal = pcDecimal + 1;					
+						pcDecimal = pcDecimal + 1;
+						FrontPanel.txtPc.setText(BinaryUtil.fillBinaryString(Integer.toBinaryString(pcDecimal)));;
 					}						
 						
 				} catch (Exception e){
