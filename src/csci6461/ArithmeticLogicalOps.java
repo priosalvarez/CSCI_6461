@@ -63,53 +63,26 @@ public class ArithmeticLogicalOps {
 		FrontPanel.setRegister(instruction.getRegisterNumber(), ea);
 	}
 	
-
-	public String evaluateIndirectSMR(Instruction instruction, String ea) throws Throwable{
-		try {
-			if(instruction.isIndirect()){
-				// Is all what is in the address or only the address part?
-				Instruction indirectInstruction = new Instruction(FrontPanel.memory[Integer.parseInt(ea, 2)].getText());
-				//AddressPart
-				ea = indirectInstruction.getAddress();
-				// else
-				//ea = indirectInstruction.getBinaryInstruction();
-			}
-		} catch (Exception e){
-			throw new Throwable("FAULT");
-		}
-		return ea;
-	}
-	
-		
 	/*
 	 * This method implements the SMR instruction in the UI
 	 */
-	public void instructionSMR(Instruction instruction) throws Throwable{
-		String ea = "";
-		//Verify if instruction has index
-		if(instruction.getIndexNumber() == 0){
-			ea = instruction.getAddress();
-		} else {
-			Integer addressDecimal = Integer.parseInt(instruction.getAddress(), 2);
-			Integer indexDecimal = Integer.parseInt(FrontPanel.getIndex(instruction.getIndexNumber()), 2);
-			//Get index and sum it with address
-			Integer sum = addressDecimal + indexDecimal; 
-			if(sum > 31){ 
-				throw new Throwable("FAULT");
-			}
-			ea = Integer.toBinaryString(sum);
+	public static void instructionSMR(Instruction instruction) throws Throwable{
+		
+		FrontPanel.txtCc.setText("0000");
+		String ea = BinaryUtil.eaCalculation(instruction);
+		
+		Integer addressDecimal = Integer.parseInt(Cache.getInstance().checkCache(ea), 2);
+		Integer registerDecimal = Integer.parseInt(FrontPanel.getRegister(instruction.getRegisterNumber()), 2);
+		Integer diffSMR = registerDecimal - addressDecimal;
+		
+		if(diffSMR < 0){
+			FrontPanel.txtCc.setText("0010");
+			diffSMR = 0;
 		}
 		
-		ea = evaluateIndirectSMR(instruction, ea);
-		ea = BinaryUtil.fillBinaryString(ea);
-		
-		Integer addressDecimal = Integer.parseInt(instruction.getAddress(), 2);
-		Integer registerDecimal = Integer.parseInt(FrontPanel.getRegister(instruction.getRegisterNumber()), 2);
-		Integer diffAMR = registerDecimal - addressDecimal;
-		
 		//Subtract Memory from Register
-		ea = Integer.toBinaryString(diffAMR);
-		FrontPanel.setRegister(instruction.getRegisterNumber(), ea);
+		String result = Integer.toBinaryString(diffSMR);
+		FrontPanel.setRegister(instruction.getRegisterNumber(), BinaryUtil.fillBinaryString(result));
 	}
 	/*
 	 * This method implements the AIR instruction in the UI

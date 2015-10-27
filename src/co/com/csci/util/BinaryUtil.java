@@ -1,5 +1,9 @@
 package co.com.csci.util;
 
+import co.com.csci.model.Instruction;
+import csci6461.Cache;
+import csci6461.FrontPanel;
+
 public class BinaryUtil {
 	
 	public static String fillBinaryString(String binary){
@@ -33,6 +37,32 @@ public class BinaryUtil {
 			return "";
 		}		
 	}	
+	
+	public static String sumBinary(String bin1, String bin2){
+		Integer sum = Integer.parseInt(bin1, 2) + Integer.parseInt(bin2,2);
+		return Integer.toBinaryString(sum);
+	}
+	
+	public static Integer sumBinaryToInteger(String bin1, String bin2){
+		return Integer.parseInt(bin1, 2) + Integer.parseInt(bin2,2);
+	}
+	
+	public static String eaCalculation(Instruction instruction){
+		if(!instruction.isIndirect()){
+			if(!instruction.hasIndex()){
+				return instruction.getAddress();
+			} else {
+				return sumBinary(FrontPanel.getIndex(instruction.getIndexNumber()), instruction.getAddress());
+			}
+		} else {
+			if(!instruction.hasIndex()){
+				return FrontPanel.memory[instruction.getIntegerAddress()].getText();
+			} else {
+				Integer eaPos = sumBinaryToInteger(FrontPanel.getIndex(instruction.getIndexNumber()), instruction.getAddress());
+				return Cache.getInstance().checkCache(eaPos);
+			}
+		}
+	}
 
 
 }

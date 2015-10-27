@@ -59,7 +59,11 @@ public enum InstructionEnum {
 			case "01":
 				return LDR;
 			case "02":				
-				return STR;				
+				return STR;
+			case "04":
+				return AMR;
+			case "05":				
+				return SMR;	
 			case "10":
 				return JZ;
 			case "11":

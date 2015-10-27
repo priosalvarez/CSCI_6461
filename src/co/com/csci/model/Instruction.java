@@ -63,7 +63,7 @@ public class Instruction {
 	
 	public boolean hasIndex(){
 		int index = Integer.parseInt(ix, 2);
-		return index == 0 ? true : false;
+		return index == 0 ? false : true;
 	}
 
 	public String getR() {

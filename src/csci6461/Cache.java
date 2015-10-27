@@ -74,7 +74,17 @@ public class Cache {
 	
 	/**
 	 * Check if cache has in the memory address what the machine needs
-	 * @param memoryAddress
+	 * @param memoryAddress in binary
+	 * @return data from memory address after fetching it from cache
+	 * 		   or adding it to the cache if it wasn't stored it. 
+	 */
+	public String checkCache(String memoryAddress){
+		return checkCache(Integer.parseInt(memoryAddress, 2));
+	}
+	
+	/**
+	 * Check if cache has in the memory address what the machine needs
+	 * @param memoryAddress in decimal
 	 * @return data from memory address after fetching it from cache
 	 * 		   or adding it to the cache if it wasn't stored it. 
 	 */

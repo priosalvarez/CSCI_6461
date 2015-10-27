@@ -67,7 +67,7 @@ public class FrontPanel {
 	static JTextField txtInput; //Input
 	static JTextPane txtOutput; //Output
 	
-	static JTextPane[] memory; //All memory entries
+	static public JTextPane[] memory; //All memory entries
 	private JPanel panel_1;
 	
 	/**
@@ -249,6 +249,7 @@ public class FrontPanel {
 		
 		cmbLoad.addItem("");
 		cmbLoad.addItem("Program 1");
+		cmbLoad.addItem("SMR");
 		cmbLoad.addItemListener(new ItemListener() {
 			
 			@Override
@@ -668,10 +669,10 @@ public class FrontPanel {
 	  		  				break;
 		  		  		/*case AMR:
 		  		  			instructionAMR(instruction);
-	  		  				break;
+	  		  				break;*/
 		  		  		case SMR:
-		  		  			instructionSMR(instruction);
-	  		  				break;
+		  		  			ArithmeticLogicalOps.instructionSMR(instruction);
+	  		  				break;/*
 		  		  		case AIR:
 		  		  			instructionAIR(instruction);
 	  		  				break;
