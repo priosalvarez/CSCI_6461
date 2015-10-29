@@ -16,52 +16,23 @@ public class ArithmeticLogicalOps {
 
 	private Object[] memory;
 
-	public String evaluateIndirectAMR(Instruction instruction, String ea) throws Throwable{
-		try {
-			if(instruction.isIndirect()){
-				// Is all what is in the address or only the address part?
-				Instruction indirectInstruction = new Instruction(FrontPanel.memory[Integer.parseInt(ea, 2)].getText());
-				//AddressPart
-				ea = indirectInstruction.getAddress();
-				// else
-				//ea = indirectInstruction.getBinaryInstruction();
-			}
-		} catch (Exception e){
-			throw new Throwable("FAULT");
-		}
-		return ea;
-	}
-		
 	/*
 	 * This method implements the AMR instruction in the UI
 	 */
-	public void instructionAMR(Instruction instruction) throws Throwable{
-		String ea = "";
-		//Verify if instruction has index
-		if(instruction.getIndexNumber() == 0){
-			ea = instruction.getAddress();
-		} else {
-			Integer addressDecimal = Integer.parseInt(instruction.getAddress(), 2);
-			Integer indexDecimal = Integer.parseInt(FrontPanel.getIndex(instruction.getIndexNumber()), 2);
-			//Get index and sum it with address
-			Integer sum = addressDecimal + indexDecimal;
-			if(sum > 31){ 
-				throw new Throwable("FAULT");
-			}
-			ea = Integer.toBinaryString(sum);  
-		}
+	public static void instructionAMR(Instruction instruction) throws Throwable{
 		
-		ea = evaluateIndirectAMR(instruction, ea); 
-		ea = BinaryUtil.fillBinaryString(ea); 
+		FrontPanel.txtCc.setText("0000");
+		String ea = BinaryUtil.eaCalculation(instruction); 
 		
-		Integer addressDecimal = Integer.parseInt(instruction.getAddress(), 2);
+		Integer addressDecimal = Integer.parseInt(Cache.getInstance().checkCache(ea), 2); //content of effective address
 		Integer registerDecimal = Integer.parseInt(FrontPanel.getRegister(instruction.getRegisterNumber()), 2);
-		Integer sumAMR = registerDecimal + addressDecimal;
-		
-		//Add Memory to Register
-		ea = Integer.toBinaryString(sumAMR);
-		FrontPanel.setRegister(instruction.getRegisterNumber(), ea);
+		Integer addAMR = registerDecimal + addressDecimal;
+
+		//Add Register to Memory
+		String resultAMR = Integer.toBinaryString(addAMR);
+		FrontPanel.setRegister(instruction.getRegisterNumber(), BinaryUtil.fillBinaryString(resultAMR));
 	}
+	
 	
 	/*
 	 * This method implements the SMR instruction in the UI
@@ -73,23 +44,24 @@ public class ArithmeticLogicalOps {
 		
 		Integer addressDecimal = Integer.parseInt(Cache.getInstance().checkCache(ea), 2);
 		Integer registerDecimal = Integer.parseInt(FrontPanel.getRegister(instruction.getRegisterNumber()), 2);
+		//Subtract Memory from Register
 		Integer diffSMR = registerDecimal - addressDecimal;
 		
+		//Check for Underflow
 		if(diffSMR < 0){
 			FrontPanel.txtCc.setText("0010");
 			diffSMR = 0;
 		}
-		
-		//Subtract Memory from Register
-		String result = Integer.toBinaryString(diffSMR);
-		FrontPanel.setRegister(instruction.getRegisterNumber(), BinaryUtil.fillBinaryString(result));
+		String resultSMR = Integer.toBinaryString(diffSMR);
+		FrontPanel.setRegister(instruction.getRegisterNumber(), BinaryUtil.fillBinaryString(resultSMR));
 	}
 	/*
 	 * This method implements the AIR instruction in the UI
 	   IX and I are ignored in this instruction
 	 */
-	public void instructionAIR(Instruction instruction) throws Throwable{
-		String ea = "";
+	public static void instructionAIR(Instruction instruction) throws Throwable{
+		
+		FrontPanel.txtCc.setText("0000");
 		//Assume the Immediate Value is 10
 		Integer immediate = 10;
 		Integer registerDecimal = Integer.parseInt(FrontPanel.getRegister(instruction.getRegisterNumber()), 2);
@@ -99,15 +71,19 @@ public class ArithmeticLogicalOps {
 			FrontPanel.getRegister(instruction.getRegisterNumber());
 		}
 
+		//If register = 0, load r with the immediate
 		if(registerDecimal == 0){
-			
-		//Subtract Immediate Value to Register
+		FrontPanel.setRegister(0, "0000000000001010");
+			}
+		
+		else{
+		//add immediate to register
 		int sumAIR;
 		sumAIR = registerDecimal + immediate;
 		
 		//Convert the result to binary
-		ea = Integer.toBinaryString(sumAIR);
-		FrontPanel.setRegister(instruction.getRegisterNumber(), ea);
+		String resultAIR = Integer.toBinaryString(sumAIR);
+		FrontPanel.setRegister(instruction.getRegisterNumber(), BinaryUtil.fillBinaryString(resultAIR));
 		
 	}
 	}
@@ -116,10 +92,11 @@ public class ArithmeticLogicalOps {
 	 * This method implements the SIR instruction in the UI
 	   IX and I are ignored in this instruction
 	 */
-	public void instructionSIR(Instruction instruction) throws Throwable{
-		String ea = "";
-		//Assume the Immediate Value is 10
-		Integer immediate = 10;
+	public static void instructionSIR(Instruction instruction) throws Throwable{
+	
+		FrontPanel.txtCc.setText("0000");
+		//Assume the Immediate Value is 1
+		Integer immediate = 1;
 		Integer registerDecimal = Integer.parseInt(FrontPanel.getRegister(instruction.getRegisterNumber()), 2);
 		
 		if(immediate == 0){
@@ -127,60 +104,44 @@ public class ArithmeticLogicalOps {
 			FrontPanel.getRegister(instruction.getRegisterNumber());
 		}
 
+		//If register = 0, load r with the immediate
 		if(registerDecimal == 0){
-			
-		//Subtract Immediate Value to Register
+		FrontPanel.setRegister(1, "0000000000000001");
+			}
+		
+		else{
+		//Subtract immediate from register
 		int diffSIR;
 		diffSIR = registerDecimal - immediate;
 		
-		//Convert the result to binary
-		ea = Integer.toBinaryString(diffSIR);
-		FrontPanel.setRegister(instruction.getRegisterNumber(), ea);
-	}
-}
-
-
-	public String evaluateIndirectMLT(Instruction instruction, String ea) throws Throwable{
-		try {
-			if(instruction.isIndirect()){
-				// Is all what is in the address or only the address part?
-				Instruction indirectInstruction = new Instruction(FrontPanel.memory[Integer.parseInt(ea, 2)].getText());//Need destination on front panel
-				//AddressPart
-				ea = indirectInstruction.getAddress();
-				// else
-				//ea = indirectInstruction.getBinaryInstruction();
-			}
-		} catch (Exception e){
-			throw new Throwable("FAULT");
+		//Check for Underflow
+		if(diffSIR < 0){
+			FrontPanel.txtCc.setText("0010");
+			diffSIR = 0;
 		}
-		return ea;
+		
+		//Convert the result to binary
+		String resultSIR = Integer.toBinaryString(diffSIR);
+		FrontPanel.setRegister(instruction.getRegisterNumber(), BinaryUtil.fillBinaryString(resultSIR));
+		
 	}
-	
+	}
+
+
 	/*
 	 * This method implements the MLT instruction in the UI
 	 */
-	public void instructionMLT(Instruction instruction) throws Throwable{
-		String ea = "";
-		//Verify if instruction has index
-		if(instruction.getIndexNumber() == 0){
-			ea = instruction.getAddress();
-		} else {
-			Integer addressDecimal = Integer.parseInt(instruction.getAddress(), 2);
-			Integer indexDecimal = Integer.parseInt(FrontPanel.getIndex(instruction.getIndexNumber()), 2);
-			//Get index and sum it with address
-			Integer sum = addressDecimal + indexDecimal;
-			if(sum > 31){
-				throw new Throwable("FAULT");
-			}
-			ea = Integer.toBinaryString(sum);
-		}
-		ea = evaluateIndirectMLT(instruction, ea);
-		ea = BinaryUtil.fillBinaryString(ea); 
+	public static void instructionMLT(Instruction instruction) throws Throwable{
+		String ea = BinaryUtil.eaCalculation(instruction);
+		//String ea = "";
 		
 	try{
 		//Multiply R0 by R2
+
 				Integer RxDecimal = Integer.parseInt(FrontPanel.getRegister(0));
 				Integer RyDecimal = Integer.parseInt(FrontPanel.getRegister(2));
+				//Integer RxDecimal = Integer.parseInt(FrontPanel.getRegister(instruction.getRegisterNumber(0)), 2);
+				//Integer RyDecimal = Integer.parseInt(FrontPanel.getRegister(instruction.getRegisterNumber(1)), 2);
 				Integer productMLT = RxDecimal * RyDecimal;
 				String productBinary = Integer.toBinaryString(productMLT);
 				productBinary = BinaryUtil.fillBinaryString32(productBinary);
@@ -188,18 +149,19 @@ public class ArithmeticLogicalOps {
 				//Find High Order Bit and Low Order Bit
 				String LSB = productBinary.substring(0, 15);
 				String MSB = productBinary.substring(16, 31);
-				
+				  
 				//Store the MSB in R0 and LSB in R1
-				FrontPanel.setRegister(instruction.getRegisterNumber(), MSB);//(0)
-				FrontPanel.setRegister(instruction.getRegisterNumber(), LSB);//(1)
+				FrontPanel.setRegister(0, MSB);//(0)
+				FrontPanel.setRegister(1, LSB);//(1)
 	}
-	//Overflow Flag if R0 or R1 already have content
+		//Overflow Flag if R0 or R1 already have content
 	finally{
 		if(instruction.getRegisterNumber() != null || instruction.getRegisterNumber() != null){//(1), also here '' means 'null' incompatible types check
 			instruction.setCCNumber(instruction.getCCNumber(4), 0);
 		}
 		}
 	}
+	
 	
 	
 
