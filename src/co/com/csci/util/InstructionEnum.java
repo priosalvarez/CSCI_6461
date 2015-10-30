@@ -64,6 +64,10 @@ public enum InstructionEnum {
 				return AMR;
 			case "05":				
 				return SMR;	
+			case "06":				
+				return AIR;	
+			case "07":				
+				return SIR;
 			case "10":
 				return JZ;
 			case "11":

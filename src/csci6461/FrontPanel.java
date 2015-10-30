@@ -249,7 +249,16 @@ public class FrontPanel {
 		
 		cmbLoad.addItem("");
 		cmbLoad.addItem("Program 1");
+		cmbLoad.addItem("AMR");
 		cmbLoad.addItem("SMR");
+		cmbLoad.addItem("AIR");
+		cmbLoad.addItem("SIR");
+		cmbLoad.addItem("MLT");
+		cmbLoad.addItem("DVD");
+		cmbLoad.addItem("TRR");
+		cmbLoad.addItem("AND");
+		cmbLoad.addItem("ORR");
+		cmbLoad.addItem("NOT");
 		cmbLoad.addItemListener(new ItemListener() {
 			
 			@Override
@@ -667,36 +676,36 @@ public class FrontPanel {
 		  		  		case STR:
 		  		  			LoadStore.instructionSTR(instruction);
 	  		  				break;
-		  		  		/*case AMR:
-		  		  			instructionAMR(instruction);
-	  		  				break;*/
+		  		  		case AMR:
+		  		  			ArithmeticLogicalOps.instructionAMR(instruction);
+	  		  				break;
 		  		  		case SMR:
 		  		  			ArithmeticLogicalOps.instructionSMR(instruction);
-	  		  				break;/*
+	  		  				break;
 		  		  		case AIR:
-		  		  			instructionAIR(instruction);
+		  		  			ArithmeticLogicalOps.instructionAIR(instruction);
 	  		  				break;
 		  		  		case SIR:
-		  		  			instructionSIR(instruction);
+		  		  			ArithmeticLogicalOps.instructionSIR(instruction);
 	  		  				break;
 		  		  		case MLT:
-		  		  			instructionMLT(instruction);
-	  		  				break;
+		  		  			ArithmeticLogicalOps.instructionMLT(instruction);
+	  		  				break; 
 		  		  		case DVD:
-		  		  			instructionDVD(instruction);
+		  		  			ArithmeticLogicalOps.instructionDVD(instruction);
 	  		  				break;
 		  		  		case TRR:
-		  		  			instructionTRR(instruction);
+		  		  			ArithmeticLogicalOps.instructionTRR(instruction);
 	  		  				break;
 		  		  		case AND:
-		  		  			instructionAND(instruction);
+		  		  			ArithmeticLogicalOps.instructionAND(instruction);
 	  		  				break;
 		  		  		case ORR:
-		  		  			instructionORR(instruction);
+		  		  			ArithmeticLogicalOps.instructionORR(instruction);
 	  		  				break;
 		  		  		case NOT:
-		  		  			instructionNOT(instruction);
-	  		  				break;	*/
+		  		  			ArithmeticLogicalOps.instructionNOT(instruction);
+	  		  				break;
 		  		  		case JZ:
 		  		  			Transfer.instructionJZ(instruction);
 		  		  			break;	

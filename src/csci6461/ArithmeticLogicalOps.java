@@ -133,26 +133,23 @@ public class ArithmeticLogicalOps {
 	 */
 	public static void instructionMLT(Instruction instruction) throws Throwable{
 		String ea = BinaryUtil.eaCalculation(instruction);
-		//String ea = "";
 		
 	try{
 		//Multiply R0 by R2
 
-				Integer RxDecimal = Integer.parseInt(FrontPanel.getRegister(0));
-				Integer RyDecimal = Integer.parseInt(FrontPanel.getRegister(2));
-				//Integer RxDecimal = Integer.parseInt(FrontPanel.getRegister(instruction.getRegisterNumber(0)), 2);
-				//Integer RyDecimal = Integer.parseInt(FrontPanel.getRegister(instruction.getRegisterNumber(1)), 2);
+				Integer RxDecimal = Integer.parseInt(FrontPanel.getRegister(0), 2);
+				Integer RyDecimal = Integer.parseInt(FrontPanel.getRegister(2), 2);
 				Integer productMLT = RxDecimal * RyDecimal;
 				String productBinary = Integer.toBinaryString(productMLT);
 				productBinary = BinaryUtil.fillBinaryString32(productBinary);
 				
 				//Find High Order Bit and Low Order Bit
-				String LSB = productBinary.substring(0, 15);
-				String MSB = productBinary.substring(16, 31);
+				String LSB = productBinary.substring(0, 16);
+				String MSB = productBinary.substring(16, 32);
 				  
 				//Store the MSB in R0 and LSB in R1
-				FrontPanel.setRegister(0, MSB);//(0)
-				FrontPanel.setRegister(1, LSB);//(1)
+				FrontPanel.setRegister(0, MSB);
+				FrontPanel.setRegister(1, LSB);
 	}
 		//Overflow Flag if R0 or R1 already have content
 	finally{
@@ -162,270 +159,103 @@ public class ArithmeticLogicalOps {
 		}
 	}
 	
-	
-	
-
-	public String evaluateIndirectDVD(Instruction instruction, String ea) throws Throwable{
-		try {
-			if(instruction.isIndirect()){
-				// Is all what is in the address or only the address part?
-				Instruction indirectInstruction = new Instruction(FrontPanel.memory[Integer.parseInt(ea, 2)].getText());//Need destination on front panel
-				//AddressPart
-				ea = indirectInstruction.getAddress();
-				// else
-				//ea = indirectInstruction.getBinaryInstruction();
-			}
-		} catch (Exception e){
-			throw new Throwable("FAULT");
-		}
-		return ea;
-	}
 	/*
 	 * This method implements the DVD instruction in the UI
 	 */
-	public void instructionDVD(Instruction instruction) throws Throwable{
-		String ea = "";
-		//Verify if instruction has index
-		if(instruction.getIndexNumber() == 0){
-			ea = instruction.getAddress();
-		} else {
-			Integer addressDecimal = Integer.parseInt(instruction.getAddress(), 2);
-			Integer indexDecimal = Integer.parseInt(FrontPanel.getIndex(instruction.getIndexNumber()), 2);
-			//Get index and sum it with address
-			Integer sum = addressDecimal + indexDecimal;
-			if(sum > 31){
-				throw new Throwable("FAULT");
-			}
-			ea = Integer.toBinaryString(sum);
-		}
-		ea = evaluateIndirectDVD(instruction, ea);
-		ea = BinaryUtil.fillBinaryString(ea); 
+	public static void instructionDVD(Instruction instruction) throws Throwable{
 		
-		Integer RxDecimal = Integer.parseInt(FrontPanel.getRegister(0));
-		Integer RyDecimal = Integer.parseInt(FrontPanel.getRegister(2));
+		String ea = BinaryUtil.eaCalculation(instruction);
+		
+		Integer RxDecimal = Integer.parseInt(FrontPanel.getRegister(0), 2);
+		Integer RyDecimal = Integer.parseInt(FrontPanel.getRegister(2), 2);
 		
 	try{
 		//Divide R0 by R2
 		Integer quotientDVD = RxDecimal / RyDecimal;
 		Integer remainderDVD = RxDecimal % RyDecimal; 
+		String DVDQuotient = BinaryUtil.fillBinaryString(Integer.toBinaryString(quotientDVD));
+		String DVDRemainder = BinaryUtil.fillBinaryString(Integer.toBinaryString(remainderDVD));
 		
-		//Store the quotient in Rx and the remainder in Rx+1
-		String eaQuotient = Integer.toBinaryString(quotientDVD);
-		String eaRemainder = Integer.toBinaryString(remainderDVD);
-		FrontPanel.setRegister(instruction.getRegisterNumber(), eaQuotient);
-		FrontPanel.setRegister(instruction.getRegisterNumber(), eaRemainder);
+		//Store the quotient in R0 and the remainder in R1
+		FrontPanel.setRegister(0, DVDQuotient);
+		FrontPanel.setRegister(1, DVDRemainder);
 	}
 	//Exception Handler if the denominator was 0
 	catch (ArithmeticException ae) {
 	if (RyDecimal == 0){
-		//set cc(3) to 1
-		instruction.setCCNumber(instruction.getCCNumber(3), 1);
+		//set cc to 1
+		FrontPanel.txtCc.setText("0001");
     }
 }
-
 	}
-	
 
-	public String evaluateIndirectTRR(Instruction instruction, String ea) throws Throwable{
-		try {
-			if(instruction.isIndirect()){
-				// Is all what is in the address or only the address part?
-				Instruction indirectInstruction = new Instruction(FrontPanel.memory[Integer.parseInt(ea, 2)].getText());//Need destination on front panel
-				//AddressPart
-				ea = indirectInstruction.getAddress();
-				// else
-				//ea = indirectInstruction.getBinaryInstruction();
-			}
-		} catch (Exception e){
-			throw new Throwable("FAULT");
-		}
-		return ea;
-	}
-	
 	/*
 	 * This method implements the TRR instruction in the UI
 	 */
-	public void instructionTRR(Instruction instruction) throws Throwable{
-		String ea = "";
-		//Verify if instruction has index
-		if(instruction.getIndexNumber() == 0){
-			ea = instruction.getAddress();
-		} else {
-			Integer addressDecimal = Integer.parseInt(instruction.getAddress(), 2);
-			Integer indexDecimal = Integer.parseInt(FrontPanel.getIndex(instruction.getIndexNumber()), 2);
-			//Get index and sum it with address
-			Integer sum = addressDecimal + indexDecimal;
-			if(sum > 31){
-				throw new Throwable("FAULT");
-			}
-			ea = Integer.toBinaryString(sum);
-		}
-		ea = evaluateIndirectTRR(instruction, ea);
-		ea = BinaryUtil.fillBinaryString(ea); 
+	public static void instructionTRR(Instruction instruction) throws Throwable{
+		String ea = BinaryUtil.eaCalculation(instruction);
 		
 		//Test the Equality of R0 and R2
 		Integer RxDecimal = Integer.parseInt(FrontPanel.getRegister(0));
 		Integer RyDecimal = Integer.parseInt(FrontPanel.getRegister(2));
 		
 	if(RxDecimal == RyDecimal){
-	//set cc(3) to 1
-		
-		instruction.setCCNumber(instruction.getCCNumber(3), 1);
+	//set cc to 1
+		FrontPanel.txtCc.setText("0001");
 	}
 	else{
-	//set cc(4) to 0
-		
-		instruction.setCCNumber(instruction.getCCNumber(4), 1);
+	//set cc to 0
+		FrontPanel.txtCc.setText("0000");
 	}
 	}
-	
 
-	public String evaluateIndirectAND(Instruction instruction, String ea) throws Throwable{
-		try {
-			if(instruction.isIndirect()){
-				// Is all what is in the address or only the address part?
-				Instruction indirectInstruction = new Instruction(FrontPanel.memory[Integer.parseInt(ea, 2)].getText());//Need destination on front panel
-				//AddressPart
-				ea = indirectInstruction.getAddress();
-				// else
-				//ea = indirectInstruction.getBinaryInstruction();
-			}
-		} catch (Exception e){
-			throw new Throwable("FAULT");
-		}
-		return ea;
-	}
-	
 	/*
 	 * This method implements the AND instruction in the UI
 	 */
-	public void instructionAND(Instruction instruction) throws Throwable{
-		String ea = "";
-		//Verify if instruction has index
-		if(instruction.getIndexNumber() == 0){
-			ea = instruction.getAddress();
-		} else {
-			Integer addressDecimal = Integer.parseInt(instruction.getAddress(), 2);
-			Integer indexDecimal = Integer.parseInt(FrontPanel.getIndex(instruction.getIndexNumber()), 2);
-			//Get index and sum it with address
-			Integer sum = addressDecimal + indexDecimal;
-			if(sum > 31){
-				throw new Throwable("FAULT");
-			}
-			ea = Integer.toBinaryString(sum);
-		}
-		ea = evaluateIndirectAND(instruction, ea);
-		ea = BinaryUtil.fillBinaryString(ea); 
-		
+	public static void instructionAND(Instruction instruction) throws Throwable{
+			String ea = BinaryUtil.eaCalculation(instruction);
+			
 		//Logical AND for R0 and R2
-		Integer RxDecimal = Integer.parseInt(FrontPanel.getRegister(0));
-		Integer RyDecimal = Integer.parseInt(FrontPanel.getRegister(2));
+		Integer RxDecimal = Integer.parseInt(FrontPanel.getRegister(0), 2);
+		Integer RyDecimal = Integer.parseInt(FrontPanel.getRegister(2), 2);
 		Integer AndDecimal = RxDecimal & RyDecimal;
 		
 		//Store the result in R0
-		ea = Integer.toBinaryString(AndDecimal);
-		FrontPanel.setRegister(instruction.getRegisterNumber(), ea);
+		String ANDResult = BinaryUtil.fillBinaryString(Integer.toBinaryString(AndDecimal));
+		FrontPanel.setRegister(1, ANDResult);
 	}
-	
 
-	public String evaluateIndirectORR(Instruction instruction, String ea) throws Throwable{
-		try {
-			if(instruction.isIndirect()){
-				// Is all what is in the address or only the address part?
-				Instruction indirectInstruction = new Instruction(FrontPanel.memory[Integer.parseInt(ea, 2)].getText());
-				//AddressPart
-				ea = indirectInstruction.getAddress();
-				// else
-				//ea = indirectInstruction.getBinaryInstruction();
-			}
-		} catch (Exception e){
-			throw new Throwable("FAULT");
-		}
-		return ea;
-	}
-	
 	/*
 	 * This method implements the ORR instruction in the UI
 	 */
-	public void instructionORR(Instruction instruction) throws Throwable{
-		String ea = "";
-		//Verify if instruction has index
-		if(instruction.getIndexNumber() == 0){
-			ea = instruction.getAddress();
-		} else {
-			Integer addressDecimal = Integer.parseInt(instruction.getAddress(), 2);
-			Integer indexDecimal = Integer.parseInt(FrontPanel.getIndex(instruction.getIndexNumber()), 2);
-			//Get index and sum it with address
-			Integer sum = addressDecimal + indexDecimal;
-			if(sum > 31){
-				throw new Throwable("FAULT");
-			}
-			ea = Integer.toBinaryString(sum);
-		}
-		ea = evaluateIndirectORR(instruction, ea);
-		ea = BinaryUtil.fillBinaryString(ea); 
+	public static void instructionORR(Instruction instruction) throws Throwable{
+		String ea = BinaryUtil.eaCalculation(instruction);
 		
 		//Logical OR of R0 and R2
-		Integer RxDecimal = Integer.parseInt(FrontPanel.getRegister(0));
-		Integer RyDecimal = Integer.parseInt(FrontPanel.getRegister(2));
-		Integer ORRDecimal = RxDecimal ^ RyDecimal;
+		Integer RxDecimal = Integer.parseInt(FrontPanel.getRegister(0), 2);
+		Integer RyDecimal = Integer.parseInt(FrontPanel.getRegister(2), 2);
+		Integer ORRDecimal = RxDecimal | RyDecimal;
 		
 		//Store the result in R0
-		ea = Integer.toBinaryString(ORRDecimal);
-		FrontPanel.setRegister(instruction.getRegisterNumber(), ea);
-	}
-	
-
-	public String evaluateIndirectNOT(Instruction instruction, String ea) throws Throwable{
-		try {
-			if(instruction.isIndirect()){
-				// Is all what is in the address or only the address part?
-				//Instruction indirectInstruction = new Instruction(memory[Integer.parseInt(ea, 2)].getText());
-				
-				Instruction indirectInstruction = new Instruction(FrontPanel.memory[Integer.parseInt(ea, 2)].getText());
-								
-				//AddressPart
-				ea = indirectInstruction.getAddress();
-				// else
-				//ea = indirectInstruction.getBinaryInstruction();
-			}
-		} catch (Exception e){
-			throw new Throwable("FAULT");
-		}
-		return ea;
+		String ORRresult = BinaryUtil.fillBinaryString(Integer.toBinaryString(ORRDecimal));
+		FrontPanel.setRegister(1, ORRresult);
 	}
 	
 	/*
 	 * This method implements the NOT instruction in the UI
 	 */
-	public void instructionNOT(Instruction instruction) throws Throwable{
-		String ea = "";
-		//Verify if instruction has index
-		if(instruction.getIndexNumber() == 0){
-			ea = instruction.getAddress();
-		} else {
-			Integer addressDecimal = Integer.parseInt(instruction.getAddress(), 2);
-			Integer indexDecimal = Integer.parseInt(FrontPanel.getIndex(instruction.getIndexNumber()), 2);
-			//Get index and sum it with address
-			Integer sum = addressDecimal + indexDecimal;
-			if(sum > 31){
-				throw new Throwable("FAULT");
-			}
-			ea = Integer.toBinaryString(sum);
-		}
-		ea = evaluateIndirectNOT(instruction, ea);
-		ea = BinaryUtil.fillBinaryString(ea); 
-		
-		//Multiply R0 by R2
-		Integer RxDecimal = Integer.parseInt(FrontPanel.getRegister(2));
+	public static void instructionNOT(Instruction instruction) throws Throwable{
+		String ea = BinaryUtil.eaCalculation(instruction);
+
+		//Logical NOT of R0
+		Integer RxDecimal = Integer.parseInt(FrontPanel.getRegister(0));
 		Integer NOTDecimal = ~RxDecimal;
 		
-		//Store the result in R0
-		ea = Integer.toBinaryString(NOTDecimal);
-		FrontPanel.setRegister(instruction.getRegisterNumber(), ea);
+		//Store the result in R1
+		String NOTresult = Integer.toBinaryString(NOTDecimal);
+		NOTresult = NOTresult.substring(16, 32);
+		FrontPanel.setRegister(1, NOTresult);
 	}
-	
-	
 	
 	public void instructionSRC(Instruction instruction) throws Throwable{
 		//TODO
