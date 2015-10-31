@@ -102,6 +102,24 @@ public class Cache {
 	 * @param memoryAddress 
 	 * @param newData 
 	 */
+	public void updateData(String memoryAddressS, String newData){
+		Integer memoryAddress = Integer.parseUnsignedInt(memoryAddressS, 2);
+		CacheSlot slot = find(memoryAddress);
+		//Verify first if the the memory address to be updated is in the cache or not
+		if(slot != null){
+			writeThrough(memoryAddress, slot, newData);
+		} else {
+			bringMemoryAddressToCache(memoryAddress);
+			slot = find(memoryAddress);
+			writeThrough(memoryAddress, slot, newData);
+		}
+	}
+	
+	/**
+	 * Write data to cache 
+	 * @param memoryAddress 
+	 * @param newData 
+	 */
 	public void updateData(int memoryAddress, String newData){
 		CacheSlot slot = find(memoryAddress);
 		//Verify first if the the memory address to be updated is in the cache or not
@@ -115,6 +133,15 @@ public class Cache {
 	}
 	
 	/**
+	 * Reset all cache allocated
+	 */
+	public void resetCache(){
+		System.out.println("Resetting Cache...");
+		instance = new Cache(MEMORY_SIZE);
+		System.out.println("Cache Reset...");
+	}
+	
+	/**
 	 * Find if a memory address is in cache
 	 * @param memoryAddress
 	 * @return cache slot if it's found or null if it's not
@@ -122,9 +149,11 @@ public class Cache {
 	private CacheSlot find(int memoryAddress) {
 		for(int i = 0; i < cacheSize; i++){
 			if(cacheSlots.get(i) != null && cacheSlots.get(i).getMemoryAddress() == memoryAddress){
+				System.out.println("Memory address " + memoryAddress + " found in Cache...");
 				return cacheSlots.get(i);
 			}
 		}
+		System.out.println("Memory address " + memoryAddress + " is NOT in Cache...");
 		return null;
 	}
 	

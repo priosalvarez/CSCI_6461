@@ -24,24 +24,26 @@ public enum InstructionEnum {
 	SMR("05"),
 	AIR("06"),
 	SIR("07"),
-	MLT("020"),//
-	DVD("021"),
-	TRR("022"),
-	AND("023"),
-	ORR("024"),
-	NOT("025"),		
-	SRC("031"),
-	RRC("032"),
+	MLT("20"),//
+	DVD("21"),
+	TRR("22"),
+	AND("23"),
+	ORR("24"),
+	NOT("25"),		
+	SRC("31"),
+	RRC("32"),
 	//Floating Point/Vector Ops
-	FADD("033"),
-	FSUB("034"),
-	VADD("035"),
-	VSUB("036"),
-	CNVRT("037"),
-	LDFR("050"),
-	STFR("051"),
-	FAULT("999");
-	
+	FADD("33"),
+	FSUB("34"),
+	VADD("35"),
+	VSUB("36"),
+	CNVRT("37"),
+	LDFR("50"),
+	STFR("51"),
+	FAULT("999"),
+	//Device Inst
+	IN("61"),
+	OUT("62");
 	
 	
 	
@@ -117,6 +119,15 @@ public enum InstructionEnum {
 			default:
 				return FAULT;
 		}
+	}
+	
+	public static String getValue(InstructionEnum instruction){
+		String decimalValue = instruction.value;
+		Integer firstPartN = Integer.parseInt(decimalValue.substring(0, 1));
+		Integer secondPartN = Integer.parseInt(decimalValue.substring(1));
+		String firstPart = Integer.toBinaryString(firstPartN);
+		String secondPart = Integer.toBinaryString(secondPartN);
+		return BinaryUtil.fillBinaryStringParam(firstPart, 3) + BinaryUtil.fillBinaryStringParam(secondPart, 3);
 	}
 	
 }

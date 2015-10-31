@@ -207,10 +207,6 @@ public class FrontPanel {
 		}
 	}
 	
-	public void setPC(int CCNum, String content){
-		
-	}
-	
 	public static String getCC(int CCNum){
 		if(CCNum == 1){
 			return txtCc.getText();
@@ -263,21 +259,15 @@ public class FrontPanel {
 		cmbLoad.addItem("AND");
 		cmbLoad.addItem("ORR");
 		cmbLoad.addItem("NOT");
-		cmbLoad.addItem("JZ");
-		cmbLoad.addItem("JNE");
-		cmbLoad.addItem("JCC");
-		cmbLoad.addItem("JMA");
-		cmbLoad.addItem("JSR");
-		cmbLoad.addItem("RFS");
-		cmbLoad.addItem("SOB");
-		cmbLoad.addItem("JGE");
-		
 		cmbLoad.addItemListener(new ItemListener() {
 			
 			@Override
 			public void itemStateChanged(ItemEvent itemEvent) {
 				if (itemEvent.getStateChange() == ItemEvent.SELECTED) {
 					ItemSelectable is = itemEvent.getItemSelectable();
+					Cache.getInstance().resetCache();
+					resetInterface();
+					resetMemory();
 					HardCodeBuilder.loadProgram(selectedString(is));
 				}
 			}
@@ -287,6 +277,30 @@ public class FrontPanel {
 	private String selectedString(ItemSelectable is) {
 	    Object selected[] = is.getSelectedObjects();
 	    return ((selected.length == 0) ? "null" : (String) selected[0]);
+	}
+	
+	private void resetInterface(){
+		setIndex(1, null);
+		setIndex(2, null);
+		setIndex(3, null);
+		setRegister(0, null);
+		setRegister(1, null);
+		setRegister(2, null);
+		setRegister(3, null);
+		txtCc.setText("CC");
+		txtMsr.setText("MSR");
+		txtEc.setText("EC");
+		txtMar.setText(null);
+		txtMbr.setText(null);
+		txtIr.setText(null);
+		txtInput.setText(null);
+		txtOutput.setText("Output");
+	}
+	
+	private void resetMemory(){
+		for(int i = 0; i < 2048; i++){
+			setMemory(i, 0);
+		}
 	}
 	
 	private void initTitle(JPanel panel){
@@ -647,6 +661,24 @@ public class FrontPanel {
 		panel.add(txtX3, gbc_txtX3);
 	}
 	
+	private void initBtnResetCache(JPanel panel){
+		JButton btnEmptyCache = new JButton("Reset Cache");
+		GridBagConstraints gbc_btnEmptyCache = new GridBagConstraints();
+		gbc_btnEmptyCache.insets = new Insets(0, 0, 5, 5);
+		gbc_btnEmptyCache.anchor = GridBagConstraints.NORTH;
+		gbc_btnEmptyCache.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnEmptyCache.gridx = 8;
+		gbc_btnEmptyCache.gridy = 12;
+		panel_1.add(btnEmptyCache, gbc_btnEmptyCache);
+		
+		btnEmptyCache.addActionListener(new ActionListener()
+		{
+		  public void actionPerformed(ActionEvent e){
+			  Cache.getInstance().resetCache();
+		  }
+		});
+	}
+	
 	private void initBtnSingleInstruction(JPanel panel){
 		JButton btnSingle = new JButton("Single Instruction");
 		GridBagConstraints gbc_btnSingle = new GridBagConstraints();
@@ -667,8 +699,8 @@ public class FrontPanel {
 			  //Convert PC from binary to decimal 
 			  Integer pcDecimal = Integer.parseInt(txtPc.getText(), 2);
 			  //Get Instruction from memory space
-			  //String plainInstruction = Cache.getInstance().checkCache(pcDecimal);
-			  String plainInstruction = memory[pcDecimal].getText();
+			  String plainInstruction = Cache.getInstance().checkCache(pcDecimal);
+			  //String plainInstruction = memory[pcDecimal].getText();
 			  Instruction instruction;
 			  try
 			  {
@@ -720,27 +752,6 @@ public class FrontPanel {
 		  		  			ArithmeticLogicalOps.instructionNOT(instruction);
 	  		  				break;
 		  		  		case JZ:
-		  		  			Transfer.instructionJZ(instruction);
-		  		  			break;		  		  		
-			  		  	case JNE:
-		  		  			Transfer.instructionJNE(instruction);
-		  		  			break;	
-				  		case JCC:
-				  			Transfer.instructionJCC(instruction);
-			  		  		break;	
-				  		case JMA:
-		  		  			Transfer.instructionJZ(instruction);
-		  		  			break;	
-				  		case JSR:
-		  		  			Transfer.instructionRFS(instruction);
-		  		  			break;	
-				  		case RFS:
-		  		  			Transfer.instructionSOB(instruction);
-		  		  			break;	
-				  		case SOB:
-		  		  			Transfer.instructionJGE(instruction);
-		  		  			break;	
-				  		case JGE:
 		  		  			Transfer.instructionJZ(instruction);
 		  		  			break;	
 		  		  		case HALT:
@@ -807,6 +818,7 @@ public class FrontPanel {
 		initBtnExecute(panel);
 		initBtnLoad(panel);
 		initBtnStop(panel);
+		initBtnResetCache(panel);
 	}
 	
 	private void initInputsAndOutputs(JPanel panel) {
@@ -878,6 +890,40 @@ public class FrontPanel {
 		gbc_txtMsr.gridy = 11;
 		panel.add(txtMsr, gbc_txtMsr);
 		txtMsr.setColumns(10);
+	}
+	
+	public static void setPc(Integer pc){
+		txtPc.setText(BinaryUtil.fillBinaryStringParam(Integer.toBinaryString(pc), 16));
+	}
+	
+	public void setMemory(Integer pos, Integer content){
+		memory[pos].setText(BinaryUtil.fillBinaryStringParam(Integer.toBinaryString(content), 16));
+	}
+	
+	public static void setRegister(Integer registerNum, Integer content){
+		if(registerNum == 0){
+			txtR0.setText(BinaryUtil.fillBinaryStringParam(Integer.toBinaryString(content), 16));
+		} else if(registerNum == 1){
+			txtR1.setText(BinaryUtil.fillBinaryStringParam(Integer.toBinaryString(content), 16));
+		} else  if(registerNum == 2){
+			txtR2.setText(BinaryUtil.fillBinaryStringParam(Integer.toBinaryString(content), 16));
+		} else if(registerNum == 3){
+			txtR3.setText(BinaryUtil.fillBinaryStringParam(Integer.toBinaryString(content), 16));
+		} else {
+			//Exception
+		}
+	}
+	
+	public static void setIndex(Integer indexNum, Integer content){
+		if(indexNum == 1){
+			txtX1.setText(BinaryUtil.fillBinaryStringParam(Integer.toBinaryString(content), 16));
+		} else  if(indexNum == 2){
+			txtX2.setText(BinaryUtil.fillBinaryStringParam(Integer.toBinaryString(content), 16));
+		} else if(indexNum == 3){
+			txtX3.setText(BinaryUtil.fillBinaryStringParam(Integer.toBinaryString(content), 16));
+		} else {
+			//Exception
+		}
 	}
 
 }
