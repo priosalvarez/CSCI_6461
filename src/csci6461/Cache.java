@@ -149,9 +149,11 @@ public class Cache {
 	private CacheSlot find(int memoryAddress) {
 		for(int i = 0; i < cacheSize; i++){
 			if(cacheSlots.get(i) != null && cacheSlots.get(i).getMemoryAddress() == memoryAddress){
+				System.out.println("Memory address " + memoryAddress + " found in Cache...");
 				return cacheSlots.get(i);
 			}
 		}
+		System.out.println("Memory address " + memoryAddress + " is NOT in Cache...");
 		return null;
 	}
 	
