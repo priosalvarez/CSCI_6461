@@ -845,5 +845,39 @@ public class FrontPanel {
 		panel.add(txtMsr, gbc_txtMsr);
 		txtMsr.setColumns(10);
 	}
+	
+	public static void setPc(Integer pc){
+		txtPc.setText(BinaryUtil.fillBinaryStringParam(Integer.toBinaryString(pc), 16));
+	}
+	
+	public static void setMemory(Integer pos, Integer content){
+		memory[pos].setText(BinaryUtil.fillBinaryStringParam(Integer.toBinaryString(content), 16));
+	}
+	
+	public static void setRegister(Integer registerNum, Integer content){
+		if(registerNum == 0){
+			txtR0.setText(BinaryUtil.fillBinaryStringParam(Integer.toBinaryString(content), 16));
+		} else if(registerNum == 1){
+			txtR1.setText(BinaryUtil.fillBinaryStringParam(Integer.toBinaryString(content), 16));
+		} else  if(registerNum == 2){
+			txtR2.setText(BinaryUtil.fillBinaryStringParam(Integer.toBinaryString(content), 16));
+		} else if(registerNum == 3){
+			txtR3.setText(BinaryUtil.fillBinaryStringParam(Integer.toBinaryString(content), 16));
+		} else {
+			//Exception
+		}
+	}
+	
+	public static void setIndex(Integer indexNum, Integer content){
+		if(indexNum == 1){
+			txtX1.setText(BinaryUtil.fillBinaryStringParam(Integer.toBinaryString(content), 16));
+		} else  if(indexNum == 2){
+			txtX2.setText(BinaryUtil.fillBinaryStringParam(Integer.toBinaryString(content), 16));
+		} else if(indexNum == 3){
+			txtX3.setText(BinaryUtil.fillBinaryStringParam(Integer.toBinaryString(content), 16));
+		} else {
+			//Exception
+		}
+	}
 
 }

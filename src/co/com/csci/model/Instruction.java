@@ -128,7 +128,6 @@ public class Instruction {
 		this.ccNumber = ccNumber;
 	}
 	
-	
 	public InstructionEnum getIntructionCode(){
 		String part1 = opCode.substring(0, 3);
 		String part2 = opCode.substring(3);
@@ -136,7 +135,6 @@ public class Instruction {
 		int decimalValue2 = Integer.parseInt(part2, 2);
 		return InstructionEnum.findInstruction(decimalValue + "" + decimalValue2);
 	}
-
 	
 	
 

@@ -115,6 +115,13 @@ public class Cache {
 	}
 	
 	/**
+	 * Reset all cache allocated
+	 */
+	public void resetCache(){
+		instance = new Cache(MEMORY_SIZE);
+	}
+	
+	/**
 	 * Find if a memory address is in cache
 	 * @param memoryAddress
 	 * @return cache slot if it's found or null if it's not

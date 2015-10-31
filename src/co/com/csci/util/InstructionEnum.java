@@ -40,8 +40,10 @@ public enum InstructionEnum {
 	CNVRT("037"),
 	LDFR("050"),
 	STFR("051"),
-	FAULT("999");
-	
+	FAULT("999"),
+	//Device Inst
+	IN("61"),
+	OUT("62");
 	
 	
 	
@@ -117,6 +119,13 @@ public enum InstructionEnum {
 			default:
 				return FAULT;
 		}
+	}
+	
+	public static String getValue(InstructionEnum instruction){
+		String decimalValue = instruction.value;
+		String firstPart = decimalValue.substring(0, 1);
+		String secondPart = decimalValue.substring(1);
+		return BinaryUtil.fillBinaryString03(firstPart) + BinaryUtil.fillBinaryString03(secondPart);
 	}
 	
 }
