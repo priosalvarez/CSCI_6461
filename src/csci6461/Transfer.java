@@ -1,7 +1,5 @@
 package csci6461;
 
-import javax.swing.text.ChangedCharSetException;
-
 import co.com.csci.model.Instruction;
 import co.com.csci.util.BinaryUtil;
 
@@ -15,13 +13,13 @@ the same format as the Load/Store instructions.*/
 public class Transfer {
 	
 	
-	private int r;
+	
 		//Transfer Instructions
 		public static Integer instructionJZ(Instruction instruction) throws Throwable{
 			/*Jump If Zero:
 			If c(r) = 0, then PC <- EA or c(EA), if I bit set;
 			Else PC <- PC+1*/
-		  String ea = "";
+			String ea = BinaryUtil.eaCalculation(instruction);
 			
 		  //String pc = FrontPanel.txtpnPc.getText();
 		  //Convert PC from binary to decimal 
@@ -41,7 +39,7 @@ public class Transfer {
 				}
 				else {
 					pcDecimal = pcDecimal + 1;
-					FrontPanel.txtPc.setText(BinaryUtil.fillBinaryString(Integer.toBinaryString(pcDecimal)));;
+					FrontPanel.txtPc.setText(BinaryUtil.fillBinaryString(Integer.toBinaryString(pcDecimal)));
 				}						
 					
 			} catch (Exception e){
@@ -52,9 +50,9 @@ public class Transfer {
 			
 		}
 		
-		public Integer instructionJNE(Instruction instruction) throws Throwable{
+		public static Integer instructionJNE(Instruction instruction) throws Throwable{
 			
-			String ea = "";
+			String ea = BinaryUtil.eaCalculation(instruction);
 			
 			/*Jump If Not Equal:
 				If c(r) != 0, then PC <- EA or c(EA) , if I bit set;
@@ -88,9 +86,9 @@ public class Transfer {
 				return pcDecimal;
 			
 		}
-		public Integer instructionJCC(Instruction instruction) throws Throwable{
+		public static Integer instructionJCC(Instruction instruction) throws Throwable{
 			
-			String ea = "";
+			String ea = BinaryUtil.eaCalculation(instruction);
 			
 			/*Jump If Condition Code
 			cc replaces r for this instruction
@@ -134,11 +132,12 @@ public class Transfer {
 			PC <- EA, if I bit not set; PC <- c(EA), if I bit set
 			Note: r is ignored in this instruction*/
 			
-			String ea = "";
+			String ea = BinaryUtil.eaCalculation(instruction);
 			
 			  //String pc = FrontPanel.txtpnPc.getText();
 			  //Convert PC from binary to decimal 
 			  Integer pcDecimal = Integer.parseInt(FrontPanel.txtPc.getText(), 2);
+			  
 				
 				
 				try {
@@ -166,7 +165,7 @@ public class Transfer {
 		}
 		public void instructionJSR(Instruction instruction) throws Throwable{
 			//TODO
-			String ea = "";
+			//String ea = BinaryUtil.eaCalculation(instruction);
 			
 			/*Jump and Save Return Address:
 				R3 <- PC+1;
@@ -179,36 +178,69 @@ public class Transfer {
 			
 			
 		}
-		public void instructionRFS(Instruction instruction) throws Throwable{
-			//TODO
-			String ea = "";
+		public static void instructionRFS(Instruction instruction) throws Throwable{
+			
 			
 			/*Return From Subroutine w/ return code as Immed portion (optional) stored in the instruction’s address field. 
 					R0 <- Immed; PC <-- c(R3)
 					IX, I fields are ignored.*/
 			
+			//get content from immediate, in this case it is assuming that immediate is 10
+			int immediate = 10;
+			String immediateString = Integer.toString(immediate);			
 			
-			
-			
+			try {		
+				
+				FrontPanel.setRegister(0, immediateString);
+				
+				FrontPanel.txtPc.setText(BinaryUtil.fillBinaryString(FrontPanel.getRegister(3)));
+				
+									
+					
+			} catch (Exception e){
+				throw new Throwable("FAULT");		
+			}
 			
 		}
-		public void instructionSOB(Instruction instruction) throws Throwable{
-			//TODO
-			String ea = "";
+		public static void instructionSOB(Instruction instruction) throws Throwable{
+			
+			String ea = BinaryUtil.eaCalculation(instruction);
 			
 			/*Subtract One and Branch. R = 0..3
 					r <- c(r) – 1
-					If c(r) > 0,  PC <- EA; but PC <-- c(EA), if I bit set;
-					Else PC <- PC + 1*/
+					If c(r) > 0,  
+						PC <- EA; 
+						if I bit set 
+ 							PC <-- c(EA), ;
+					Else PC <- PC + 1*/			
 			
+			  //String pc = FrontPanel.txtpnPc.getText();
+			  //Convert PC from binary to decimal 
+			  Integer pcDecimal = Integer.parseInt(FrontPanel.txtPc.getText(), 2);
+			  
+			  FrontPanel.setRegister(instruction.getRegisterNumber(),Integer.toString(Integer.parseInt(FrontPanel.getRegister(instruction.getRegisterNumber()), 2) - 1));
+				
+			  
+				if (Integer.parseInt(FrontPanel.getRegister(instruction.getRegisterNumber()), 2) > 0)				
+					ea = instruction.getAddress();
+						//verify that bit is set
+					if(instruction.isIndirect()){
+						
+						Instruction indirectInstruction = new Instruction(FrontPanel.memory[Integer.parseInt(ea, 2)].getText());						
+						ea = indirectInstruction.getAddress();						
+					}
 			
+			else {
+				pcDecimal = pcDecimal + 1;
+				FrontPanel.txtPc.setText(BinaryUtil.fillBinaryString(Integer.toBinaryString(pcDecimal)));
+			}						
 			
 			
 			
 		}
-		public Integer instructionJGE(Instruction instruction) throws Throwable{
+		public static Integer instructionJGE(Instruction instruction) throws Throwable{
 			
-			String ea = "";
+			String ea = BinaryUtil.eaCalculation(instruction);
 			
 			/*Jump Greater Than or Equal To:
 				If c(r) >= 0, then PC <- EA or c(EA) , if I bit set;

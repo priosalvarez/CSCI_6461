@@ -14,7 +14,7 @@ public class ArithmeticLogicalOps {
 	
 	
 
-	private Object[] memory;
+	//private Object[] memory;
 
 	/*
 	 * This method implements the AMR instruction in the UI

@@ -22,6 +22,7 @@ public class Instruction {
 	
 	private Integer base;
 	private Integer ccNumber;
+	private Integer registerNumber;
 	
 	public Instruction(String opCode, String r, String ix, String i, String address){
 		this.opCode = opCode;
@@ -76,6 +77,11 @@ public class Instruction {
 
 	public void setR(String r) {
 		this.r = r;
+	}
+	
+	public Integer setR(Integer registerNumber) {
+		
+		return Integer.parseInt(r, 2);
 	}
 
 	public String getI() {
