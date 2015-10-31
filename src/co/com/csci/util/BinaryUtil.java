@@ -96,7 +96,7 @@ public class BinaryUtil {
 			}
 		} else {
 			if(!instruction.hasIndex()){
-				return FrontPanel.memory[instruction.getIntegerAddress()].getText();
+				return Cache.getInstance().checkCache(instruction.getIntegerAddress());
 			} else {
 				Integer eaPos = sumBinaryToInteger(FrontPanel.getIndex(instruction.getIndexNumber()), instruction.getAddress());
 				return Cache.getInstance().checkCache(eaPos);

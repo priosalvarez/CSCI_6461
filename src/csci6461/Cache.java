@@ -102,6 +102,24 @@ public class Cache {
 	 * @param memoryAddress 
 	 * @param newData 
 	 */
+	public void updateData(String memoryAddressS, String newData){
+		Integer memoryAddress = Integer.parseUnsignedInt(memoryAddressS, 2);
+		CacheSlot slot = find(memoryAddress);
+		//Verify first if the the memory address to be updated is in the cache or not
+		if(slot != null){
+			writeThrough(memoryAddress, slot, newData);
+		} else {
+			bringMemoryAddressToCache(memoryAddress);
+			slot = find(memoryAddress);
+			writeThrough(memoryAddress, slot, newData);
+		}
+	}
+	
+	/**
+	 * Write data to cache 
+	 * @param memoryAddress 
+	 * @param newData 
+	 */
 	public void updateData(int memoryAddress, String newData){
 		CacheSlot slot = find(memoryAddress);
 		//Verify first if the the memory address to be updated is in the cache or not
@@ -118,6 +136,7 @@ public class Cache {
 	 * Reset all cache allocated
 	 */
 	public void resetCache(){
+		System.out.println("Resetting Cache...");
 		instance = new Cache(MEMORY_SIZE);
 	}
 	

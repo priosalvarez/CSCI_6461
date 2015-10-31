@@ -265,6 +265,9 @@ public class FrontPanel {
 			public void itemStateChanged(ItemEvent itemEvent) {
 				if (itemEvent.getStateChange() == ItemEvent.SELECTED) {
 					ItemSelectable is = itemEvent.getItemSelectable();
+					Cache.getInstance().resetCache();
+					resetInterface();
+					resetMemory();
 					HardCodeBuilder.loadProgram(selectedString(is));
 				}
 			}
@@ -274,6 +277,27 @@ public class FrontPanel {
 	private String selectedString(ItemSelectable is) {
 	    Object selected[] = is.getSelectedObjects();
 	    return ((selected.length == 0) ? "null" : (String) selected[0]);
+	}
+	
+	private void resetInterface(){
+		setIndex(1, null);
+		setIndex(2, null);
+		setIndex(3, null);
+		setRegister(0, null);
+		setRegister(1, null);
+		setRegister(2, null);
+		setRegister(3, null);
+		txtCc.setText("CC");
+		txtMsr.setText("MSR");
+		txtEc.setText("EC");
+		txtInput.setText(null);
+		txtOutput.setText("Output");
+	}
+	
+	private void resetMemory(){
+		for(int i = 0; i < 2048; i++){
+			setMemory(i, 0);
+		}
 	}
 	
 	private void initTitle(JPanel panel){
@@ -850,7 +874,7 @@ public class FrontPanel {
 		txtPc.setText(BinaryUtil.fillBinaryStringParam(Integer.toBinaryString(pc), 16));
 	}
 	
-	public static void setMemory(Integer pos, Integer content){
+	public void setMemory(Integer pos, Integer content){
 		memory[pos].setText(BinaryUtil.fillBinaryStringParam(Integer.toBinaryString(content), 16));
 	}
 	

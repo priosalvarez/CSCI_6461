@@ -57,7 +57,6 @@ public class HardCodeBuilder {
 	}
 
 	private static void loadProgram1() {
-		//resetInterface();
 		
 		//Init PC en 500
 		FrontPanel.setPc(500);
@@ -244,6 +243,17 @@ public class HardCodeBuilder {
 		FrontPanel.memory[7].setText("0000000000000001");
 	}
 
+	/**
+	 * Function to make easier hard code instructions to UI
+	 * receiving the opCode with the instruction name and the
+	 * other parameter as decimal numbers.
+	 * @param opCodeEnum
+	 * @param r
+	 * @param ix
+	 * @param address
+	 * @param i
+	 * @return 16 bits long binary instruction
+	 */
 	public static String instUIBuilder(InstructionEnum opCodeEnum,
 												 Integer r, Integer ix,
 												 Integer address, Integer i){
