@@ -658,6 +658,24 @@ public class FrontPanel {
 		panel.add(txtX3, gbc_txtX3);
 	}
 	
+	private void initBtnResetCache(JPanel panel){
+		JButton btnEmptyCache = new JButton("Reset Cache");
+		GridBagConstraints gbc_btnEmptyCache = new GridBagConstraints();
+		gbc_btnEmptyCache.insets = new Insets(0, 0, 5, 5);
+		gbc_btnEmptyCache.anchor = GridBagConstraints.NORTH;
+		gbc_btnEmptyCache.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnEmptyCache.gridx = 8;
+		gbc_btnEmptyCache.gridy = 12;
+		panel_1.add(btnEmptyCache, gbc_btnEmptyCache);
+		
+		btnEmptyCache.addActionListener(new ActionListener()
+		{
+		  public void actionPerformed(ActionEvent e){
+			  Cache.getInstance().resetCache();
+		  }
+		});
+	}
+	
 	private void initBtnSingleInstruction(JPanel panel){
 		JButton btnSingle = new JButton("Single Instruction");
 		GridBagConstraints gbc_btnSingle = new GridBagConstraints();
@@ -797,6 +815,7 @@ public class FrontPanel {
 		initBtnExecute(panel);
 		initBtnLoad(panel);
 		initBtnStop(panel);
+		initBtnResetCache(panel);
 	}
 	
 	private void initInputsAndOutputs(JPanel panel) {

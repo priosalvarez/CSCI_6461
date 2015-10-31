@@ -138,6 +138,7 @@ public class Cache {
 	public void resetCache(){
 		System.out.println("Resetting Cache...");
 		instance = new Cache(MEMORY_SIZE);
+		System.out.println("Cache Reset...");
 	}
 	
 	/**
