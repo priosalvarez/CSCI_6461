@@ -259,6 +259,15 @@ public class FrontPanel {
 		cmbLoad.addItem("AND");
 		cmbLoad.addItem("ORR");
 		cmbLoad.addItem("NOT");
+		cmbLoad.addItem("JZ");
+		cmbLoad.addItem("JNE");
+		cmbLoad.addItem("JCC");
+		cmbLoad.addItem("JMA");
+		cmbLoad.addItem("JSR");
+		cmbLoad.addItem("RFS");
+		cmbLoad.addItem("SOB");
+		cmbLoad.addItem("JGE");
+		
 		cmbLoad.addItemListener(new ItemListener() {
 			
 			@Override
@@ -753,7 +762,28 @@ public class FrontPanel {
 	  		  				break;
 		  		  		case JZ:
 		  		  			Transfer.instructionJZ(instruction);
+		  		  			break;
+			  		  	case JNE:
+		  		  			Transfer.instructionJNE(instruction);
 		  		  			break;	
+				  		case JCC:
+				  			Transfer.instructionJCC(instruction);
+			  		  		break;	
+				  		case JMA:
+		  		  			Transfer.instructionJZ(instruction);
+		  		  			break;	
+				  		case JSR:
+		  		  			Transfer.instructionRFS(instruction);
+		  		  			break;	
+				  		case RFS:
+		  		  			Transfer.instructionSOB(instruction);
+		  		  			break;	
+				  		case SOB:
+		  		  			Transfer.instructionJGE(instruction);
+		  		  			break;	
+				  		case JGE:
+		  		  			Transfer.instructionJZ(instruction);
+		  		  			break;
 		  		  		case HALT:
 		  		  			txtOutput.setText("HALT");
 			  				break;
