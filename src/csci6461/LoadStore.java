@@ -19,6 +19,8 @@ public class LoadStore {
 		FrontPanel.setRegister(instruction.getRegisterNumber(), Cache.getInstance().checkCache(ea));
 	}
 	
+	
+	
 	/**
 	 * Store Register To Memory, r = 0..3
 	   EA <- c(r)
@@ -31,30 +33,64 @@ public class LoadStore {
 		Cache.getInstance().updateData(ea, FrontPanel.getRegister(instruction.getRegisterNumber()));
 	}
 	
-	public void instructionLDA(Instruction instruction) throws Throwable{
-		//TODO
-		String ea = "";
+	
+	
+	/**
+	 * Load Register with Address, r = 0..3
+		r <- EA
+		r <- c(EA), if I bit set
+	 * @param instruction
+	 * @throws Throwable
+	 */
+	public static void instructionLDA(Instruction instruction) throws Throwable{
+				
 		/*Load Register with Address, r = 0..3
 				r <- EA
-				r <- c(EA), if I bit set*/
+				r <- c(EA), if I bit set*/	
+		String ea = BinaryUtil.eaCalculation(instruction);
+		FrontPanel.setRegister(instruction.getRegisterNumber(), Integer.parseInt(Cache.getInstance().checkCache(ea), 2));
+		
+			
+	}
+	
+	
+	
+	/**
+	 * Load Index Register from Memory, x = 1..3
+		Xx <- c(EA)
+	 * @param instruction
+	 * @throws Throwable
+	 */
+	public static void instructionLDX(Instruction instruction) throws Throwable{		
+		
+		/*Load Index Register from Memory, x = 1..3
+				Xx <- c(EA)*/
+		
+		String ea = BinaryUtil.eaCalculation(instruction);		
+		FrontPanel.setIndex(instruction.getIndexNumber(), Cache.getInstance().checkCache(ea));
 		
 		
 	}
 	
-	public void instructionLDX(Instruction instruction) throws Throwable{
-		//TODO
-		String ea = "";
-		/*Load Index Register from Memory, x = 1..3
-				Xx <- c(EA)*/
+	
+	
+	/**
+	 * Store Index Register to Memory. X = 1..3
+		EA <- c(X0)
+		C(EA) <- c(Xx), if I-bit set
+	 * @param instruction
+	 * @throws Throwable
+	 */
+	public static void instructionSTX(Instruction instruction) throws Throwable{
 		
 		
-	}
-	public void instructionSTX(Instruction instruction) throws Throwable{
-		//TODO
-		String ea = "";
 		/*Store Index Register to Memory. X = 1..3
 				EA <- c(X0)
 				C(EA) <- c(Xx), if I-bit set*/
+		
+		String ea = BinaryUtil.eaCalculation(instruction);
+		Cache.getInstance().updateData(ea, FrontPanel.getIndex(instruction.getIndexNumber()));	
+		
 		
 	}
 	

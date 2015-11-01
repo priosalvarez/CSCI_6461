@@ -64,6 +64,7 @@ public class ArithmeticLogicalOps {
 		FrontPanel.txtCc.setText("0000");
 		//Assume the Immediate Value is 10
 		Integer immediate = 10;
+		//c(r) 
 		Integer registerDecimal = Integer.parseInt(FrontPanel.getRegister(instruction.getRegisterNumber()), 2);
 		
 		if(immediate == 0){

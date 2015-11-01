@@ -30,6 +30,9 @@ public class HardCodeBuilder {
 	private static String OUTs = "OUT";
 	private static String LDRs = "LDR";
 	private static String STRs = "STR";
+	private static String LDXs = "LDX";
+	private static String STXs = "STX";
+	private static String LDAs = "LDA";
 	
 	public static void loadProgram(String programName){
 		
@@ -102,7 +105,16 @@ public class HardCodeBuilder {
 		if(programName.equals(OUTs)){
 			loadOUT();
 		}
-		
+		if(programName.equals(LDXs)){
+			loadLDX();
+		}
+		if(programName.equals(STXs)){
+			loadSTX();
+		}
+		if(programName.equals(LDAs)){
+			loadLDA();
+		}
+				
 	}
 
 	private static void loadOUT() {
@@ -129,6 +141,25 @@ public class HardCodeBuilder {
 		FrontPanel.txtInput.setText("a");
 		FrontPanel.memory[6].setText(instUIBuilder(IN, 0, 0, 0, 0));
 	}
+	
+	private static void loadSTX() {
+		FrontPanel.setPc(6);
+		FrontPanel.memory[6].setText(instUIBuilder(STX, 1, 0, 7, 0));
+		FrontPanel.setRegister(1, 101);
+	}
+	
+	private static void loadLDX() {
+		FrontPanel.setPc(6);
+		FrontPanel.memory[6].setText(instUIBuilder(LDX, 2, 0, 8, 0));
+		FrontPanel.setRegister(7, 100);
+	}
+	private static void loadLDA() {
+		FrontPanel.setPc(6);
+		FrontPanel.memory[6].setText(instUIBuilder(LDA, 2, 0, 7, 0));
+		FrontPanel.setRegister(7, 100);
+	}
+	
+	
 
 	private static void loadProgram1() {
 		

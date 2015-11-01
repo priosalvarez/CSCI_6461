@@ -167,7 +167,7 @@ public class FrontPanel {
 		return "";
 	}
 	
-	public void setIndex(int indexNum, String content){
+	public static void setIndex(int indexNum, String content){
 		if(indexNum == 1){
 			txtX1.setText(content);
 		} else  if(indexNum == 2){

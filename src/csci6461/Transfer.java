@@ -163,9 +163,9 @@ public class Transfer {
 			
 			
 		}
-		public void instructionJSR(Instruction instruction) throws Throwable{
-			//TODO
-			//String ea = BinaryUtil.eaCalculation(instruction);
+		public Integer instructionJSR(Instruction instruction) throws Throwable{
+			
+			String ea = BinaryUtil.eaCalculation(instruction);
 			
 			/*Jump and Save Return Address:
 				R3 <- PC+1;
@@ -173,7 +173,31 @@ public class Transfer {
 				R0 should contain pointer to arguments
 				Argument list should end with –17777 value*/
 			
-			
+			 //String pc = FrontPanel.txtpnPc.getText();
+			  //Convert PC from binary to decimal 
+			  Integer pcDecimal = Integer.parseInt(FrontPanel.txtPc.getText(), 2);
+				
+				
+				try {
+					if(Integer.parseInt(FrontPanel.getRegister(instruction.getRegisterNumber()), 2) == 0){
+						ea = instruction.getAddress();
+						
+						//verify that bit is set
+						if(instruction.isIndirect()){
+							
+							Instruction indirectInstruction = new Instruction(FrontPanel.memory[Integer.parseInt(ea, 2)].getText());						
+							ea = indirectInstruction.getAddress();						
+						}
+					}
+					else {
+						pcDecimal = pcDecimal + 1;
+						FrontPanel.txtPc.setText((Integer.toBinaryString(pcDecimal)));
+					}						
+						
+				} catch (Exception e){
+					throw new Throwable("FAULT");
+				}
+				return pcDecimal;
 			
 			
 			
