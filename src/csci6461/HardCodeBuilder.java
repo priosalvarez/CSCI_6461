@@ -27,6 +27,7 @@ public class HardCodeBuilder {
 	private static String SOBs = "SOB";
 	private static String JGEs = "JGE";
 	private static String INs = "IN";
+	private static String OUTs = "OUT";
 	private static String LDRs = "LDR";
 	private static String STRs = "STR";
 	
@@ -98,7 +99,17 @@ public class HardCodeBuilder {
 		if(programName.equals(STRs)){
 			loadSTR();
 		}
+		if(programName.equals(OUTs)){
+			loadOUT();
+		}
 		
+	}
+
+	private static void loadOUT() {
+		FrontPanel.setPc(6);
+		FrontPanel.memory[6].setText(instUIBuilder(OUT, 1, 0, 1, 0));
+		FrontPanel.txtOutput.setText("");
+		FrontPanel.setRegister(1, 97);
 	}
 
 	private static void loadSTR() {

@@ -50,6 +50,18 @@ public class IOOps {
 			}
 		}
 	}
+
+	/**
+	 * Output Character to Device from Register, r = 0..3
+	 * @param instruction
+	 */
+	public static void instructionOUT(Instruction instruction) {
+		if(instruction.getIntegerAddress() == ID_CONSOLE_PRINTER){
+			char outputChar = (char) Integer.parseInt(FrontPanel.getRegister(instruction.getRegisterNumber()), 2);
+			String currentText = FrontPanel.txtOutput.getText();
+			FrontPanel.txtOutput.setText(currentText + outputChar);
+		}
+	}
 	
 
 }

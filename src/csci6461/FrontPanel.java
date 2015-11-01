@@ -268,6 +268,7 @@ public class FrontPanel {
 		cmbLoad.addItem("SOB");
 		cmbLoad.addItem("JGE");
 		cmbLoad.addItem("IN");
+		cmbLoad.addItem("OUT");
 		cmbLoad.addItem("LDR");
 		cmbLoad.addItem("STR");
 		
@@ -705,7 +706,6 @@ public class FrontPanel {
 		{
 		  public void actionPerformed(ActionEvent e)
 		  {
-			  txtOutput.setText("Output");
 			  //Get PC counter
 			  String pc = txtPc.getText();
 			  //Convert PC from binary to decimal 
@@ -789,6 +789,9 @@ public class FrontPanel {
 		  		  			break;
 				  		case IN:
 		  		  			IOOps.instructionIN(instruction);
+		  		  			break;
+				  		case OUT:
+		  		  			IOOps.instructionOUT(instruction);
 		  		  			break;
 		  		  		case HALT:
 		  		  			txtOutput.setText("HALT");
