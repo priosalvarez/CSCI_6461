@@ -179,12 +179,12 @@ public class Cache {
 		String data = FrontPanel.memory[memoryAddress].getText();
 		CacheSlot slot = new CacheSlot(data, memoryAddress);
 		if(cacheSize == MEMORY_SIZE){
-			System.out.println("Bringing data from memory postion " + memoryAddress + " to cache position " + memoryAddress);
+			System.out.println("Bringing data from memory position " + memoryAddress + " to cache position " + memoryAddress);
 			cacheSlots.set(memoryAddress, slot);
 			return data;
 		} else {
 			cacheSlots.set(addCounter, slot);
-			System.out.println("Bringing data from memory address postion " + memoryAddress + " to position " + addCounter);
+			System.out.println("Bringing data from memory address position " + memoryAddress + " to position " + addCounter);
 			incrementAddCounter();
 			return data;
 		}
@@ -197,9 +197,9 @@ public class Cache {
 	 * @param data
 	 */
 	private void writeThrough(int memoryAddress, CacheSlot slot, String data){
-		System.out.println("Writing data to cache postion " + findPosition(memoryAddress));
+		System.out.println("Writing data to cache position " + findPosition(memoryAddress));
 		slot.setData(data);
-		System.out.println("Writing data to memory address postion " + memoryAddress);
+		System.out.println("Writing data to memory address position " + memoryAddress);
 		FrontPanel.memory[memoryAddress].setText(slot.getData());
 	}
 

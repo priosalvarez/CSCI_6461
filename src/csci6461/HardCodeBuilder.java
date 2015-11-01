@@ -26,6 +26,9 @@ public class HardCodeBuilder {
 	private static String RFSs = "RFS";
 	private static String SOBs = "SOB";
 	private static String JGEs = "JGE";
+	private static String INs = "IN";
+	private static String LDRs = "LDR";
+	private static String STRs = "STR";
 	
 	public static void loadProgram(String programName){
 		
@@ -86,8 +89,34 @@ public class HardCodeBuilder {
 		if(programName.equals(JGEs)){
 			loadJGE();
 		}
+		if(programName.equals(INs)){
+			loadIN();
+		}
+		if(programName.equals(LDRs)){
+			loadLDR();
+		}
+		if(programName.equals(STRs)){
+			loadSTR();
+		}
 		
-		
+	}
+
+	private static void loadSTR() {
+		FrontPanel.setPc(6);
+		FrontPanel.memory[6].setText(instUIBuilder(STR, 2, 0, 8, 0));
+		FrontPanel.setRegister(2, 123);
+	}
+
+	private static void loadLDR() {
+		FrontPanel.setPc(6);
+		FrontPanel.memory[6].setText(instUIBuilder(LDR, 1, 0, 7, 0));
+		FrontPanel.setMemory(7, 100);
+	}
+
+	private static void loadIN() {
+		FrontPanel.setPc(6);
+		FrontPanel.txtInput.setText("a");
+		FrontPanel.memory[6].setText(instUIBuilder(IN, 0, 0, 0, 0));
 	}
 
 	private static void loadProgram1() {

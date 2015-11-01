@@ -31,7 +31,7 @@ public class IOOps {
 	 * @param instruction
 	 * @throws Throwable
 	 */
-	public void instructionIN(Instruction instruction) throws Throwable{
+	public static void instructionIN(Instruction instruction) throws Throwable{
 		char readChar;
 		//Read from keyboard
 		if(instruction.getIntegerAddress() == ID_KEYBOARD){

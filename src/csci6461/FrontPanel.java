@@ -267,6 +267,9 @@ public class FrontPanel {
 		cmbLoad.addItem("RFS");
 		cmbLoad.addItem("SOB");
 		cmbLoad.addItem("JGE");
+		cmbLoad.addItem("IN");
+		cmbLoad.addItem("LDR");
+		cmbLoad.addItem("STR");
 		
 		cmbLoad.addItemListener(new ItemListener() {
 			
@@ -784,6 +787,9 @@ public class FrontPanel {
 				  		case JGE:
 		  		  			Transfer.instructionJZ(instruction);
 		  		  			break;
+				  		case IN:
+		  		  			IOOps.instructionIN(instruction);
+		  		  			break;
 		  		  		case HALT:
 		  		  			txtOutput.setText("HALT");
 			  				break;
@@ -926,7 +932,7 @@ public class FrontPanel {
 		txtPc.setText(BinaryUtil.fillBinaryStringParam(Integer.toBinaryString(pc), 16));
 	}
 	
-	public void setMemory(Integer pos, Integer content){
+	public static void setMemory(Integer pos, Integer content){
 		memory[pos].setText(BinaryUtil.fillBinaryStringParam(Integer.toBinaryString(content), 16));
 	}
 	

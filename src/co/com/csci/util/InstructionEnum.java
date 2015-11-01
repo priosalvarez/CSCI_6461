@@ -115,6 +115,10 @@ public enum InstructionEnum {
 				return LDFR;
 			case "51":
 				return STFR;
+			case "61":
+				return IN;
+			case "62":
+				return OUT;
 			default:
 				return FAULT;
 		}
