@@ -4,8 +4,7 @@ public enum InstructionEnum {
 
 	HALT("00"),
 	LDR("01"),
-	STR("02"),
-	
+	STR("02"),	
 	//Load/Store Instructions
 	LDA("03"),
 	LDX("41"),	
@@ -127,6 +126,7 @@ public enum InstructionEnum {
 		Integer secondPartN = Integer.parseInt(decimalValue.substring(1));
 		String firstPart = Integer.toBinaryString(firstPartN);
 		String secondPart = Integer.toBinaryString(secondPartN);
+		
 		return BinaryUtil.fillBinaryStringParam(firstPart, 3) + BinaryUtil.fillBinaryStringParam(secondPart, 3);
 	}
 	

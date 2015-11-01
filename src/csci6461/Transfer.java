@@ -39,7 +39,7 @@ public class Transfer {
 				}
 				else {
 					pcDecimal = pcDecimal + 1;
-					FrontPanel.txtPc.setText(BinaryUtil.fillBinaryString(Integer.toBinaryString(pcDecimal)));
+					FrontPanel.txtPc.setText((Integer.toBinaryString(pcDecimal)));
 				}						
 					
 			} catch (Exception e){
@@ -114,7 +114,7 @@ public class Transfer {
 					}
 					else {
 						pcDecimal = pcDecimal + 1;
-						FrontPanel.txtPc.setText(BinaryUtil.fillBinaryString(Integer.toBinaryString(pcDecimal)));;
+						FrontPanel.txtPc.setText((Integer.toBinaryString(pcDecimal)));;
 					}						
 						
 				} catch (Exception e){
@@ -193,7 +193,7 @@ public class Transfer {
 				
 				FrontPanel.setRegister(0, immediateString);
 				
-				FrontPanel.txtPc.setText(BinaryUtil.fillBinaryString(FrontPanel.getRegister(3)));
+				FrontPanel.txtPc.setText((FrontPanel.getRegister(3)));
 				
 									
 					
@@ -232,7 +232,7 @@ public class Transfer {
 			
 			else {
 				pcDecimal = pcDecimal + 1;
-				FrontPanel.txtPc.setText(BinaryUtil.fillBinaryString(Integer.toBinaryString(pcDecimal)));
+				FrontPanel.txtPc.setText((Integer.toBinaryString(pcDecimal)));
 			}						
 			
 			

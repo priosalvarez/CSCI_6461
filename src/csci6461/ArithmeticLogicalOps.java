@@ -30,7 +30,7 @@ public class ArithmeticLogicalOps {
 
 		//Add Register to Memory
 		String resultAMR = Integer.toBinaryString(addAMR);
-		FrontPanel.setRegister(instruction.getRegisterNumber(), BinaryUtil.fillBinaryString(resultAMR));
+		FrontPanel.setRegister(instruction.getRegisterNumber(), (resultAMR));
 	}
 	
 	

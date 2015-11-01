@@ -18,14 +18,14 @@ public class HardCodeBuilder {
 	private static String ANDs = "AND";	
 	private static String ORRs = "ORR";
 	private static String NOTs = "NOT";
-	private static String JZ = "JZ";
-	private static String JNE = "JNE";
-	private static String JCC = "JCC";
-	private static String JMA = "JMA";
-	private static String JSR = "JSR";
-	private static String RFS = "RFS";
-	private static String SOB = "SOB";
-	private static String JGE = "JGE";
+	private static String JZs = "JZ";
+	private static String JNEs = "JNE";
+	private static String JCCs = "JCC";
+	private static String JMAs = "JMA";
+	private static String JSRs = "JSR";
+	private static String RFSs = "RFS";
+	private static String SOBs = "SOB";
+	private static String JGEs = "JGE";
 	
 	public static void loadProgram(String programName){
 		
@@ -62,28 +62,28 @@ public class HardCodeBuilder {
 		if(programName.equals(NOTs)){
 			loadNOT();
 		}
-		if(programName.equals(JZ)){
+		if(programName.equals(JZs)){
 			loadJZ();
 		}
-		if(programName.equals(JNE)){
+		if(programName.equals(JNEs)){
 			loadJNE();
 		}
-		if(programName.equals(JCC)){
+		if(programName.equals(JCCs)){
 			loadJCC();
 		}
-		if(programName.equals(JMA)){
+		if(programName.equals(JMAs)){
 			loadJMA();
 		}
-		if(programName.equals(JSR)){
+		if(programName.equals(JSRs)){
 			loadJSR();
 		}
-		if(programName.equals(RFS)){
+		if(programName.equals(RFSs)){
 			loadRFS();
 		}
-		if(programName.equals(SOB)){
+		if(programName.equals(SOBs)){
 			loadSOB();
 		}
-		if(programName.equals(JGE)){
+		if(programName.equals(JGEs)){
 			loadJGE();
 		}
 		
