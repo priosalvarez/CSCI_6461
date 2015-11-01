@@ -63,9 +63,8 @@ public class FrontPanel {
 	
 	static JTextPane txtEc; //EC
 	static JTextField txtCc; //CC
-	
-	static JTextField txtInput; //Input
 	static JTextPane txtOutput; //Output
+	static JTextPane txtInput;
 	
 	static public JTextPane[] memory; //All memory entries
 	private JPanel panel_1;
@@ -222,12 +221,12 @@ public class FrontPanel {
 		return "";
 	}
 	
-	public JTextField getDirectInput() {
+	public JTextPane getDirectInput() {
 		return txtInput;
 	}
 
-	public void setDirectInput(JTextField directInput) {
-		this.txtInput = directInput;
+	public void setDirectInput(JTextPane directInput) {
+		txtInput = directInput;
 	}
 	
 	private void initLoadComboBox(JPanel panel){
@@ -608,6 +607,7 @@ public class FrontPanel {
 	}
 	
 	private void initIndexes(JPanel panel){
+		
 		//Init Index 1
 		JLabel lblX1 = new JLabel("X1");
 		GridBagConstraints gbc_lblX1 = new GridBagConstraints();
@@ -882,17 +882,18 @@ public class FrontPanel {
 		gbc_lblInput.gridy = 14;
 		panel.add(lblInput, gbc_lblInput);
 		
-		setDirectInput(new JTextField());
-		getDirectInput().setBounds(100, 12, 94, 43);
-		GridBagConstraints gbc_txtInput = new GridBagConstraints();
-		gbc_txtInput.gridheight = 2;
-		gbc_txtInput.gridwidth = 5;
-		gbc_txtInput.fill = GridBagConstraints.BOTH;
-		gbc_txtInput.insets = new Insets(0, 0, 5, 5);
-		gbc_txtInput.gridx = 2;
-		gbc_txtInput.gridy = 14;
-		panel.add(getDirectInput(), gbc_txtInput);
-		getDirectInput().setColumns(10);
+		JScrollPane scrollPane = new JScrollPane();
+		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
+		gbc_scrollPane.gridwidth = 5;
+		gbc_scrollPane.gridheight = 2;
+		gbc_scrollPane.insets = new Insets(0, 0, 5, 5);
+		gbc_scrollPane.fill = GridBagConstraints.BOTH;
+		gbc_scrollPane.gridx = 2;
+		gbc_scrollPane.gridy = 14;
+		txtInput = new JTextPane();
+		scrollPane.add(txtInput);
+		panel_1.add(scrollPane, gbc_scrollPane);
+		scrollPane.setViewportView(txtInput);
 		
 		//Init output area for processing messages (i.e. troubleshooting, trap messages)
 		txtEc = new JTextPane();

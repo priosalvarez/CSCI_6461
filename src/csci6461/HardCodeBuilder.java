@@ -249,6 +249,42 @@ public class HardCodeBuilder {
 		FrontPanel.memory[104].setText(instUIBuilder(JMA, 0, 0, 31, 1));
 		
 		FrontPanel.memory[100].setText(instUIBuilder(HALT, 0, 0, 0, 0));
+		
+		FrontPanel.setRegister(0, 0);
+		FrontPanel.setRegister(1, 0);
+		FrontPanel.setRegister(2, 0);
+		FrontPanel.setRegister(3, 0);
+		
+		FrontPanel.setIndex(1, 1000);
+		FrontPanel.setIndex(2, 1500);
+		FrontPanel.setIndex(3, 1000);
+		
+		FrontPanel.setMemory(6, 13);
+		FrontPanel.setMemory(7, 100);
+		FrontPanel.setMemory(8, 35);
+		FrontPanel.setMemory(10, 10);
+		FrontPanel.setMemory(11, 515);
+		FrontPanel.setMemory(12, 499);
+		//FrontPanel.setMemory(13, 13);
+		FrontPanel.setMemory(14, 1020);
+		FrontPanel.setMemory(15, 520);
+		//FrontPanel.setMemory(16, 13);
+		FrontPanel.setMemory(17, 0);
+		FrontPanel.setMemory(18, 540);
+		FrontPanel.setMemory(19, 500);
+		//FrontPanel.setMemory(20, 500);
+		FrontPanel.setMemory(21, 558);
+		FrontPanel.setMemory(22, 539);
+		FrontPanel.setMemory(23, 580);
+		FrontPanel.setMemory(24, 600);
+		FrontPanel.setMemory(25, 560);
+		FrontPanel.setMemory(26, 20);
+		FrontPanel.setMemory(27, 500);
+		FrontPanel.setMemory(28, 500);
+		//FrontPanel.setMemory(29, 500);
+		FrontPanel.setMemory(30, 500);
+		FrontPanel.setMemory(31, 500);
+		
 	}
 	
 	private static void loadAMR() {
