@@ -14,68 +14,58 @@ public class Transfer {
 	
 	
 	
-		//Transfer Instructions
-		public static void instructionJZ(Instruction instruction) throws Throwable{
-			/*Jump If Zero:
+	//Transfer Instructions
+	public static void instructionJZ(Instruction instruction) throws Throwable{
+		/*Jump If Zero:
 			If c(r) = 0, then PC <- EA or c(EA), if I bit set;
 			Else PC <- PC+1*/
-			String ea = BinaryUtil.eaCalculation(instruction);
-			
-		  //String pc = FrontPanel.txtpnPc.getText();
-		  //Convert PC from binary to decimal 
-		  Integer pcDecimal = Integer.parseInt(FrontPanel.txtPc.getText(), 2);
-			
-			
-			try {
-				if(Integer.parseInt(FrontPanel.getRegister(instruction.getRegisterNumber()), 2) == 0){
-					FrontPanel.txtPc.setText(BinaryUtil.fillBinaryStringParam(ea, 16));
-				}
-				else {
-					pcDecimal = pcDecimal + 1;
-					FrontPanel.txtPc.setText(BinaryUtil.fillBinaryStringParam(Integer.toBinaryString(pcDecimal), 16));
-				}						
-					
-			} catch (Exception e){
-				throw new Throwable("FAULT");
-			}			
-		}
+		String ea = BinaryUtil.eaCalculation(instruction);
+
+		//Convert PC from binary to decimal 
+		Integer pcDecimal = Integer.parseInt(FrontPanel.txtPc.getText(), 2);
+
+
+		try {
+			if(Integer.parseInt(FrontPanel.getRegister(instruction.getRegisterNumber()), 2) == 0){
+				FrontPanel.txtPc.setText(BinaryUtil.fillBinaryStringParam(ea, 16));
+			}
+			else {
+				pcDecimal = pcDecimal + 1;
+				FrontPanel.txtPc.setText(BinaryUtil.fillBinaryStringParam(Integer.toBinaryString(pcDecimal), 16));
+			}						
+
+		} catch (Exception e){
+			throw new Throwable("FAULT");
+		}			
+	}
 		
-		public static Integer instructionJNE(Instruction instruction) throws Throwable{
-			
-			String ea = BinaryUtil.eaCalculation(instruction);
-			
-			/*Jump If Not Equal:
+	public static void instructionJNE(Instruction instruction) throws Throwable{
+
+		String ea = BinaryUtil.eaCalculation(instruction);
+
+		/*Jump If Not Equal:
 				If c(r) != 0, then PC <- EA or c(EA) , if I bit set;
 				Else PC <- PC + 1*/
-			
-			
-			  //String pc = FrontPanel.txtpnPc.getText();
-			  //Convert PC from binary to decimal 
-			  Integer pcDecimal = Integer.parseInt(FrontPanel.txtPc.getText(), 2);
-				
-				
-			  try {
-					if(Integer.parseInt(FrontPanel.getRegister(instruction.getRegisterNumber()), 2) != 0){
-						ea = instruction.getAddress();
-						
-						//verify that bit is set
-						if(instruction.isIndirect()){
-							
-							Instruction indirectInstruction = new Instruction(FrontPanel.memory[Integer.parseInt(ea, 2)].getText());						
-							ea = indirectInstruction.getAddress();						
-						}
-					}
-					else {
-						pcDecimal = pcDecimal + 1;
-						FrontPanel.txtPc.setText(BinaryUtil.fillBinaryString(Integer.toBinaryString(pcDecimal)));;
-					}						
-						
-				} catch (Exception e){
-					throw new Throwable("FAULT");
-				}
-				return pcDecimal;
-			
-		}
+
+
+		//Convert PC from binary to decimal 
+		Integer pcDecimal = Integer.parseInt(FrontPanel.txtPc.getText(), 2);
+
+
+		try {
+			if(Integer.parseInt(FrontPanel.getRegister(instruction.getRegisterNumber()), 2) != 0){
+				FrontPanel.txtPc.setText(BinaryUtil.fillBinaryStringParam(ea, 16));
+			}
+			else {
+				pcDecimal = pcDecimal + 1;
+				FrontPanel.txtPc.setText(BinaryUtil.fillBinaryStringParam(Integer.toBinaryString(pcDecimal), 16));
+			}						
+
+		} catch (Exception e){
+			throw new Throwable("FAULT");
+		}			
+
+	}
 		
 		/*
 		 * Condition Code: set when arithmetic/logical operations are executed; 
