@@ -28,18 +28,11 @@ public class Transfer {
 			
 			try {
 				if(Integer.parseInt(FrontPanel.getRegister(instruction.getRegisterNumber()), 2) == 0){
-					ea = instruction.getAddress();
-					
-					//verify that bit is set
-					if(instruction.isIndirect()){
-						
-						Instruction indirectInstruction = new Instruction(FrontPanel.memory[Integer.parseInt(ea, 2)].getText());						
-						ea = indirectInstruction.getAddress();						
-					}
+					FrontPanel.txtPc.setText(BinaryUtil.fillBinaryStringParam(ea, 16));
 				}
 				else {
 					pcDecimal = pcDecimal + 1;
-					FrontPanel.txtPc.setText((Integer.toBinaryString(pcDecimal)));
+					FrontPanel.txtPc.setText(BinaryUtil.fillBinaryStringParam(Integer.toBinaryString(pcDecimal), 16));
 				}						
 					
 			} catch (Exception e){

@@ -170,7 +170,7 @@ public class HardCodeBuilder {
 		FrontPanel.memory[499].setText(instUIBuilder(AIR, 3, 0, 1, 0));
 		FrontPanel.memory[500].setText(instUIBuilder(IN, 2, 0, 0, 0));
 		FrontPanel.memory[501].setText(instUIBuilder(SMR, 2, 0, 6, 0));
-		FrontPanel.memory[502].setText(instUIBuilder(JCC, 1, 0, 15, 1));
+		FrontPanel.memory[502].setText(instUIBuilder(JZ, 2, 0, 15, 1));
 		FrontPanel.memory[503].setText(instUIBuilder(SMR, 2, 0, 8, 0));
 		FrontPanel.memory[504].setText(instUIBuilder(JCC, 1, 0, 7, 1));
 		FrontPanel.memory[505].setText(instUIBuilder(STR, 2, 0, 13, 0));
@@ -199,7 +199,7 @@ public class HardCodeBuilder {
 		FrontPanel.memory[539].setText(instUIBuilder(AIR, 3, 0, 1, 0));
 		FrontPanel.memory[540].setText(instUIBuilder(IN, 2, 0, 0, 0));
 		FrontPanel.memory[541].setText(instUIBuilder(SMR, 2, 0, 6, 0));
-		FrontPanel.memory[542].setText(instUIBuilder(JCC, 1, 0, 21, 1));
+		FrontPanel.memory[542].setText(instUIBuilder(JZ, 2, 0, 21, 1));
 		FrontPanel.memory[543].setText(instUIBuilder(SMR, 2, 0, 8, 0));
 		FrontPanel.memory[544].setText(instUIBuilder(JCC, 1, 0, 7, 1));
 		FrontPanel.memory[545].setText(instUIBuilder(STR, 2, 0, 13, 0));
