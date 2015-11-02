@@ -95,7 +95,7 @@ public class Instruction {
 	}
 	
 	public Integer getIntegerAddress() {
-		return Integer.parseInt(address);
+		return Integer.parseInt(address, 2);
 	}
 
 	public void setAddress(String address) {

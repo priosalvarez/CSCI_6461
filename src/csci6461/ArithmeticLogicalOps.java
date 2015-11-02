@@ -49,7 +49,7 @@ public class ArithmeticLogicalOps {
 		
 		//Check for Underflow
 		if(diffSMR < 0){
-			FrontPanel.txtCc.setText("0010");
+			FrontPanel.txtCc.setText("0100");
 			diffSMR = 0;
 		}
 		String resultSMR = Integer.toBinaryString(diffSMR);
@@ -117,7 +117,7 @@ public class ArithmeticLogicalOps {
 		
 		//Check for Underflow
 		if(diffSIR < 0){
-			FrontPanel.txtCc.setText("0010");
+			FrontPanel.txtCc.setText("0100");
 			diffSIR = 0;
 		}
 		
@@ -134,30 +134,28 @@ public class ArithmeticLogicalOps {
 	 */
 	public static void instructionMLT(Instruction instruction) throws Throwable{
 		String ea = BinaryUtil.eaCalculation(instruction);
-		
-	try{
-		//Multiply R0 by R2
 
-				Integer RxDecimal = Integer.parseInt(FrontPanel.getRegister(0), 2);
-				Integer RyDecimal = Integer.parseInt(FrontPanel.getRegister(2), 2);
-				Integer productMLT = RxDecimal * RyDecimal;
-				String productBinary = Integer.toBinaryString(productMLT);
-				productBinary = BinaryUtil.fillBinaryString32(productBinary);
-				
-				//Find High Order Bit and Low Order Bit
-				String LSB = productBinary.substring(0, 16);
-				String MSB = productBinary.substring(16, 32);
-				  
-				//Store the MSB in R0 and LSB in R1
-				FrontPanel.setRegister(0, MSB);
-				FrontPanel.setRegister(1, LSB);
-	}
-		//Overflow Flag if R0 or R1 already have content
-	finally{
-		if(instruction.getRegisterNumber() != null || instruction.getRegisterNumber() != null){//(1), also here '' means 'null' incompatible types check
-			instruction.setCCNumber(instruction.getCCNumber(4), 0);
+		//Multiply R0 by R2
+		Integer RxDecimal = Integer.parseInt(FrontPanel.getRegister(0), 2);
+		Integer RyDecimal = Integer.parseInt(FrontPanel.getRegister(2), 2);
+		Integer productMLT = RxDecimal * RyDecimal;
+		String productBinary = Integer.toBinaryString(productMLT);
+
+		//Check if overflow
+		if(productBinary.length() > 32){
+			FrontPanel.txtCc.setText("1000");
+			return;
 		}
-		}
+
+		productBinary = BinaryUtil.fillBinaryString32(productBinary);
+
+		//Find High Order Bit and Low Order Bit
+		String LSB = productBinary.substring(0, 16);
+		String MSB = productBinary.substring(16, 32);
+
+		//Store the MSB in R0 and LSB in R1
+		FrontPanel.setRegister(0, MSB);
+		FrontPanel.setRegister(1, LSB);
 	}
 	
 	/*
@@ -170,44 +168,43 @@ public class ArithmeticLogicalOps {
 		Integer RxDecimal = Integer.parseInt(FrontPanel.getRegister(0), 2);
 		Integer RyDecimal = Integer.parseInt(FrontPanel.getRegister(2), 2);
 		
-	try{
-		//Divide R0 by R2
-		Integer quotientDVD = RxDecimal / RyDecimal;
-		Integer remainderDVD = RxDecimal % RyDecimal; 
-		String DVDQuotient = BinaryUtil.fillBinaryString(Integer.toBinaryString(quotientDVD));
-		String DVDRemainder = BinaryUtil.fillBinaryString(Integer.toBinaryString(remainderDVD));
-		
-		//Store the quotient in R0 and the remainder in R1
-		FrontPanel.setRegister(0, DVDQuotient);
-		FrontPanel.setRegister(1, DVDRemainder);
-	}
-	//Exception Handler if the denominator was 0
-	catch (ArithmeticException ae) {
-	if (RyDecimal == 0){
-		//set cc to 1
-		FrontPanel.txtCc.setText("0001");
-    }
-}
+		try{
+			//Divide R0 by R2
+			Integer quotientDVD = RxDecimal / RyDecimal;
+			Integer remainderDVD = RxDecimal % RyDecimal; 
+			String DVDQuotient = BinaryUtil.fillBinaryString(Integer.toBinaryString(quotientDVD));
+			String DVDRemainder = BinaryUtil.fillBinaryString(Integer.toBinaryString(remainderDVD));
+
+			//Store the quotient in R0 and the remainder in R1
+			FrontPanel.setRegister(0, DVDQuotient);
+			FrontPanel.setRegister(1, DVDRemainder);
+		}
+		//Exception Handler if the denominator was 0
+		catch (ArithmeticException ae) {
+			if (RyDecimal == 0){
+				//set cc to 1
+				FrontPanel.txtCc.setText("0010");
+			}
+		}
 	}
 
 	/*
 	 * This method implements the TRR instruction in the UI
 	 */
 	public static void instructionTRR(Instruction instruction) throws Throwable{
-		String ea = BinaryUtil.eaCalculation(instruction);
-		
+
 		//Test the Equality of R0 and R2
-		Integer RxDecimal = Integer.parseInt(FrontPanel.getRegister(0));
-		Integer RyDecimal = Integer.parseInt(FrontPanel.getRegister(2));
-		
-	if(RxDecimal == RyDecimal){
-	//set cc to 1
-		FrontPanel.txtCc.setText("0001");
-	}
-	else{
-	//set cc to 0
-		FrontPanel.txtCc.setText("0000");
-	}
+		Integer RxDecimal = instruction.getRegisterNumber();
+		Integer RyDecimal = instruction.getIndexNumber();
+
+		if(RxDecimal == RyDecimal){
+			//set cc to 1
+			FrontPanel.txtCc.setText("0001");
+		}
+		else{
+			//set cc to 0
+			FrontPanel.txtCc.setText("0000");
+		}
 	}
 
 	/*

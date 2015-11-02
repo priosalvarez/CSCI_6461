@@ -290,9 +290,9 @@ public class HardCodeBuilder {
 		FrontPanel.setIndex(2, 1500);
 		FrontPanel.setIndex(3, 1000);
 		
-		FrontPanel.setMemory(6, 13);
+		FrontPanel.setMemory(6, 32);
 		FrontPanel.setMemory(7, 100);
-		FrontPanel.setMemory(8, 35);
+		FrontPanel.setMemory(8, 16);
 		FrontPanel.setMemory(10, 10);
 		FrontPanel.setMemory(11, 515);
 		FrontPanel.setMemory(12, 499);
@@ -315,6 +315,8 @@ public class HardCodeBuilder {
 		//FrontPanel.setMemory(29, 500);
 		FrontPanel.setMemory(30, 500);
 		FrontPanel.setMemory(31, 500);
+		
+		FrontPanel.txtInput.setText("1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 5");
 		
 	}
 	
@@ -357,11 +359,10 @@ public class HardCodeBuilder {
 		FrontPanel.memory[7].setText("0000000000000001");
 	}
 	private static void loadTRR() {
-		FrontPanel.txtPc.setText("0000000000000110");
+		FrontPanel.setPc(6);
 		FrontPanel.setRegister(0, "0000000000000010");
 		FrontPanel.setRegister(2, "0000000000000010");
-		FrontPanel.memory[6].setText("0100100000000111");
-		FrontPanel.memory[7].setText("0000000000000001");
+		FrontPanel.memory[6].setText(instUIBuilder(TRR, 0, 2, 0, 0));
 	}
 	private static void loadAND() {
 		FrontPanel.txtPc.setText("0000000000000110");
@@ -397,10 +398,10 @@ public class HardCodeBuilder {
 		FrontPanel.memory[7].setText("0000000000000001");
 	}
 	private static void loadJCC() {
-		FrontPanel.txtPc.setText("0000000000000110");
-		FrontPanel.setRegister(0, "0000000000000010");
-		FrontPanel.memory[6].setText("0001100000000111");
-		FrontPanel.memory[7].setText("0000000000000001");
+		FrontPanel.setPc(6);
+		FrontPanel.memory[6].setText(instUIBuilder(JCC, 1, 0, 8, 1));
+		FrontPanel.setMemory(8, 130);
+		FrontPanel.txtCc.setText("0100");
 	}
 	private static void loadJMA() {
 		FrontPanel.txtPc.setText("0000000000000110");
