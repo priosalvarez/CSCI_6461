@@ -243,8 +243,7 @@ public class ArithmeticLogicalOps {
 	 * This method implements the NOT instruction in the UI
 	 */
 	public static void instructionNOT(Instruction instruction) throws Throwable{
-		String ea = BinaryUtil.eaCalculation(instruction);
-
+		
 		//Logical NOT of R0
 		Integer RxDecimal = Integer.parseInt(FrontPanel.getRegister(0));
 		Integer NOTDecimal = ~RxDecimal;
