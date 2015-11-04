@@ -258,14 +258,32 @@ public class ArithmeticLogicalOps {
 		FrontPanel.setRegister(1, NOTresult);
 	}
 	
-	public void instructionSRC(Instruction instruction) throws Throwable{
-		//TODO
+	/**
+	 * @param instruction
+	 * @throws Throwable
+	 */
+	public static void instructionSRC(Instruction instruction) throws Throwable{
+		/*Shift Register by Count
+		c(r) is shifted left (L/R =1) or right (L/R = 0) either logically (A/L = 1) or arithmetically (A/L = 0)
+		XX, XXX are ignored
+		Count = 0…15
+		If Count = 0, no shift occurs*/
+
 				
 		
 	}
 	
-	public void instructionRRC(Instruction instruction) throws Throwable{
-		//TODO
+	/**
+	 * @param instruction
+	 * @throws Throwable
+	 */
+	public static void instructionRRC(Instruction instruction) throws Throwable{
+		/*Rotate Register by Count
+		c(r) is rotated left (L/R = 1) or right (L/R =0) either logically (A/L =1)
+		XX, XXX is ignored
+		Count = 0…15
+		If Count = 0, no rotate occurs*/
+
 				
 		
 	}
