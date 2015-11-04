@@ -801,10 +801,11 @@ public class FrontPanel {
 		  		  			break;
 				  }
 				  //Increment PC counter
-				  if((iCode != InstructionEnum.HALT) || (iCode != InstructionEnum.JZ)){
+				  if((iCode != InstructionEnum.HALT) && (iCode != InstructionEnum.JZ)
+					  && (iCode != InstructionEnum.JCC)){
 					  pcDecimal++;
+					  txtPc.setText(BinaryUtil.fillBinaryString(Integer.toBinaryString(pcDecimal)));
 				  }
-				  txtPc.setText(BinaryUtil.fillBinaryString(Integer.toBinaryString(pcDecimal)));
 		  	} catch (Throwable t){
 		  		txtOutput.setText("FAULT");
 		  		
