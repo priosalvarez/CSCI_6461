@@ -1,13 +1,17 @@
 package csci6461;
 
 import co.com.csci.util.BinaryUtil;
+import co.com.csci.util.FileReaderUtil;
 import co.com.csci.util.InstructionEnum;
 
 import static co.com.csci.util.InstructionEnum.*;
 
+import javax.swing.JOptionPane;
+
 public class HardCodeBuilder {
 	
 	private static String PROGRAM_1 = "Program 1";
+	private static String PROGRAM_2 = "Program 2";
 	private static String AMRs = "AMR";
 	private static String SMRs = "SMR";
 	private static String AIRs = "AIR";
@@ -38,6 +42,9 @@ public class HardCodeBuilder {
 		
 		if(programName.equals(PROGRAM_1)){
 			loadProgram1();
+		}
+		if(programName.equals(PROGRAM_2)){
+			loadProgram2();
 		}
 		if(programName.equals(AMRs)){
 			loadAMR();
@@ -115,6 +122,56 @@ public class HardCodeBuilder {
 			loadLDA();
 		}
 				
+	}
+
+	private static void initProgram2(){
+		//Get paragraph (428 characters)
+		String paragraph = FileReaderUtil.getFile("TextProgramTwo.txt");
+		//Save in memory 1000+
+		int paragraphStart = 1000;
+		for(int i = 0; i < paragraph.length(); i++){
+			char readChar = paragraph.charAt(i);
+			int asciiChar = (int) readChar;
+			FrontPanel.setMemory(paragraphStart, asciiChar);
+			paragraphStart++;
+		}
+
+		//Get word
+		String word = (String)JOptionPane.showInputDialog(
+				null,
+				"Search word: ",
+				"Add",
+				JOptionPane.PLAIN_MESSAGE,
+				null,
+				null,
+				"");
+		//Save in memory 2000+
+		int wordStart = 2000;
+		for(int i = 0; i < word.length(); i++){
+			char readChar = paragraph.charAt(i);
+			int asciiChar = (int) readChar;
+			FrontPanel.setMemory(wordStart, asciiChar);
+			wordStart++;
+		}
+		FrontPanel.txtOutput.setText(paragraph);
+		
+		//Save paragraph and word length in memory
+		FrontPanel.setMemory(7, paragraph.length());
+		FrontPanel.setMemory(8, word.length());
+	}
+	
+	private static void loadProgram2() {
+		initProgram2();
+		//Initialize indexes
+		FrontPanel.setIndex(1, 1000);
+		FrontPanel.setIndex(2, 2000);
+		
+		FrontPanel.setMemory(9, 46); // Dot (.) ascii value
+		FrontPanel.setMemory(10, 32); // Space ( ) ascii value
+		
+		
+		
+		
 	}
 
 	private static void loadOUT() {

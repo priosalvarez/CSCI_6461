@@ -248,6 +248,7 @@ public class FrontPanel {
 		
 		cmbLoad.addItem("");
 		cmbLoad.addItem("Program 1");
+		cmbLoad.addItem("Program 2");
 		cmbLoad.addItem("AMR");
 		cmbLoad.addItem("SMR");
 		cmbLoad.addItem("AIR");

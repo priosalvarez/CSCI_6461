@@ -18,6 +18,8 @@ public class ArithmeticLogicalOps {
 
 	/*
 	 * This method implements the AMR instruction in the UI
+	 * Add Memory To Register, r = 0..3
+	 * r-> c(r) + c(EA)
 	 */
 	public static void instructionAMR(Instruction instruction) throws Throwable{
 		
@@ -30,12 +32,14 @@ public class ArithmeticLogicalOps {
 
 		//Add Register to Memory
 		String resultAMR = Integer.toBinaryString(addAMR);
-		FrontPanel.setRegister(instruction.getRegisterNumber(), (resultAMR));
+		FrontPanel.setRegister(instruction.getRegisterNumber(), BinaryUtil.fillBinaryStringParam(resultAMR, 16));
 	}
 	
 	
 	/*
 	 * This method implements the SMR instruction in the UI
+	 * Subtract Memory From Register, r = 0..3
+	 * r-> c(r) – c(EA)
 	 */
 	public static void instructionSMR(Instruction instruction) throws Throwable{
 		
@@ -53,79 +57,67 @@ public class ArithmeticLogicalOps {
 			diffSMR = 0;
 		}
 		String resultSMR = Integer.toBinaryString(diffSMR);
-		FrontPanel.setRegister(instruction.getRegisterNumber(), BinaryUtil.fillBinaryString(resultSMR));
+		FrontPanel.setRegister(instruction.getRegisterNumber(), BinaryUtil.fillBinaryStringParam(resultSMR, 16));
 	}
+	
 	/*
 	 * This method implements the AIR instruction in the UI
-	   IX and I are ignored in this instruction
+	 * IX and I are ignored in this instruction
+	 * Add  Immediate to Register, r = 0..3
+	 *	r -> c(r) + Immed
+     *	Note:
+     *	1. if Immed = 0, does nothing
+	 *	2. if c(r) = 0, loads r with Immed
+	 *	IX and I are ignored in this instruction
 	 */
 	public static void instructionAIR(Instruction instruction) throws Throwable{
 		
 		FrontPanel.txtCc.setText("0000");
-		//Assume the Immediate Value is 10
-		Integer immediate = 10;
-		//c(r) 
+		// Get immmediate value.
+		Integer immediate = instruction.getIntegerAddress();
+		// Get register value. 
 		Integer registerDecimal = Integer.parseInt(FrontPanel.getRegister(instruction.getRegisterNumber()), 2);
 		
-		if(immediate == 0){
-		//No action required
-			FrontPanel.getRegister(instruction.getRegisterNumber());
-		}
-
-		//If register = 0, load r with the immediate
-		if(registerDecimal == 0){
-		FrontPanel.setRegister(0, "0000000000001010");
+		//If inmmediate is not 0
+		if(immediate != 0){
+			if(registerDecimal == 0){
+				FrontPanel.setRegister(instruction.getRegisterNumber(), BinaryUtil.fillBinaryStringParam(Integer.toBinaryString(immediate), 16));
+			} else {
+				int sumAIR = registerDecimal + immediate;
+				FrontPanel.setRegister(instruction.getRegisterNumber(), BinaryUtil.fillBinaryStringParam(Integer.toBinaryString(sumAIR), 16));
 			}
-		
-		else{
-		//add immediate to register
-		int sumAIR;
-		sumAIR = registerDecimal + immediate;
-		
-		//Convert the result to binary
-		String resultAIR = Integer.toBinaryString(sumAIR);
-		FrontPanel.setRegister(instruction.getRegisterNumber(), BinaryUtil.fillBinaryString(resultAIR));
-		
-	}
+		}
 	}
 	
 	/*
 	 * This method implements the SIR instruction in the UI
-	   IX and I are ignored in this instruction
+	 * IX and I are ignored in this instruction Subtract  Immediate  from Register, r = 0..3 
+	 * r -> c(r) - Immed 
+	 * Note: 
+	 * 1. if Immed = 0, does nothing 
+	 * 2. if c(r) = 0, loads r1 with –(Immed) 
+	 * IX and I are ignored in this instruction
 	 */
 	public static void instructionSIR(Instruction instruction) throws Throwable{
-	
 		FrontPanel.txtCc.setText("0000");
-		//Assume the Immediate Value is 1
-		Integer immediate = 1;
+		// Get immmediate value.
+		Integer immediate = instruction.getIntegerAddress();
+		// Get register value. 
 		Integer registerDecimal = Integer.parseInt(FrontPanel.getRegister(instruction.getRegisterNumber()), 2);
 		
-		if(immediate == 0){
-		//No action required
-			FrontPanel.getRegister(instruction.getRegisterNumber());
-		}
-
-		//If register = 0, load r with the immediate
-		if(registerDecimal == 0){
-		FrontPanel.setRegister(1, "0000000000000001");
+		//If inmmediate is not 0
+		if(immediate != 0){
+			if(registerDecimal == 0){
+				FrontPanel.setRegister(instruction.getRegisterNumber(), BinaryUtil.fillBinaryStringParam(Integer.toBinaryString(immediate), 16));
+			} else {
+				int diffSMR = registerDecimal - immediate;
+				if(diffSMR < 0){
+					FrontPanel.txtCc.setText("0100");
+					diffSMR = 0;
+				}
+				FrontPanel.setRegister(instruction.getRegisterNumber(), BinaryUtil.fillBinaryStringParam(Integer.toBinaryString(diffSMR), 16));
 			}
-		
-		else{
-		//Subtract immediate from register
-		int diffSIR;
-		diffSIR = registerDecimal - immediate;
-		
-		//Check for Underflow
-		if(diffSIR < 0){
-			FrontPanel.txtCc.setText("0100");
-			diffSIR = 0;
 		}
-		
-		//Convert the result to binary
-		String resultSIR = Integer.toBinaryString(diffSIR);
-		FrontPanel.setRegister(instruction.getRegisterNumber(), BinaryUtil.fillBinaryString(resultSIR));
-		
-	}
 	}
 
 
@@ -133,29 +125,31 @@ public class ArithmeticLogicalOps {
 	 * This method implements the MLT instruction in the UI
 	 */
 	public static void instructionMLT(Instruction instruction) throws Throwable{
-		String ea = BinaryUtil.eaCalculation(instruction);
 
 		//Multiply R0 by R2
-		Integer RxDecimal = Integer.parseInt(FrontPanel.getRegister(0), 2);
-		Integer RyDecimal = Integer.parseInt(FrontPanel.getRegister(2), 2);
-		Integer productMLT = RxDecimal * RyDecimal;
-		String productBinary = Integer.toBinaryString(productMLT);
-
-		//Check if overflow
-		if(productBinary.length() > 32){
-			FrontPanel.txtCc.setText("1000");
-			return;
+		Integer RxDecimal = Integer.parseInt(FrontPanel.getRegister(instruction.getRegisterNumber()), 2);
+		Integer RyDecimal = Integer.parseInt(FrontPanel.getRegister(instruction.getIndexNumber()), 2);
+		
+		if( (RxDecimal == 0 || RxDecimal == 2) && (RyDecimal == 0 || RyDecimal == 2) ){
+			Integer productMLT = RxDecimal * RyDecimal;
+			String productBinary = Integer.toBinaryString(productMLT);
+	
+			//Check if overflow
+			if(productBinary.length() > 32){
+				FrontPanel.txtCc.setText("1000");
+				return;
+			}
+	
+			productBinary = BinaryUtil.fillBinaryStringParam(productBinary, 32);
+	
+			//Find High Order Bit and Low Order Bit
+			String hob = productBinary.substring(0, 16);
+			String lob = productBinary.substring(16, 32);
+	
+			//Store in Rx and Rx+1
+			FrontPanel.setRegister(RxDecimal, hob);
+			FrontPanel.setRegister(RxDecimal + 1, lob);
 		}
-
-		productBinary = BinaryUtil.fillBinaryString32(productBinary);
-
-		//Find High Order Bit and Low Order Bit
-		String LSB = productBinary.substring(0, 16);
-		String MSB = productBinary.substring(16, 32);
-
-		//Store the MSB in R0 and LSB in R1
-		FrontPanel.setRegister(0, MSB);
-		FrontPanel.setRegister(1, LSB);
 	}
 	
 	/*
@@ -163,27 +157,27 @@ public class ArithmeticLogicalOps {
 	 */
 	public static void instructionDVD(Instruction instruction) throws Throwable{
 		
-		String ea = BinaryUtil.eaCalculation(instruction);
+		Integer RxDecimal = Integer.parseInt(FrontPanel.getRegister(instruction.getRegisterNumber()), 2);
+		Integer RyDecimal = Integer.parseInt(FrontPanel.getRegister(instruction.getIndexNumber()), 2);
 		
-		Integer RxDecimal = Integer.parseInt(FrontPanel.getRegister(0), 2);
-		Integer RyDecimal = Integer.parseInt(FrontPanel.getRegister(2), 2);
-		
-		try{
-			//Divide R0 by R2
-			Integer quotientDVD = RxDecimal / RyDecimal;
-			Integer remainderDVD = RxDecimal % RyDecimal; 
-			String DVDQuotient = BinaryUtil.fillBinaryString(Integer.toBinaryString(quotientDVD));
-			String DVDRemainder = BinaryUtil.fillBinaryString(Integer.toBinaryString(remainderDVD));
-
-			//Store the quotient in R0 and the remainder in R1
-			FrontPanel.setRegister(0, DVDQuotient);
-			FrontPanel.setRegister(1, DVDRemainder);
-		}
-		//Exception Handler if the denominator was 0
-		catch (ArithmeticException ae) {
-			if (RyDecimal == 0){
-				//set cc to 1
-				FrontPanel.txtCc.setText("0010");
+		if( (RxDecimal == 0 || RxDecimal == 2) && (RyDecimal == 0 || RyDecimal == 2) ){
+			try{
+				//Divide R0 by R2
+				Integer quotientDVD = RxDecimal / RyDecimal;
+				Integer remainderDVD = RxDecimal % RyDecimal; 
+				String DVDQuotient = BinaryUtil.fillBinaryStringParam(Integer.toBinaryString(quotientDVD), 16);
+				String DVDRemainder = BinaryUtil.fillBinaryStringParam(Integer.toBinaryString(remainderDVD), 16);
+	
+				//Store the quotient in R0 and the remainder in R1
+				FrontPanel.setRegister(RxDecimal, DVDQuotient);
+				FrontPanel.setRegister(RyDecimal, DVDRemainder);
+			}
+			//Exception Handler if the denominator was 0
+			catch (ArithmeticException ae) {
+				if (RyDecimal == 0){
+					//set cc to 1
+					FrontPanel.txtCc.setText("0010");
+				}
 			}
 		}
 	}
@@ -211,48 +205,45 @@ public class ArithmeticLogicalOps {
 	 * This method implements the AND instruction in the UI
 	 */
 	public static void instructionAND(Instruction instruction) throws Throwable{
-			String ea = BinaryUtil.eaCalculation(instruction);
 			
 		//Logical AND for R0 and R2
-		Integer RxDecimal = Integer.parseInt(FrontPanel.getRegister(0), 2);
-		Integer RyDecimal = Integer.parseInt(FrontPanel.getRegister(2), 2);
+		Integer RxDecimal = Integer.parseInt(FrontPanel.getRegister(instruction.getRegisterNumber()), 2);
+		Integer RyDecimal = Integer.parseInt(FrontPanel.getRegister(instruction.getIndexNumber()), 2);
 		Integer AndDecimal = RxDecimal & RyDecimal;
 		
 		//Store the result in R0
-		String ANDResult = BinaryUtil.fillBinaryString(Integer.toBinaryString(AndDecimal));
-		FrontPanel.setRegister(1, ANDResult);
+		String ANDResult = BinaryUtil.fillBinaryStringParam(Integer.toBinaryString(AndDecimal), 16);
+		FrontPanel.setRegister(RxDecimal, ANDResult);
 	}
 
 	/*
 	 * This method implements the ORR instruction in the UI
 	 */
 	public static void instructionORR(Instruction instruction) throws Throwable{
-		String ea = BinaryUtil.eaCalculation(instruction);
 		
 		//Logical OR of R0 and R2
-		Integer RxDecimal = Integer.parseInt(FrontPanel.getRegister(0), 2);
-		Integer RyDecimal = Integer.parseInt(FrontPanel.getRegister(2), 2);
+		Integer RxDecimal = Integer.parseInt(FrontPanel.getRegister(instruction.getRegisterNumber()), 2);
+		Integer RyDecimal = Integer.parseInt(FrontPanel.getRegister(instruction.getIndexNumber()), 2);
 		Integer ORRDecimal = RxDecimal | RyDecimal;
 		
 		//Store the result in R0
-		String ORRresult = BinaryUtil.fillBinaryString(Integer.toBinaryString(ORRDecimal));
-		FrontPanel.setRegister(1, ORRresult);
+		String ORRresult = BinaryUtil.fillBinaryStringParam(Integer.toBinaryString(ORRDecimal), 16);
+		FrontPanel.setRegister(RxDecimal, ORRresult);
 	}
 	
 	/*
 	 * This method implements the NOT instruction in the UI
 	 */
 	public static void instructionNOT(Instruction instruction) throws Throwable{
-		String ea = BinaryUtil.eaCalculation(instruction);
 
 		//Logical NOT of R0
-		Integer RxDecimal = Integer.parseInt(FrontPanel.getRegister(0));
+		Integer RxDecimal = Integer.parseInt(FrontPanel.getRegister(instruction.getRegisterNumber()), 2);
 		Integer NOTDecimal = ~RxDecimal;
 		
 		//Store the result in R1
 		String NOTresult = Integer.toBinaryString(NOTDecimal);
 		NOTresult = NOTresult.substring(16, 32);
-		FrontPanel.setRegister(1, NOTresult);
+		FrontPanel.setRegister(RxDecimal, NOTresult);
 	}
 	
 	public void instructionSRC(Instruction instruction) throws Throwable{

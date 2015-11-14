@@ -1,4 +1,4 @@
-package csci6461;
+		package csci6461;
 
 import co.com.csci.model.Instruction;
 import co.com.csci.util.BinaryUtil;
