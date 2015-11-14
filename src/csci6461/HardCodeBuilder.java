@@ -156,8 +156,8 @@ public class HardCodeBuilder {
 		FrontPanel.txtOutput.setText(paragraph);
 		
 		//Save paragraph and word length in memory
-		FrontPanel.setMemory(7, paragraph.length());
-		FrontPanel.setMemory(8, word.length());
+		FrontPanel.setMemory(7, paragraph.length()); //Number of paragraph letters
+		FrontPanel.setMemory(8, word.length()); //Number of word letters
 	}
 	
 	private static void loadProgram2() {
@@ -165,13 +165,149 @@ public class HardCodeBuilder {
 		//Initialize indexes
 		FrontPanel.setIndex(1, 1000);
 		FrontPanel.setIndex(2, 2000);
+		FrontPanel.setPc(50);
 		
 		FrontPanel.setMemory(9, 46); // Dot (.) ascii value
 		FrontPanel.setMemory(10, 32); // Space ( ) ascii value
+		FrontPanel.setMemory(14, 0); // Letters finder counter
+		FrontPanel.setMemory(17, 1); // Words in sentence counter
+		FrontPanel.setMemory(18, 1); // Sentence in paragraph counter
+		FrontPanel.setMemory(19, 0); // ZERO
+		FrontPanel.setMemory(20, 1); // ONE
+		FrontPanel.setMemory(21, 64); // 1st continue
+		FrontPanel.setMemory(31, 0); // ZERO FINISH
 		
+		FrontPanel.memory[50].setText(instUIBuilder(LDR, 0, 1, 0, 0)); //Load paragraph letter
+		FrontPanel.memory[51].setText(instUIBuilder(LDR, 1, 2, 0, 0)); //Load word letter
+		FrontPanel.memory[52].setText(instUIBuilder(TRR, 0, 1, 0, 0)); //Compare
+		FrontPanel.memory[53].setText(instUIBuilder(JCC, 3, 0, 11, 1));//If equal to 0 jump
+		FrontPanel.setMemory(11, 200);//Call to incrementParagraphAndWordAndFinderIndex()	
+		incrementParagraphAndWordAndFinderIndex();
+		//Else
+		FrontPanel.memory[54].setText(instUIBuilder(STX, 0, 1, 12, 0));//Bring index paragraph to memory
+		FrontPanel.memory[55].setText(instUIBuilder(STX, 0, 1, 13, 0));//Bring index word to memory
+		FrontPanel.memory[56].setText(instUIBuilder(LDR, 2, 0, 12, 0));//Load from memory to register the indexes
+		FrontPanel.memory[57].setText(instUIBuilder(LDR, 3, 0, 13, 0));//Load from memory to register the indexes
+		FrontPanel.memory[58].setText(instUIBuilder(AIR, 2, 0, 1, 0));// +1
+		FrontPanel.memory[59].setText(instUIBuilder(AIR, 3, 0, 1, 0));// +1
+		FrontPanel.memory[60].setText(instUIBuilder(STR, 2, 0, 12, 0));//Store to memory
+		FrontPanel.memory[61].setText(instUIBuilder(STR, 3, 0, 13, 0));//Store to memory
+		FrontPanel.memory[62].setText(instUIBuilder(LDX, 0, 1, 12, 0));//Store to index
+		FrontPanel.memory[63].setText(instUIBuilder(LDX, 0, 2, 13, 0));//Store to index
 		
+		FrontPanel.memory[64].setText(instUIBuilder(LDR, 0, 1, 0, 0)); //Load paragraph letter
+		FrontPanel.memory[65].setText(instUIBuilder(LDR, 1, 1, 0, 0)); //Load paragraph letter number
+		FrontPanel.memory[66].setText(instUIBuilder(TRR, 1, 2, 0, 0)); //Compare with index
 		
+		FrontPanel.memory[67].setText(instUIBuilder(JCC, 3, 0, 15, 1));//If it's last 
+		FrontPanel.setMemory(15, 300);
+		//Then
+		isWordFound(); // Here program will always finish if Jump
+		//Else
+		FrontPanel.memory[68].setText(instUIBuilder(LDR, 1, 0, 10, 0)); //Load space
+		FrontPanel.memory[69].setText(instUIBuilder(TRR, 0, 1, 0, 0)); //Compare with space and letter
+		FrontPanel.memory[70].setText(instUIBuilder(JCC, 3, 0, 23, 1));//If it's space
+		FrontPanel.setMemory(23, 400);
+		//Then
+		isWordFoundSpaceReturn();
+		//Else
+		FrontPanel.memory[71].setText(instUIBuilder(LDR, 1, 0, 9, 0)); //Load dot(.)
+		FrontPanel.memory[72].setText(instUIBuilder(TRR, 0, 1, 0, 0)); //Compare with dot and letter
+		FrontPanel.memory[73].setText(instUIBuilder(JCC, 3, 0, 24, 1));//If it's dot then
+		FrontPanel.setMemory(24, 500);
+		//Then
+		isWordFoundDotReturn();
+		//Else (Go back to POS 51)
+		FrontPanel.memory[213].setText(instUIBuilder(JMA, 0, 0, 30, 1));//Jump to POS 51
+		FrontPanel.setMemory(30, 51); // LOOP JUMP
+	}
+	
+	private static void incrementParagraphAndWordAndFinderIndex(){
 		
+		FrontPanel.memory[200].setText(instUIBuilder(LDR, 2, 0, 14, 0));//Load from memory to register the counter
+		FrontPanel.memory[201].setText(instUIBuilder(AIR, 2, 0, 1, 0));// +1
+		FrontPanel.memory[202].setText(instUIBuilder(STR, 2, 0, 14, 0));//Store to memory the counter
+		FrontPanel.memory[203].setText(instUIBuilder(STX, 0, 1, 12, 0));//Bring index paragraph to memory
+		FrontPanel.memory[204].setText(instUIBuilder(STX, 0, 1, 13, 0));//Bring index word to memory
+		FrontPanel.memory[205].setText(instUIBuilder(LDR, 2, 0, 12, 0));//Load from memory to register the indexes
+		FrontPanel.memory[206].setText(instUIBuilder(LDR, 3, 0, 13, 0));//Load from memory to register the indexes
+		FrontPanel.memory[207].setText(instUIBuilder(AIR, 2, 0, 1, 0));// +1
+		FrontPanel.memory[208].setText(instUIBuilder(AIR, 3, 0, 1, 0));// +1
+		FrontPanel.memory[209].setText(instUIBuilder(STR, 2, 0, 12, 0));//Store to memory
+		FrontPanel.memory[210].setText(instUIBuilder(STR, 3, 0, 13, 0));//Store to memory
+		FrontPanel.memory[211].setText(instUIBuilder(LDX, 0, 1, 12, 0));//Store to index
+		FrontPanel.memory[212].setText(instUIBuilder(LDX, 0, 2, 13, 0));//Store to index
+		FrontPanel.memory[213].setText(instUIBuilder(JMA, 0, 0, 21, 1));//Jump to 1st continue
+		
+	}
+	
+	private static void isWordFound(){
+		//isWordFound()
+		FrontPanel.memory[300].setText(instUIBuilder(LDR, 4, 0, 14, 0));//Load from memory to register the counter
+		FrontPanel.memory[301].setText(instUIBuilder(LDR, 1, 0, 14, 0));//Load from memory to the word number
+		FrontPanel.memory[302].setText(instUIBuilder(TRR, 1, 2, 0, 0)); //Compare them
+		FrontPanel.memory[303].setText(instUIBuilder(JCC, 3, 1, 16, 1));//If equal jump then
+		FrontPanel.setMemory(16, 0);//Stop in 16 POS <- mean success!
+		//Else
+		FrontPanel.memory[304].setText(instUIBuilder(JMA, 0, 0, 31, 0));//Stop in 31 POS <- mean finish without finding word!
+	}
+	
+	private static void isWordFoundSpaceReturn(){
+		//isWordFound()
+		FrontPanel.memory[400].setText(instUIBuilder(LDR, 4, 0, 14, 0));//Load from memory to register the counter
+		FrontPanel.memory[401].setText(instUIBuilder(LDR, 1, 0, 14, 0));//Load from memory to the word number
+		FrontPanel.memory[402].setText(instUIBuilder(TRR, 1, 2, 0, 0)); //Compare them
+		FrontPanel.memory[403].setText(instUIBuilder(JCC, 3, 1, 16, 1));//If equal jump then
+		FrontPanel.setMemory(16, 0);//Stop in 16 POS <- mean success!
+		//Else
+		FrontPanel.memory[404].setText(instUIBuilder(LDR, 1, 0, 17, 0)); //Load word counter
+		FrontPanel.memory[405].setText(instUIBuilder(AIR, 1, 0, 1, 0));// +1
+		FrontPanel.memory[406].setText(instUIBuilder(STR, 1, 0, 17, 0)); //Store word counter
+		FrontPanel.memory[407].setText(instUIBuilder(LDR, 1, 0, 19, 0));//Initialize letter counter to zero
+		FrontPanel.memory[408].setText(instUIBuilder(STR, 1, 0, 14, 0));//Initialize letter counter to zero
+		FrontPanel.memory[409].setText(instUIBuilder(LDR, 1, 0, 26, 0));//Initialize letter index to 2000
+		FrontPanel.setMemory(26, 2000);
+		FrontPanel.memory[410].setText(instUIBuilder(STR, 1, 0, 13, 0));//Initialize letter index to 2000
+		FrontPanel.memory[411].setText(instUIBuilder(LDX, 0, 2, 13, 0));//Initialize index index to 2000		
+		//Paragraph index++
+		FrontPanel.memory[412].setText(instUIBuilder(STX, 0, 1, 12, 0));//Bring index paragraph to memory
+		FrontPanel.memory[413].setText(instUIBuilder(LDR, 1, 0, 12, 0));//Load from memory to register the indexes
+		FrontPanel.memory[414].setText(instUIBuilder(AIR, 1, 0, 1, 0));// +1
+		FrontPanel.memory[415].setText(instUIBuilder(STR, 1, 0, 12, 0));//Store to memory
+		FrontPanel.memory[416].setText(instUIBuilder(STX, 0, 1, 12, 0));//Store to index
+		
+		FrontPanel.memory[417].setText(instUIBuilder(JMA, 0, 0, 30, 1));//Jump to POS 51
+	}
+	
+	private static void isWordFoundDotReturn(){
+		//isWordFound()
+		FrontPanel.memory[500].setText(instUIBuilder(LDR, 4, 0, 14, 0));//Load from memory to register the counter
+		FrontPanel.memory[501].setText(instUIBuilder(LDR, 1, 0, 14, 0));//Load from memory to the word number
+		FrontPanel.memory[502].setText(instUIBuilder(TRR, 1, 2, 0, 0)); //Compare them
+		FrontPanel.memory[503].setText(instUIBuilder(JCC, 3, 1, 16, 1));//If equal jump then
+		FrontPanel.setMemory(16, 0);//Stop in 16 POS <- mean success!
+		//Else
+		FrontPanel.memory[504].setText(instUIBuilder(LDR, 1, 0, 18, 0)); //Load sentence counter
+		FrontPanel.memory[505].setText(instUIBuilder(AIR, 1, 0, 1, 0));// +1
+		FrontPanel.memory[506].setText(instUIBuilder(STR, 1, 0, 18, 0)); //Store sentence counter
+		
+		FrontPanel.memory[507].setText(instUIBuilder(LDR, 1, 0, 19, 0));//Initialize letter counter to zero
+		FrontPanel.memory[508].setText(instUIBuilder(STR, 1, 0, 14, 0));//Initialize letter counter to zero
+		FrontPanel.memory[509].setText(instUIBuilder(LDR, 1, 0, 26, 0));//Initialize letter index to 2000
+		FrontPanel.setMemory(26, 2000);
+		FrontPanel.memory[510].setText(instUIBuilder(STR, 1, 0, 13, 0));//Initialize letter index to 2000
+		FrontPanel.memory[511].setText(instUIBuilder(LDX, 0, 2, 13, 0));//Initialize index index to 2000		
+		//Paragraph index++
+		FrontPanel.memory[512].setText(instUIBuilder(STX, 0, 1, 12, 0));//Bring index paragraph to memory
+		FrontPanel.memory[513].setText(instUIBuilder(LDR, 1, 0, 12, 0));//Load from memory to register the indexes
+		FrontPanel.memory[514].setText(instUIBuilder(AIR, 1, 0, 1, 0));// +1
+		FrontPanel.memory[515].setText(instUIBuilder(STR, 1, 0, 12, 0));//Store to memory
+		FrontPanel.memory[516].setText(instUIBuilder(STX, 0, 1, 12, 0));//Store to index
+		//Initialize word counter to (1)
+		FrontPanel.memory[517].setText(instUIBuilder(LDR, 1, 0, 20, 0));//Initialize register to one
+		FrontPanel.memory[518].setText(instUIBuilder(STR, 1, 0, 17, 0));//Initialize word counter to one
+		
+		FrontPanel.memory[519].setText(instUIBuilder(JMA, 0, 0, 30, 1));//Jump to POS 51
 	}
 
 	private static void loadOUT() {
