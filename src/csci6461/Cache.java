@@ -94,22 +94,24 @@ public class Cache {
 	public String checkCache(int memoryAddress) throws Exception{
 		CacheSlot slot = find(memoryAddress);
 		if(memoryAddress > 5){
-		if(slot == null){
-			return bringMemoryAddressToCache(memoryAddress);
+			if(slot == null){
+				return bringMemoryAddressToCache(memoryAddress);
+			}
+			return slot.getData();	
 		}
-		return slot.getData();	}
 		else{
-	  		/* Machine Fault
+			/* Machine Fault
 	  		  Illegal Memory Address to Reserved Locations */
-	  			String pc = FrontPanel.txtPc.getText();
-	  			String msr = FrontPanel.txtMsr.getText();
-	  			FrontPanel.memory[1].setText(msr);
-	  			FrontPanel.memory[4].setText(pc);
-	  			FrontPanel.txtMfr.setText("0");	
-	  			}
-			throw new Exception("Reserverd Memory");
+			String pc = FrontPanel.txtPc.getText();
+			String msr = FrontPanel.txtMsr.getText();
+			FrontPanel.memory[1].setText(msr);
+			FrontPanel.memory[4].setText(pc);
+			FrontPanel.txtMfr.setText("0");	
+			//Activate Trap SecondPart
 		}
-	
+		throw new Exception("Reserverd Memory");
+	}
+
 	/**
 	 * Write data to cache 
 	 * @param memoryAddress 
@@ -136,22 +138,25 @@ public class Cache {
 	public void updateData(int memoryAddress, String newData){
 		CacheSlot slot = find(memoryAddress);
 		if(memoryAddress > 5){
-		//Verify first if the the memory address to be updated is in the cache or not
-		if(slot != null){
-			writeThrough(memoryAddress, slot, newData);
-		} else {
-			bringMemoryAddressToCache(memoryAddress);
-			slot = find(memoryAddress);
-			writeThrough(memoryAddress, slot, newData);
-		}} 
+			//Verify first if the the memory address to be updated is in the cache or not
+			if(slot != null){
+				writeThrough(memoryAddress, slot, newData);
+			} else {
+				bringMemoryAddressToCache(memoryAddress);
+				slot = find(memoryAddress);
+				writeThrough(memoryAddress, slot, newData);
+			}
+		} 
 		else{
-	  		/* Machine Fault
+			/* Machine Fault
 	  		  Illegal Memory Address to Reserved Locations */
-	  			String pc = FrontPanel.txtPc.getText();
-	  			String msr = FrontPanel.txtMsr.getText();
-	  			FrontPanel.memory[1].setText(msr);
-	  			FrontPanel.memory[4].setText(pc);
-	  			FrontPanel.txtMfr.setText("0");	}
+			String pc = FrontPanel.txtPc.getText();
+			String msr = FrontPanel.txtMsr.getText();
+			FrontPanel.memory[1].setText(msr);
+			FrontPanel.memory[4].setText(pc);
+			FrontPanel.txtMfr.setText("0");	
+			//Activate Trap SecondPart
+		}
 	}
 	
 	/**

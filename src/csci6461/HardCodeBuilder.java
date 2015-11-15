@@ -136,7 +136,7 @@ public class HardCodeBuilder {
 				
 	}
 
-	private static void initProgram2(){
+	private static String initProgram2(){
 		//Get paragraph (428 characters)
 		String paragraph = FileReaderUtil.getFile("TextProgramTwo.txt");
 		//Save in memory 1000+
@@ -147,6 +147,8 @@ public class HardCodeBuilder {
 			FrontPanel.setMemory(paragraphStart, asciiChar);
 			paragraphStart++;
 		}
+		
+		FrontPanel.txtOutput.setText(paragraph);
 
 		//Get word
 		String word = (String)JOptionPane.showInputDialog(
@@ -160,20 +162,20 @@ public class HardCodeBuilder {
 		//Save in memory 2000+
 		int wordStart = 2000;
 		for(int i = 0; i < word.length(); i++){
-			char readChar = paragraph.charAt(i);
+			char readChar = word.charAt(i);
 			int asciiChar = (int) readChar;
 			FrontPanel.setMemory(wordStart, asciiChar);
 			wordStart++;
 		}
-		FrontPanel.txtOutput.setText(paragraph);
 		
 		//Save paragraph and word length in memory
-		FrontPanel.setMemory(7, paragraph.length()); //Number of paragraph letters
+		FrontPanel.setMemory(7, paragraph.length()+998); //Final position of paragraph letters (Windows add \n at the end)
 		FrontPanel.setMemory(8, word.length()); //Number of word letters
+		return word;
 	}
 	
 	private static void loadProgram2() {
-		initProgram2();
+		String word = initProgram2();
 		//Initialize indexes
 		FrontPanel.setIndex(1, 1000);
 		FrontPanel.setIndex(2, 2000);
@@ -192,12 +194,12 @@ public class HardCodeBuilder {
 		FrontPanel.memory[50].setText(instUIBuilder(LDR, 0, 1, 0, 0)); //Load paragraph letter
 		FrontPanel.memory[51].setText(instUIBuilder(LDR, 1, 2, 0, 0)); //Load word letter
 		FrontPanel.memory[52].setText(instUIBuilder(TRR, 0, 1, 0, 0)); //Compare
-		FrontPanel.memory[53].setText(instUIBuilder(JCC, 3, 0, 11, 1));//If equal to 0 jump
+		FrontPanel.memory[53].setText(instUIBuilder(JCC, 3, 0, 11, 1));//If equal to 1 jump
 		FrontPanel.setMemory(11, 200);//Call to incrementParagraphAndWordAndFinderIndex()	
 		incrementParagraphAndWordAndFinderIndex();
 		//Else
 		FrontPanel.memory[54].setText(instUIBuilder(STX, 0, 1, 12, 0));//Bring index paragraph to memory
-		FrontPanel.memory[55].setText(instUIBuilder(STX, 0, 1, 13, 0));//Bring index word to memory
+		FrontPanel.memory[55].setText(instUIBuilder(STX, 0, 2, 13, 0));//Bring index word to memory
 		FrontPanel.memory[56].setText(instUIBuilder(LDR, 2, 0, 12, 0));//Load from memory to register the indexes
 		FrontPanel.memory[57].setText(instUIBuilder(LDR, 3, 0, 13, 0));//Load from memory to register the indexes
 		FrontPanel.memory[58].setText(instUIBuilder(AIR, 2, 0, 1, 0));// +1
@@ -208,9 +210,8 @@ public class HardCodeBuilder {
 		FrontPanel.memory[63].setText(instUIBuilder(LDX, 0, 2, 13, 0));//Store to index
 		
 		FrontPanel.memory[64].setText(instUIBuilder(LDR, 0, 1, 0, 0)); //Load paragraph letter
-		FrontPanel.memory[65].setText(instUIBuilder(LDR, 1, 1, 0, 0)); //Load paragraph letter number
+		FrontPanel.memory[65].setText(instUIBuilder(LDR, 1, 0, 7, 0)); //Load paragraph final position
 		FrontPanel.memory[66].setText(instUIBuilder(TRR, 1, 2, 0, 0)); //Compare with index
-		
 		FrontPanel.memory[67].setText(instUIBuilder(JCC, 3, 0, 15, 1));//If it's last 
 		FrontPanel.setMemory(15, 300);
 		//Then
@@ -230,17 +231,36 @@ public class HardCodeBuilder {
 		//Then
 		isWordFoundDotReturn();
 		//Else (Go back to POS 51)
-		FrontPanel.memory[213].setText(instUIBuilder(JMA, 0, 0, 30, 1));//Jump to POS 51
-		FrontPanel.setMemory(30, 51); // LOOP JUMP
+		FrontPanel.memory[74].setText(instUIBuilder(JMA, 0, 0, 30, 1));//Jump to POS 51
+		FrontPanel.setMemory(30, 50); // LOOP JUMP
+		startAutoProgram(word);
 	}
 	
+	private static void startAutoProgram(String word) {
+		
+		while( !FrontPanel.isPC(16) && !FrontPanel.isPC(31)){
+			FrontPanel.autoSingleStepClicker();
+		}
+		
+		if(FrontPanel.isPC(16)){
+			//Mostar resultado exito en consola
+			Integer wordNumber = Integer.parseInt(FrontPanel.memory[17].getText(), 2);
+			Integer sentenceNumber = Integer.parseInt(FrontPanel.memory[18].getText(), 2); 
+			FrontPanel.txtOutput.setText("Found: " + word + " S#: "+ sentenceNumber + " W#: " + wordNumber);
+		} else {
+			//Mostrar resultado fin en consola
+			FrontPanel.txtOutput.setText(FrontPanel.txtOutput.getText() + "\nNot found: " + word);
+		}
+		
+	}
+
 	private static void incrementParagraphAndWordAndFinderIndex(){
 		
 		FrontPanel.memory[200].setText(instUIBuilder(LDR, 2, 0, 14, 0));//Load from memory to register the counter
 		FrontPanel.memory[201].setText(instUIBuilder(AIR, 2, 0, 1, 0));// +1
 		FrontPanel.memory[202].setText(instUIBuilder(STR, 2, 0, 14, 0));//Store to memory the counter
 		FrontPanel.memory[203].setText(instUIBuilder(STX, 0, 1, 12, 0));//Bring index paragraph to memory
-		FrontPanel.memory[204].setText(instUIBuilder(STX, 0, 1, 13, 0));//Bring index word to memory
+		FrontPanel.memory[204].setText(instUIBuilder(STX, 0, 2, 13, 0));//Bring index word to memory
 		FrontPanel.memory[205].setText(instUIBuilder(LDR, 2, 0, 12, 0));//Load from memory to register the indexes
 		FrontPanel.memory[206].setText(instUIBuilder(LDR, 3, 0, 13, 0));//Load from memory to register the indexes
 		FrontPanel.memory[207].setText(instUIBuilder(AIR, 2, 0, 1, 0));// +1
@@ -255,10 +275,10 @@ public class HardCodeBuilder {
 	
 	private static void isWordFound(){
 		//isWordFound()
-		FrontPanel.memory[300].setText(instUIBuilder(LDR, 4, 0, 14, 0));//Load from memory to register the counter
-		FrontPanel.memory[301].setText(instUIBuilder(LDR, 1, 0, 14, 0));//Load from memory to the word number
-		FrontPanel.memory[302].setText(instUIBuilder(TRR, 1, 2, 0, 0)); //Compare them
-		FrontPanel.memory[303].setText(instUIBuilder(JCC, 3, 1, 16, 1));//If equal jump then
+		FrontPanel.memory[300].setText(instUIBuilder(LDR,3, 0, 14, 0));//Load from memory to register the counter
+		FrontPanel.memory[301].setText(instUIBuilder(LDR, 1, 0, 8, 0));//Load from memory to the word number
+		FrontPanel.memory[302].setText(instUIBuilder(TRR, 1, 3, 0, 0)); //Compare them
+		FrontPanel.memory[303].setText(instUIBuilder(JCC, 3, 0, 16, 0));//If equal jump then
 		FrontPanel.setMemory(16, 0);//Stop in 16 POS <- mean success!
 		//Else
 		FrontPanel.memory[304].setText(instUIBuilder(JMA, 0, 0, 31, 0));//Stop in 31 POS <- mean finish without finding word!
@@ -266,10 +286,10 @@ public class HardCodeBuilder {
 	
 	private static void isWordFoundSpaceReturn(){
 		//isWordFound()
-		FrontPanel.memory[400].setText(instUIBuilder(LDR, 4, 0, 14, 0));//Load from memory to register the counter
-		FrontPanel.memory[401].setText(instUIBuilder(LDR, 1, 0, 14, 0));//Load from memory to the word number
-		FrontPanel.memory[402].setText(instUIBuilder(TRR, 1, 2, 0, 0)); //Compare them
-		FrontPanel.memory[403].setText(instUIBuilder(JCC, 3, 1, 16, 1));//If equal jump then
+		FrontPanel.memory[400].setText(instUIBuilder(LDR, 3, 0, 14, 0));//Load from memory to register the counter
+		FrontPanel.memory[401].setText(instUIBuilder(LDR, 1, 0, 8, 0));//Load from memory to the word number
+		FrontPanel.memory[402].setText(instUIBuilder(TRR, 1, 3, 0, 0)); //Compare them
+		FrontPanel.memory[403].setText(instUIBuilder(JCC, 3, 0, 16, 0));//If equal jump then
 		FrontPanel.setMemory(16, 0);//Stop in 16 POS <- mean success!
 		//Else
 		FrontPanel.memory[404].setText(instUIBuilder(LDR, 1, 0, 17, 0)); //Load word counter
@@ -286,17 +306,17 @@ public class HardCodeBuilder {
 		FrontPanel.memory[413].setText(instUIBuilder(LDR, 1, 0, 12, 0));//Load from memory to register the indexes
 		FrontPanel.memory[414].setText(instUIBuilder(AIR, 1, 0, 1, 0));// +1
 		FrontPanel.memory[415].setText(instUIBuilder(STR, 1, 0, 12, 0));//Store to memory
-		FrontPanel.memory[416].setText(instUIBuilder(STX, 0, 1, 12, 0));//Store to index
+		FrontPanel.memory[416].setText(instUIBuilder(LDX, 0, 1, 12, 0));//Store to index
 		
 		FrontPanel.memory[417].setText(instUIBuilder(JMA, 0, 0, 30, 1));//Jump to POS 51
 	}
 	
 	private static void isWordFoundDotReturn(){
 		//isWordFound()
-		FrontPanel.memory[500].setText(instUIBuilder(LDR, 4, 0, 14, 0));//Load from memory to register the counter
-		FrontPanel.memory[501].setText(instUIBuilder(LDR, 1, 0, 14, 0));//Load from memory to the word number
-		FrontPanel.memory[502].setText(instUIBuilder(TRR, 1, 2, 0, 0)); //Compare them
-		FrontPanel.memory[503].setText(instUIBuilder(JCC, 3, 1, 16, 1));//If equal jump then
+		FrontPanel.memory[500].setText(instUIBuilder(LDR, 3, 0, 14, 0));//Load from memory to register the counter
+		FrontPanel.memory[501].setText(instUIBuilder(LDR, 1, 0, 8, 0));//Load from memory to the word number
+		FrontPanel.memory[502].setText(instUIBuilder(TRR, 1, 3, 0, 0)); //Compare them
+		FrontPanel.memory[503].setText(instUIBuilder(JCC, 3, 0, 16, 0));//If equal jump then
 		FrontPanel.setMemory(16, 0);//Stop in 16 POS <- mean success!
 		//Else
 		FrontPanel.memory[504].setText(instUIBuilder(LDR, 1, 0, 18, 0)); //Load sentence counter
@@ -314,7 +334,7 @@ public class HardCodeBuilder {
 		FrontPanel.memory[513].setText(instUIBuilder(LDR, 1, 0, 12, 0));//Load from memory to register the indexes
 		FrontPanel.memory[514].setText(instUIBuilder(AIR, 1, 0, 1, 0));// +1
 		FrontPanel.memory[515].setText(instUIBuilder(STR, 1, 0, 12, 0));//Store to memory
-		FrontPanel.memory[516].setText(instUIBuilder(STX, 0, 1, 12, 0));//Store to index
+		FrontPanel.memory[516].setText(instUIBuilder(LDX, 0, 1, 12, 0));//Store to index
 		//Initialize word counter to (1)
 		FrontPanel.memory[517].setText(instUIBuilder(LDR, 1, 0, 20, 0));//Initialize register to one
 		FrontPanel.memory[518].setText(instUIBuilder(STR, 1, 0, 17, 0));//Initialize word counter to one

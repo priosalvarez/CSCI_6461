@@ -91,44 +91,19 @@ public class Transfer {
 			
 		}
 		
-		public Integer instructionJMA(Instruction instruction) throws Throwable{
-						
-			
+		public static void instructionJMA(Instruction instruction) throws Throwable{
 			/*Unconditional Jump To Address
 			PC <- EA, if I bit not set; PC <- c(EA), if I bit set
 			Note: r is ignored in this instruction*/
-			
 			String ea = BinaryUtil.eaCalculation(instruction);
-			
-			  //String pc = FrontPanel.txtpnPc.getText();
-			  //Convert PC from binary to decimal 
-			  Integer pcDecimal = Integer.parseInt(FrontPanel.txtPc.getText(), 2);
-			  
-				
-				
-				try {
-					
-					if(instruction.isIndirect()){
-							
-							Instruction indirectInstruction = new Instruction(FrontPanel.memory[Integer.parseInt(ea, 2)].getText());						
-							ea = indirectInstruction.getAddress();						
-						}
-					
-					else {
-						
-						pcDecimal = pcDecimal + 1;					
-					}						
-						
-				} catch (Exception e){
-					throw new Throwable("FAULT");
-				}
-				return pcDecimal;
-				
-				
-			
-			
-			
+			//String pc = FrontPanel.txtpnPc.getText();
+			try {
+				FrontPanel.txtPc.setText(ea);											
+			} catch (Exception e){
+				throw new Throwable("FAULT");
+			}
 		}
+		
 		public Integer instructionJSR(Instruction instruction) throws Throwable{
 			
 			String ea = BinaryUtil.eaCalculation(instruction);

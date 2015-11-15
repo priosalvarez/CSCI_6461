@@ -62,6 +62,8 @@ public enum InstructionEnum {
 				return LDR;
 			case "02":				
 				return STR;
+			case "03":
+				return LDA;				
 			case "04":
 				return AMR;
 			case "05":				
@@ -112,6 +114,10 @@ public enum InstructionEnum {
 				return VSUB;
 			case "37":
 				return CNVRT;
+			case "41":
+				return LDX;
+			case "42":
+				return STX;
 			case "50":
 				return LDFR;
 			case "51":

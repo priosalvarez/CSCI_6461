@@ -188,10 +188,10 @@ public class ArithmeticLogicalOps {
 	public static void instructionTRR(Instruction instruction) throws Throwable{
 
 		//Test the Equality of R0 and R2
-		Integer RxDecimal = instruction.getRegisterNumber();
-		Integer RyDecimal = instruction.getIndexNumber();
+		Integer RxDecimal = Integer.parseInt(FrontPanel.getRegister(instruction.getRegisterNumber()), 2);
+		Integer RyDecimal = Integer.parseInt(FrontPanel.getRegister(instruction.getIndexNumber()), 2);
 
-		if(RxDecimal == RyDecimal){
+		if(RxDecimal.equals(RyDecimal)){
 			//set cc to 1
 			FrontPanel.txtCc.setText("0001");
 		}

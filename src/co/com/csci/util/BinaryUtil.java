@@ -88,17 +88,24 @@ public class BinaryUtil {
 	}
 	
 	public static String eaCalculation(Instruction instruction) throws Exception{
+		
+		String indexValue = FrontPanel.getIndex(instruction.getIndexNumber());
+		if(instruction.getIntructionCode() == InstructionEnum.LDX || 
+		   instruction.getIntructionCode() == InstructionEnum.STX){
+			indexValue = "0";
+		}
+		
 		if(!instruction.isIndirect()){
 			if(!instruction.hasIndex()){
 				return instruction.getAddress();
 			} else {
-				return sumBinary(FrontPanel.getIndex(instruction.getIndexNumber()), instruction.getAddress());
+				return sumBinary(indexValue, instruction.getAddress());
 			}
 		} else {
 			if(!instruction.hasIndex()){
 				return Cache.getInstance().checkCache(instruction.getIntegerAddress());
 			} else {
-				Integer eaPos = sumBinaryToInteger(FrontPanel.getIndex(instruction.getIndexNumber()), instruction.getAddress());
+				Integer eaPos = sumBinaryToInteger(indexValue, instruction.getAddress());
 				return Cache.getInstance().checkCache(eaPos);
 			}
 		}

@@ -781,7 +781,7 @@ public class FrontPanel {
 				  			Transfer.instructionJCC(instruction);
 			  		  		break;	
 				  		case JMA:
-		  		  			Transfer.instructionJZ(instruction);
+		  		  			Transfer.instructionJMA(instruction);
 		  		  			break;	
 				  		case JSR:
 		  		  			Transfer.instructionRFS(instruction);
@@ -826,7 +826,8 @@ public class FrontPanel {
 				  }
 				  //Increment PC counter
 				  if((iCode != InstructionEnum.HALT) && (iCode != InstructionEnum.JZ)
-					  && (iCode != InstructionEnum.JCC)){
+					  && (iCode != InstructionEnum.JCC) && (iCode != InstructionEnum.JNE) 
+					  && (iCode != InstructionEnum.JMA)){
 					  pcDecimal++;
 					  txtPc.setText(BinaryUtil.fillBinaryString(Integer.toBinaryString(pcDecimal)));
 				  }
@@ -1026,6 +1027,137 @@ public class FrontPanel {
 		} else {
 			//Exception
 		}
+	}
+	
+	public static void autoSingleStepClicker(){
+		//Get PC counter
+		String pc = txtPc.getText();
+		//Convert PC from binary to decimal 
+		Integer pcDecimal = Integer.parseInt(txtPc.getText(), 2);
+		
+		Instruction instruction;
+		try
+		{
+			//Get Instruction from memory space
+			String plainInstruction = Cache.getInstance().checkCache(pcDecimal);
+			instruction = new Instruction(plainInstruction);
+			//Change MAR
+			txtMar.setText(pc);
+			//Change MBR
+			txtMbr.setText(plainInstruction);
+			//Change IR
+			txtIr.setText(plainInstruction);
+			//Evaluate instruction
+			InstructionEnum iCode = instruction.getIntructionCode();
+			
+			System.out.println("Program counter: " + pcDecimal);
+			System.out.println("Running instruction: " + iCode);
+			System.out.println("Register 0: " + getRegister(0));
+			System.out.println("Register 1: " + getRegister(1));
+			System.out.println("Paragraph index: " + (Integer.parseInt(getIndex(1), 2)));
+			System.out.println("Word index: " + (Integer.parseInt(getIndex(2), 2)));
+			System.out.println("Letters found counter: " + (Integer.parseInt(memory[14].getText(), 2)));
+			System.out.println("Word #: " + (Integer.parseInt(memory[17].getText(), 2)));
+			System.out.println("Sentence #: " + (Integer.parseInt(memory[18].getText(), 2)));
+			
+			switch(iCode){
+			case LDR:
+				LoadStore.instructionLDR(instruction);
+				break;
+			case STR:
+				LoadStore.instructionSTR(instruction);
+				break;
+			case AMR:
+				ArithmeticLogicalOps.instructionAMR(instruction);
+				break;
+			case SMR:
+				ArithmeticLogicalOps.instructionSMR(instruction);
+				break;
+			case AIR:
+				ArithmeticLogicalOps.instructionAIR(instruction);
+				break;
+			case SIR:
+				ArithmeticLogicalOps.instructionSIR(instruction);
+				break;
+			case MLT:
+				ArithmeticLogicalOps.instructionMLT(instruction);
+				break; 
+			case DVD:
+				ArithmeticLogicalOps.instructionDVD(instruction);
+				break;
+			case TRR:
+				ArithmeticLogicalOps.instructionTRR(instruction);
+				break;
+			case AND:
+				ArithmeticLogicalOps.instructionAND(instruction);
+				break;
+			case ORR:
+				ArithmeticLogicalOps.instructionORR(instruction);
+				break;
+			case NOT:
+				ArithmeticLogicalOps.instructionNOT(instruction);
+				break;
+			case JZ:
+				Transfer.instructionJZ(instruction);
+				break;
+			case JNE:
+				Transfer.instructionJNE(instruction);
+				break;	
+			case JCC:
+				Transfer.instructionJCC(instruction);
+				break;	
+			case JMA:
+				Transfer.instructionJMA(instruction);
+				break;	
+			case JSR:
+				Transfer.instructionRFS(instruction);
+				break;	
+			case RFS:
+				Transfer.instructionSOB(instruction);
+				break;	
+			case SOB:
+				Transfer.instructionJGE(instruction);
+				break;	
+			case JGE:
+				Transfer.instructionJZ(instruction);
+				break;
+			case IN:
+				IOOps.instructionIN(instruction);
+				break;
+			case OUT:
+				IOOps.instructionOUT(instruction);
+				break;
+			case LDA:
+				LoadStore.instructionLDA(instruction);
+				break;
+			case STX:
+				LoadStore.instructionSTX(instruction);
+				break;
+			case LDX:
+				LoadStore.instructionLDX(instruction);
+			case HALT:
+				txtOutput.setText("HALT");
+				break;
+			case FAULT:
+				txtOutput.setText("FAULT");
+				break;
+			}
+			//Increment PC counter
+			if((iCode != InstructionEnum.HALT) && (iCode != InstructionEnum.JZ)
+					&& (iCode != InstructionEnum.JCC) && (iCode != InstructionEnum.JNE) 
+					&& (iCode != InstructionEnum.JMA)){
+				pcDecimal++;
+				txtPc.setText(BinaryUtil.fillBinaryString(Integer.toBinaryString(pcDecimal)));
+			}
+		} catch (Throwable t){
+			txtOutput.setText("FAULT");
+
+		}
+	}
+	
+	public static Boolean isPC(Integer x){
+		Integer num = Integer.parseInt(txtPc.getText(), 2);
+		return num == x;
 	}
 
 }
