@@ -63,5 +63,27 @@ public class IOOps {
 		}
 	}
 	
+	public static void instructionCHK(Instruction instruction) throws Throwable{
+		char readStatus;
+		//readStatus from Device Switch
+		if(instruction.getIntegerAddress() == OTHER){
+			if(FrontPanel.txtInput.getText() != null &&
+				FrontPanel.txtInput.getText().length() > 0){
+				readStatus = FrontPanel.txtInput.getText().charAt(0);
+				int asciiChar = (int) readStatus;
+				FrontPanel.setRegister(instruction.getRegisterNumber(), asciiChar);
+				if(FrontPanel.txtInput.getText().length() >= 2){
+					FrontPanel.txtInput.setText(FrontPanel.txtInput.getText().substring(1));
+				} else {
+					FrontPanel.txtInput.setText(null);
+				}
+			} else {
+				throw new Exception("No input to read in the interface, nothing done.");
+			}
+	
+	
+		}
+	}
+	
 
 }
