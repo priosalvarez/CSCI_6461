@@ -87,7 +87,7 @@ public class BinaryUtil {
 		return Integer.parseInt(bin1, 2) + Integer.parseInt(bin2,2);
 	}
 	
-	public static String eaCalculation(Instruction instruction){
+	public static String eaCalculation(Instruction instruction) throws Exception{
 		if(!instruction.isIndirect()){
 			if(!instruction.hasIndex()){
 				return instruction.getAddress();

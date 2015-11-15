@@ -37,6 +37,9 @@ public class HardCodeBuilder {
 	private static String LDXs = "LDX";
 	private static String STXs = "STX";
 	private static String LDAs = "LDA";
+	private static String SRCs = "SRC";
+	private static String RRCs = "RRC";
+	private static String CHKs = "CHK";
 	
 	public static void loadProgram(String programName){
 		
@@ -120,6 +123,15 @@ public class HardCodeBuilder {
 		}
 		if(programName.equals(LDAs)){
 			loadLDA();
+		}
+		if(programName.equals(SRCs)){
+			loadSRC();
+		}
+		if(programName.equals(RRCs)){
+			loadRRC();
+		}
+		if(programName.equals(CHKs)){
+			loadCHK();
 		}
 				
 	}
@@ -351,8 +363,6 @@ public class HardCodeBuilder {
 		FrontPanel.memory[6].setText(instUIBuilder(LDA, 2, 0, 7, 0));
 		FrontPanel.setRegister(7, 100);
 	}
-	
-	
 
 	private static void loadProgram1() {
 		
@@ -625,6 +635,25 @@ public class HardCodeBuilder {
 		FrontPanel.setRegister(0, "0000000000000011");
 		FrontPanel.memory[6].setText("0100110000000111");
 		FrontPanel.memory[7].setText("0000000000000001");
+	}
+	private static void loadSRC() {
+		FrontPanel.txtPc.setText("0000000000000110");
+		FrontPanel.setRegister(0, "0000000000000110");
+		FrontPanel.memory[6].setText("0110010000000111");
+		FrontPanel.memory[7].setText("0000000000000001");
+	}
+	private static void loadRRC() {
+		FrontPanel.txtPc.setText("0000000000000110");
+		FrontPanel.setRegister(0, "0000000000000011");
+		FrontPanel.memory[6].setText("0110100000000111");
+		FrontPanel.memory[7].setText("0000000000000001");
+	}
+	private static void loadCHK() {
+		FrontPanel.txtPc.setText("0000000000000110");
+		FrontPanel.setRegister(0, "0000000000000011");
+		FrontPanel.memory[6].setText("1100110000000111");
+		FrontPanel.memory[7].setText("0000000000000001");
+		FrontPanel.txtInput.setText("3");
 	}
 	
 	

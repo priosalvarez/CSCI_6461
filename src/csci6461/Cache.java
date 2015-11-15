@@ -77,8 +77,10 @@ public class Cache {
 	 * @param memoryAddress in binary
 	 * @return data from memory address after fetching it from cache
 	 * 		   or adding it to the cache if it wasn't stored it. 
+	 * @throws Exception 
+	 * @throws NumberFormatException 
 	 */
-	public String checkCache(String memoryAddress){
+	public String checkCache(String memoryAddress) throws NumberFormatException, Exception{
 		return checkCache(Integer.parseInt(memoryAddress, 2));
 	}
 	
@@ -87,15 +89,26 @@ public class Cache {
 	 * @param memoryAddress in decimal
 	 * @return data from memory address after fetching it from cache
 	 * 		   or adding it to the cache if it wasn't stored it. 
+	 * @throws Exception 
 	 */
-	public String checkCache(int memoryAddress){
+	public String checkCache(int memoryAddress) throws Exception{
 		CacheSlot slot = find(memoryAddress);
+		if(memoryAddress > 5){
 		if(slot == null){
 			return bringMemoryAddressToCache(memoryAddress);
 		}
-		return slot.getData();
-	}
-	
+		return slot.getData();	}
+		else{
+	  		/* Machine Fault
+	  		  Illegal Memory Address to Reserved Locations */
+	  			String pc = FrontPanel.txtPc.getText();
+	  			String msr = FrontPanel.txtMsr.getText();
+	  			FrontPanel.memory[1].setText(msr);
+	  			FrontPanel.memory[4].setText(pc);
+	  			FrontPanel.txtMfr.setText("0");	
+	  			}
+			throw new Exception("Reserverd Memory");
+		}
 	
 	/**
 	 * Write data to cache 
@@ -122,6 +135,7 @@ public class Cache {
 	 */
 	public void updateData(int memoryAddress, String newData){
 		CacheSlot slot = find(memoryAddress);
+		if(memoryAddress > 5){
 		//Verify first if the the memory address to be updated is in the cache or not
 		if(slot != null){
 			writeThrough(memoryAddress, slot, newData);
@@ -129,7 +143,15 @@ public class Cache {
 			bringMemoryAddressToCache(memoryAddress);
 			slot = find(memoryAddress);
 			writeThrough(memoryAddress, slot, newData);
-		}
+		}} 
+		else{
+	  		/* Machine Fault
+	  		  Illegal Memory Address to Reserved Locations */
+	  			String pc = FrontPanel.txtPc.getText();
+	  			String msr = FrontPanel.txtMsr.getText();
+	  			FrontPanel.memory[1].setText(msr);
+	  			FrontPanel.memory[4].setText(pc);
+	  			FrontPanel.txtMfr.setText("0");	}
 	}
 	
 	/**

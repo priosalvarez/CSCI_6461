@@ -277,7 +277,7 @@ public class Transfer {
 			return Integer.parseInt(bin1, 2) + Integer.parseInt(bin2,2);
 		}
 		
-		public String eaCalculation(Instruction instruction){
+		public String eaCalculation(Instruction instruction) throws Exception{
 			if(!instruction.isIndirect()){
 				if(!instruction.hasIndex()){
 					return instruction.getAddress();

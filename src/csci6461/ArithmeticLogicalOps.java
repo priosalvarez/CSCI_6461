@@ -246,14 +246,50 @@ public class ArithmeticLogicalOps {
 		FrontPanel.setRegister(RxDecimal, NOTresult);
 	}
 	
-	public void instructionSRC(Instruction instruction) throws Throwable{
-		//TODO
-				
-		
+	/**
+	 * @param instruction
+	 * @throws Throwable
+	 */
+	public static void instructionSRC(Instruction instruction) throws Throwable{
+		/*Shift Register by Count
+		c(r) is shifted left (L/R =1) or right (L/R = 0) either logically (A/L = 1) or arithmetically (A/L = 0)
+		XX, XXX are ignored
+		Count = 0…15
+		If Count = 0, no shift occurs*/
+			String ea = BinaryUtil.eaCalculation(instruction); 
+
+			Integer registerDecimal = Integer.parseInt(FrontPanel.getRegister(instruction.getRegisterNumber()), 2);
+			
+			//Shift Right, Count = 2
+			Integer SRC = registerDecimal >> 2;
+			String resultSRC = BinaryUtil.fillBinaryString(Integer.toBinaryString(SRC));
+			//Arithmetic Shift
+			//resultSRC = String.format("%1"+(16-resultSRC.length())+"d%s", 1, resultSRC);
+			FrontPanel.setRegister(instruction.getRegisterNumber(), (resultSRC));
+			
 	}
 	
-	public void instructionRRC(Instruction instruction) throws Throwable{
-		//TODO
+	/**
+	 * @param instruction
+	 * @throws Throwable
+	 */
+	public static void instructionRRC(Instruction instruction) throws Throwable{
+		/*Rotate Register by Count
+		c(r) is rotated left (L/R = 1) or right (L/R =0) either logically (A/L =1)
+		XX, XXX is ignored
+		Count = 0…15
+		If Count = 0, no rotate occurs*/
+		
+		String ea = BinaryUtil.eaCalculation(instruction); 
+		Integer registerDecimal = Integer.parseInt(FrontPanel.getRegister(instruction.getRegisterNumber()), 2);
+		
+		//Rotate Left Count 3
+		   int RRC = (registerDecimal << 3) | (registerDecimal >> (16 - 3));
+
+		String resultRRC = BinaryUtil.fillBinaryString(Integer.toBinaryString(RRC));
+		FrontPanel.setRegister(instruction.getRegisterNumber(), (resultRRC)); 
+	
+
 				
 		
 	}

@@ -42,7 +42,8 @@ public enum InstructionEnum {
 	FAULT("999"),
 	//Device Inst
 	IN("61"),
-	OUT("62");
+	OUT("62"),
+	CHK("63");
 	
 	
 	
@@ -119,6 +120,8 @@ public enum InstructionEnum {
 				return IN;
 			case "62":
 				return OUT;
+			case "63":
+				return CHK;
 			default:
 				return FAULT;
 		}

@@ -43,7 +43,7 @@ public class FrontPanel {
 	private JTextField txtIX;
 	private JTextField txtI;
 	private JTextField txtAddress;
-	private JTextField txtMsr;
+	static JTextField txtMsr;
 
 	//Registers
 	static JTextPane txtR0;// TextInput for R0
@@ -60,6 +60,7 @@ public class FrontPanel {
 	static JTextPane txtMar; //MAR
 	static JTextPane txtMbr; //MBR
 	static JTextPane txtIr;  //IR
+	static JTextField txtMfr;  //MFR
 	
 	static JTextPane txtEc; //EC
 	static JTextField txtCc; //CC
@@ -271,6 +272,9 @@ public class FrontPanel {
 		cmbLoad.addItem("OUT");
 		cmbLoad.addItem("LDR");
 		cmbLoad.addItem("STR");
+		cmbLoad.addItem("SRC");
+		cmbLoad.addItem("RRC");
+		cmbLoad.addItem("CHK");
 		
 		cmbLoad.addItemListener(new ItemListener() {
 			
@@ -301,7 +305,7 @@ public class FrontPanel {
 		setRegister(2, null);
 		setRegister(3, null);
 		txtCc.setText("CC");
-		txtMsr.setText("MSR");
+		//txtMsr.setText("MSR");
 		txtEc.setText("EC");
 		txtMar.setText(null);
 		txtMbr.setText(null);
@@ -682,7 +686,7 @@ public class FrontPanel {
 		gbc_btnEmptyCache.anchor = GridBagConstraints.NORTH;
 		gbc_btnEmptyCache.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnEmptyCache.gridx = 8;
-		gbc_btnEmptyCache.gridy = 12;
+		gbc_btnEmptyCache.gridy = 11;
 		panel_1.add(btnEmptyCache, gbc_btnEmptyCache);
 		
 		btnEmptyCache.addActionListener(new ActionListener()
@@ -707,16 +711,19 @@ public class FrontPanel {
 		{
 		  public void actionPerformed(ActionEvent e)
 		  {
+			  String MSR = txtMsr.getText();
+			  String MFR = txtMfr.getText();
 			  //Get PC counter
 			  String pc = txtPc.getText();
 			  //Convert PC from binary to decimal 
 			  Integer pcDecimal = Integer.parseInt(txtPc.getText(), 2);
 			  //Get Instruction from memory space
-			  String plainInstruction = Cache.getInstance().checkCache(pcDecimal);
-			  //String plainInstruction = memory[pcDecimal].getText();
-			  Instruction instruction;
+			  
 			  try
 			  {
+				  String plainInstruction = Cache.getInstance().checkCache(pcDecimal);
+				  //String plainInstruction = memory[pcDecimal].getText();
+				  Instruction instruction;
 				  instruction = new Instruction(plainInstruction);
 				  //Change MAR
 				  txtMar.setText(pc);
@@ -794,11 +801,27 @@ public class FrontPanel {
 				  		case OUT:
 		  		  			IOOps.instructionOUT(instruction);
 		  		  			break;
+				  		case CHK:
+		  		  			IOOps.instructionCHK(instruction);
+		  		  			break;
+		  		  		case SRC:
+		  		  			ArithmeticLogicalOps.instructionSRC(instruction);
+	  		  				break;
+		  		  		case RRC:
+		  		  			ArithmeticLogicalOps.instructionRRC(instruction);
+		  		  			break;
 		  		  		case HALT:
 		  		  			txtOutput.setText("HALT");
 			  				break;
 		  		  		case FAULT:
 		  		  			txtOutput.setText("FAULT");
+			  		  		/* Machine Fault
+			  		  		 * Illegal Operation Code */
+			  		  			pc = txtPc.getText();
+			  		  			String msr = txtMsr.getText();
+			  		  			memory[1].setText(msr);
+			  		  			memory[4].setText(pc);
+			  		  			txtMfr.setText("2");
 		  		  			break;
 				  }
 				  //Increment PC counter
@@ -807,7 +830,14 @@ public class FrontPanel {
 					  pcDecimal++;
 					  txtPc.setText(BinaryUtil.fillBinaryString(Integer.toBinaryString(pcDecimal)));
 				  }
-		  	} catch (Throwable t){
+			  } catch(IndexOutOfBoundsException m){
+						pc = txtPc.getText();
+			  			String msr = txtMsr.getText();
+			  			memory[1].setText(msr);
+			  			memory[4].setText(pc);
+			  			txtMfr.setText("3"); 	
+			  			}
+		  	 catch (Throwable t){
 		  		txtOutput.setText("FAULT");
 		  		
 		  	}
@@ -921,17 +951,47 @@ public class FrontPanel {
 		panel.add(txtCc, gbc_txtCc);
 		txtCc.setColumns(10);
 		
+		//Msr Label
+		JLabel lblMsr = new JLabel("MSR");
+		GridBagConstraints gbc_lblMsr = new GridBagConstraints();
+		gbc_lblMsr.anchor = GridBagConstraints.SOUTH;
+		gbc_lblMsr.insets = new Insets(0, 0, 5, 5);
+		gbc_lblMsr.gridx = 8;
+		gbc_lblMsr.gridy = 12;
+		panel.add(lblMsr, gbc_lblMsr);
+		
 		//Init MSR
 		txtMsr = new JTextField();
-		txtMsr.setText("MSR");
+		txtMsr.setText("0000000000000001");
 		GridBagConstraints gbc_txtMsr = new GridBagConstraints();
 		gbc_txtMsr.anchor = GridBagConstraints.SOUTH;
 		gbc_txtMsr.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtMsr.insets = new Insets(0, 0, 5, 5);
 		gbc_txtMsr.gridx = 8;
-		gbc_txtMsr.gridy = 11;
+		gbc_txtMsr.gridy = 13;
 		panel.add(txtMsr, gbc_txtMsr);
 		txtMsr.setColumns(10);
+		
+		//Mfr Label
+				JLabel lblMfr = new JLabel("MFR");
+				GridBagConstraints gbc_lblMfr = new GridBagConstraints();
+				gbc_lblMfr.anchor = GridBagConstraints.SOUTH;
+				gbc_lblMfr.insets = new Insets(0, 0, 5, 5);
+				gbc_lblMfr.gridx = 8;
+				gbc_lblMfr.gridy = 14;
+				panel.add(lblMfr, gbc_lblMfr);
+				
+				//Init MFR
+				txtMfr = new JTextField();
+				txtMfr.setText("");
+				GridBagConstraints gbc_txtMfr = new GridBagConstraints();
+				gbc_txtMfr.anchor = GridBagConstraints.SOUTH;
+				gbc_txtMfr.fill = GridBagConstraints.HORIZONTAL;
+				gbc_txtMfr.insets = new Insets(0, 0, 5, 5);
+				gbc_txtMfr.gridx = 8;
+				gbc_txtMfr.gridy = 15;
+				panel.add(txtMfr, gbc_txtMfr);
+				txtMfr.setColumns(10);
 	}
 	
 	public static void setPc(Integer pc){
