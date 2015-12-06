@@ -61,6 +61,8 @@ public class FrontPanel {
 	static JTextPane txtMbr; //MBR
 	static JTextPane txtIr;  //IR
 	static JTextField txtMfr;  //MFR
+	static JTextField txtFR0;  //FR0
+	static JTextField txtFR1;  //FR1
 	
 	static JTextPane txtEc; //EC
 	static JTextField txtCc; //CC
@@ -711,8 +713,14 @@ public class FrontPanel {
 		{
 		  public void actionPerformed(ActionEvent e)
 		  {
+			  //Get MSR
 			  String MSR = txtMsr.getText();
+			  //Get MFR
 			  String MFR = txtMfr.getText();
+			  //Get FR0
+			  String FR0 = txtFR0.getText();
+			  //Get FR1
+			  String FR1 = txtFR1.getText();
 			  //Get PC counter
 			  String pc = txtPc.getText();
 			  //Convert PC from binary to decimal 
@@ -993,6 +1001,49 @@ public class FrontPanel {
 				gbc_txtMfr.gridy = 15;
 				panel.add(txtMfr, gbc_txtMfr);
 				txtMfr.setColumns(10);
+				
+				//FR0 Label
+				JLabel lblFR0 = new JLabel("FR0");
+				GridBagConstraints gbc_lblFR0 = new GridBagConstraints();
+				gbc_lblFR0.anchor = GridBagConstraints.SOUTH;
+				gbc_lblFR0.insets = new Insets(0, 0, 5, 5);
+				gbc_lblFR0.gridx = 8;
+				gbc_lblFR0.gridy = 16;
+				panel.add(lblFR0, gbc_lblFR0);
+				
+				//Init FR0
+				txtFR0 = new JTextField();
+				txtFR0.setText("");
+				GridBagConstraints gbc_txtFR0 = new GridBagConstraints();
+				gbc_txtFR0.anchor = GridBagConstraints.SOUTH;
+				gbc_txtFR0.fill = GridBagConstraints.HORIZONTAL;
+				gbc_txtFR0.insets = new Insets(0, 0, 5, 5);
+				gbc_txtFR0.gridx = 8;
+				gbc_txtFR0.gridy = 17;
+				panel.add(txtFR0, gbc_txtFR0);
+				txtFR0.setColumns(10);
+				
+				
+				//FR1 Label
+				JLabel lblFR1 = new JLabel("FR1");
+				GridBagConstraints gbc_lblFR1 = new GridBagConstraints();
+				gbc_lblFR1.anchor = GridBagConstraints.SOUTH;
+				gbc_lblFR1.insets = new Insets(0, 0, 5, 5);
+				gbc_lblFR1.gridx = 8;
+				gbc_lblFR1.gridy = 18;
+				panel.add(lblFR1, gbc_lblFR1);
+				
+				//Init FR1
+				txtFR1 = new JTextField();
+				txtFR1.setText("");
+				GridBagConstraints gbc_txtFR1 = new GridBagConstraints();
+				gbc_txtFR1.anchor = GridBagConstraints.SOUTH;
+				gbc_txtFR1.fill = GridBagConstraints.HORIZONTAL;
+				gbc_txtFR1.insets = new Insets(0, 0, 5, 5);
+				gbc_txtFR1.gridx = 8;
+				gbc_txtFR1.gridy = 19;
+				panel.add(txtFR1, gbc_txtFR1);
+				txtFR1.setColumns(10);
 	}
 	
 	public static void setPc(Integer pc){
