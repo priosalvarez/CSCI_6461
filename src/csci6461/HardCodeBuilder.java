@@ -40,6 +40,8 @@ public class HardCodeBuilder {
 	private static String SRCs = "SRC";
 	private static String RRCs = "RRC";
 	private static String CHKs = "CHK";
+	private static String FADDs = "FADD";
+	private static String FSUBs = "FSUB";
 	
 	public static void loadProgram(String programName){
 		
@@ -132,6 +134,12 @@ public class HardCodeBuilder {
 		}
 		if(programName.equals(CHKs)){
 			loadCHK();
+		}
+		if(programName.equals(FADDs)){
+			loadFADD();
+		}
+		if(programName.equals(FSUBs)){
+			loadFSUB();
 		}
 				
 	}
@@ -674,6 +682,20 @@ public class HardCodeBuilder {
 		FrontPanel.memory[6].setText("1100110000000111");
 		FrontPanel.memory[7].setText("0000000000000001");
 		FrontPanel.txtInput.setText("3");
+	}
+	private static void loadFADD() {
+		FrontPanel.txtPc.setText("0000000000000110");
+		FrontPanel.setRegister(0, "0000000000000011");
+		FrontPanel.memory[6].setText("0110110000000111");
+		FrontPanel.memory[7].setText("0000000000000001");
+		FrontPanel.txtFR0.setText("0000000000000001");
+	}
+	private static void loadFSUB() {
+		FrontPanel.txtPc.setText("0000000000000110");
+		FrontPanel.setRegister(0, "0000000000000011");
+		FrontPanel.memory[6].setText("0111000000000111");
+		FrontPanel.memory[7].setText("0000000000000010");
+		FrontPanel.txtFR0.setText("0000000000000001");
 	}
 	
 	

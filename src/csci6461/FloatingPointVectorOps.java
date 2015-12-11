@@ -1,6 +1,9 @@
 package csci6461;
 
+import java.math.BigInteger;
+
 import co.com.csci.model.Instruction;
+import co.com.csci.util.BinaryUtil;
 
 
 /*Floating Point Instructions/Vector Operations:
@@ -27,17 +30,63 @@ to hold vectors (unless you were Seymour Cray).
 
 public class FloatingPointVectorOps {
 	
-	
-	public void instructionFADD(Instruction instruction) throws Throwable{
-		//TODO
-				
+	/* Floating Add Memory to Register */
+	public static void instructionFADD(Instruction instruction) throws Throwable{
+		
+		String ea = BinaryUtil.eaCalculation(instruction); 
+		
+		Integer addressDecimal = Integer.parseInt(Cache.getInstance().checkCache(ea), 2);	
+		Integer FRDecimal = Integer.parseInt(FrontPanel.txtFR0.getText(), 2);
+
+		float floatFR = addressDecimal + (float)FRDecimal;
+		
+		//Convert Floating Point to Binary
+		int intBits = Float.floatToIntBits(floatFR); 
+		String binary = Integer.toBinaryString(intBits);
+		
+		//Limit the Result from 32 to 16 bits
+		String signResult = "0";							//SIGN
+		String exponentResult = binary.substring(0, 6);		//EXPONENT
+		String mantissaResult = binary.substring(7, 16);	//MANTISSA
+		
+		binary = signResult + exponentResult + mantissaResult;
+		
+		//Set OVERFLOW	
+		if(Integer.parseInt(exponentResult, 2) > 64){
+			FrontPanel.txtCc.setText("1000");
+			return;
+		}
+		FrontPanel.txtFR0.setText(binary);
 		
 	}	
 	
-	public void instructionFSUB(Instruction instruction) throws Throwable{
-		//TODO
-				
+	/* Floating Subtract Memory to Register */
+	public static void instructionFSUB(Instruction instruction) throws Throwable{
 		
+	String ea = BinaryUtil.eaCalculation(instruction); 
+		
+		Integer addressDecimal = Integer.parseInt(Cache.getInstance().checkCache(ea), 2);	
+		Integer FRDecimal = Integer.parseInt(FrontPanel.txtFR0.getText(), 2);
+
+		float floatFR = (float)FRDecimal - addressDecimal;
+		
+		//Convert Floating Point to Binary
+		int intBits = Float.floatToIntBits(floatFR); 
+		String binary = Integer.toBinaryString(intBits);
+		
+		//Limit the Result from 32 to 16 bits
+		String signResult = binary.substring(0, 1);			//SIGN
+		String exponentResult = binary.substring(1, 7);		//EXPONENT
+		String mantissaResult = binary.substring(8, 17);	//MANTISSA
+		
+		binary = signResult + exponentResult + mantissaResult;
+		
+		//Set UNDERFLOW	
+				if(Integer.parseInt(exponentResult) < -63){
+					FrontPanel.txtCc.setText("0100");
+					return;
+				}
+		FrontPanel.txtFR0.setText(binary);
 	}
 	
 	public void instructionVADD(Instruction instruction) throws Throwable{

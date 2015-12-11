@@ -277,6 +277,8 @@ public class FrontPanel {
 		cmbLoad.addItem("SRC");
 		cmbLoad.addItem("RRC");
 		cmbLoad.addItem("CHK");
+		cmbLoad.addItem("FADD");
+		cmbLoad.addItem("FSUB");
 		
 		cmbLoad.addItemListener(new ItemListener() {
 			
@@ -818,6 +820,12 @@ public class FrontPanel {
 		  		  		case RRC:
 		  		  			ArithmeticLogicalOps.instructionRRC(instruction);
 		  		  			break;
+		  		  		case FADD:
+		  		  			FloatingPointVectorOps.instructionFADD(instruction);
+	  		  				break;
+		  		  		case FSUB:
+		  		  			FloatingPointVectorOps.instructionFSUB(instruction);
+	  		  				break;
 		  		  		case HALT:
 		  		  			txtOutput.setText("HALT");
 			  				break;
