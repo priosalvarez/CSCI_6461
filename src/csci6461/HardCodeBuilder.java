@@ -42,6 +42,10 @@ public class HardCodeBuilder {
 	private static String CHKs = "CHK";
 	private static String FADDs = "FADD";
 	private static String FSUBs = "FSUB";
+	private static String LDFRs = "LDFR";
+	private static String STFRs = "STFR";
+	private static String VADDs = "VADD";
+	private static String VSUBs = "VSUB";
 	
 	public static void loadProgram(String programName){
 		
@@ -141,7 +145,39 @@ public class HardCodeBuilder {
 		if(programName.equals(FSUBs)){
 			loadFSUB();
 		}
+		if(programName.equals(LDFRs)){
+			loadFDR();
+		}
+		if(programName.equals(STFRs)){
+			loadSTFR();
+		}
+		if(programName.equals(VADDs)){
+			loadVADD();
+		}
+		if(programName.equals(VSUBs)){
+			loadVSUB();
+		}
 				
+	}
+
+	private static void loadVSUB() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private static void loadVADD() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private static void loadSTFR() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private static void loadFDR() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	private static String initProgram2(){
@@ -698,9 +734,6 @@ public class HardCodeBuilder {
 		FrontPanel.txtFR0.setText("0000000000000001");
 	}
 	
-	
-	
-
 	/**
 	 * Function to make easier hard code instructions to UI
 	 * receiving the opCode with the instruction name and the

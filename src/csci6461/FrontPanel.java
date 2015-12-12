@@ -990,68 +990,68 @@ public class FrontPanel {
 		txtMsr.setColumns(10);
 		
 		//Mfr Label
-				JLabel lblMfr = new JLabel("MFR");
-				GridBagConstraints gbc_lblMfr = new GridBagConstraints();
-				gbc_lblMfr.anchor = GridBagConstraints.SOUTH;
-				gbc_lblMfr.insets = new Insets(0, 0, 5, 5);
-				gbc_lblMfr.gridx = 8;
-				gbc_lblMfr.gridy = 14;
-				panel.add(lblMfr, gbc_lblMfr);
-				
-				//Init MFR
-				txtMfr = new JTextField();
-				txtMfr.setText("");
-				GridBagConstraints gbc_txtMfr = new GridBagConstraints();
-				gbc_txtMfr.anchor = GridBagConstraints.SOUTH;
-				gbc_txtMfr.fill = GridBagConstraints.HORIZONTAL;
-				gbc_txtMfr.insets = new Insets(0, 0, 5, 5);
-				gbc_txtMfr.gridx = 8;
-				gbc_txtMfr.gridy = 15;
-				panel.add(txtMfr, gbc_txtMfr);
-				txtMfr.setColumns(10);
-				
-				//FR0 Label
-				JLabel lblFR0 = new JLabel("FR0");
-				GridBagConstraints gbc_lblFR0 = new GridBagConstraints();
-				gbc_lblFR0.anchor = GridBagConstraints.SOUTH;
-				gbc_lblFR0.insets = new Insets(0, 0, 5, 5);
-				gbc_lblFR0.gridx = 8;
-				gbc_lblFR0.gridy = 16;
-				panel.add(lblFR0, gbc_lblFR0);
-				
-				//Init FR0
-				txtFR0 = new JTextField();
-				txtFR0.setText("");
-				GridBagConstraints gbc_txtFR0 = new GridBagConstraints();
-				gbc_txtFR0.anchor = GridBagConstraints.SOUTH;
-				gbc_txtFR0.fill = GridBagConstraints.HORIZONTAL;
-				gbc_txtFR0.insets = new Insets(0, 0, 5, 5);
-				gbc_txtFR0.gridx = 8;
-				gbc_txtFR0.gridy = 17;
-				panel.add(txtFR0, gbc_txtFR0);
-				txtFR0.setColumns(10);
-				
-				
-				//FR1 Label
-				JLabel lblFR1 = new JLabel("FR1");
-				GridBagConstraints gbc_lblFR1 = new GridBagConstraints();
-				gbc_lblFR1.anchor = GridBagConstraints.SOUTH;
-				gbc_lblFR1.insets = new Insets(0, 0, 5, 5);
-				gbc_lblFR1.gridx = 8;
-				gbc_lblFR1.gridy = 18;
-				panel.add(lblFR1, gbc_lblFR1);
-				
-				//Init FR1
-				txtFR1 = new JTextField();
-				txtFR1.setText("");
-				GridBagConstraints gbc_txtFR1 = new GridBagConstraints();
-				gbc_txtFR1.anchor = GridBagConstraints.SOUTH;
-				gbc_txtFR1.fill = GridBagConstraints.HORIZONTAL;
-				gbc_txtFR1.insets = new Insets(0, 0, 5, 5);
-				gbc_txtFR1.gridx = 8;
-				gbc_txtFR1.gridy = 19;
-				panel.add(txtFR1, gbc_txtFR1);
-				txtFR1.setColumns(10);
+		JLabel lblMfr = new JLabel("MFR");
+		GridBagConstraints gbc_lblMfr = new GridBagConstraints();
+		gbc_lblMfr.anchor = GridBagConstraints.SOUTH;
+		gbc_lblMfr.insets = new Insets(0, 0, 5, 5);
+		gbc_lblMfr.gridx = 8;
+		gbc_lblMfr.gridy = 14;
+		panel.add(lblMfr, gbc_lblMfr);
+		
+		//Init MFR
+		txtMfr = new JTextField();
+		txtMfr.setText("");
+		GridBagConstraints gbc_txtMfr = new GridBagConstraints();
+		gbc_txtMfr.anchor = GridBagConstraints.SOUTH;
+		gbc_txtMfr.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtMfr.insets = new Insets(0, 0, 5, 5);
+		gbc_txtMfr.gridx = 8;
+		gbc_txtMfr.gridy = 15;
+		panel.add(txtMfr, gbc_txtMfr);
+		txtMfr.setColumns(10);
+		
+		//FR0 Label
+		JLabel lblFR0 = new JLabel("FR0");
+		GridBagConstraints gbc_lblFR0 = new GridBagConstraints();
+		gbc_lblFR0.anchor = GridBagConstraints.SOUTH;
+		gbc_lblFR0.insets = new Insets(0, 0, 5, 5);
+		gbc_lblFR0.gridx = 8;
+		gbc_lblFR0.gridy = 16;
+		panel.add(lblFR0, gbc_lblFR0);
+		
+		//Init FR0
+		txtFR0 = new JTextField();
+		txtFR0.setText("");
+		GridBagConstraints gbc_txtFR0 = new GridBagConstraints();
+		gbc_txtFR0.anchor = GridBagConstraints.SOUTH;
+		gbc_txtFR0.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtFR0.insets = new Insets(0, 0, 5, 5);
+		gbc_txtFR0.gridx = 8;
+		gbc_txtFR0.gridy = 17;
+		panel.add(txtFR0, gbc_txtFR0);
+		txtFR0.setColumns(10);
+		
+		
+		//FR1 Label
+		JLabel lblFR1 = new JLabel("FR1");
+		GridBagConstraints gbc_lblFR1 = new GridBagConstraints();
+		gbc_lblFR1.anchor = GridBagConstraints.SOUTH;
+		gbc_lblFR1.insets = new Insets(0, 0, 5, 5);
+		gbc_lblFR1.gridx = 8;
+		gbc_lblFR1.gridy = 18;
+		panel.add(lblFR1, gbc_lblFR1);
+		
+		//Init FR1
+		txtFR1 = new JTextField();
+		txtFR1.setText("");
+		GridBagConstraints gbc_txtFR1 = new GridBagConstraints();
+		gbc_txtFR1.anchor = GridBagConstraints.SOUTH;
+		gbc_txtFR1.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtFR1.insets = new Insets(0, 0, 5, 5);
+		gbc_txtFR1.gridx = 8;
+		gbc_txtFR1.gridy = 19;
+		panel.add(txtFR1, gbc_txtFR1);
+		txtFR1.setColumns(10);
 	}
 	
 	public static void setPc(Integer pc){
@@ -1217,6 +1217,26 @@ public class FrontPanel {
 	public static Boolean isPC(Integer x){
 		Integer num = Integer.parseInt(txtPc.getText(), 2);
 		return num == x;
+	}
+	
+	public static String getFRField(Integer num){
+		if(num == 0){
+			return txtFR0.getText();
+		} else if (num == 1){
+			return txtFR1.getText();
+		} else {
+			return null;
+		}
+	}
+	
+	public static void setFRField(int num, String content){
+		if(num == 0){
+			txtFR0.setText(content);
+		} else if(num == 1){
+			txtFR1.setText(content);
+		} else {
+			//Exception
+		}
 	}
 
 }

@@ -2,6 +2,7 @@ package csci6461;
 
 import java.math.BigInteger;
 
+import co.com.csci.model.FloatRepresentation;
 import co.com.csci.model.Instruction;
 import co.com.csci.util.BinaryUtil;
 
@@ -36,98 +37,96 @@ public class FloatingPointVectorOps {
 		String ea = BinaryUtil.eaCalculation(instruction); 
 		
 		Integer addressDecimal = Integer.parseInt(Cache.getInstance().checkCache(ea), 2);	
-		Integer FRDecimal = Integer.parseInt(FrontPanel.txtFR0.getText(), 2);
+		FloatRepresentation FRDecimal = new FloatRepresentation(FrontPanel.getFRField(instruction.getRegisterNumber()));
 
-		float floatFR = addressDecimal + (float)FRDecimal;
+		float floatFR = addressDecimal + FRDecimal.calculateDecimalNumber();
 		
-		//Convert Floating Point to Binary
-		int intBits = Float.floatToIntBits(floatFR); 
-		String binary = Integer.toBinaryString(intBits);
-		
-		//Limit the Result from 32 to 16 bits
-		String signResult = "0";							//SIGN
-		String exponentResult = binary.substring(0, 6);		//EXPONENT
-		String mantissaResult = binary.substring(7, 16);	//MANTISSA
-		
-		binary = signResult + exponentResult + mantissaResult;
+		FloatRepresentation result = new FloatRepresentation(floatFR);
 		
 		//Set OVERFLOW	
-		if(Integer.parseInt(exponentResult, 2) > 64){
+		if(result.getExponent() == null){
 			FrontPanel.txtCc.setText("1000");
 			return;
 		}
-		FrontPanel.txtFR0.setText(binary);
+		FrontPanel.txtFR0.setText(result.toString());
 		
 	}	
 	
 	/* Floating Subtract Memory to Register */
 	public static void instructionFSUB(Instruction instruction) throws Throwable{
 		
-	String ea = BinaryUtil.eaCalculation(instruction); 
+		String ea = BinaryUtil.eaCalculation(instruction); 
 		
 		Integer addressDecimal = Integer.parseInt(Cache.getInstance().checkCache(ea), 2);	
-		Integer FRDecimal = Integer.parseInt(FrontPanel.txtFR0.getText(), 2);
+		FloatRepresentation FRDecimal = new FloatRepresentation(FrontPanel.getFRField(instruction.getRegisterNumber()));
 
-		float floatFR = (float)FRDecimal - addressDecimal;
+		Float floatFR = FRDecimal.calculateDecimalNumber() - addressDecimal;
 		
-		//Convert Floating Point to Binary
-		int intBits = Float.floatToIntBits(floatFR); 
-		String binary = Integer.toBinaryString(intBits);
+		FloatRepresentation result = new FloatRepresentation(floatFR);
 		
-		//Limit the Result from 32 to 16 bits
-		String signResult = binary.substring(0, 1);			//SIGN
-		String exponentResult = binary.substring(1, 7);		//EXPONENT
-		String mantissaResult = binary.substring(8, 17);	//MANTISSA
-		
-		binary = signResult + exponentResult + mantissaResult;
-		
+		Float floorLimit = new Float(Math.pow(3.682143, 19));
 		//Set UNDERFLOW	
-				if(Integer.parseInt(exponentResult) < -63){
-					FrontPanel.txtCc.setText("0100");
-					return;
-				}
-		FrontPanel.txtFR0.setText(binary);
+		if(floatFR.compareTo(floorLimit) < 0){
+			FrontPanel.txtCc.setText("0100");
+			return;
+		}
+		FrontPanel.txtFR0.setText(result.toString());
 	}
 	
 	public void instructionVADD(Instruction instruction) throws Throwable{
-		//TODO
-				
+		String ea = BinaryUtil.eaCalculation(instruction);
+		String ea2 = BinaryUtil.eaCalculation(new Instruction(instruction));
 		
+		Integer startVectorOne = Integer.parseInt(ea, 2);
+		Integer startVectorTwo = Integer.parseInt(ea2, 2);
+		
+		Integer vectorLength = Integer.parseInt(FrontPanel.getFRField(instruction.getRegisterNumber()), 2);
+		
+		for(int i = 0; i < vectorLength; i++){
+			Integer numVectorOne = Integer.parseInt(Cache.getInstance().checkCache(startVectorOne), 2);
+			Integer numVectorTwo = Integer.parseInt(Cache.getInstance().checkCache(startVectorTwo), 2);
+			
+			Integer result = numVectorOne + numVectorTwo;
+			Cache.getInstance().updateData(numVectorOne, Integer.toBinaryString(result));
+			
+			startVectorOne++;
+			startVectorTwo++;
+		}
 	}
 	
 	public void instructionVSUB(Instruction instruction) throws Throwable{
-		//TODO
-				
+		String ea = BinaryUtil.eaCalculation(instruction);
+		String ea2 = BinaryUtil.eaCalculation(new Instruction(instruction));
 		
+		Integer startVectorOne = Integer.parseInt(ea, 2);
+		Integer startVectorTwo = Integer.parseInt(ea2, 2);
+		
+		Integer vectorLength = Integer.parseInt(FrontPanel.getFRField(instruction.getRegisterNumber()), 2);
+		
+		for(int i = 0; i < vectorLength; i++){
+			Integer numVectorOne = Integer.parseInt(Cache.getInstance().checkCache(startVectorOne), 2);
+			Integer numVectorTwo = Integer.parseInt(Cache.getInstance().checkCache(startVectorTwo), 2);
+			
+			Integer result = numVectorOne - numVectorTwo;
+			Cache.getInstance().updateData(numVectorOne, Integer.toBinaryString(result));
+			
+			startVectorOne++;
+			startVectorTwo++;
+		}
 	}
 	
 	public void instructionCNVRT(Instruction instruction) throws Throwable{
 		//TODO
-				
-		
 	}
 	
 	public void instructionLDFR(Instruction instruction) throws Throwable{
-		//TODO
-				
-		
+		String ea = BinaryUtil.eaCalculation(instruction);
+		FrontPanel.setFRField(instruction.getRegisterNumber(), Cache.getInstance().checkCache(ea));
 	}
 	
 	public void instructionSTFR(Instruction instruction) throws Throwable{
-		//TODO
-				
-		
+		String ea = BinaryUtil.eaCalculation(instruction);
+		Cache.getInstance().updateData(ea, FrontPanel.getFRField(instruction.getRegisterNumber()));
 	}
-	
-	/*public void instructionFAULT(Instruction instruction) throws Throwable{
-		//TODO
-				
-		
-	}*/
-	
-	
-	
-	
-	
 
 }
