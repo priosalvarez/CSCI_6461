@@ -40,20 +40,6 @@ public class Instruction {
 		this.address = instruction.substring(11);
 		base = 2;
 	}
-	
-	/**
-	 * Special constructor for vector type
-	 */
-	public Instruction(Instruction instruction){
-		this.opCode = instruction.getOpCode();
-		this.r = instruction.getR();
-		this.ix = instruction.getIx();
-		this.i = instruction.getI();
-		Integer add = Integer.parseInt(instruction.getAddress());
-		add++;
-		this.address = Integer.toBinaryString(add);
-		base = 2;
-	}
 
 	public String getOpCode() {
 		return opCode;

@@ -146,7 +146,7 @@ public class HardCodeBuilder {
 			loadFSUB();
 		}
 		if(programName.equals(LDFRs)){
-			loadFDR();
+			loadLDFR();
 		}
 		if(programName.equals(STFRs)){
 			loadSTFR();
@@ -161,23 +161,55 @@ public class HardCodeBuilder {
 	}
 
 	private static void loadVSUB() {
-		// TODO Auto-generated method stub
+		FrontPanel.txtPc.setText("0000000000000110");
+		FrontPanel.memory[6].setText(instUIBuilder(VSUB, 0, 0, 7, 0));
+		FrontPanel.txtFR0.setText("0000000010000000"); // 3f
+		FrontPanel.setMemory(7, 10);
+		FrontPanel.setMemory(8, 15);
 		
+		FrontPanel.setMemory(10, 4);
+		FrontPanel.setMemory(11, 2);
+		FrontPanel.setMemory(12, 2);
+		
+		FrontPanel.setMemory(15, 1);
+		FrontPanel.setMemory(16, 2);
+		FrontPanel.setMemory(17, 1);
+		
+		//Result, vector with = 3, 0, 1 in pos 10, 11, 12
 	}
 
 	private static void loadVADD() {
-		// TODO Auto-generated method stub
+		FrontPanel.txtPc.setText("0000000000000110");
+		FrontPanel.memory[6].setText(instUIBuilder(VADD, 0, 0, 7, 0));
+		FrontPanel.txtFR0.setText("0000000010000000"); // 3f
+		FrontPanel.setMemory(7, 10);
+		FrontPanel.setMemory(8, 15);
 		
+		FrontPanel.setMemory(10, 1);
+		FrontPanel.setMemory(11, 1);
+		FrontPanel.setMemory(12, 2);
+		
+		FrontPanel.setMemory(15, 1);
+		FrontPanel.setMemory(16, 2);
+		FrontPanel.setMemory(17, 1);
+		
+		//Result, vector with = 2, 3, 3 in pos 10, 11, 12
 	}
 
 	private static void loadSTFR() {
-		// TODO Auto-generated method stub
-		
+		FrontPanel.txtPc.setText("0000000000000110");
+		FrontPanel.memory[6].setText(instUIBuilder(STFR, 0, 0, 7, 0));
+		FrontPanel.memory[7].setText("0000000000000000"); // 0f
+		FrontPanel.txtFR0.setText("0100000000000000"); // 1f
+		//Result = 0100000000000000 1f
 	}
 
-	private static void loadFDR() {
-		// TODO Auto-generated method stub
-		
+	private static void loadLDFR() {
+		FrontPanel.txtPc.setText("0000000000000110");
+		FrontPanel.memory[6].setText(instUIBuilder(LDFR, 0, 0, 7, 0));
+		FrontPanel.memory[7].setText("0100000000000000"); // 1f
+		FrontPanel.txtFR0.setText(""); // 1f
+		//Result = 0100000000000000 1f
 	}
 
 	private static String initProgram2(){
@@ -721,17 +753,17 @@ public class HardCodeBuilder {
 	}
 	private static void loadFADD() {
 		FrontPanel.txtPc.setText("0000000000000110");
-		FrontPanel.setRegister(0, "0000000000000011");
-		FrontPanel.memory[6].setText("0110110000000111");
-		FrontPanel.memory[7].setText("0000000000000001");
-		FrontPanel.txtFR0.setText("0000000000000001");
+		FrontPanel.memory[6].setText(instUIBuilder(FADD, 0, 0, 7, 0));
+		FrontPanel.setMemory(7, 1); // 1
+		FrontPanel.txtFR0.setText("0100000000000000"); // 1f
+		//Result = 0000000000000000 2f
 	}
 	private static void loadFSUB() {
 		FrontPanel.txtPc.setText("0000000000000110");
-		FrontPanel.setRegister(0, "0000000000000011");
-		FrontPanel.memory[6].setText("0111000000000111");
-		FrontPanel.memory[7].setText("0000000000000010");
-		FrontPanel.txtFR0.setText("0000000000000001");
+		FrontPanel.memory[6].setText(instUIBuilder(FSUB, 0, 0, 7, 0));
+		FrontPanel.setMemory(7, 1); // 1
+		FrontPanel.txtFR0.setText("0000000000000000"); // 2f
+		//Result = 0100000000000000 1f
 	}
 	
 	/**

@@ -48,7 +48,7 @@ public class FloatingPointVectorOps {
 			FrontPanel.txtCc.setText("1000");
 			return;
 		}
-		FrontPanel.txtFR0.setText(result.toString());
+		FrontPanel.setFRField(instruction.getRegisterNumber(), result.toString());
 		
 	}	
 	
@@ -65,66 +65,73 @@ public class FloatingPointVectorOps {
 		FloatRepresentation result = new FloatRepresentation(floatFR);
 		
 		Float floorLimit = new Float(Math.pow(3.682143, 19));
+		floorLimit *= -1;
 		//Set UNDERFLOW	
 		if(floatFR.compareTo(floorLimit) < 0){
 			FrontPanel.txtCc.setText("0100");
 			return;
 		}
-		FrontPanel.txtFR0.setText(result.toString());
+		FrontPanel.setFRField(instruction.getRegisterNumber(), result.toString());
 	}
 	
-	public void instructionVADD(Instruction instruction) throws Throwable{
+	public static void instructionVADD(Instruction instruction) throws Throwable{
 		String ea = BinaryUtil.eaCalculation(instruction);
-		String ea2 = BinaryUtil.eaCalculation(new Instruction(instruction));
+		Integer eaIntegerV2 = Integer.parseInt(ea, 2) + 1;
+		String ea2 = Integer.toBinaryString(eaIntegerV2);
 		
-		Integer startVectorOne = Integer.parseInt(ea, 2);
-		Integer startVectorTwo = Integer.parseInt(ea2, 2);
+		Integer startVectorOne = Integer.parseInt(Cache.getInstance().checkCache(ea), 2);
+		Integer startVectorTwo = Integer.parseInt(Cache.getInstance().checkCache(ea2), 2);
 		
-		Integer vectorLength = Integer.parseInt(FrontPanel.getFRField(instruction.getRegisterNumber()), 2);
+		FloatRepresentation floatLength = new FloatRepresentation(FrontPanel.getFRField(instruction.getRegisterNumber()));
+		Integer vectorLength = floatLength.calculateDecimalNumber().intValue();
+		
 		
 		for(int i = 0; i < vectorLength; i++){
 			Integer numVectorOne = Integer.parseInt(Cache.getInstance().checkCache(startVectorOne), 2);
 			Integer numVectorTwo = Integer.parseInt(Cache.getInstance().checkCache(startVectorTwo), 2);
 			
 			Integer result = numVectorOne + numVectorTwo;
-			Cache.getInstance().updateData(numVectorOne, Integer.toBinaryString(result));
+			Cache.getInstance().updateData(startVectorOne, BinaryUtil.fillBinaryStringParam(Integer.toBinaryString(result), 16));
 			
 			startVectorOne++;
 			startVectorTwo++;
 		}
 	}
 	
-	public void instructionVSUB(Instruction instruction) throws Throwable{
+	public static void instructionVSUB(Instruction instruction) throws Throwable{
 		String ea = BinaryUtil.eaCalculation(instruction);
-		String ea2 = BinaryUtil.eaCalculation(new Instruction(instruction));
+		Integer eaIntegerV2 = Integer.parseInt(ea, 2) + 1;
+		String ea2 = Integer.toBinaryString(eaIntegerV2);
 		
-		Integer startVectorOne = Integer.parseInt(ea, 2);
-		Integer startVectorTwo = Integer.parseInt(ea2, 2);
+		Integer startVectorOne = Integer.parseInt(Cache.getInstance().checkCache(ea), 2);
+		Integer startVectorTwo = Integer.parseInt(Cache.getInstance().checkCache(ea2), 2);
 		
-		Integer vectorLength = Integer.parseInt(FrontPanel.getFRField(instruction.getRegisterNumber()), 2);
+		FloatRepresentation floatLength = new FloatRepresentation(FrontPanel.getFRField(instruction.getRegisterNumber()));
+		Integer vectorLength = floatLength.calculateDecimalNumber().intValue();
+		
 		
 		for(int i = 0; i < vectorLength; i++){
 			Integer numVectorOne = Integer.parseInt(Cache.getInstance().checkCache(startVectorOne), 2);
 			Integer numVectorTwo = Integer.parseInt(Cache.getInstance().checkCache(startVectorTwo), 2);
 			
 			Integer result = numVectorOne - numVectorTwo;
-			Cache.getInstance().updateData(numVectorOne, Integer.toBinaryString(result));
+			Cache.getInstance().updateData(startVectorOne, BinaryUtil.fillBinaryStringParam(Integer.toBinaryString(result), 16));
 			
 			startVectorOne++;
 			startVectorTwo++;
 		}
 	}
 	
-	public void instructionCNVRT(Instruction instruction) throws Throwable{
+	public static void instructionCNVRT(Instruction instruction) throws Throwable{
 		//TODO
 	}
 	
-	public void instructionLDFR(Instruction instruction) throws Throwable{
+	public static void instructionLDFR(Instruction instruction) throws Throwable{
 		String ea = BinaryUtil.eaCalculation(instruction);
 		FrontPanel.setFRField(instruction.getRegisterNumber(), Cache.getInstance().checkCache(ea));
 	}
 	
-	public void instructionSTFR(Instruction instruction) throws Throwable{
+	public static void instructionSTFR(Instruction instruction) throws Throwable{
 		String ea = BinaryUtil.eaCalculation(instruction);
 		Cache.getInstance().updateData(ea, FrontPanel.getFRField(instruction.getRegisterNumber()));
 	}

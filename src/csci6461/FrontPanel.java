@@ -279,6 +279,10 @@ public class FrontPanel {
 		cmbLoad.addItem("CHK");
 		cmbLoad.addItem("FADD");
 		cmbLoad.addItem("FSUB");
+		cmbLoad.addItem("LDFR");
+		cmbLoad.addItem("STFR");
+		cmbLoad.addItem("VADD");
+		cmbLoad.addItem("VSUB");
 		
 		cmbLoad.addItemListener(new ItemListener() {
 			
@@ -825,6 +829,18 @@ public class FrontPanel {
 	  		  				break;
 		  		  		case FSUB:
 		  		  			FloatingPointVectorOps.instructionFSUB(instruction);
+	  		  				break;
+		  		  		case LDFR:
+		  		  			FloatingPointVectorOps.instructionLDFR(instruction);
+	  		  				break;
+		  		  		case STFR:
+		  		  			FloatingPointVectorOps.instructionSTFR(instruction);
+	  		  				break;
+		  		  		case VADD:
+		  		  			FloatingPointVectorOps.instructionVADD(instruction);
+	  		  				break;
+		  		  		case VSUB:
+		  		  			FloatingPointVectorOps.instructionVSUB(instruction);
 	  		  				break;
 		  		  		case HALT:
 		  		  			txtOutput.setText("HALT");

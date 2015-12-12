@@ -145,13 +145,13 @@ public class FloatRepresentation {
 
 	public static void main(String[] args) {
 		
-		String s = "1";
-		String exp = "1000001";
-		String mantissa = "10000000";
+		String s = "0";
+		String exp = "1000000";
+		String mantissa = "00000000";
 		FloatRepresentation f = new FloatRepresentation(s+exp+mantissa);
 		System.out.println(f.calculateDecimalNumber());
 		
-		FloatRepresentation f2 = new FloatRepresentation(-0.75f);
+		FloatRepresentation f2 = new FloatRepresentation(3f);
 		System.out.println(f2.toString());
 		 
 	}
