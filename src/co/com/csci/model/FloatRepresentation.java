@@ -151,7 +151,7 @@ public class FloatRepresentation {
 		FloatRepresentation f = new FloatRepresentation(s+exp+mantissa);
 		System.out.println(f.calculateDecimalNumber());
 		
-		FloatRepresentation f2 = new FloatRepresentation(3f);
+		FloatRepresentation f2 = new FloatRepresentation(2f);
 		System.out.println(f2.toString());
 		 
 	}

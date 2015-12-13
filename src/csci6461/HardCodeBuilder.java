@@ -46,6 +46,7 @@ public class HardCodeBuilder {
 	private static String STFRs = "STFR";
 	private static String VADDs = "VADD";
 	private static String VSUBs = "VSUB";
+	private static String CNVRTs = "CNVRT";
 	
 	public static void loadProgram(String programName){
 		
@@ -157,7 +158,18 @@ public class HardCodeBuilder {
 		if(programName.equals(VSUBs)){
 			loadVSUB();
 		}
+		if(programName.equals(CNVRTs)){
+			loadCNVRT();
+		}
 				
+	}
+
+	private static void loadCNVRT() {
+		FrontPanel.txtPc.setText("0000000000000110");
+		FrontPanel.memory[6].setText(instUIBuilder(CNVRT, 0, 0, 7, 0));
+		FrontPanel.setMemory(7, 2); //Convert the number 2 
+		FrontPanel.setRegister(0, 0); //Convert from Integer to Float
+		//Result 0000000000000000 2f
 	}
 
 	private static void loadVSUB() {

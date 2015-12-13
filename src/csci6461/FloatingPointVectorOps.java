@@ -123,7 +123,17 @@ public class FloatingPointVectorOps {
 	}
 	
 	public static void instructionCNVRT(Instruction instruction) throws Throwable{
-		//TODO
+		String ea = BinaryUtil.eaCalculation(instruction);
+		
+		Integer f = Integer.parseInt(FrontPanel.getRegister(instruction.getRegisterNumber()));
+		
+		if(f == 0){
+			FrontPanel.setRegister(instruction.getRegisterNumber(), Cache.getInstance().checkCache(ea));
+		} else if (f == 1){
+			Integer memoryNumber = Integer.parseInt(Cache.getInstance().checkCache(ea), 2);
+			FloatRepresentation floatNumber = new FloatRepresentation(new Float(memoryNumber));
+			FrontPanel.setRegister(instruction.getRegisterNumber(), floatNumber.toString());
+		}
 	}
 	
 	public static void instructionLDFR(Instruction instruction) throws Throwable{

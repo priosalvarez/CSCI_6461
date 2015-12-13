@@ -283,6 +283,7 @@ public class FrontPanel {
 		cmbLoad.addItem("STFR");
 		cmbLoad.addItem("VADD");
 		cmbLoad.addItem("VSUB");
+		cmbLoad.addItem("CNVRT");
 		
 		cmbLoad.addItemListener(new ItemListener() {
 			
@@ -841,6 +842,9 @@ public class FrontPanel {
 	  		  				break;
 		  		  		case VSUB:
 		  		  			FloatingPointVectorOps.instructionVSUB(instruction);
+	  		  				break;
+		  		  		case CNVRT:
+		  		  			FloatingPointVectorOps.instructionCNVRT(instruction);
 	  		  				break;
 		  		  		case HALT:
 		  		  			txtOutput.setText("HALT");
